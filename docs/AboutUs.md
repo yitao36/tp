@@ -9,15 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`.
 
 ## Project team
 
-### John Doe
+### Ng Yu Peng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ngyupeng.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ngyupeng)]
+[[portfolio](team/ngyupeng.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: UI
 
 ### Jane Doe
 
