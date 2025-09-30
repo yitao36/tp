@@ -38,15 +38,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`.
 * Role: Testing
 * Responsibilities: In charge of Model
 
-### Jean Doe
+### 3seastacks
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/3seastacks.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/3seastacks)]
+# [[portfolio](team/3seastacks.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Documentation
 
 ### Hua Jun
 
