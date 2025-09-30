@@ -48,12 +48,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`.
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Hua Jun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/huajun07.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/huajun07)]
+[[portfolio](team/huajun07.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Documentation
+* Responsibilities: Storage
