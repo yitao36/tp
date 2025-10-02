@@ -316,12 +316,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *{More to be added}*
 
 ### Non-Functional Requirements
+1. Data requirement:
+   - Persistent through multiple accesses.
+   - Able to handle the storage of information of roughly 300 students and external contacts.
+   - The data should be stored locally and should be in a human editable text file.
+2. Performance Requirements:
+   - The system should not take more than 2 seconds to respond to a user command.
+   - Similarly the system should not take more than 2 seconds to initialise and load up.
+   - It should also be stable and not crash.
+   - Should be able to hold up to 300 contacts without a noticeable sluggishness in performance for typical usage.
+3. Environment Requirement:
+   - The software should work on the Windows, Linux, and OS-X platforms.
+   - The software should work on a computer that has version 17 of Java.
+   - The software should work without requiring an installer.
+   - The software should not depend on your own remote server.
+   - The system should cater to users who can type fast and prefer typing to other means of input.
+4. Quality Requirement:
+   - A teacher with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+   - The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%.
+   - The GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for resolutions 1280x720 and higher and for screen scales 150%.
+5. Process Requirement:
+   - The project is expected to adhere to a weekly schedule that has progress each week.
+   - Features should not be hard-to-test.
+6. Project Scope
+   - The system is not required to handle multiple users and assumes only a single user.
+   - The system is catered towards CCA teachers and should not handle other aspects of student lives including grades in school subjects (math, english, etc).
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
 
 ### Glossary
 
