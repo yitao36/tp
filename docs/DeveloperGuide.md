@@ -262,29 +262,52 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* is a secondary school uniform group CCA teacher
+* needs to manage student contacts and information
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+* Manage CCA students contacts faster than a typical mouse/GUI driven app.
+* Help plan and manage CCA activities including external vendors’ contacts, attendance, delegating roles etc.
+* CCA students have various roles and team structures, we want to help them manage this complexity.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​        | I want to …​                                                                                | So that…​                                                                          |
+|----------|----------------|---------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| `* * *`  | CCA teacher    | organise the students by their year of study                                                | I can communicate with each cohort more easily                                     |
+| `* * *`  | CCA teacher    | update the contact details of students                                                      | student details are up to date with the current year                               |
+| `* * *`  | CCA teacher    | store contacts of alumni                                                                    | I can call them back for help                                                      |
+| `* * *`  | CCA teacher    | assign roles to contacts                                                                    | I can keep track of their role in the CCA                                          |
+| `* * *`  | Frequent User  | pin contacts                                                                                | I can access them easily                                                           |
+| `* * *`  | CCA teacher    | add emergency contacts of my students                                                       | contact them if something goes wrong during events                                 |
+| `* * *`  | CCA teacher    | filter contacts by their roles                                                              | I can find the relevant people quickly                                             |
+| `* *`    | CCA teacher    | contact detail that lists the student’s dietary details                                     | food I cater in would be safe for consumption                                      |
+| `* *`    | CCA teacher    | find the vendors I need via a tag                                                           | I can search for what I need quickly                                               |
+| `* *`    | CCA teacher    | keep track of certain deadline tasks for my contacts                                        | I can keep track of individual tasks                                               |
+| `* *`    | CCA teacher    | assign specific roles to students for events                                                | I can keep track of everyone’s responsibilities and ensure events go more smoothly |
+| `* *`    | CCA teacher    | search students by sorting attendance                                                       | I can contact students with high absentee rate                                     |
+| `* *`    | CCA teacher    | form groups based on skills                                                                 | students can complement each other                                                 |
+| `* *`    | CCA teacher    | link vendors to specific events                                                             | I know which group of vendors are providing for a particular activity              |
+| `* *`    | CCA teacher    | group contacts by geographical location                                                     | logistics of the event can be planned more efficiently                             |
+| `* *`    | User           | view the information in more graphical ways                                                 | I don't get lost in a bunch of text                                                |
+| `* *`    | CCA teacher    | have the product automatically create the attendance sheet for me to easily mark attendance | I can submit attendance                                                            |
+| `* *`    | CCA teacher    | mark the attendance directly within the app                                                 | reduce the administrative workload                                                 |
+| `* *`    | CCA teacher    | archive contacts                                                                            | graduated students don't clutter my contacts                                       |
+| `* *`    | User           | copy contacts to clipboard                                                                  | I can use it in other applications like email                                      |
+| `* *`    | CCA teacher    | uploads students’ photos together with the contact details                                  | can better remember everyone's names                                               |
+| `* *`    | CCA teacher    | export to other formats (e.g. Excel)                                                        | I can keep records for documentation                                               |
+| `* *`    | Forgetful User | commands to be intuitive                                                                    | I can remember them more easily                                                    |
+| `*`      | CCA teacher    | partition my students based on geographical location                                        | they do not have to travel far for events                                          |
+| `*`      | CCA teacher    | group vendors by location                                                                   | I can plan and coordinate activities more effectively                              |
+| `*`      | CCA teacher    | churn out statistics on an overview summary of attendance rate of the CCA                   | help decide the next CCA leaders                                                   |
 
 ### Use cases
 
