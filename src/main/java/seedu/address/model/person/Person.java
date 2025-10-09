@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.role.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,6 +32,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final EmergencyContact emergencyContact;
+    private final Set<Role> roles = new HashSet<>();
 
     /**
      * Every field must be present and not null.
