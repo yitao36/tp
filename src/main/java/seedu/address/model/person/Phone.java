@@ -11,8 +11,9 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Expected 8 digit Singapore phone number that starts with 3/6/8/9." + "\n"
+            + "This phone number should only contain numbers." + "\n"
+            + "Do not add spacing or hyphen between digits.";
     public final String value;
 
     /**
@@ -30,7 +31,22 @@ public class Phone {
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        return test.matches(VALIDATION_REGEX);
+        try {
+            if (test.length() != 8) {
+                return false;
+            }
+            int firstDigit = Integer.parseInt(String.valueOf(test.charAt(0)));
+            if (firstDigit == 3 || firstDigit == 6 || firstDigit == 8 || firstDigit == 9) {
+                Integer.parseInt(test);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     @Override
