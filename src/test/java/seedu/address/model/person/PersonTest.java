@@ -96,4 +96,18 @@ public class PersonTest {
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void isValidPerson() {
+        Phone phoneA = new Phone("98765432");
+        Phone phoneB = new Phone("91234567");
+        EmergencyContact emergencyContactA = new EmergencyContact("Father", "98765432");
+
+        // invalid person
+        assertFalse(Person.isValidPerson(phoneA, emergencyContactA)); // same phone as emergency contact
+
+        // valid person
+        assertTrue(Person.isValidPerson(phoneA, null)); // emergency contact is optional
+        assertTrue(Person.isValidPerson(phoneB, emergencyContactA)); // valid emergency contact
+    }
 }

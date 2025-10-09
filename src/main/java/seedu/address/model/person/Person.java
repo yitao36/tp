@@ -1,10 +1,12 @@
 package seedu.address.model.person;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -12,9 +14,12 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null (except emergencyContact), field values are validated, immutable.
  */
 public class Person {
+
+    public static final String MESSAGE_CONSTRAINTS =
+            "Emergency contact's phone number should not be the same as contact's phone number";
 
     // Identity fields
     private final Name name;
@@ -24,17 +29,31 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final EmergencyContact emergencyContact;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  EmergencyContact emergencyContact) {
         requireAllNonNull(name, phone, email, address, tags);
+        checkArgument(isValidPerson(phone, emergencyContact), MESSAGE_CONSTRAINTS);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.emergencyContact = emergencyContact;
+    }
+
+    /**
+     * Returns true if the given parameters form a valid Person.
+     */
+    public static boolean isValidPerson(Phone phone, EmergencyContact emergencyContact) {
+        if (emergencyContact != null) {
+            return !emergencyContact.phone.equals(phone);
+        }
+        return true;
     }
 
     public Name getName() {
@@ -59,6 +78,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Optional<EmergencyContact> getEmergencyContact() {
+        return Optional.ofNullable(emergencyContact);
     }
 
     /**
