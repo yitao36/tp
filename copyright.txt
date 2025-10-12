@@ -7,3 +7,6 @@ Copyright by Susumu Yoshida - http://www.mcdodesign.com/
 Copyright by Jan Jan Kovařík - http://glyphicons.com/
 - calendar.png
 - edit.png
+
+Pin icons created by Pixel perfect - Flaticon - https://www.flaticon.com/free-icons/pin
+- pin.png

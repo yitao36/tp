@@ -116,10 +116,12 @@ public class ModelManager implements Model {
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
+     * List is sorted by pin status. TODO: Abstract out pin comparator logic.
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        return filteredPersons.sorted((p1, p2) ->
+                Boolean.compare(p2.getPin().value, p1.getPin().value));
     }
 
     @Override

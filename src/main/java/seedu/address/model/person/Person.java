@@ -38,20 +38,19 @@ public class Person {
 
     /**
      * Every field must be present and not null.
-     * TODO: Add Pin to argument
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+    public Person(Name name, Phone phone, Email email, Address address, Pin pin, Set<Tag> tags,
                   EmergencyContact emergencyContact, EnrollmentYear enrollmentYear) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address, pin, tags);
         checkArgument(isValidPerson(phone, emergencyContact), MESSAGE_CONSTRAINTS);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.pin = pin;
         this.tags.addAll(tags);
         this.emergencyContact = emergencyContact;
         this.enrollmentYear = enrollmentYear;
-        this.pin = new Pin(false);
     }
 
     /**
