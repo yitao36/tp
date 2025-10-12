@@ -10,6 +10,7 @@ import seedu.address.model.person.EnrollmentYear;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Pin;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -22,11 +23,13 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final boolean DEFAULT_PIN = false;
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Pin pin;
     private Set<Tag> tags;
     private EmergencyContact emergencyContact;
     private EnrollmentYear enrollmentYear;
@@ -39,6 +42,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        pin = new Pin(DEFAULT_PIN);
         tags = new HashSet<>();
         emergencyContact = null;
         enrollmentYear = null;
@@ -53,6 +57,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        pin = personToCopy.getPin();
     }
 
     /**
@@ -96,6 +101,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Pin} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPin(boolean pin) {
+        this.pin = new Pin(pin);
+        return this;
+    }
+
+    /**
      * Sets the {@code EmergencyContact} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmergencyContact(String name, String phone) {
@@ -112,7 +125,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, emergencyContact, enrollmentYear);
+        return new Person(name, phone, email, address, pin, tags, emergencyContact, enrollmentYear);
     }
 
 }

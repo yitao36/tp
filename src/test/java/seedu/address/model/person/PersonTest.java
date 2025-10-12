@@ -50,9 +50,9 @@ public class PersonTest {
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
 
-        // TODO isPinned value differs, all other attributes same -> returns true
-        Pin pin = new Pin(true);
-        assertFalse(true);
+        // pinned value differs, all other attributes same -> returns true
+        editedBob = new PersonBuilder(BOB).withPin(false).build();
+        assertTrue(BOB.isSamePerson(editedBob));
     }
 
     @Test
@@ -97,7 +97,8 @@ public class PersonTest {
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
+                + ", pin=" + ALICE.getPin() + "}";
         assertEquals(expected, ALICE.toString());
     }
 
