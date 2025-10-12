@@ -99,8 +99,16 @@ public class ParserUtil {
     /**
      * Parses a {@code boolean pin} into a {@code Pin}.
      */
-    public static Pin parsePin(boolean pin) throws ParseException {
-        return new Pin(pin);
+    public static Pin parsePin(String pin) throws ParseException {
+        requireNonNull(pin);
+        String trimmedPin = pin.trim();
+        if (trimmedPin.equalsIgnoreCase("TRUE")) {
+            return new Pin(true);
+        } else if (trimmedPin.equalsIgnoreCase("FALSE")) {
+            return new Pin(false);
+        } else {
+            throw new ParseException(Pin.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**

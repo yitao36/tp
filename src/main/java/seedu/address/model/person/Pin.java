@@ -7,6 +7,8 @@ import java.util.Objects;
  * Guarantees: immutable;
  */
 public class Pin {
+    public static final String MESSAGE_CONSTRAINTS = "Argument should be either TRUE or FALSE";
+
     public final boolean value;
 
     /**
@@ -18,7 +20,7 @@ public class Pin {
 
     @Override
     public String toString() {
-        return value ? "true" : "false";
+        return value ? "True" : "False";
     }
 
     @Override

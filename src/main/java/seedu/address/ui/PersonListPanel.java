@@ -42,10 +42,8 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                // Creates a pseudo-class "pin" if this cell should be pinned.
-                if (person.getPin().value) {
-                    this.pseudoClassStateChanged(PseudoClass.getPseudoClass("pin"), true);
-                }
+                // Updates the pseudo-class "pin" if pin status changes.
+                this.pseudoClassStateChanged(PseudoClass.getPseudoClass("pin"), person.getPin().value);
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
             }
         }
