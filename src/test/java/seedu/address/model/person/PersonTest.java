@@ -49,6 +49,10 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+
+        // TODO isPinned value differs, all other attributes same -> returns true
+        Pin pin = new Pin(true);
+        assertFalse(true);
     }
 
     @Test

@@ -34,9 +34,11 @@ public class Person {
     private final EmergencyContact emergencyContact;
     private final Set<Role> roles = new HashSet<>();
     private final EnrollmentYear enrollmentYear;
+    private final Pin pin;
 
     /**
      * Every field must be present and not null.
+     * TODO: Add Pin to argument
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
                   EmergencyContact emergencyContact, EnrollmentYear enrollmentYear) {
@@ -49,6 +51,7 @@ public class Person {
         this.tags.addAll(tags);
         this.emergencyContact = emergencyContact;
         this.enrollmentYear = enrollmentYear;
+        this.pin = new Pin(false);
     }
 
     /**
@@ -75,6 +78,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Pin getPin() {
+        return pin;
     }
 
     /**
@@ -108,6 +115,7 @@ public class Person {
 
     /**
      * Returns true if both persons have the same identity and data fields.
+     * Does not take into account {@code Pin} field.
      * This defines a stronger notion of equality between two persons.
      */
     @Override
@@ -143,6 +151,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("pin", pin)
                 .toString();
     }
 
