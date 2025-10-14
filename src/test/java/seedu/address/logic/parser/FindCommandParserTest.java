@@ -34,9 +34,9 @@ public class FindCommandParserTest {
         assertParseFailure(parser, " " + "Alice Bob",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
 
-        // invalid prefix specified
-        assertParseFailure(parser, " " + "feaf/"
-                + " \n Alice \n \t Bob  \t",
+        // multiple prefix specified
+        assertParseFailure(parser, " n/"
+                + " \n Alice \n  \t" + " n/" + "Bob",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
