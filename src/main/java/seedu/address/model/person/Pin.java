@@ -12,7 +12,7 @@ public class Pin {
     public final boolean value;
 
     /**
-     * Constructs an {@code Pin}.
+     * Constructs a {@code Pin}.
      */
     public Pin(boolean isPinned) {
         value = isPinned;
