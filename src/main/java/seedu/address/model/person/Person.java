@@ -34,18 +34,20 @@ public class Person {
     private final EmergencyContact emergencyContact;
     private final Set<Role> roles = new HashSet<>();
     private final EnrollmentYear enrollmentYear;
+    private final Pin pin;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+    public Person(Name name, Phone phone, Email email, Address address, Pin pin, Set<Tag> tags,
                   EmergencyContact emergencyContact, EnrollmentYear enrollmentYear) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address, pin, tags);
         checkArgument(isValidPerson(phone, emergencyContact), MESSAGE_CONSTRAINTS);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.pin = pin;
         this.tags.addAll(tags);
         this.emergencyContact = emergencyContact;
         this.enrollmentYear = enrollmentYear;
@@ -75,6 +77,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Pin getPin() {
+        return pin;
     }
 
     /**
@@ -108,6 +114,7 @@ public class Person {
 
     /**
      * Returns true if both persons have the same identity and data fields.
+     * Does not take into account {@code Pin} field.
      * This defines a stronger notion of equality between two persons.
      */
     @Override
@@ -143,6 +150,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("pin", pin)
                 .toString();
     }
 

@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -41,6 +42,8 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
+                // Updates the pseudo-class "pin" if pin status changes.
+                this.pseudoClassStateChanged(PseudoClass.getPseudoClass("pin"), person.getPin().value);
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
             }
         }

@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Pin;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -93,6 +94,21 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code boolean pin} into a {@code Pin}.
+     */
+    public static Pin parsePin(String pin) throws ParseException {
+        requireNonNull(pin);
+        String trimmedPin = pin.trim();
+        if (trimmedPin.equalsIgnoreCase("TRUE")) {
+            return new Pin(true);
+        } else if (trimmedPin.equalsIgnoreCase("FALSE")) {
+            return new Pin(false);
+        } else {
+            throw new ParseException(Pin.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**

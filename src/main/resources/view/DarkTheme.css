@@ -111,6 +111,18 @@
     -fx-background-color: #424d5f;
 }
 
+.list-cell:filled:even:pin {
+    -fx-background-color: #210101;
+}
+
+.list-cell:filled:odd:pin {
+    -fx-background-color: #4b1504;
+}
+
+.list-cell:filled:selected:pin {
+    -fx-background-color: #440d3f;
+}
+
 .list-cell:filled:selected #cardPane {
     -fx-border-color: #3e7b91;
     -fx-border-width: 1;
@@ -124,6 +136,7 @@
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
+
 }
 
 .cell_small_label {
