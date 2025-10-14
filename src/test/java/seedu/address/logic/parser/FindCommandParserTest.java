@@ -54,6 +54,10 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        // empty name
+        assertParseFailure(parser, PREFIX_NAME.toString(),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC , Name.MESSAGE_CONSTRAINTS);
 
