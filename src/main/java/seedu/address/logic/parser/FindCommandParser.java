@@ -4,7 +4,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Arrays;
-import java.util.Optional;
+import java.util.Collection;
+import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -32,6 +33,11 @@ public class FindCommandParser implements Parser<FindCommand> {
             String name = argMultimap.getValue(PREFIX_NAME).get();
             String[] nameKeywords = name.split("\\s+");
 
+            // Throws an error if invalid name is supplied
+            for (String s : nameKeywords) {
+                ParserUtil.parseName(s);
+            }
+
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         } else {
             assert false : "unknown prefix";
@@ -43,12 +49,11 @@ public class FindCommandParser implements Parser<FindCommand> {
      * Returns true if there is exactly one prefix specified, and its value is not empty.
      */
     private static boolean existsSingularPrefix(ArgumentMultimap argMultimap, Prefix... prefixes) {
-        long countPrefix = Arrays.stream(prefixes)
-                .map(argMultimap::getValue)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .filter(s -> !s.isEmpty())
-                .count();
-        return countPrefix == 1;
+        List<String> listPrefixes = Arrays.stream(prefixes)
+                .map(argMultimap::getAllValues)
+                .flatMap(Collection::stream)
+                .toList();
+
+        return (listPrefixes.size() == 1 && !listPrefixes.get(0).isEmpty());
     }
 }
