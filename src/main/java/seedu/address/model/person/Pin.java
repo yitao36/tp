@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import java.util.Objects;
 
 /**
- * Represents a Person's address in the address book.
+ * Represents whether a Person is pinned in the address book.
  * Guarantees: immutable;
  */
 public class Pin {
