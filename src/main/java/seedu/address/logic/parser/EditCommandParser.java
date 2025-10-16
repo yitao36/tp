@@ -23,8 +23,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.role.Role;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.role.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -54,7 +54,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_PIN,
-                PREFIX_EMERGENCY_NAME, PREFIX_EMERGENCY_PHONE, PREFIX_EMERGENCY_EMAIL, PREFIX_ADDRESS, PREFIX_ENROLL_YEAR);
+                PREFIX_EMERGENCY_NAME, PREFIX_EMERGENCY_PHONE, PREFIX_EMERGENCY_EMAIL, PREFIX_ADDRESS,
+                PREFIX_ENROLL_YEAR);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 

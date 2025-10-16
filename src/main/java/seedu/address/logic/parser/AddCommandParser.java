@@ -36,13 +36,23 @@ import seedu.address.model.tag.Tag;
 public class AddCommandParser implements Parser<AddCommand> {
 
     /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_PIN, PREFIX_ROLE, PREFIX_EMERGENCY_NAME, PREFIX_EMERGENCY_PHONE, PREFIX_EMERGENCY_EMAIL,
+                PREFIX_ADDRESS, PREFIX_PIN, PREFIX_ROLE, PREFIX_EMERGENCY_NAME, PREFIX_EMERGENCY_PHONE,
+                PREFIX_EMERGENCY_EMAIL,
                 PREFIX_TAG, PREFIX_ENROLL_YEAR);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
@@ -61,24 +71,17 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ParserUtil.parseEmergencyContact(argMultimap.getValue(PREFIX_EMERGENCY_NAME),
                         argMultimap.getValue(PREFIX_EMERGENCY_PHONE), argMultimap.getValue(PREFIX_EMERGENCY_EMAIL));
         EnrollmentYear enrollmentYear = ParserUtil.parseEnrollmentYear(
-            argMultimap.getValue(PREFIX_ENROLL_YEAR).orElse(""));
+                argMultimap.getValue(PREFIX_ENROLL_YEAR).orElse(""));
         Set<Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         try {
-            Person person = new Person(name, phone, email, address, pin, roleList, tagList, emergencyContact.orElse(null), enrollmentYear);
+            Person person = new Person(name, phone, email, address, pin, roleList, tagList,
+                    emergencyContact.orElse(null), enrollmentYear);
             return new AddCommand(person);
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());
         }
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }
