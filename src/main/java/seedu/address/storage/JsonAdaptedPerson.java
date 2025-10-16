@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.EnrollmentYear;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -33,6 +34,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String enrollmentYear;
     private final Boolean pin;
+    private final JsonAdaptedEmergencyContact emergencyContact;
     private final List<JsonAdaptedRole> roles = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -42,13 +44,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("pin") Boolean pin, @JsonProperty("enrollmentYear") String enrollmentYear,
+            @JsonProperty("pin") Boolean pin, @JsonProperty("emergencyContact") JsonAdaptedEmergencyContact emergencyContact, @JsonProperty("enrollmentYear") String enrollmentYear,
             @JsonProperty("roles") List<JsonAdaptedRole> roles, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.pin = pin;
+        this.emergencyContact = emergencyContact;
         if (enrollmentYear != null) {
             this.enrollmentYear = enrollmentYear;
         } else {
@@ -71,6 +74,11 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         pin = source.getPin().value;
+        if (source.getEmergencyContact().isPresent()) {
+            emergencyContact = new JsonAdaptedEmergencyContact(source.getEmergencyContact().get());
+        } else {
+            emergencyContact = null;
+        }
         enrollmentYear = source.getEnrollmentYear().toString();
         roles.addAll(source.getRoles().stream()
                 .map(JsonAdaptedRole::new)
@@ -133,12 +141,17 @@ class JsonAdaptedPerson {
         }
         final Pin modelPin = new Pin(pin);
 
+        EmergencyContact modelEmergencyContact = null;
+        if (emergencyContact != null) {
+            modelEmergencyContact = emergencyContact.toModelType();
+        }
+
         final EnrollmentYear modelEnrollmentYear = new EnrollmentYear(enrollmentYear);
 
         final Set<Role> modelRoles = new HashSet<>(personRoles);
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPin,
-                modelRoles, modelTags, null, modelEnrollmentYear);
+                modelRoles, modelTags, modelEmergencyContact, modelEnrollmentYear);
     }
 
 }

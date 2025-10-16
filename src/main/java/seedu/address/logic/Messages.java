@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Person;
 
 /**
@@ -54,6 +55,17 @@ public class Messages {
 
         builder.append("; Pinned: ")
                 .append(person.getPin());
+
+        if (person.getEmergencyContact().isPresent()) {
+            EmergencyContact emergencyContact = person.getEmergencyContact().get();
+            builder.append("; Emergency Contact Name: ")
+                    .append(emergencyContact.name)
+                    .append("; Emergency Contact Phone: ")
+                    .append(emergencyContact.phone)
+                    .append("; Emergency Contact Email: ")
+                    .append(emergencyContact.email);
+        }
+
         return builder.toString();
     }
 

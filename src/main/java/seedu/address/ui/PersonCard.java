@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Person;
 
 /**
@@ -46,6 +47,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label emergency;
+    @FXML
     private Label enrollmentYear;
     @FXML
     private FlowPane roles;
@@ -70,6 +73,16 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+
+        if (person.getEmergencyContact().isPresent()) {
+            EmergencyContact emergencyContact = person.getEmergencyContact().get();
+            String displayMessage = String.format("Emergency Contact: %s, %s, %s", emergencyContact.name.fullName,
+                    emergencyContact.phone.value, emergencyContact.email.value);
+            emergency.setText(displayMessage);
+        } else {
+            emergency.setText("Missing emergency contact.");
+        }
+
         String enrollmentYearStr = person.getEnrollmentYear().toString();
         enrollmentYear.setText(enrollmentYearStr.isEmpty()
                 ? "No enrollment year" : "Enrollment Year: " + enrollmentYearStr);

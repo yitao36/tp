@@ -10,24 +10,29 @@ import seedu.address.commons.util.ToStringBuilder;
  * {@link Phone#isValidPhone} respectively.
  */
 public class EmergencyContact {
+    public static final String MESSAGE_CONSTRAINTS = "The emergency contact fields (`ecn, ecp, ece`) must be either "
+            + "all provided or not at all.";
 
     public final Name name;
     public final Phone phone;
+    public final Email email;
 
     /**
      * Constructs a {@code EmergencyContact}.
      *
      * @param name  A valid name.
      * @param phone A valid phone number.
+     * @param email A valid email address.
      */
-    public EmergencyContact(String name, String phone) {
+    public EmergencyContact(String name, String phone, String email) {
         this.name = new Name(name);
         this.phone = new Phone(phone);
+        this.email = new Email(email);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("name", name).add("phone", phone).toString();
+        return new ToStringBuilder(this).add("name", name).add("phone", phone).add("email", email).toString();
     }
 
     @Override
@@ -41,13 +46,13 @@ public class EmergencyContact {
             return false;
         }
 
-        EmergencyContact otherEmergencyContact = (EmergencyContact) other;
-        return name.equals(otherEmergencyContact.name) && phone.equals(otherEmergencyContact.phone);
+        EmergencyContact otherContact = (EmergencyContact) other;
+        return name.equals(otherContact.name) && phone.equals(otherContact.phone) && email.equals(otherContact.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, phone);
+        return Objects.hash(name, phone, email);
     }
 
 }
