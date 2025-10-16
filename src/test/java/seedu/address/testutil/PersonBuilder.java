@@ -11,6 +11,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Pin;
+import seedu.address.model.role.Role;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -30,6 +31,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Pin pin;
+    private Set<Role> roles;
     private Set<Tag> tags;
     private EmergencyContact emergencyContact;
     private EnrollmentYear enrollmentYear;
@@ -43,6 +45,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         pin = new Pin(DEFAULT_PIN);
+        roles = new HashSet<>();
         tags = new HashSet<>();
         emergencyContact = null;
         enrollmentYear = new EnrollmentYear();
@@ -56,6 +59,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        roles = new HashSet<>(personToCopy.getRoles());
         tags = new HashSet<>(personToCopy.getTags());
         pin = personToCopy.getPin();
         enrollmentYear = personToCopy.getEnrollmentYear();
@@ -70,9 +74,17 @@ public class PersonBuilder {
     }
 
     /**
+     * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withRoles(String... roles) {
+        this.roles = SampleDataUtil.getRoleSet(roles);
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -134,7 +146,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, pin, tags, emergencyContact, enrollmentYear);
+        return new Person(name, phone, email, address, pin, roles, tags, emergencyContact, enrollmentYear);
     }
 
 }

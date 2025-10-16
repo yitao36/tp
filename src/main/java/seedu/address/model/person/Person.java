@@ -30,16 +30,16 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Set<Role> roles = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
     private final EmergencyContact emergencyContact;
-    private final Set<Role> roles = new HashSet<>();
     private final EnrollmentYear enrollmentYear;
     private final Pin pin;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Pin pin, Set<Tag> tags,
+    public Person(Name name, Phone phone, Email email, Address address, Pin pin, Set<Role> roles, Set<Tag> tags,
                   EmergencyContact emergencyContact, EnrollmentYear enrollmentYear) {
         requireAllNonNull(name, phone, email, address, pin, tags);
         checkArgument(isValidPerson(phone, emergencyContact), MESSAGE_CONSTRAINTS);
@@ -48,6 +48,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.pin = pin;
+        this.roles.addAll(roles);
         this.tags.addAll(tags);
         this.emergencyContact = emergencyContact;
         this.enrollmentYear = enrollmentYear;
@@ -81,6 +82,14 @@ public class Person {
 
     public Pin getPin() {
         return pin;
+    }
+
+    /**
+     * Returns an immutable role set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Role> getRoles() {
+        return Collections.unmodifiableSet(roles);
     }
 
     /**
@@ -133,6 +142,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && roles.equals(otherPerson.roles)
                 && tags.equals(otherPerson.tags)
                 && enrollmentYear.equals(otherPerson.enrollmentYear);
     }
@@ -140,7 +150,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, enrollmentYear);
+        return Objects.hash(name, phone, email, address, roles, tags, enrollmentYear);
     }
 
     @Override
@@ -150,6 +160,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("roles", roles)
                 .add("tags", tags)
                 .add("pin", pin)
                 .add("enrollmentYear", enrollmentYear)

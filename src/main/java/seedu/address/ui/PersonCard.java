@@ -47,6 +47,7 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private Label enrollmentYear;
+    private FlowPane roles;
     @FXML
     private FlowPane tags;
 
@@ -71,6 +72,9 @@ public class PersonCard extends UiPart<Region> {
         String enrollmentYearStr = person.getEnrollmentYear().toString();
         enrollmentYear.setText(enrollmentYearStr.isEmpty()
                 ? "No enrollment year" : "Enrollment Year: " + enrollmentYearStr);
+        person.getRoles().stream()
+                .sorted(Comparator.comparing(role -> role.roleName))
+                .forEach(role -> roles.getChildren().add(new Label(role.roleName)));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

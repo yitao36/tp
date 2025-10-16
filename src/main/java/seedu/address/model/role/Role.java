@@ -9,6 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Role {
     public static final String MESSAGE_CONSTRAINTS = "TODO";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9 ]+$";
+
     public final String roleName;
 
     /**
@@ -26,8 +28,7 @@ public class Role {
      * Returns true if a given string is a valid role name.
      */
     public static boolean isValidRoleName(String test) {
-        // TODO: implement this
-        return true;
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
