@@ -31,6 +31,7 @@ public class NameTest {
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
         assertFalse(Name.isValidName("peter (pete")); // invalid bracket matching
         assertFalse(Name.isValidName("peter pete)")); // invalid bracket matching
+        assertFalse(Name.isValidName("peter pete)(")); // invalid bracket matching
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
