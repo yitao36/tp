@@ -5,6 +5,7 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
+    "roles" : [ "secretary" ],
     "tags" : [ "friends" ],
     "pin" : false
   }, {
@@ -12,6 +13,7 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
+    "roles" : [ "president", "camp leader" ],
     "tags" : [ "owesMoney", "friends" ],
     "pin" : false,
     "enrollmentYear": "2025"
@@ -48,6 +50,7 @@
     "phone" : "94824428",
     "email" : "anna@example.com",
     "address" : "4th street",
+    "roles" : [ ],
     "tags" : [ ],
     "pin" : true
   } ]
