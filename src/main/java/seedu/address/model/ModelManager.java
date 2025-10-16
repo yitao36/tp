@@ -124,7 +124,8 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        return filteredPersons.sorted((p1, p2) ->
+        Boolean.compare(p2.getPin().value, p1.getPin().value));
     }
 
     @Override
