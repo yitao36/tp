@@ -7,10 +7,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -24,6 +26,14 @@ public class PersonUtil {
      */
     public static String getAddCommand(Person person) {
         return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    }
+
+
+    /**
+     * Returns the part of command string for the given {@code FindCommand} details.
+     */
+    public static String getFindCommand(List<String> keywords) {
+        return FindCommand.COMMAND_WORD + " " + PREFIX_NAME + String.join(" ", keywords);
     }
 
     /**
