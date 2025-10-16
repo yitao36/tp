@@ -18,11 +18,6 @@ public class EnrollmentYearTest {
     static final String EMPTY_YEAR = "";
 
     @Test
-    public void constructor_nullYear_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new EnrollmentYear(null));
-    }
-
-    @Test
     public void constructor_invalidYear_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new EnrollmentYear(INVALID_YEAR));
     }
@@ -30,11 +25,6 @@ public class EnrollmentYearTest {
     @Test
     public void constructor_nonPositiveYear_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new EnrollmentYear(ZERO_YEAR));
-    }
-
-    @Test
-    public void constructor_emptyYear_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new EnrollmentYear(EMPTY_YEAR));
     }
 
     @Test
@@ -67,6 +57,9 @@ public class EnrollmentYearTest {
         final EnrollmentYear enrollmentYear = new EnrollmentYear(VALID_YEAR);
         final String expected = VALID_YEAR;
         assertEquals(expected, enrollmentYear.toString());
+        final EnrollmentYear emptyEnrollmentYear = new EnrollmentYear();
+        final String expectedNone = "";
+        assertEquals(expectedNone, emptyEnrollmentYear.toString());
     }
 
     @Test

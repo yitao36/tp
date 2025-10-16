@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EnrollmentYear;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -39,6 +40,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
         descriptor.setPin(person.getPin());
+        descriptor.setEnrollmentYear(person.getEnrollmentYear());
+
     }
 
     /**
@@ -80,6 +83,23 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPin(new Pin(isPinned));
         return this;
     }
+
+    /**
+     * Sets the {@code EnrollmentYear} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withEnrollmentYear(String year) {
+        descriptor.setEnrollmentYear(new EnrollmentYear(year));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EnrollmentYear} of the {@code EditPersonDescriptor} that we are building as empty.
+     */
+    public EditPersonDescriptorBuilder withEnrollmentYear() {
+        descriptor.setEnrollmentYear(new EnrollmentYear());
+        return this;
+    }
+
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}

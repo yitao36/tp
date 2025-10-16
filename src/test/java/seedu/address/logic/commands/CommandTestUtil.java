@@ -36,6 +36,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final boolean VALID_PIN_AMY = true;
     public static final boolean VALID_PIN_BOB = false;
+    public static final String VALID_ENROLLMENT_YEAR_AMY = "";
+    public static final String VALID_ENROLLMENT_YEAR_BOB = "2024";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -65,9 +67,11 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).withPin(VALID_PIN_AMY).build();
+                .withTags(VALID_TAG_FRIEND).withPin(VALID_PIN_AMY)
+                .withEnrollmentYear(VALID_ENROLLMENT_YEAR_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withEnrollmentYear(VALID_ENROLLMENT_YEAR_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withPin(VALID_PIN_BOB).build();
     }
 

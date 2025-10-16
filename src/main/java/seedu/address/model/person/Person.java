@@ -95,8 +95,8 @@ public class Person {
         return Optional.ofNullable(emergencyContact);
     }
 
-    public Optional<EnrollmentYear> getEnrollmentYear() {
-        return Optional.ofNullable(enrollmentYear);
+    public EnrollmentYear getEnrollmentYear() {
+        return enrollmentYear;
     }
 
     /**
@@ -133,13 +133,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && enrollmentYear.equals(otherPerson.enrollmentYear);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, enrollmentYear);
     }
 
     @Override
@@ -151,6 +152,7 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("pin", pin)
+                .add("enrollmentYear", enrollmentYear)
                 .toString();
     }
 

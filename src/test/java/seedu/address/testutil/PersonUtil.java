@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENROLL_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PIN;
@@ -39,6 +40,7 @@ public class PersonUtil {
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         sb.append(PREFIX_PIN + person.getPin().toString() + " ");
+        sb.append(PREFIX_ENROLL_YEAR + person.getEnrollmentYear().toString() + "");
         return sb.toString();
     }
 
@@ -63,6 +65,10 @@ public class PersonUtil {
                 sb.append(PREFIX_PIN)
                         .append(pin.value ? "True" : "False")
                         .append(" "));
+        descriptor.getEnrollmentYear().ifPresent(enrollmentYear ->
+            sb.append(PREFIX_ENROLL_YEAR)
+              .append(enrollmentYear.isPresent ? enrollmentYear.year : "")
+              .append(" "));
         return sb.toString();
     }
 }
