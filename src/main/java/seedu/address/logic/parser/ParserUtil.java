@@ -134,13 +134,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code enrollmentYear} is invalid.
      */
-    public static EnrollmentYear parseEnrollmentYear(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (trimmedTag.isEmpty()) {
+    public static EnrollmentYear parseEnrollmentYear(String year) throws ParseException {
+        requireNonNull(year);
+        String trimmedYear = year.trim();
+        if (trimmedYear.isEmpty()) {
             return new EnrollmentYear();
-        } else if (EnrollmentYear.isValidYear(trimmedTag)) {
-            return new EnrollmentYear(trimmedTag);
+        } else if (EnrollmentYear.isValidYear(trimmedYear)) {
+            return new EnrollmentYear(trimmedYear);
         } else {
             throw new ParseException(EnrollmentYear.MESSAGE_CONSTRAINTS);
         }
