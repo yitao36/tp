@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ENROLLMENT_YEAR_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PIN_BOB;
@@ -57,6 +58,10 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPin(VALID_PIN_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // different enrollmentYear -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEnrollmentYear(VALID_ENROLLMENT_YEAR_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different tags -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
@@ -71,7 +76,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
                 + editPersonDescriptor.getAddress().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + ", pin="
-                + editPersonDescriptor.getPin().orElse(null) + "}";
+                + editPersonDescriptor.getPin().orElse(null) + ", enrollmentYear="
+                + editPersonDescriptor.getEnrollmentYear().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

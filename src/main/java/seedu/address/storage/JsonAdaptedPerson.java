@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EnrollmentYear;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -29,6 +30,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String enrollmentYear;
     private final Boolean pin;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -38,12 +40,18 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("pin") Boolean pin, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("pin") Boolean pin, @JsonProperty("enrollmentYear") String enrollmentYear,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.pin = pin;
+        if (enrollmentYear != null) {
+            this.enrollmentYear = enrollmentYear;
+        } else {
+            this.enrollmentYear = "";
+        }
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -58,6 +66,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         pin = source.getPin().value;
+        enrollmentYear = source.getEnrollmentYear().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -111,9 +120,11 @@ class JsonAdaptedPerson {
         }
         final Pin modelPin = new Pin(pin);
 
+        final EnrollmentYear modelEnrollmentYear = new EnrollmentYear(enrollmentYear);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPin,
-                modelTags, null, null);
+                modelTags, null, modelEnrollmentYear);
     }
 
 }

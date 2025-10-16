@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EnrollmentYear;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Pin;
@@ -28,6 +29,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_PIN = "NTRUE";
+    private static final String INVALID_ENROLLMENT_YEAR = "12!23";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "99123456";
@@ -37,6 +39,8 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_PIN_1 = "FALSE";
     private static final String VALID_PIN_2 = "TRUE";
+    private static final String VALID_ENROLLMENT_YEAR_1 = "2024";
+    private static final String VALID_ENROLLMENT_YEAR_2 = "";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -215,5 +219,24 @@ public class ParserUtilTest {
 
         expectedPin = new Pin(true);
         assertEquals(expectedPin, ParserUtil.parsePin(VALID_PIN_2));
+    }
+
+    @Test
+    public void parseEnrollmentYear_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEnrollmentYear(null));
+    }
+
+    @Test
+    public void parseEnrollmentYear_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEnrollmentYear(INVALID_ENROLLMENT_YEAR));
+    }
+
+    @Test
+    public void parseEnrollmentYear_validValueWithoutWhitespace_returnsEnrollmentYear() throws Exception {
+        EnrollmentYear expectedEnrollmentYear = new EnrollmentYear(VALID_ENROLLMENT_YEAR_1);
+        assertEquals(expectedEnrollmentYear, ParserUtil.parseEnrollmentYear(VALID_ENROLLMENT_YEAR_1));
+
+        expectedEnrollmentYear = new EnrollmentYear(VALID_ENROLLMENT_YEAR_2);
+        assertEquals(expectedEnrollmentYear, ParserUtil.parseEnrollmentYear(VALID_ENROLLMENT_YEAR_2));
     }
 }

@@ -45,7 +45,7 @@ public class PersonBuilder {
         pin = new Pin(DEFAULT_PIN);
         tags = new HashSet<>();
         emergencyContact = null;
-        enrollmentYear = null;
+        enrollmentYear = new EnrollmentYear();
     }
 
     /**
@@ -58,6 +58,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         pin = personToCopy.getPin();
+        enrollmentYear = personToCopy.getEnrollmentYear();
     }
 
     /**
@@ -121,6 +122,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withEnrollmentYear(String year) {
         this.enrollmentYear = new EnrollmentYear(year);
+        return this;
+    }
+
+    /**
+     * Sets the {@code EnrollmentYear} of the {@code Person} that we are building as empty.
+     */
+    public PersonBuilder withEnrollmentYear() {
+        this.enrollmentYear = new EnrollmentYear();
         return this;
     }
 
