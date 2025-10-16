@@ -6,8 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ],
-    "pin" : false,
-    "enrollmentYear": ""
+    "pin" : false
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -22,39 +21,34 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "tags" : [ ],
-    "pin" : false,
-    "enrollmentYear": ""
+    "pin" : false
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "tags" : [ "friends" ],
-    "pin" : false,
-    "enrollmentYear": ""
+    "pin" : false
   }, {
     "name" : "Elle Meyer",
     "phone" : "94832224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tags" : [ ],
-    "pin" : false,
-    "enrollmentYear": ""
+    "pin" : false
   }, {
     "name" : "Fiona Kunz",
     "phone" : "94824927",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tags" : [ ],
-    "pin" : false,
-    "enrollmentYear": ""
+    "pin" : false
   }, {
     "name" : "George Best",
     "phone" : "94824428",
     "email" : "anna@example.com",
     "address" : "4th street",
     "tags" : [ ],
-    "pin" : true,
-    "enrollmentYear": ""
+    "pin" : true
   } ]
 }

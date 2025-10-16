@@ -40,7 +40,7 @@ public class PersonUtil {
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         sb.append(PREFIX_PIN + person.getPin().toString() + " ");
-        sb.append(PREFIX_ENROLL_YEAR + person.getEnrollmentYear().toString() + "");
+        sb.append(PREFIX_ENROLL_YEAR + person.getEnrollmentYear().toString() + " ");
         return sb.toString();
     }
 

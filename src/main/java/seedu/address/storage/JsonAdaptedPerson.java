@@ -47,7 +47,11 @@ class JsonAdaptedPerson {
         this.email = email;
         this.address = address;
         this.pin = pin;
-        this.enrollmentYear = enrollmentYear;
+        if (enrollmentYear != null) {
+            this.enrollmentYear = enrollmentYear;
+        } else {
+            this.enrollmentYear = "";
+        }
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -116,10 +120,6 @@ class JsonAdaptedPerson {
         }
         final Pin modelPin = new Pin(pin);
 
-        if (enrollmentYear == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, EnrollmentYear.class.getSimpleName()));
-        }
         final EnrollmentYear modelEnrollmentYear = new EnrollmentYear(enrollmentYear);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
