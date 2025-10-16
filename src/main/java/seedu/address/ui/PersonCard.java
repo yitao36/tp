@@ -69,8 +69,8 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         String enrollmentYearStr = person.getEnrollmentYear().toString();
-        enrollmentYear.setText(enrollmentYearStr.isEmpty() ?
-                "No enrollment year" : "Enrollment Year: " + enrollmentYearStr);
+        enrollmentYear.setText(enrollmentYearStr.isEmpty()
+                ? "No enrollment year" : "Enrollment Year: " + enrollmentYearStr);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
