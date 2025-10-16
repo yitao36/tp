@@ -232,7 +232,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseEnrollmentYear_validValueWithoutWhitespace_returnsPin() throws Exception {
+    public void parseEnrollmentYear_validValueWithoutWhitespace_returnsEnrollmentYear() throws Exception {
         EnrollmentYear expectedEnrollmentYear = new EnrollmentYear(VALID_ENROLLMENT_YEAR_1);
         assertEquals(expectedEnrollmentYear, ParserUtil.parseEnrollmentYear(VALID_ENROLLMENT_YEAR_1));
 

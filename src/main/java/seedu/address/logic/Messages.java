@@ -46,7 +46,7 @@ public class Messages {
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         builder.append("; Enrollment Year: ")
-               .append(person.getEnrollmentYear().toString());
+               .append(person.getEnrollmentYear());
         builder.append("; Pinned: ")
                 .append(person.getPin());
         return builder.toString();

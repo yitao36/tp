@@ -66,8 +66,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setPin(ParserUtil.parsePin(argMultimap.getValue(PREFIX_PIN).get()));
         }
         if (argMultimap.getValue(PREFIX_ENROLL_YEAR).isPresent()) {
-            editPersonDescriptor.setEnrollmentYear(ParserUtil.parseEnrollmentYear((
-                    argMultimap.getValue(PREFIX_ENROLL_YEAR).get())));
+            editPersonDescriptor.setEnrollmentYear(ParserUtil.parseEnrollmentYear(
+                    argMultimap.getValue(PREFIX_ENROLL_YEAR).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 

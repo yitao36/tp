@@ -41,7 +41,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setTags(person.getTags());
         descriptor.setPin(person.getPin());
         descriptor.setEnrollmentYear(person.getEnrollmentYear());
-
     }
 
     /**
