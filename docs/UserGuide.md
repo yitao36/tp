@@ -113,7 +113,7 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose selected field contain any of the given keywords.
+Finds persons whose selected field contains any of the given keywords.
 
 Available prefixes
 - Name: `n/`
