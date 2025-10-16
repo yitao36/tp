@@ -33,9 +33,12 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
         assertFalse(Phone.isValidPhone("124293842033123"));
         assertFalse(Phone.isValidPhone("911"));
-
+        assertFalse(Phone.isValidPhone("12345678"));
         // valid phone numbers
         assertTrue(Phone.isValidPhone("93121534"));
+        assertTrue(Phone.isValidPhone("31313131"));
+        assertTrue(Phone.isValidPhone("61616161"));
+        assertTrue(Phone.isValidPhone("81818112"));
     }
 
     @Test
