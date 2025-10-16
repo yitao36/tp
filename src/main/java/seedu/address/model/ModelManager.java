@@ -82,8 +82,13 @@ public class ModelManager implements Model {
         this.addressBook.resetData(addressBook);
     }
 
+    /**
+     * TODO: Temporary fix of the internal list not matching the observable list, due to pin sorting.
+     */
     @Override
     public ReadOnlyAddressBook getAddressBook() {
+        addressBook.setPersons(addressBook.getPersonList().sorted((p1, p2) ->
+                Boolean.compare(p2.getPin().value, p1.getPin().value)));
         return addressBook;
     }
 
@@ -116,12 +121,10 @@ public class ModelManager implements Model {
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
-     * List is sorted by pin status. TODO: Abstract out pin comparator logic.
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons.sorted((p1, p2) ->
-                Boolean.compare(p2.getPin().value, p1.getPin().value));
+        return filteredPersons;
     }
 
     @Override
