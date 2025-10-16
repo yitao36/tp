@@ -25,6 +25,9 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final boolean DEFAULT_PIN = false;
+    public static final String DEFAULT_EMERGENCY_NAME = "Alice Bee";
+    public static final String DEFAULT_EMERGENCY_PHONE = "88887777";
+    public static final String DEFAULT_EMERGENCY_EMAIL = "alice@gmail.com";
 
     private Name name;
     private Phone phone;
@@ -47,7 +50,8 @@ public class PersonBuilder {
         pin = new Pin(DEFAULT_PIN);
         roles = new HashSet<>();
         tags = new HashSet<>();
-        emergencyContact = null;
+        emergencyContact = new EmergencyContact(DEFAULT_EMERGENCY_NAME, DEFAULT_EMERGENCY_PHONE,
+                DEFAULT_EMERGENCY_EMAIL);
         enrollmentYear = new EnrollmentYear();
     }
 
@@ -62,6 +66,7 @@ public class PersonBuilder {
         roles = new HashSet<>(personToCopy.getRoles());
         tags = new HashSet<>(personToCopy.getTags());
         pin = personToCopy.getPin();
+        emergencyContact = personToCopy.getEmergencyContact().orElse(null);
         enrollmentYear = personToCopy.getEnrollmentYear();
     }
 
@@ -124,8 +129,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code EmergencyContact} of the {@code Person} that we are building.
      */
-    public PersonBuilder withEmergencyContact(String name, String phone) {
-        this.emergencyContact = new EmergencyContact(name, phone);
+    public PersonBuilder withEmergencyContact(String name, String phone, String email) {
+        this.emergencyContact = new EmergencyContact(name, phone, email);
         return this;
     }
 

@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.EnrollmentYear;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -289,5 +291,33 @@ public class ParserUtilTest {
 
         expectedEnrollmentYear = new EnrollmentYear(VALID_ENROLLMENT_YEAR_2);
         assertEquals(expectedEnrollmentYear, ParserUtil.parseEnrollmentYear(VALID_ENROLLMENT_YEAR_2));
+    }
+
+    @Test
+    public void parseEmergencyContact_incomplete_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmergencyContact(Optional.of(VALID_NAME),
+                Optional.of(VALID_PHONE), Optional.empty()));
+    }
+
+    @Test
+    public void parseEmergencyContact_invalidValue_returnsEmergencyContact() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmergencyContact(Optional.of(INVALID_NAME),
+                Optional.of(VALID_PHONE), Optional.of(VALID_EMAIL)));
+    }
+
+    @Test
+    public void parseEmergencyContact_empty_returnsEmpty() throws Exception {
+        Optional<EmergencyContact> emergencyContact = ParserUtil.parseEmergencyContact(Optional.empty(),
+                Optional.empty(), Optional.empty());
+        Optional<EmergencyContact> expectedEmergencyContact = Optional.empty();
+        assertEquals(expectedEmergencyContact, emergencyContact);
+    }
+
+    @Test
+    public void parseEmergencyContact_validValue_returnsEmergencyContact() throws Exception {
+        EmergencyContact emergencyContact = ParserUtil.parseEmergencyContact(Optional.of(VALID_NAME),
+                Optional.of(VALID_PHONE), Optional.of(VALID_EMAIL)).get();
+        EmergencyContact expectedEmergencyContact = new EmergencyContact(VALID_NAME, VALID_PHONE, VALID_EMAIL);
+        assertEquals(expectedEmergencyContact, emergencyContact);
     }
 }

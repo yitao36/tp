@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -11,6 +12,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.EnrollmentYear;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -110,6 +112,30 @@ public class ParserUtil {
             return new Pin(false);
         } else {
             throw new ParseException(Pin.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses a {@code emergencyName, emergencyPhone, emergencyEmail} into an {@code EmergencyContact}.
+     */
+    public static Optional<EmergencyContact> parseEmergencyContact(Optional<String> emergencyName,
+                                                                   Optional<String> emergencyPhone,
+                                                                   Optional<String> emergencyEmail)
+                                                                    throws ParseException {
+        int presentFieldsCount = (emergencyName.isPresent() ? 1 : 0)
+                + (emergencyPhone.isPresent() ? 1 : 0)
+                + (emergencyEmail.isPresent() ? 1 : 0);
+
+        if (presentFieldsCount != 0 && presentFieldsCount != 3) {
+            throw new ParseException(EmergencyContact.MESSAGE_CONSTRAINTS);
+        }
+        if (presentFieldsCount == 0) {
+            return Optional.empty();
+        }
+        try {
+            return Optional.of(new EmergencyContact(emergencyName.get(), emergencyPhone.get(), emergencyEmail.get()));
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
         }
     }
 

@@ -35,6 +35,7 @@ public class TypicalPersons {
             .withPin(false)
             .withRoles("president", "camp leader")
             .withTags("owesMoney", "friends")
+            .withEmergencyContact("Bernard Meier", "98762345", "bernard@example.com")
             .withEnrollmentYear("2025").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
