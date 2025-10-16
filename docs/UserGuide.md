@@ -114,14 +114,14 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​ [t/T
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
-* The same is true for editing roles.
+* Editing roles follows the same rules as editing tags.
 * The pin field takes in either "TRUE" or "FALSE"
 * The enrollment year should be a positive integer or empty string (to delete)
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-*  `edit 3 n/Jack Wilson r/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing roles.
+*  `edit 3 n/Jack Wilson r/` Edits the name of the 3rd person to be `Jack Wilson` and clears all existing roles.
 
 ### Locating persons by name: `find`
 

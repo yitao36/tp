@@ -71,7 +71,7 @@ public class PersonUtil {
         if (descriptor.getRoles().isPresent()) {
             Set<Role> roles = descriptor.getRoles().get();
             if (roles.isEmpty()) {
-                sb.append(PREFIX_TAG).append(" ");
+                sb.append(PREFIX_ROLE).append(" ");
             } else {
                 roles.forEach(s -> sb.append(PREFIX_ROLE).append(s.roleName).append(" "));
             }

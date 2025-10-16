@@ -26,7 +26,7 @@ public class RoleTest {
 
         // invalid role names
         assertFalse(Role.isValidRoleName("")); // empty string
-        assertFalse(Role.isValidRoleName("president@")); // less than 3 numbers
+        assertFalse(Role.isValidRoleName("president@"));
 
         // valid role names
         assertTrue(Role.isValidRoleName("93121534"));

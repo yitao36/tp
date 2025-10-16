@@ -54,7 +54,7 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a role set containing the list of strings given.
      */
     public static Set<Role> getRoleSet(String... strings) {
         return Arrays.stream(strings)
