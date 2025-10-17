@@ -83,6 +83,10 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE]…​ [t/TAG]…�
 A person can have any number of tags (including 0)
 </div>
 
+<div markdown="span" class="info info-primary">:info: **Note:**
+Persons are considered duplicates if they have the same name
+</div>
+
 * The emergency contact fields (`ecn, ecp, ece`) must be either all provided or not at all.
 
 Examples:

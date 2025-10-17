@@ -31,6 +31,19 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
+     * Binds the PersonDetailedView to the currently selected person from {@code ListView}.
+     * When the selected person changes, the new details are reflected in PersonDetailedView.
+     */
+    public void listenForSelectionEvent(PersonDetailedPanel personDetailedPanel) {
+        personListView.getSelectionModel().selectedItemProperty().addListener(((
+                observable, oldValue, newValue) -> {
+                    if (newValue != null) {
+                        personDetailedPanel.updateDetails(newValue);
+                    }
+                }));
+    }
+
+    /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {
@@ -48,5 +61,4 @@ public class PersonListPanel extends UiPart<Region> {
             }
         }
     }
-
 }
