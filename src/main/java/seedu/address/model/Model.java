@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -51,6 +52,9 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /** Sorts the AddressBook */
+    void sortAddressBook(Comparator<Person> personComparator);
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
