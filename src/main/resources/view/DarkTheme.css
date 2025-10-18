@@ -350,6 +350,11 @@
     -fx-background-radius: 0;
 }
 
+#personDetailedPanel .label {
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+}
+
 #roles {
     -fx-hgap: 7;
     -fx-vgap: 3;
