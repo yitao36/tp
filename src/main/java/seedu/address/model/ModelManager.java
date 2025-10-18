@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -82,14 +83,14 @@ public class ModelManager implements Model {
         this.addressBook.resetData(addressBook);
     }
 
-    /**
-     * TODO: Temporary fix of the internal list not matching the observable list, due to pin sorting.
-     */
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        addressBook.setPersons(addressBook.getPersonList().sorted((p1, p2) ->
-                Boolean.compare(p2.getPin().value, p1.getPin().value)));
         return addressBook;
+    }
+
+    @Override
+    public void sortAddressBook(Comparator<Person> comparator) {
+        addressBook.sort(comparator);
     }
 
     @Override
@@ -112,7 +113,6 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
@@ -124,8 +124,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons.sorted((p1, p2) ->
-        Boolean.compare(p2.getPin().value, p1.getPin().value));
+        return filteredPersons;
     }
 
     @Override
