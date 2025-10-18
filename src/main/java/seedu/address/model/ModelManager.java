@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private Person selectedPerson;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        selectedPerson = filteredPersons.isEmpty() ? null : filteredPersons.get(0);
     }
 
     public ModelManager() {
@@ -132,6 +135,27 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Selected Person Accessors =============================================================
+
+    @Override
+    public void setSelectedPerson(Person p) {
+        selectedPerson = p;
+    }
+
+    @Override
+    public void setSelectedPerson(Index i) {
+        if (filteredPersons.size() <= i.getZeroBased()) {
+            selectedPerson = null;
+        } else {
+            selectedPerson = filteredPersons.get(i.getZeroBased());
+        }
+    }
+
+    @Override
+    public Person getSelectedPerson() {
+        return selectedPerson;
     }
 
     @Override

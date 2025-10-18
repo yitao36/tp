@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 
 /**
@@ -84,4 +85,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+
+    /** Returns the currently selected person in the filtered person list. */
+    Person getSelectedPerson();
+
+    /** Sets the currently selected person in the filtered person list. */
+    void setSelectedPerson(Person p);
+
+    /** Sets the selected person to the specified index in the filtered person list. */
+    void setSelectedPerson(Index i);
 }

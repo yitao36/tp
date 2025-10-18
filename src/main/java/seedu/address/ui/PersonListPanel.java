@@ -37,10 +37,15 @@ public class PersonListPanel extends UiPart<Region> {
     public void listenForSelectionEvent(PersonDetailedPanel personDetailedPanel) {
         personListView.getSelectionModel().selectedItemProperty().addListener(((
                 observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        personDetailedPanel.updateDetails(newValue);
-                    }
+                    personDetailedPanel.updateDetails(newValue);
                 }));
+    }
+
+    public void setSelectedPerson(Person p) {
+        if (p == null) {
+            personListView.getSelectionModel().selectFirst();
+        }
+        personListView.getSelectionModel().select(p);
     }
 
     /**

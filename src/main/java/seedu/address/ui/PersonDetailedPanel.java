@@ -52,6 +52,11 @@ public class PersonDetailedPanel extends UiPart<Region> {
      * Populates the panel with details of the selected person.
      */
     public void updateDetails(Person selected) {
+        if (selected == null) {
+            this.getRoot().setVisible(false);
+            return;
+        }
+        this.getRoot().setVisible(true);
         name.setText(selected.getName().fullName);
         pin.setImage(pinImage);
         pin.setVisible(selected.getPin().value);
