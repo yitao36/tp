@@ -10,6 +10,6 @@
     <stylesheets>
         <URL value="@DetailedPanel.css" />
     </stylesheets>
-    <VBox fx:id="helpPanelPlaceholder" styleClass="pane-with-border"/>
-    <VBox fx:id="personPanelPlaceholder" styleClass="pane-with-border"/>
+    <VBox fx:id="helpPanelPlaceholder" styleClass="pane-with-border-dark"/>
+    <VBox fx:id="personPanelPlaceholder" styleClass="pane-with-border-dark"/>
 </StackPane>

@@ -88,8 +88,10 @@
 }
 
 .split-pane-divider {
-    -fx-padding: 0 2 0 0;
-    -fx-background-color: derive(#272815, 0%);
+    -fx-padding: 0 2 0 2;
+    -fx-background-color: derive(#272815, 20%);
+    -fx-border-color: transparent derive(#272815, 0%) transparent derive(#272815, 0%);
+    -fx-border-width: 2;
 }
 
 .list-view {
@@ -105,7 +107,7 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: derive(#272815, 00%); /* #564403; */ /* (Darker) Brown */
+    -fx-background-color: derive(#272815, 0%); /* #564403; */ /* (Darker) Brown */
 }
 
 .list-cell:filled:odd {
@@ -152,6 +154,12 @@
 
 .stack-pane {
     -fx-background-color: derive(#272815, 20%);
+}
+
+.pane-with-border-dark {
+    -fx-background-color: derive(#272815, 10%);
+    -fx-border-color: derive(#272815, 0%);
+    -fx-border-width: 2px;
 }
 
 .pane-with-border {
@@ -340,9 +348,9 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #272815 transparent #272815;
+    -fx-background-color: transparent;
     -fx-background-insets: 0;
-    -fx-border-color: #272815 #272815 #ffffff #272815;
+    -fx-border-color: transparent transparent white transparent;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
