@@ -12,3 +12,5 @@ Pin icons created by Pixel perfect - Flaticon - https://www.flaticon.com/free-ic
 - pin.png
 - email.png
 - telephone.png
+- contact.png
+- tent.png
