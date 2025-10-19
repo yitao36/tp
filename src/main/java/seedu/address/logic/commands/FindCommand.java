@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENROLL_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.function.Predicate;
@@ -18,11 +19,12 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose "
-            + "selected prefix field contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Prefix: Exactly one of the following: 'n/' \n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice bob charlie";
+            + "fields satisfy certain constraints. Names contaning the specified keywords (case-insensitive)"
+            + " or enrollment year satisfying the constraint and displays them as a list with index numbers.\n"
+            + "Parameters: At most one of each of the following: "
+            + "[" + PREFIX_NAME + "KEYWORD [MORE_KEYWORDS]...]"
+            + "[" + PREFIX_ENROLL_YEAR + "[OP YEAR]"
+            + "\nExample: " + COMMAND_WORD + " " + PREFIX_NAME + "alice bob charlie";
 
     private final Predicate<Person> predicate;
 

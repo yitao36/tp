@@ -12,7 +12,9 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.person.MultiPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
@@ -29,22 +31,21 @@ public class FindCommandParserTest {
     @Test
     public void parse_invalidPrefix_throwsParseException() {
         // no prefix specified
-        FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
         assertParseFailure(parser, " " + "Alice Bob",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
 
         // multiple prefix specified
         assertParseFailure(parser, " n/"
                 + " \n Alice \n  \t" + " n/" + "Bob",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                Messages.getErrorMessageForDuplicatePrefixes(new Prefix("n/")));
     }
 
     @Test
     public void parse_prefixNameValidArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+                new FindCommand(new MultiPredicate(Arrays.asList(
+                        new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")))));
         assertParseSuccess(parser, " " + PREFIX_NAME + "Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
