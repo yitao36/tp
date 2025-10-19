@@ -136,7 +136,7 @@ Name:
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Enrollment Year:
-* A operator and a integer needs to be provided (in that order).
+* An operator and an integer needs to be provided (in that order).
 * The operator must be one of `<, <=, >, >=, =`.
 * The integer must be non-negative.
 * For e.g. `<2025` will return contacts that enrolled before `2024`.

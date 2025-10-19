@@ -32,10 +32,10 @@ public class EnrollmentYearPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different predicate -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
 
-        // different person -> returns false
+        // different predicate -> returns false
         assertFalse(firstPredicate.equals(thirdPredicate));
     }
 
