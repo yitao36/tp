@@ -28,12 +28,14 @@ public class DetailedPanel extends UiPart<StackPane> {
     private VBox personPanelPlaceholder;
 
     /**
-     * Constructs a panel displaying the person's detail.
+     * Constructs a container panel that initially shows the help panel.
      */
     public DetailedPanel() {
         super(FXML);
         helpPanelPlaceholder.getChildren().add(helpPanel.getRoot());
         personPanelPlaceholder.getChildren().add(personPanel.getRoot());
+
+        // Workaround to get personPanel height to fill up the whole container
         personPanel.getRoot().prefHeightProperty().bind(personPanelPlaceholder.heightProperty());
         personPanelPlaceholder.setVisible(false);
     }
@@ -42,8 +44,12 @@ public class DetailedPanel extends UiPart<StackPane> {
      * Populates the panel with details of the selected person.
      */
     public void updateDetails(Person selected) {
-        closeHelp();
-        personPanel.updateDetails(selected);
+        if (selected == null) {
+            showHelp();
+        } else {
+            closeHelp();
+            personPanel.updateDetails(selected);
+        }
     }
 
     /**

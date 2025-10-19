@@ -73,6 +73,8 @@ public class PersonPanel extends UiPart<VBox> {
      * Populates the panel with details of the selected person.
      */
     public void updateDetails(Person selected) {
+        assert selected != null : "person cannot be null";
+
         name.setText(selected.getName().fullName);
         pinIcon.setVisible(selected.getPin().value);
         name.setGraphic(pinIcon);
