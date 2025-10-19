@@ -91,12 +91,12 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
 
-    /** Returns the currently selected person in the filtered person list. */
+    /** Returns the selected person in the filtered person list. */
     Person getSelectedPerson();
 
-    /** Sets the currently selected person in the filtered person list. */
+    /** Sets the selected person in the filtered person list. */
     void setSelectedPerson(Person p);
 
-    /** Sets the selected person to the specified index in the filtered person list. */
+    /** Sets the selected person to the person at the specified index in the filtered person list. */
     void setSelectedPerson(Index i);
 }

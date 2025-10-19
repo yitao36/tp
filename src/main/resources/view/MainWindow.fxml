@@ -20,7 +20,7 @@
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@DarkTheme.css" />
+        <URL value="@NewTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
 
@@ -41,14 +41,14 @@
         </StackPane>
 
         <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
+                   prefHeight="100">
           <padding>
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
         </StackPane>
 
-        <SplitPane minWidth="660" VBox.vgrow="ALWAYS">
-          <VBox fx:id="personList" styleClass="pane-with-border"
+        <SplitPane VBox.vgrow="ALWAYS">
+          <VBox fx:id="personList"
                 minWidth="330">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
@@ -56,7 +56,7 @@
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
 
-          <StackPane fx:id="personDetailedPanelPlaceholder" styleClass="pane-with-border"
+          <StackPane fx:id="detailedPanelPlaceholder"
             minWidth="330">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />

@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.detailedpanel.DetailedPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,7 +33,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private PersonDetailedPanel personDetailedPanel;
+    private DetailedPanel detailedPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -46,7 +47,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
-    private StackPane personDetailedPanelPlaceholder;
+    private StackPane detailedPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -70,6 +71,13 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+    }
+
+    /**
+     * Displays a message to the user on initialization of AddressBook
+     */
+    public void initializeMessageToUser() {
+        resultDisplay.setFeedbackToUser("AddressBook successfully initialized.");
     }
 
     public Stage getPrimaryStage() {
@@ -117,8 +125,11 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        personDetailedPanel = new PersonDetailedPanel();
-        personDetailedPanelPlaceholder.getChildren().add(personDetailedPanel.getRoot());
+        detailedPanel = new DetailedPanel();
+        detailedPanelPlaceholder.getChildren().add(detailedPanel.getRoot());
+        detailedPanel.showHelp();
+        // Binds the detailedPanel person to the selected person in personList.
+        personListPanel.listenForSelectionEvent(detailedPanel);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -129,7 +140,6 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        personListPanel.listenForSelectionEvent(personDetailedPanel);
     }
     /**
      * Sets the default size based on {@code guiSettings}.
@@ -183,6 +193,10 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             personListPanel.setSelectedPerson(logic.getSelectedPerson());
+
+            if (logic.getFilteredPersonList().isEmpty()) {
+                detailedPanel.showHelp();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
