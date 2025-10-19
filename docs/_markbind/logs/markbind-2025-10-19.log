@@ -1,0 +1,35 @@
+2025-10-19T14:16:22.754Z - info: Website generation started at 10:16:22 pm
+2025-10-19T14:16:23.305Z - info: Building assets...
+2025-10-19T14:16:23.715Z - info: Assets built
+2025-10-19T14:16:23.716Z - info: Generating pages...
+2025-10-19T14:16:23.821Z - error: 'page' layout does not exist
+2025-10-19T14:16:23.823Z - error: 'page' layout does not exist
+2025-10-19T14:16:23.824Z - error: 'page' layout does not exist
+2025-10-19T14:16:23.825Z - error: 'page' layout does not exist
+2025-10-19T14:16:23.945Z - error: 'page' layout does not exist
+2025-10-19T14:16:23.951Z - error: 'page' layout does not exist
+2025-10-19T14:16:23.953Z - error: 'page' layout does not exist
+2025-10-19T14:16:23.963Z - error: 'page' layout does not exist
+2025-10-19T14:16:23.980Z - error: 'page' layout does not exist
+2025-10-19T14:16:23.981Z - error: 'page' layout does not exist
+2025-10-19T14:16:23.991Z - error: 'page' layout does not exist
+2025-10-19T14:16:24.016Z - error: 'page' layout does not exist
+2025-10-19T14:16:24.049Z - error: 'page' layout does not exist
+2025-10-19T14:16:24.058Z - error: 'page' layout does not exist
+2025-10-19T14:16:24.071Z - error: 'page' layout does not exist
+2025-10-19T14:16:24.072Z - error: 'page' layout does not exist
+2025-10-19T14:16:24.085Z - info: Pages built
+2025-10-19T14:16:24.216Z - info: Site data built
+2025-10-19T14:16:24.216Z - info: Website generation complete! Total build time: 1.517s
+2025-10-19T14:16:24.252Z - info: Serving "C:\Users\yitao\OneDrive\Desktop\CS2103T\tp\docs\_site" at http://127.0.0.1:8080
+2025-10-19T14:16:24.252Z - info: Press CTRL+C to stop ...
+2025-10-19T14:18:49.928Z - info: [10:18:49 pm] Reload for file change: C:\Users\yitao\OneDrive\Desktop\CS2103T\tp\docs\package-lock.json
+2025-10-19T14:18:49.936Z - info: [10:18:49 pm] Reload for file change: C:\Users\yitao\OneDrive\Desktop\CS2103T\tp\docs\site.json
+2025-10-19T14:18:49.959Z - info: No pages needed to be rebuilt
+2025-10-19T14:18:50.956Z - info: Assets built
+2025-10-19T14:19:30.513Z - info: [10:19:30 pm] Reload for file add: C:\Users\yitao\OneDrive\Desktop\CS2103T\tp\docs\node_modules\object-copy\node_modules\is-accessor-descriptor\desktop.ini
+2025-10-19T14:19:30.636Z - info: [10:19:30 pm] Reload for file deletion: C:\Users\yitao\OneDrive\Desktop\CS2103T\tp\docs\node_modules\object-copy\node_modules\is-accessor-descriptor\desktop.ini
+2025-10-19T14:19:31.532Z - info: Assets built
+2025-10-19T14:19:31.665Z - debug: Assets removed
+2025-10-19T14:20:37.007Z - info: [10:20:37 pm] Reload for file change: C:\Users\yitao\OneDrive\Desktop\CS2103T\tp\docs\site.json
+2025-10-19T14:20:37.017Z - info: No pages needed to be rebuilt
