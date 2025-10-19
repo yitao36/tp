@@ -1,10 +1,10 @@
 package seedu.address.ui.detailedpanel;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Person;
@@ -19,12 +19,16 @@ public class PersonPanel extends UiPart<VBox> {
     private static final Image contactImage = new Image("/images/contact.png");
     private static final Image phoneImage = new Image("/images/telephone.png");
     private static final Image emailImage = new Image("/images/email.png");
+    private static final Image addressImage = new Image("/images/home.png");
 
     @FXML
     private Label name;
-
     @FXML
     private ImageView pinIcon;
+    @FXML
+    private FlowPane roles;
+    @FXML
+    private FlowPane tags;
     @FXML
     private ImageView phoneIcon;
     @FXML
@@ -34,8 +38,11 @@ public class PersonPanel extends UiPart<VBox> {
     @FXML
     private Label email;
     @FXML
+    private Label address;
+    @FXML
+    private ImageView addressIcon;
+    @FXML
     private VBox emergencyTitle;
-
     @FXML
     private Label emergencyName;
     @FXML
@@ -57,6 +64,7 @@ public class PersonPanel extends UiPart<VBox> {
         pinIcon.setImage(pinImage);
         phoneIcon.setImage(phoneImage);
         emailIcon.setImage(emailImage);
+        addressIcon.setImage(addressImage);
         emergencyNameIcon.setImage(contactImage);
         emergencyPhoneIcon.setImage(phoneImage);
         emergencyEmailIcon.setImage(emailImage);
@@ -64,6 +72,7 @@ public class PersonPanel extends UiPart<VBox> {
         name.setGraphic(pinIcon);
         phone.setGraphic(phoneIcon);
         email.setGraphic(emailIcon);
+        address.setGraphic(addressIcon);
         emergencyName.setGraphic(emergencyNameIcon);
         emergencyPhone.setGraphic(emergencyPhoneIcon);
         emergencyEmail.setGraphic(emergencyEmailIcon);
@@ -77,16 +86,15 @@ public class PersonPanel extends UiPart<VBox> {
 
         name.setText(selected.getName().fullName);
         pinIcon.setVisible(selected.getPin().value);
-        name.setGraphic(pinIcon);
-        name.setContentDisplay(ContentDisplay.LEFT);
+
+        roles.getChildren().clear();
+        roles.getChildren().addAll(selected.getRoles().stream().map(r -> new Label(r.roleName)).toList());
+        tags.getChildren().clear();
+        tags.getChildren().addAll(selected.getTags().stream().map(r -> new Label(r.tagName)).toList());
 
         phone.setText(selected.getPhone().value);
-        phone.setGraphic(phoneIcon);
-        phone.setContentDisplay(ContentDisplay.LEFT);
-
         email.setText(selected.getEmail().value);
-        email.setGraphic(emailIcon);
-        email.setContentDisplay(ContentDisplay.LEFT);
+        address.setText(selected.getAddress().value);
 
         if (selected.getEmergencyContact().isPresent()) {
             EmergencyContact ec = selected.getEmergencyContact().get();
