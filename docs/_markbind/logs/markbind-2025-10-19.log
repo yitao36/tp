@@ -33,3 +33,55 @@
 2025-10-19T14:19:31.665Z - debug: Assets removed
 2025-10-19T14:20:37.007Z - info: [10:20:37 pm] Reload for file change: C:\Users\yitao\OneDrive\Desktop\CS2103T\tp\docs\site.json
 2025-10-19T14:20:37.017Z - info: No pages needed to be rebuilt
+2025-10-19T14:23:57.507Z - info: Website generation started at 10:23:57 pm
+2025-10-19T14:23:57.963Z - info: Building assets...
+2025-10-19T14:23:58.413Z - info: Assets built
+2025-10-19T14:23:58.414Z - info: Generating pages...
+2025-10-19T14:23:58.517Z - error: 'page' layout does not exist
+2025-10-19T14:23:58.518Z - error: 'page' layout does not exist
+2025-10-19T14:23:58.520Z - error: 'page' layout does not exist
+2025-10-19T14:23:58.521Z - error: 'page' layout does not exist
+2025-10-19T14:23:58.633Z - error: 'page' layout does not exist
+2025-10-19T14:23:58.638Z - error: 'page' layout does not exist
+2025-10-19T14:23:58.647Z - error: 'page' layout does not exist
+2025-10-19T14:23:58.648Z - error: 'page' layout does not exist
+2025-10-19T14:23:58.661Z - error: 'page' layout does not exist
+2025-10-19T14:23:58.671Z - error: 'page' layout does not exist
+2025-10-19T14:23:58.693Z - error: 'page' layout does not exist
+2025-10-19T14:23:58.694Z - error: 'page' layout does not exist
+2025-10-19T14:23:58.729Z - error: 'page' layout does not exist
+2025-10-19T14:23:58.740Z - error: 'page' layout does not exist
+2025-10-19T14:23:58.741Z - error: 'page' layout does not exist
+2025-10-19T14:23:58.750Z - error: 'page' layout does not exist
+2025-10-19T14:23:58.762Z - info: Pages built
+2025-10-19T14:23:58.883Z - info: Site data built
+2025-10-19T14:23:58.883Z - info: Website generation complete! Total build time: 1.467s
+2025-10-19T14:23:58.916Z - info: Serving "C:\Users\yitao\OneDrive\Desktop\CS2103T\tp\docs\_site" at http://127.0.0.1:8080
+2025-10-19T14:23:58.917Z - info: Press CTRL+C to stop ...
+2025-10-19T14:24:11.516Z - info: [10:24:11 pm] Reload for file change: C:\Users\yitao\OneDrive\Desktop\CS2103T\tp\docs\site.json
+2025-10-19T14:24:11.532Z - info: No pages needed to be rebuilt
+2025-10-19T14:24:25.324Z - info: Website generation started at 10:24:25 pm
+2025-10-19T14:24:25.852Z - info: Building assets...
+2025-10-19T14:24:26.425Z - info: Assets built
+2025-10-19T14:24:26.426Z - info: Generating pages...
+2025-10-19T14:24:26.541Z - error: 'page' layout does not exist
+2025-10-19T14:24:26.544Z - error: 'page' layout does not exist
+2025-10-19T14:24:26.546Z - error: 'page' layout does not exist
+2025-10-19T14:24:26.547Z - error: 'page' layout does not exist
+2025-10-19T14:24:26.683Z - error: 'page' layout does not exist
+2025-10-19T14:24:26.691Z - error: 'page' layout does not exist
+2025-10-19T14:24:26.693Z - error: 'page' layout does not exist
+2025-10-19T14:24:26.705Z - error: 'page' layout does not exist
+2025-10-19T14:24:26.724Z - error: 'page' layout does not exist
+2025-10-19T14:24:26.733Z - error: 'page' layout does not exist
+2025-10-19T14:24:26.742Z - error: 'page' layout does not exist
+2025-10-19T14:24:26.767Z - error: 'page' layout does not exist
+2025-10-19T14:24:26.798Z - error: 'page' layout does not exist
+2025-10-19T14:24:26.805Z - error: 'page' layout does not exist
+2025-10-19T14:24:26.814Z - error: 'page' layout does not exist
+2025-10-19T14:24:26.820Z - error: 'page' layout does not exist
+2025-10-19T14:24:26.832Z - info: Pages built
+2025-10-19T14:24:26.969Z - info: Site data built
+2025-10-19T14:24:26.970Z - info: Website generation complete! Total build time: 1.741s
+2025-10-19T14:24:27.000Z - info: Serving "C:\Users\yitao\OneDrive\Desktop\CS2103T\tp\docs\_site" at http://127.0.0.1:8080
+2025-10-19T14:24:27.000Z - info: Press CTRL+C to stop ...
