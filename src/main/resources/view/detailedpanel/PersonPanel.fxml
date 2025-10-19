@@ -33,7 +33,7 @@
             -fx-border-insets: 30 0 0 0; -fx-background-insets: 30 0 0 0;
             -fx-background-color: #824910; -fx-background-radius: 18.0;
             -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 16.0;">
-                <Label text="Emergency Contact" maxWidth="Infinity" underline="true"
+                <Label text="Emergency Contact" maxWidth="Infinity" alignment="TOP_CENTER" underline="true"
                        style="-fx-font-size: 30.0;"/>
                 <Label fx:id="emergencyName" wrapText="true" graphicTextGap="10.0">
                     <ImageView fx:id="emergencyNameIcon" fitHeight="20.0" fitWidth="20.0"/>
