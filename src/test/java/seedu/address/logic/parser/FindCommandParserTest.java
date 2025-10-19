@@ -38,6 +38,10 @@ public class FindCommandParserTest {
         assertParseFailure(parser, " n/"
                 + " \n Alice \n  \t" + " n/" + "Bob",
                 Messages.getErrorMessageForDuplicatePrefixes(new Prefix("n/")));
+
+        // no keywords
+        assertParseFailure(parser, " n/",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
