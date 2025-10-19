@@ -34,6 +34,7 @@ public class DetailedPanel extends UiPart<StackPane> {
         super(FXML);
         helpPanelPlaceholder.getChildren().add(helpPanel.getRoot());
         personPanelPlaceholder.getChildren().add(personPanel.getRoot());
+        personPanel.getRoot().prefHeightProperty().bind(personPanelPlaceholder.heightProperty());
         personPanelPlaceholder.setVisible(false);
     }
 
