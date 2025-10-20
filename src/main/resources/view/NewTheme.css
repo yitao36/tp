@@ -1,6 +1,5 @@
 /* Primary: #272815 */
 /* Secondary: #141101 */
-/* Tertiary: #0F1A0F */
 
 .background {
     -fx-background-color: derive(#272815, 10%);
@@ -119,15 +118,15 @@
 }
 
 .list-cell:filled:even:pin {
-    -fx-background-color: derive(#141101, 10%); /* (Darker) Sea green */
+    -fx-background-color: derive(#141101, 30%); /* (Darker) Sea green */
 }
 
 .list-cell:filled:odd:pin {
-    -fx-background-color: derive(#141101, 20%); /* Sea green */
+    -fx-background-color: derive(#141101, 40%); /* Sea green */
 }
 
 .list-cell:filled:selected:pin {
-    -fx-background-color: derive(#141101, 30%); /* (Lighter) Sea green */
+    -fx-background-color: derive(#141101, 45%); /* (Lighter) Sea green */
 }
 
 .list-cell:filled:selected #cardPane {
