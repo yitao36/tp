@@ -10,6 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.ui.detailedpanel.DetailedPanel;
 
 /**
  * Panel containing the list of persons.
@@ -31,6 +32,24 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
+     * Binds the PersonDetailedView to the currently selected person from {@code ListView}.
+     * When the selected person changes, the new details are reflected in PersonDetailedView.
+     */
+    public void listenForSelectionEvent(DetailedPanel personDetailedPanel) {
+        personListView.getSelectionModel().selectedItemProperty().addListener(((
+                observable, oldValue, newValue) -> {
+                    personDetailedPanel.updateDetails(newValue);
+                }));
+    }
+
+    public void setSelectedPerson(Person p) {
+        if (p == null) {
+            personListView.getSelectionModel().clearSelection();
+        }
+        personListView.getSelectionModel().select(p);
+    }
+
+    /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {
@@ -48,5 +67,4 @@ public class PersonListPanel extends UiPart<Region> {
             }
         }
     }
-
 }
