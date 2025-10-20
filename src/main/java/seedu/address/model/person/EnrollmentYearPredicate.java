@@ -12,8 +12,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class EnrollmentYearPredicate implements Predicate<Person> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Enrollment year filter string should be either a blank"
-        + "string to indicate having no enrollment year, or an integer preceeding by a constraint of the following: "
+    public static final String MESSAGE_CONSTRAINTS = "Enrollment year filter string should be either a blank "
+        + "string to indicate having no enrollment year, or an integer preceded by a constraint of the following: "
         + "(<, <=, >=, >, =).";
 
     /**

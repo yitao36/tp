@@ -139,7 +139,7 @@ Enrollment Year:
 * An operator and an integer needs to be provided (in that order).
 * The operator must be one of `<, <=, >, >=, =`.
 * The integer must be non-negative.
-* For e.g. `<2025` will return contacts that enrolled before `2024`.
+* For e.g. `<2025` will return contacts that enrolled in `2024` or earlier.
 * A empty string can also be provided to find contacts without an enrollment year
 
 Examples:
