@@ -23,8 +23,8 @@ public class FindCommand extends Command {
             + " or enrollment year satisfying the specified constraint and"
             + " displays them as a list with index numbers.\n"
             + "Parameters: At most one of each of the following: "
-            + "[" + PREFIX_NAME + "KEYWORD [MORE_KEYWORDS]...]"
-            + "[" + PREFIX_ENROLL_YEAR + "[OP YEAR]"
+            + "[" + PREFIX_NAME + "KEYWORD [MORE_KEYWORDS]...] "
+            + "[" + PREFIX_ENROLL_YEAR + "[OP YEAR]]"
             + "\nExample: " + COMMAND_WORD + " " + PREFIX_NAME + "alice bob charlie";
 
     private final Predicate<Person> predicate;

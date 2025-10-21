@@ -36,7 +36,6 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         List<Predicate<Person>> predicates = new ArrayList<Predicate<Person>>();
 
-        // Iterates through which prefix is selected.
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String name = argMultimap.getValue(PREFIX_NAME).get();
             String[] nameKeywords = name.split("\\s+");
