@@ -97,7 +97,14 @@ public class PersonPanel extends UiPart<VBox> {
         assert selected != null : "person cannot be null";
 
         name.setText(selected.getName().fullName);
-        pinIcon.setVisible(selected.getPin().value);
+
+        if (selected.getPin().value) {
+            pinIcon.setManaged(true);
+            pinIcon.setVisible(true);
+        } else {
+            pinIcon.setManaged(false);
+            pinIcon.setVisible(false);
+        }
 
         roles.getChildren().clear();
         tags.getChildren().clear();
