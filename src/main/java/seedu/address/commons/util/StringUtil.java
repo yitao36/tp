@@ -55,7 +55,7 @@ public class StringUtil {
         requireNonNull(substring);
 
         String preppedSubstring = substring.trim().toLowerCase();
-        checkArgument(!preppedSubstring.isEmpty(), "Word parameter cannot be empty");
+        checkArgument(!preppedSubstring.isEmpty(), "Substring parameter cannot be empty");
         checkArgument(preppedSubstring.split("\\s+").length == 1, "Substring parameter should be a single word");
 
         String preppedSentence = sentence.toLowerCase();
