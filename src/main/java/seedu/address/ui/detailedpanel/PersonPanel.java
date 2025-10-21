@@ -15,6 +15,11 @@ import seedu.address.ui.UiPart;
  */
 public class PersonPanel extends UiPart<VBox> {
     private static final String FXML = "detailedpanel/PersonPanel.fxml";
+
+    private static final String MESSAGE_NO_EMERGENCY_CONTACT =
+            "No Emergency Contact detail provided.\n"
+            + "Add one using `edit INDEX ecn/NAME ecp/PHONE`";
+
     private static final Image pinImage = new Image("/images/pin.png");
     private static final Image contactImage = new Image("/images/contact.png");
     private static final Image phoneImage = new Image("/images/telephone.png");
@@ -97,15 +102,21 @@ public class PersonPanel extends UiPart<VBox> {
         address.setText(selected.getAddress().value);
 
         if (selected.getEmergencyContact().isPresent()) {
+            emergencyPhone.setManaged(true);
+            emergencyPhone.setVisible(true);
+            emergencyEmail.setManaged(true);
+            emergencyEmail.setVisible(true);
+
             EmergencyContact ec = selected.getEmergencyContact().get();
             emergencyName.setText(ec.name.fullName);
             emergencyPhone.setText(ec.phone.value);
             emergencyEmail.setText(ec.email.value);
         } else {
-            emergencyName.setText("No Emergency Contact detail provided.\n"
-                    + "Add one using `edit INDEX ecn/NAME ecp/PHONE`");
-            emergencyPhone.setText("");
-            emergencyEmail.setText("");
+            emergencyName.setText(MESSAGE_NO_EMERGENCY_CONTACT);
+            emergencyPhone.setManaged(false);
+            emergencyPhone.setVisible(false);
+            emergencyEmail.setManaged(false);
+            emergencyEmail.setVisible(false);
         }
     }
 }
