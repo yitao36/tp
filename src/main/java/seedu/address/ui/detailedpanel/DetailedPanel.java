@@ -10,7 +10,7 @@ import seedu.address.model.person.Person;
 import seedu.address.ui.UiPart;
 
 /**
- * Panel showing detailed information of the person selected.
+ * Panel that switches between the active detailed panel being shown.
  */
 public class DetailedPanel extends UiPart<StackPane> {
     private static final String FXML = "detailedpanel/DetailedPanel.fxml";
@@ -20,12 +20,13 @@ public class DetailedPanel extends UiPart<StackPane> {
     // Internal copy
     private final HelpPanel helpPanel = new HelpPanel();
     private final PersonPanel personPanel = new PersonPanel();
-    private boolean isHelp = true;
 
     @FXML
     private VBox helpPanelPlaceholder;
     @FXML
     private VBox personPanelPlaceholder;
+
+    private VBox activePanel = helpPanelPlaceholder;
 
     /**
      * Constructs a container panel that initially shows the help panel.
@@ -41,14 +42,14 @@ public class DetailedPanel extends UiPart<StackPane> {
     }
 
     /**
-     * Populates the panel with details of the selected person.
+     * Populates the person panel with details of the selected person.
      */
     public void updateDetails(Person selected) {
         if (selected == null) {
             showHelp();
         } else {
-            closeHelp();
             personPanel.updateDetails(selected);
+            showPerson();
         }
     }
 
@@ -56,23 +57,23 @@ public class DetailedPanel extends UiPart<StackPane> {
      * Shows a helpful message on initialization of AddressBook, or if the person list is empty.
      */
     public void showHelp() {
-        if (isHelp) {
+        if (activePanel == helpPanelPlaceholder) {
             return;
         }
-        isHelp = true;
-        personPanelPlaceholder.setVisible(false);
+        activePanel.setVisible(false);
         helpPanelPlaceholder.setVisible(true);
+        activePanel = helpPanelPlaceholder;
     }
 
     /**
-     * Closes the help message upon selection of person.
+     * Shows detailed person information upon selection of person.
      */
-    public void closeHelp() {
-        if (!isHelp) {
+    public void showPerson() {
+        if (activePanel == personPanelPlaceholder) {
             return;
         }
-        isHelp = false;
+        activePanel.setVisible(false);
         personPanelPlaceholder.setVisible(true);
-        helpPanelPlaceholder.setVisible(false);
+        activePanel = helpPanelPlaceholder;
     }
 }

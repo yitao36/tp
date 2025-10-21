@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -66,7 +65,7 @@ public class PersonCard extends UiPart<Region> {
 
         // Sets visibility of pin icon next to name.
         // Modifying Ui element on JavaFx Application Thread with runLater prevents UI flickering.
-        Platform.runLater(() -> pin.setImage(pinImage));
+        pin.setImage(pinImage);
         boolean isPinned = person.getPin().value;
         pin.setVisible(isPinned);
 

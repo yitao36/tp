@@ -15,3 +15,4 @@ Pin icons created by Pixel perfect - Flaticon - https://www.flaticon.com/free-ic
 - contact.png
 - tent.png
 - home.png
+- year.png

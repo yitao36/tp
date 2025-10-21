@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENROLL_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +16,7 @@ import seedu.address.model.person.EnrollmentYearPredicate;
 import seedu.address.model.person.MultiPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.TagsContainKeywordsPredicate;
 
 /**
  * Parses input arguments, prefix field, and creates a new FindCommand object
@@ -27,12 +29,12 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ENROLL_YEAR);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG, PREFIX_ENROLL_YEAR);
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ENROLL_YEAR);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TAG, PREFIX_ENROLL_YEAR);
 
         List<Predicate<Person>> predicates = new ArrayList<Predicate<Person>>();
 
@@ -51,6 +53,23 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
 
             predicates.add(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        }
+
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            String tag = argMultimap.getValue(PREFIX_TAG).get();
+            String[] tagKeywords = tag.split("\\s+");
+
+            if (tag.isEmpty()) {
+                throw new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
+
+            // Throws an error if invalid tag is supplied
+            for (String s : tagKeywords) {
+                ParserUtil.parseTag(s);
+            }
+
+            predicates.add(new TagsContainKeywordsPredicate(Arrays.asList(tagKeywords)));
         }
 
         if (argMultimap.getValue(PREFIX_ENROLL_YEAR).isPresent()) {
