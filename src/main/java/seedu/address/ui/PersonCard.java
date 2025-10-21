@@ -30,7 +30,7 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
-    private final Image pinImage = new Image(this.getClass().getResourceAsStream("/images/pin.png"));
+    private final Image pinImage = new Image("/images/pin.png");
 
     @FXML
     private HBox cardPane;
@@ -89,6 +89,7 @@ public class PersonCard extends UiPart<Region> {
         person.getRoles().stream()
                 .sorted(Comparator.comparing(role -> role.roleName))
                 .forEach(role -> roles.getChildren().add(new Label(role.roleName)));
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
