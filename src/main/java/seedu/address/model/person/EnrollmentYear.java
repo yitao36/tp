@@ -54,6 +54,21 @@ public class EnrollmentYear {
         year = other.year;
     }
 
+    /**
+     * @return year as an integer, requires that isPresent be true.
+     */
+    public int getValue() {
+        assert isPresent();
+        return year;
+    }
+
+    /**
+     * @return If enrollmentYear is present
+     */
+    public boolean isPresent() {
+        return isPresent;
+    }
+
 
     /**
      * Returns true if a given string is a valid year.

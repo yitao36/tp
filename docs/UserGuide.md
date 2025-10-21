@@ -127,19 +127,28 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose selected field contains any of the given keywords.
+Finds persons by fields.
 
 Available prefixes
-- Name: `n/`
+- Name: `n/` (Name containing any of the keywords)
+- Enrollment Year: `enroll/` (Enrollment year satisfy constraints)
 
-Format: `find PREFIX/KEYWORD [MORE_KEYWORDS]`
+Format: `find n/KEYWORD [MORE_KEYWORDS] enroll/[(<|<=|>|>=|=)NUMBER]`
 
+Name:
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Enrollment Year:
+* An operator and an integer needs to be provided (in that order).
+* The operator must be one of `<, <=, >, >=, =`.
+* The integer must be non-negative.
+* For e.g. `<2025` will return contacts that enrolled in `2024` or earlier.
+* A empty string can also be provided to find contacts without an enrollment year
 
 Examples:
 * `find n/John` returns `john` and `John Doe`

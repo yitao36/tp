@@ -1,15 +1,18 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENROLL_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.EnrollmentYearPredicate;
+import seedu.address.model.person.MultiPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
@@ -24,40 +27,41 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
-        if (!argMultimap.getPreamble().isEmpty()
-            || !existsSingularPrefix(argMultimap, PREFIX_NAME)) {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ENROLL_YEAR);
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        Predicate<Person> predicate = null;
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ENROLL_YEAR);
 
-        // Iterates through which prefix is selected.
+        List<Predicate<Person>> predicates = new ArrayList<Predicate<Person>>();
+
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String name = argMultimap.getValue(PREFIX_NAME).get();
             String[] nameKeywords = name.split("\\s+");
+
+            if (name.isEmpty()) {
+                throw new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
 
             // Throws an error if invalid name is supplied
             for (String s : nameKeywords) {
                 ParserUtil.parseName(s);
             }
 
-            predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
+            predicates.add(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         }
-        assert predicate != null : "unknown prefix specified";
 
-        return new FindCommand(predicate);
-    }
+        if (argMultimap.getValue(PREFIX_ENROLL_YEAR).isPresent()) {
+            String enrollmentConstraint = argMultimap.getValue(PREFIX_ENROLL_YEAR).get();
+            predicates.add(new EnrollmentYearPredicate(enrollmentConstraint));
+        }
 
-    /**
-     * Returns true if there is exactly one prefix specified, and its value is not empty.
-     */
-    private static boolean existsSingularPrefix(ArgumentMultimap argMultimap, Prefix... prefixes) {
-        List<String> listPrefixes = Arrays.stream(prefixes)
-                .map(argMultimap::getAllValues)
-                .flatMap(Collection::stream)
-                .toList();
+        if (predicates.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
 
-        return (listPrefixes.size() == 1 && !listPrefixes.get(0).isEmpty());
+        return new FindCommand(new MultiPredicate(predicates));
     }
 }
