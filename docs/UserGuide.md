@@ -132,8 +132,12 @@ Finds persons by fields.
 Available prefixes
 - Name: `n/` (Name containing any of the keywords)
 - Enrollment Year: `enroll/` (Enrollment year satisfy constraints)
+- Tag: `t/` (Any tag containing any of the keywords)
 
-Format: `find n/KEYWORD [MORE_KEYWORDS] enroll/[(<|<=|>|>=|=)NUMBER]`
+Format: `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<|<=|>|>=|=)NUMBER]]`
+
+* At least one prefix must be provided.
+* Different prefixes can be provided in one command to search for persons matching all those fields.
 
 Name:
 * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -142,6 +146,11 @@ Name:
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Tag:
+* The search is case-insensitive. e.g. `friends` will match `Friends`
+* A tag matches a search keyword if the keyword is a substring of the tag. e.g. `friend` will match `my friends`.
+* A person is matched and returned if any of their tags matches any of the searched keywords.
 
 Enrollment Year:
 * An operator and an integer needs to be provided (in that order).
