@@ -25,3 +25,4 @@ docs/_site/
 # Local website runner modules
 docs/_markbind/
 docs/node_modules
+docs/_markbind/logs/
