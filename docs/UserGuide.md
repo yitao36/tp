@@ -32,7 +32,7 @@ CCAmper is optimized for use via a
     How do I check that it's installed properly?
 </trigger>
 
-<modal id="verify-java-17" center large>
+<modal id="verify-java-17" header="Verify installation of Java 17" center large>
     
 1. On **Windows**, Press `Win + R`, type `cmd` and press Enter.<br>
    On **Mac**, Open `Terminal` from Applications.<br>
@@ -48,7 +48,7 @@ CCAmper is optimized for use via a
    <br>We recommend placing the `.jar` file into a folder named `CCAmper` on your desktop for easy access.
 
 3. Open a command terminal, 
-<popover dark content="
+<popover header="Basic commands" content="
 `ls` to list and view all available files in the current folder.<br>
 `cd ..` to navigate to a parent folder.<br>
 `cd FILE_NAME` to navigate into FILE_NAME.<br>
