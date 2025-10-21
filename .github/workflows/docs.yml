@@ -3,7 +3,7 @@ name: MarkBind Action
 on:
   push:
     branches:
-      - branch-markbind
+      - master
 
 jobs:
   build_and_deploy:
