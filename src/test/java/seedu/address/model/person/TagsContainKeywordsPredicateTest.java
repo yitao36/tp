@@ -50,6 +50,10 @@ public class TagsContainKeywordsPredicateTest {
         predicate = new TagsContainKeywordsPredicate(Arrays.asList("friend", "colleague"));
         assertTrue(predicate.test(new PersonBuilder().withTags("friend", "colleague").build()));
 
+        // Multiple keywords (person tags matches subset of keywords)
+        predicate = new TagsContainKeywordsPredicate(Arrays.asList("friend", "colleague", "classmate"));
+        assertTrue(predicate.test(new PersonBuilder().withTags("friend", "classmate").build()));
+
         // Only one matching keyword
         predicate = new TagsContainKeywordsPredicate(Arrays.asList("friend", "enemy"));
         assertTrue(predicate.test(new PersonBuilder().withTags("friend", "colleague").build()));

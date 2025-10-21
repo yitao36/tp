@@ -198,6 +198,7 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bBb ccc@1", "CCc@1")); // Last word (boundary case)
         assertTrue(StringUtil.containsSubstringIgnoreCase("  AAA   bBb   ccc  ", "aaa")); // Sentence has extra spaces
         assertTrue(StringUtil.containsSubstringIgnoreCase("Aaa", "aaa")); // Only one word in sentence (boundary case)
+        assertTrue(StringUtil.containsSubstringIgnoreCase("Aaa", "a")); // Only one char in sentence (boundary case)
         assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc", "  ccc  ")); // Leading/trailing spaces
         assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bBb ccc", "aa")); // Substring of first word
         assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bBb ccc", "bb")); // Substring of middle word

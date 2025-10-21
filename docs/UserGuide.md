@@ -130,7 +130,10 @@ Available prefixes
 - Enrollment Year: `enroll/` (Enrollment year satisfy constraints)
 - Tag: `t/` (Any tag containing any of the keywords)
 
-Format: `find n/KEYWORD [MORE_KEYWORDS] t/KEYWORD [MORE_KEYWORDS] enroll/[(<|<=|>|>=|=)NUMBER]`
+Format: `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<|<=|>|>=|=)NUMBER]]`
+
+* At least one prefix must be provided.
+* Different prefixes can be provided in one command to search for persons matching all those fields.
 
 Name:
 * The search is case-insensitive. e.g `hans` will match `Hans`
