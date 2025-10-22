@@ -1,22 +1,23 @@
-package seedu.address.logic;
+package seedu.address.logic.constraints;
 
 import java.util.function.Predicate;
 
 /**
- * An abstract class representing a constraint on some user input String.
+ * A class representing a constraint on some user input String.
+ * If the constraint is violated, the error errorMessage associated with
  */
 public class Constraint {
     private final Predicate<String> constraint;
-    private final String message;
+    private final String errorMessage;
     private final boolean isHardConstraint;
     private String val;
 
     /**
-     * TODO
+     * Creates a new constraint that has to be satisfied for the user String input.
      */
-    public Constraint(Predicate<String> constraint, String message, boolean isHardConstraint) {
+    public Constraint(Predicate<String> constraint, String errorMessage, boolean isHardConstraint) {
         this.constraint = constraint;
-        this.message = message;
+        this.errorMessage = errorMessage;
         this.isHardConstraint = isHardConstraint;
     }
 
@@ -28,10 +29,10 @@ public class Constraint {
         return constraint.test(input);
     }
 
-    public String getMessage() {
+    public String getErrorMessage() {
         assert val != null : "test must have occured";
 
-        return String.format(message, val);
+        return String.format(errorMessage, val);
     }
 
     public boolean isHardConstraint() {

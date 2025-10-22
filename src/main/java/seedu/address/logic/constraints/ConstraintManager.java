@@ -1,9 +1,7 @@
-package seedu.address.logic;
+package seedu.address.logic.constraints;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import seedu.address.logic.parser.ConstraintUtil;
 
 /**
  * Global class, handles the logic for checking constraints.
@@ -25,4 +23,7 @@ public class ConstraintManager {
         return ConstraintUtil.getMessage(constraints);
     }
 
+    public static void clear() {
+        constraints.clear();
+    }
 }
