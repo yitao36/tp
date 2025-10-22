@@ -12,7 +12,7 @@ More generally, surround the segment's id with double curly braces.
 `cd ..` to navigate to a parent folder.<br>
 `cd FILE_NAME` to navigate into FILE_NAME.<br>
 ">navigate
-</popover>
+</popover> 
 </variable>
 
 <!-- Shows a popup for instructions on verifying the installed Java version. -->
