@@ -110,6 +110,8 @@ Add students to your address book, with the given fields.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE]…​ [t/TAG]…​ [pin/] [enroll/YEAR] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE] [ece/EMERGENCY_EMAIL]`
 
+Additional information on fields:
+* While one may key in phone numbers with hyphen(s) and/or space(s) to improve human-readability, the hyphen(s) and space(s) are automatically removed when phone number is stored in app.
 * The emergency contact fields (`ecn, ecp, ece`) must be either all provided or not at all.
 
 Examples:
