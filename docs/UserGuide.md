@@ -27,33 +27,15 @@ CCAmper is optimized for use via a
 1. Download and install Java `17` or above from this 
    <a href="https://www.oracle.com/java/technologies/downloads/#java17">Java downloads page</a>.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed 
-   [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).<br>
-<trigger trigger="click" for="verify-java-17">
-    How do I check that it's installed properly?
-</trigger>
-
-<modal id="verify-java-17" header="Verify installation of Java 17" center large>
-    
-1. On **Windows**, Press `Win + R`, type `cmd` and press Enter.<br>
-   On **Mac**, Open `Terminal` from Applications.<br>
-2. Type `java --version` and press Enter. <br>
-3. The message should show Java 17 installed.
-
-<img src="images/verify-java-17.png" alt="Image showing Java 17 installed" width="750" height="100"/>
-</modal>
+   [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).<br> {{ verifyJava17 }}
 
 2. Download our latest CCAmper `.jar` file from our [GitHub page](https://github.com/AY2526S1-CS2103T-T10-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook. 
    <br>We recommend placing the `.jar` file into a folder named `CCAmper` on your desktop for easy access.
 
-3. Open a command terminal, 
-<popover header="Basic commands" content="
-`ls` to list and view all available files in the current folder.<br>
-`cd ..` to navigate to a parent folder.<br>
-`cd FILE_NAME` to navigate into FILE_NAME.<br>
-">navigate</popover> 
-into the folder containing the `.jar` file, and use the `java -jar addressbook.jar` command to run the application.<br>
+3. Open a command terminal, {{ navigate }} into the folder containing the `.jar` file, 
+   and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
 <br>
