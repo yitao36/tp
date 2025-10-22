@@ -91,4 +91,18 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} is a valid integer string, but exceeds the integer limit for int.
+     */
+    public static boolean exceedsIntegerLimits(String s) {
+        requireNonNull(s);
+
+        try {
+            Integer.parseInt(s);
+            return false;
+        } catch (NumberFormatException e) {
+            return s.matches("[0-9]*");
+        }
+    }
 }

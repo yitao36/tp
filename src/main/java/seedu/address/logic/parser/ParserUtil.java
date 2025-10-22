@@ -26,16 +26,22 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_EXCEEDS_INTEGER_LIMITS = "Index is too large and exceeds integer limit!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer) or
+     *      exceeds integer limits.
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            if (StringUtil.exceedsIntegerLimits(trimmedIndex)) {
+                throw new ParseException(MESSAGE_EXCEEDS_INTEGER_LIMITS);
+            } else {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
