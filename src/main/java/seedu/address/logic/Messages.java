@@ -61,9 +61,7 @@ public class Messages {
             builder.append("; Emergency Contact Name: ")
                     .append(emergencyContact.name)
                     .append("; Emergency Contact Phone: ")
-                    .append(emergencyContact.phone)
-                    .append("; Emergency Contact Email: ")
-                    .append(emergencyContact.email);
+                    .append(emergencyContact.phone);
         }
 
         return builder.toString();

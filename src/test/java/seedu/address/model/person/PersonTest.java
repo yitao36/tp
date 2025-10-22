@@ -114,17 +114,13 @@ public class PersonTest {
     public void isValidPerson() {
         Phone phoneA = new Phone("98765432");
         Phone phoneB = new Phone("91234567");
-        Email emailA = new Email("tester@example.com");
-        Email emailB = new Email("admin@example.com");
-        EmergencyContact emergencyContactA = new EmergencyContact("Father", phoneA.value, emailA.value);
+        EmergencyContact emergencyContactA = new EmergencyContact("Father", phoneA.value);
 
         // invalid person
-        assertFalse(Person.isValidPerson(phoneA, emailB, emergencyContactA)); // same phone as emergency contact
-        assertFalse(Person.isValidPerson(phoneB, emailA, emergencyContactA)); // same email as emergency contact
-        assertFalse(Person.isValidPerson(phoneA, emailA, emergencyContactA)); // same phone + email as emergency contact
+        assertFalse(Person.isValidPerson(phoneA, emergencyContactA)); // same phone as emergency contact
 
         // valid person
-        assertTrue(Person.isValidPerson(phoneA, emailA, null)); // emergency contact is optional
-        assertTrue(Person.isValidPerson(phoneB, emailB, emergencyContactA)); // valid emergency contact
+        assertTrue(Person.isValidPerson(phoneA, null)); // emergency contact is optional
+        assertTrue(Person.isValidPerson(phoneB, emergencyContactA)); // valid emergency contact
     }
 }
