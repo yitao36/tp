@@ -336,13 +336,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **Extensions**
 
-- 1a. The list is empty.  
-Use case ends.  
+- 1a. The list is empty.
+Use case ends.
 
 
-- 2a. The given index is invalid.  
-  - 2a1. AddressBook shows an error message. 
-  
+- 2a. The given index is invalid.
+  - 2a1. AddressBook shows an error message.
+
   Use case resumes at step 2.
 
 **Use case: UC2. Add a person**
@@ -352,10 +352,10 @@ Use case ends.
 2. AddressBook adds the person
 3. AddressBook shows the added person to the user
    Use case ends.
-   
+
 - **Extensions**
 * 1a. Missing details or incorrect format.
-   * 1a1. AddressBook shows an error message.   
+   * 1a1. AddressBook shows an error message.
 
   Use case resumes at step 1.
 
@@ -369,7 +369,7 @@ Use case ends.
 **Use case: UC3. List all persons**
 - **MSS**
 1. User requests to list persons.
-2. AddressBook shows a list of persons. 
+2. AddressBook shows a list of persons.
 
    Use case ends.
 
@@ -387,13 +387,13 @@ Use case ends.
 - **Extensions**
 * 1a. Missing details or incorrect format.
    * 1a1. AddressBook shows an error message.
-     
+
   Use case resumes at step 1.
 
 
 * 2a. The edit results in a person becoming a duplicate of another.
    * 2a1. AddressBook shows an error message and the duplicated person.
-     
+
   Use case ends.
 
 
