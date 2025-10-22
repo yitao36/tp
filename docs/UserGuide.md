@@ -164,7 +164,7 @@ Examples:
 *  `edit 3 n/Jack Wilson r/` Edits the name of the 3rd person to be `Jack Wilson` and clears all existing roles.
 *  `edit 1 n/John p/98765432 e/johndoe@example.com a/New Place r/Senior Student t/experienced pin/TRUE enroll/2022 ecn/Sally ecp/88887777 ece/sally@example2.com`
 
-### Locating persons by name: `find`
+### Locating persons by fields: `find`
 
 Display a list of persons satisfying the search constraint.
 
@@ -174,6 +174,9 @@ Available prefixes
 - Name: `n/` (Name containing any of the keywords)
 - Enrollment Year: `enroll/` (Enrollment year satisfy constraints)
 - Tag: `t/` (Any tag containing any of the keywords)
+
+Format: `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<\|<=\|>\|>=\|=)NUMBER]] 
+[r/SUBSTRING]…​`
 
 * At least one prefix must be provided.
 * If different prefixes are provided, a list of persons matching ALL the given constraints are shown.
@@ -197,6 +200,16 @@ Enrollment Year:
 * The integer must be non-negative.
 * For e.g. `<2025` will return contacts that enrolled in `2024` or earlier.
 * A empty string can also be provided to find contacts without an enrollment year
+
+Role:
+* The search is case-insensitive. e.g. `president` will match `President`.
+* A role matches a search string if the string is a substring of the role. e.g. `section` will match `Section Leader`.
+* Unlike previous cases, we can search for a string with spaces e.g. `r/section leader` will match `Section Leader` 
+  but not `Section Head`.
+* To search for multiple roles, we supply the `r/` tag multiple times e.g. `r/section r/leader` matches both 
+  `Section Head` and `Group Leader`.
+* A person is matched and returned if any of their roles matches any of the searched strings.
+* We can match all people with roles by giving an empty substring e.g. `find r/`.
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
@@ -289,6 +302,6 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​ [t/TAG]…​ [pin/(TRUE/FALSE)] [enroll/[YEAR]] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE] [ece/EMERGENCY_EMAIL]`<br> e.g.,`edit 1 n/John p/98765432 e/johndoe@example.com a/New Place r/Senior Student t/experienced pin/TRUE enroll/2022 ecn/Sally ecp/88887777 ece/sally@example2.com`
-**Find** | `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<\|<=\|>\|>=\|=)NUMBER]]`<br> e.g., `find n/yu john enroll/>=2022`
+**Find** | `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<\|<=\|>\|>=\|=)NUMBER]] [r/SUBSTRING]…​`<br> e.g., `find n/yu john enroll/>=2022`
 **List** | `list`
 **Help** | `help`
