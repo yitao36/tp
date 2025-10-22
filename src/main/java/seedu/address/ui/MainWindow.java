@@ -12,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.ConstraintManager;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -77,7 +78,7 @@ public class MainWindow extends UiPart<Stage> {
      * Displays a message to the user on initialization of AddressBook
      */
     public void initializeMessageToUser() {
-        resultDisplay.setFeedbackToUser("AddressBook successfully initialized.");
+        resultDisplay.setFeedbackToUser(ConstraintManager.getMessage());
     }
 
     public Stage getPrimaryStage() {
