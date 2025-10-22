@@ -29,7 +29,7 @@ public class FindCommand extends Command {
             + "Parameters: At most one of each of the following: "
             + "[" + PREFIX_NAME + "KEYWORD [MORE_KEYWORDS]...] "
             + "[" + PREFIX_TAG + "KEYWORD [MORE_KEYWORDS]...] "
-            + "[" + PREFIX_ENROLL_YEAR + "[OP YEAR]]"
+            + "[" + PREFIX_ENROLL_YEAR + "[OP YEAR]] "
             + "[" + PREFIX_ROLE + "SUBSTRING]..."
             + "\nExample: " + COMMAND_WORD + " " + PREFIX_NAME + "alice bob charlie";
 
