@@ -132,11 +132,7 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-        if (filteredPersons.isEmpty()) {
-            getSelectedPerson().set(null);
-        } else if (getSelectedPerson().get() == null || !filteredPersons.contains(getSelectedPerson().get())) {
-            getSelectedPerson().set(filteredPersons.get(0));
-        }
+        updateSelectedPerson();
     }
 
     //=========== Selected Person Accessors =============================================================
@@ -144,6 +140,15 @@ public class ModelManager implements Model {
     @Override
     public ObjectProperty<Person> getSelectedPerson() {
         return addressBook.getSelectedPerson();
+    }
+
+    @Override
+    public void updateSelectedPerson() {
+        if (filteredPersons.isEmpty()) {
+            getSelectedPerson().set(null);
+        } else if (getSelectedPerson().get() == null || !filteredPersons.contains(getSelectedPerson().get())) {
+            getSelectedPerson().set(filteredPersons.get(0));
+        }
     }
 
     @Override

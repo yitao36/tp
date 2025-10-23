@@ -70,13 +70,14 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.set(index, editedPerson);
-
         selectedPerson.set(editedPerson);
     }
 
     /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.
+     * If the person removed was selected, set it to the previous or next person in the list,
+     * or null if the list is empty.
      */
     public void remove(Person toRemove) {
         requireNonNull(toRemove);

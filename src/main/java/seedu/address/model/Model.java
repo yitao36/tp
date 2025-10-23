@@ -1,13 +1,13 @@
 package seedu.address.model;
 
+import java.nio.file.Path;
+import java.util.Comparator;
+import java.util.function.Predicate;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
-
-import java.nio.file.Path;
-import java.util.Comparator;
-import java.util.function.Predicate;
 
 /**
  * The API of the Model component.
@@ -103,4 +103,10 @@ public interface Model {
      * Returns the selected person in the filtered person list.
      */
     ObjectProperty<Person> getSelectedPerson();
+
+    /**
+     * Check if the currently selected person is in the filtered list.
+     * If not, either set it to the first person in the list, or null if the list is empty.
+     */
+    void updateSelectedPerson();
 }
