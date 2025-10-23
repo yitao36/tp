@@ -1,15 +1,16 @@
 package seedu.address.model;
 
-import static java.util.Objects.requireNonNull;
-
-import java.util.Comparator;
-import java.util.List;
-
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.SortUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+
+import java.util.Comparator;
+import java.util.List;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Wraps all data at the address-book level
@@ -127,6 +128,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObjectProperty<Person> getSelectedPerson() {
+        return persons.getObservableSelectedPerson();
     }
 
     @Override

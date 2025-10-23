@@ -19,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
+
 /**
  * Adds a person to the address book.
  */
@@ -75,7 +76,6 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        model.setSelectedPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

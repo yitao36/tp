@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 
@@ -14,4 +15,8 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
+    /**
+     * Returns the selected person in the person list.
+     */
+    ObservableObjectValue<Person> getSelectedPerson();
 }

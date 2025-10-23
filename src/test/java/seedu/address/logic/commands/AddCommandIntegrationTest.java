@@ -52,6 +52,6 @@ public class AddCommandIntegrationTest {
         Person validPerson = new PersonBuilder().withName("Selected").build();
         AddCommand addCommand = new AddCommand(validPerson);
         addCommand.execute(model);
-        assertEquals(validPerson, model.getSelectedPerson());
+        assertEquals(validPerson, model.getSelectedPerson().get());
     }
 }

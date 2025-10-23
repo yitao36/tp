@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.SortUtil;
@@ -190,6 +191,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableObjectValue<Person> getSelectedPerson() {
+            throw new RuntimeException("This method should not be called");
         }
     }
 

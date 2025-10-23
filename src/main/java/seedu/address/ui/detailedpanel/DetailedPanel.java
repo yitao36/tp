@@ -2,6 +2,8 @@ package seedu.address.ui.detailedpanel;
 
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.value.ObservableObjectValue;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -19,7 +21,8 @@ public class DetailedPanel extends UiPart<StackPane> {
 
     // Internal copy
     private final HelpPanel helpPanel = new HelpPanel();
-    private final PersonPanel personPanel = new PersonPanel();
+    private final PersonPanel personPanel;
+    private final ObservableObjectValue<Person> selected;
 
     @FXML
     private VBox helpPanelPlaceholder;
@@ -31,26 +34,26 @@ public class DetailedPanel extends UiPart<StackPane> {
     /**
      * Constructs a container panel that initially shows the help panel.
      */
-    public DetailedPanel() {
+    public DetailedPanel(ObjectProperty<Person> selectedPerson) {
         super(FXML);
+        this.selected = selectedPerson;
+        personPanel = new PersonPanel();
+
         helpPanelPlaceholder.getChildren().add(helpPanel.getRoot());
         personPanelPlaceholder.getChildren().add(personPanel.getRoot());
 
         // Workaround to get personPanel height to fill up the whole container
         personPanel.getRoot().prefHeightProperty().bind(personPanelPlaceholder.heightProperty());
         personPanelPlaceholder.setVisible(false);
-    }
 
-    /**
-     * Populates the person panel with details of the selected person.
-     */
-    public void updateDetails(Person selected) {
-        if (selected == null) {
-            showHelp();
-        } else {
-            personPanel.updateDetails(selected);
-            showPerson();
-        }
+        selected.addListener((obs, old, newPerson) -> {
+            if (newPerson == null) {
+                showHelp();
+            } else {
+                personPanel.updateDetails(newPerson);
+                showPerson();
+            }
+        });
     }
 
     /**

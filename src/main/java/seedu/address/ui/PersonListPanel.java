@@ -2,15 +2,17 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
-import seedu.address.ui.detailedpanel.DetailedPanel;
+
 
 /**
  * Panel containing the list of persons.
@@ -24,29 +26,22 @@ public class PersonListPanel extends UiPart<Region> {
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Binds the selected person of the {@code ListView} with the selected person in {@code Model}
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> filteredList, ObjectProperty<Person> selectedPerson) {
         super(FXML);
-        personListView.setItems(personList);
+        personListView.setItems(filteredList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
-    }
+        personListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-    /**
-     * Binds the PersonDetailedView to the currently selected person from {@code ListView}.
-     * When the selected person changes, the new details are reflected in PersonDetailedView.
-     */
-    public void listenForSelectionEvent(DetailedPanel personDetailedPanel) {
-        personListView.getSelectionModel().selectedItemProperty().addListener(((
-                observable, oldValue, newValue) -> {
-                    personDetailedPanel.updateDetails(newValue);
-                }));
-    }
-
-    public void setSelectedPerson(Person p) {
-        if (p == null) {
-            personListView.getSelectionModel().clearSelection();
-        }
-        personListView.getSelectionModel().select(p);
+        selectedPerson.addListener((obs, old, newPerson) -> {
+            personListView.getSelectionModel().select(newPerson);
+        });
+        personListView.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((obs, old, newPerson) -> {
+                    selectedPerson.setValue(newPerson);
+                });
     }
 
     /**
