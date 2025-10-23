@@ -169,6 +169,11 @@ public class AddCommandTest {
         public ObjectProperty<Person> getSelectedPerson() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateSelectedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
