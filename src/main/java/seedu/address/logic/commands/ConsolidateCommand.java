@@ -39,12 +39,13 @@ public class ConsolidateCommand extends Command {
             counter = counter + 1;
         }
 
-        assert counter >= 0 : "The number of contacts cannot be a negative value.";
+        assert counter >= 0 : "number of contacts cannot be a negative value";
         if (counter == 0) {
             return new CommandResult(ALTERNATE_MESSAGE_SUCCESS);
         }
 
         ArrayList<String> list = new ArrayList<>(container);
+        assert list.size() > 0 : "list should contain at least one student's data";
         Collections.sort(list);
         String compilation = "";
 
