@@ -24,13 +24,6 @@ public class ConsolidateCommand extends Command {
     public static final String ALTERNATE_MESSAGE_SUCCESS = "Nothing to consolidate so far, "
             + "since no student's data has been entered and stored in CCAmper.";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": consolidate students' a) names, b) phone number, c) email and d) address, "
-            + "and display data under corresponding categories. \n"
-            + "If there are repeated value for a particular category "
-            + "(e.g. two students share the same phone number), \n"
-            + "then that particular value (e.g. phone number) is displayed once.";
-
     /**
      * Lists the categories whose data will be consolidated under ConsolidateCommand.
      */

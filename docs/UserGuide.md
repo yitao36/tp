@@ -240,6 +240,16 @@ Examples:
 
 <br>
 
+### Consolidate student info : `consolidate`
+
+Consolidate students' a) names, b) phone number, c) email and d) address and
+display data under corresponding categories.
+
+Format: `consolidate`
+
+* If there are repeated value for a particular category (e.g. two students share the same phone number),
+  then that particular value (e.g. phone number) is displayed once.
+
 ### Clearing all entries : `clear`
 
 <box type="warning">
