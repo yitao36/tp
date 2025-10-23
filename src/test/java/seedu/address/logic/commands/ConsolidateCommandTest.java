@@ -11,24 +11,44 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.testutil.TypicalPersons;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ConsolidateCommandTest {
+
+    private String orderTwoValues(String firstValue, String secondValue) {
+        String result = "";
+        if (firstValue.compareTo(secondValue) < 0) {
+            result += firstValue + "\n" + secondValue;
+        } else if (firstValue.compareTo(secondValue) == 0) {
+            result += firstValue;
+        } else {
+            result += secondValue + "\n" + firstValue;
+        }
+        return result;
+    }
 
     @Test
     public void execute_validAddressBook_success() {
+
         Model model = new ModelManager();
         model.setAddressBook(new AddressBook());
         model.addPerson(TypicalPersons.CARL);
         model.addPerson(TypicalPersons.DANIEL);
-        String commandResult = ConsolidateCommand.MESSAGE_SUCCESS + "\n";
+        String commandResult = ConsolidateCommand.MESSAGE_SUCCESS;
 
-        // note: CARL's phone number is currently larger than DANIEL's phone number
-        if (CARL.getPhone().toString().compareTo(DANIEL.getPhone().toString()) < 0) {
-            commandResult += CARL.getPhone() + "\n" + DANIEL.getPhone();
-        } else if (CARL.getPhone().toString().compareTo(DANIEL.getPhone().toString()) == 0) {
-            commandResult += CARL.getPhone();
-        } else {
-            commandResult += DANIEL.getPhone() + "\n" + CARL.getPhone();
+        ConsolidateCommand.ConsolidateCategory[] categories = ConsolidateCommand.ConsolidateCategory.values();
+        List<String> categoryCompilation = new ArrayList<>();
+
+        // note: except for CARL's name, CARL's phone number, email and address is larger than DANIEL
+        for (ConsolidateCommand.ConsolidateCategory category : categories) {
+            String temp = ConsolidateCommand.formatCategoryHeader(category) + "\n"
+                    + orderTwoValues(ConsolidateCommand.getData(category, CARL),
+                    ConsolidateCommand.getData(category, DANIEL));
+            categoryCompilation.add(temp);
         }
+        String fullCompilation = String.join("\n\n", categoryCompilation);
+        commandResult += fullCompilation;
 
         assertCommandSuccess(new ConsolidateCommand(), model, commandResult, model);
     }
