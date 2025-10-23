@@ -247,7 +247,7 @@ display data under corresponding categories.
 
 Format: `consolidate`
 
-* If there are repeated value for a particular category (e.g. two students share the same phone number),
+* If there are repeated values for a particular category (e.g. two students share the same phone number),
   then that particular value (e.g. phone number) is displayed once.
 
 <br>
