@@ -31,6 +31,9 @@ public class ConsolidateCommand extends Command {
             + "(e.g. two students share the same phone number), \n"
             + "then that particular value (e.g. phone number) is displayed once.";
 
+    /**
+     * Lists the categories whose data will be consolidated under ConsolidateCommand.
+     */
     public enum ConsolidateCategory {
         NAME, PHONE, EMAIL, ADDRESS
     }
@@ -51,13 +54,20 @@ public class ConsolidateCommand extends Command {
 
         ConsolidateCategory[] categories = ConsolidateCategory.values();
         for (ConsolidateCategory category : categories) {
-            categoryCompilation.add(this.consolidateData(category,persons));
+            categoryCompilation.add(this.consolidateData(category, persons));
         }
         String fullCompilation = String.join("\n\n", categoryCompilation);
 
         return new CommandResult(MESSAGE_SUCCESS + fullCompilation);
     }
 
+    /**
+     * Extract the data of the specified category of the specified person.
+     *
+     * @param category Category of the data to be extracted.
+     * @param person Person whose data to be extracted.
+     * @return Value of data under specified category of specified person.
+     */
     public static String getData(ConsolidateCategory category, Person person) {
         if (category == ConsolidateCategory.NAME) {
             return person.getName().toString();
@@ -72,6 +82,12 @@ public class ConsolidateCommand extends Command {
         }
     }
 
+    /**
+     * Returns the header that specify what category the consolidated data fall under.
+     *
+     * @param category Category of the consolidated data.
+     * @return Header.
+     */
     public static String formatCategoryHeader(ConsolidateCategory category) {
         String categoryName = "";
         if (category == ConsolidateCategory.NAME) {
@@ -79,9 +95,9 @@ public class ConsolidateCommand extends Command {
         } else if (category == ConsolidateCategory.PHONE) {
             categoryName = "phone";
         } else if (category == ConsolidateCategory.EMAIL) {
-            categoryName =  "email";
+            categoryName = "email";
         } else if (category == ConsolidateCategory.ADDRESS) {
-            categoryName =  "address";
+            categoryName = "address";
         } else {
             // do nothing
         }
