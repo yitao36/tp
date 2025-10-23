@@ -29,7 +29,6 @@ public class Phone {
      */
     public static boolean isValidPhone(String test) {
         try {
-            assert !test.isEmpty() : "test should have already been checked that it is not null";
             test = test.replaceAll("[\\s-]", "");
             if (test.length() != 8) {
                 return false;
