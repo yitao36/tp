@@ -101,6 +101,7 @@ public class ConsolidateCommand extends Command {
         } else {
             // do nothing
         }
+        assert !categoryName.isEmpty() : "categoryName cannot be empty";
         return "- List of students' " + categoryName + ": ";
     }
 
