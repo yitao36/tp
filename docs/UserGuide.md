@@ -11,30 +11,30 @@
 
 --------------------------------------------------------------------------------------------------------------------
 ## Welcome to CCAmper!
-CCAmper is the perfect app for **secondary school teachers** as an all-in-one desktop app for 
+CCAmper is the perfect app for **secondary school teachers** as an all-in-one desktop app for
 - Managing all your various CCA student details plus emergency contact details
-- Keeping track of critical information such as their dietary restrictions 
+- Keeping track of critical information such as their dietary restrictions
 - Keeping track of their attendance and performance.
 
 CCAmper is optimized for use via a
-<tooltip content="Command Line Interface">**CLI**</tooltip> to help secondary school teachers who are fast-typers to 
-**plan, manage, and simplify** your CCA's weekly tasks faster than traditional 
+<tooltip content="Command Line Interface">**CLI**</tooltip> to help secondary school teachers who are fast-typers to
+**plan, manage, and simplify** your CCA's weekly tasks faster than traditional
 <tooltip content="Graphical User Interface">GUI</tooltip> apps.
 
 
 ## Quick start
 
-1. Download and install Java `17` or above from this 
+1. Download and install Java `17` or above from this
    <a href="https://www.oracle.com/java/technologies/downloads/#java17">Java downloads page</a>.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed 
+   **Mac users:** Ensure you have the precise JDK version prescribed
    [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).<br> {{ verifyJava17 }}
 
 2. Download our latest CCAmper `.jar` file from our [GitHub page](https://github.com/AY2526S1-CS2103T-T10-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook. 
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
    <br>We recommend placing the `.jar` file into a folder named `CCAmper` on your desktop for easy access.
 
-3. Open a command terminal, {{ navigate }} into the folder containing the `.jar` file, 
+3. Open a command terminal, {{ navigate }} into the folder containing the `.jar` file,
    and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
@@ -71,7 +71,7 @@ CCAmper is optimized for use via a
 * Items in **square brackets** are optional.<br>
   * e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
   * e.g `n/NAME [enroll/[YEAR]]` can be used as `n/John enroll/` or as `n/John enroll/2024` or as `n/John`.
-    
+
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend family` etc.
 
@@ -110,6 +110,8 @@ Add students to your address book, with the given fields.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE]…​ [t/TAG]…​ [pin/] [enroll/YEAR] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE] [ece/EMERGENCY_EMAIL]`
 
+Additional information on fields:
+* While one may key in phone numbers with hyphen(s) and/or space(s) to improve human-readability, the hyphen(s) and space(s) are automatically removed when phone number is stored in app.
 * The emergency contact fields (`ecn, ecp, ece`) must be either all provided or not at all.
 
 Examples:
@@ -175,7 +177,7 @@ Available prefixes
 - Enrollment Year: `enroll/` (Enrollment year satisfy constraints)
 - Tag: `t/` (Any tag containing any of the keywords)
 
-Format: `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<\|<=\|>\|>=\|=)NUMBER]] 
+Format: `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<\|<=\|>\|>=\|=)NUMBER]]
 [r/SUBSTRING]…​`
 
 * At least one prefix must be provided.
@@ -204,9 +206,9 @@ Enrollment Year:
 Role:
 * The search is case-insensitive. e.g. `president` will match `President`.
 * A role matches a search string if the string is a substring of the role. e.g. `section` will match `Section Leader`.
-* Unlike previous cases, we can search for a string with spaces e.g. `r/section leader` will match `Section Leader` 
+* Unlike previous cases, we can search for a string with spaces e.g. `r/section leader` will match `Section Leader`
   but not `Section Head`.
-* To search for multiple roles, we supply the `r/` tag multiple times e.g. `r/section r/leader` matches both 
+* To search for multiple roles, we supply the `r/` tag multiple times e.g. `r/section r/leader` matches both
   `Section Head` and `Group Leader`.
 * A person is matched and returned if any of their roles matches any of the searched strings.
 * We can match all people with roles by giving an empty substring e.g. `find r/`.
@@ -255,14 +257,14 @@ Format: `exit`
 
 ### Saving of data
 
-CCAmper data are saved in the hard disk automatically after any command that changes the data. 
+CCAmper data are saved in the hard disk automatically after any command that changes the data.
 <br>There is no need to save manually.
 
 <br>
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/CCAmper.json`. 
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/CCAmper.json`.
 <br>Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning">
