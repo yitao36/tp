@@ -53,5 +53,6 @@
     "roles" : [ ],
     "tags" : [ ],
     "pin" : true
-  } ]
+  } ],
+  "events": []
 }
