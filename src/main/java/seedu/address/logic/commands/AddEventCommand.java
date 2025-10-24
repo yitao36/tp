@@ -22,7 +22,7 @@ public class AddEventCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_DURATION + "(d/M/yyyy or d/M/yyyy-d/M/yyyy) "
-            + PREFIX_DESCRIPTION + "DESCRIPTION\n"
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Meeting "
             + PREFIX_DURATION + "1/10/2025 "
