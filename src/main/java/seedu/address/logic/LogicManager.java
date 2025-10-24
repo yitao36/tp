@@ -5,6 +5,7 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -72,7 +73,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Person getSelectedPerson() {
+    public ObjectProperty<Person> getSelectedPerson() {
         return model.getSelectedPerson();
     }
 

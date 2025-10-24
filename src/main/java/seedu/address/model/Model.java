@@ -4,16 +4,18 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
@@ -51,10 +53,14 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Sorts the AddressBook */
+    /**
+     * Sorts the AddressBook
+     */
     void sortAddressBook(Comparator<Person> personComparator);
 
     /**
@@ -81,22 +87,26 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Person> getFilteredPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /**
+     * Returns the selected person in the filtered person list.
+     */
+    ObjectProperty<Person> getSelectedPerson();
 
-    /** Returns the selected person in the filtered person list. */
-    Person getSelectedPerson();
-
-    /** Sets the selected person in the filtered person list. */
-    void setSelectedPerson(Person p);
-
-    /** Sets the selected person to the person at the specified index in the filtered person list. */
-    void setSelectedPerson(Index i);
+    /**
+     * Check if the currently selected person is in the filtered list.
+     * If not, either set it to the first person in the list, or null if the list is empty.
+     */
+    void updateSelectedPerson();
 }

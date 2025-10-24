@@ -35,9 +35,9 @@ public class ClearCommandTest {
     public void execute_nonEmptyAddressBook_selectedPersonReturnsNull() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Person lastPerson = model.getFilteredPersonList().get(model.getFilteredPersonList().size() - 1);
-        model.setSelectedPerson(lastPerson);
+        model.getSelectedPerson().set(lastPerson);
         new ClearCommand().execute(model);
 
-        assertNull(model.getSelectedPerson());
+        assertNull(model.getSelectedPerson().get());
     }
 }

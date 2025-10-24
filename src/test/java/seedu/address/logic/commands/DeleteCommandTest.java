@@ -88,27 +88,43 @@ public class DeleteCommandTest {
         Model model = new ModelManager();
         Person firstPerson = new PersonBuilder().build();
         model.addPerson(firstPerson);
-        model.setSelectedPerson(firstPerson);
-        assertEquals(firstPerson, model.getSelectedPerson());
+        model.getSelectedPerson().set(firstPerson);
+        assertEquals(firstPerson, model.getSelectedPerson().get());
 
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         deleteCommand.execute(model);
-        assertNull(model.getSelectedPerson());
+        assertNull(model.getSelectedPerson().get());
     }
 
     @Test
-    public void execute_deletePersonThenNonEmptyList_firstPersonSelected() throws CommandException {
-        Index lastPersonIndex = Index.fromOneBased(model.getFilteredPersonList().size());
-        Person lastPerson = model.getFilteredPersonList().get(lastPersonIndex.getZeroBased());
-        model.setSelectedPerson(lastPerson);
+    public void execute_deleteFirstOrMiddlePerson_personAfterSelected() throws CommandException {
+        Index middlePersonIndex = Index.fromOneBased(model.getFilteredPersonList().size() - 1);
+        Person lastPerson = model.getFilteredPersonList().get(middlePersonIndex.getZeroBased() + 1);
+        Person middlePerson = model.getFilteredPersonList().get(middlePersonIndex.getZeroBased());
+        Person frontPerson = model.getFilteredPersonList().get(middlePersonIndex.getZeroBased() - 1);
+        model.getSelectedPerson().set(middlePerson);
 
-        DeleteCommand deleteCommand = new DeleteCommand(lastPersonIndex);
-        Person firstPerson = model.getFilteredPersonList().get(0);
+        DeleteCommand deleteCommand = new DeleteCommand(middlePersonIndex);
         deleteCommand.execute(model);
 
-        assertEquals(firstPerson, model.getSelectedPerson());
-        assertNotEquals(lastPerson, model.getSelectedPerson());
+        assertEquals(lastPerson, model.getSelectedPerson().get());
+        assertNotEquals(frontPerson, model.getSelectedPerson().get());
     }
+
+    @Test
+    public void execute_deleteLastPerson_personBeforeSelected() throws CommandException {
+        Index lastPersonIndex = Index.fromOneBased(model.getFilteredPersonList().size());
+        Person lastPerson = model.getFilteredPersonList().get(lastPersonIndex.getZeroBased());
+        Person middlePerson = model.getFilteredPersonList().get(lastPersonIndex.getZeroBased() - 1);
+        model.getSelectedPerson().set(lastPerson);
+
+        DeleteCommand deleteCommand = new DeleteCommand(lastPersonIndex);
+        deleteCommand.execute(model);
+
+        assertEquals(middlePerson, model.getSelectedPerson().get());
+        assertNotEquals(lastPerson, model.getSelectedPerson().get());
+    }
+
 
     @Test
     public void equals() {

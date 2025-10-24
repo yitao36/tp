@@ -79,10 +79,10 @@ public class FindCommandTest {
     @Test
     public void execute_noPersonFound_selectedPersonReturnsNull() {
         Person lastPerson = model.getFilteredPersonList().get(model.getFilteredPersonList().size() - 1);
-        model.setSelectedPerson(lastPerson);
+        model.getSelectedPerson().set(lastPerson);
         FindCommand command = new FindCommand(p -> false);
         command.execute(model);
-        assertNull(model.getSelectedPerson());
+        assertNull(model.getSelectedPerson().get());
     }
 
     @Test
@@ -91,7 +91,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         command.execute(model);
-        assertEquals(expectedModel.getFilteredPersonList().get(0), model.getSelectedPerson());
+        assertEquals(expectedModel.getFilteredPersonList().get(0), model.getSelectedPerson().get());
     }
 
     @Test
