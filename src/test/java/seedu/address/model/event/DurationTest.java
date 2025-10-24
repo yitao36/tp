@@ -25,7 +25,7 @@ public class DurationTest {
         assertThrows(NullPointerException.class, () -> Duration.isValidDuration(null));
 
         // invalid durations
-        assertFalse(Duration.isValidDuration("")); // spaces only
+        assertFalse(Duration.isValidDuration("")); // empty string
         assertFalse(Duration.isValidDuration("1/13/2025")); // invalid date
         assertFalse(Duration.isValidDuration("1/10/2025-1/13/2025")); // invalid date
         assertFalse(Duration.isValidDuration("51/10/2025-1/11/2025")); // invalid date

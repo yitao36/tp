@@ -12,15 +12,14 @@ public class Description {
             + " or an empty string to indicate no description.";
 
     /*
-     * The first character of the description must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * The description must contains at least one non-space character.
      */
     public static final String VALIDATION_REGEX = ".*[^\\s].*";
 
     public final String value;
 
     /**
-     * Constructs an {@code Description}.
+     * Constructs a {@code Description}.
      *
      * @param description A valid description.
      */

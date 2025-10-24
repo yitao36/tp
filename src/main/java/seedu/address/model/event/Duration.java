@@ -16,7 +16,8 @@ import java.util.Objects;
  */
 public class Duration {
     public static final String MESSAGE_CONSTRAINTS = "Event duration must either be in the format of "
-            + "d/M/yyyy or d/M/yyyy-d/M/yyyy. The start date should not be after the end date.";
+            + "d/M/yyyy or d/M/yyyy-d/M/yyyy. E.g. \"1/10/2025\" or \"9/1/2022-10/2/2022\"."
+            + "The start date should not be after the end date.";
 
     /*
      * The string must be a positive integer.

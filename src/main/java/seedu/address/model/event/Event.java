@@ -45,7 +45,7 @@ public class Event {
     }
 
     /**
-     * Returns true if both events have the same name.
+     * Returns true if both events have the same name and duration.
      * This defines a weaker notion of equality between two events.
      */
     public boolean isSameEvent(Event otherEvent) {

@@ -19,7 +19,7 @@ public class EventBuilder {
     private Description description;
 
     /**
-     * Creates a {@code EventBuilder} with the default details.
+     * Creates an {@code EventBuilder} with the default details.
      */
     public EventBuilder() {
         name = new EventName(DEFAULT_NAME);

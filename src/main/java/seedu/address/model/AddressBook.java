@@ -78,7 +78,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// event-level operations
 
     /**
-     * Returns true if a event with the same identity as {@code event} exists in the address book.
+     * Returns true if an event with the same identity as {@code event} exists in the address book.
      */
     public boolean hasEvent(Event event) {
         requireNonNull(event);

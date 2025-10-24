@@ -113,7 +113,7 @@ public interface Model {
     void updateSelectedPerson();
 
     /**
-     * Returns true if a event with the same identity as {@code event} exists in the address book.
+     * Returns true if an event with the same identity as {@code event} exists in the address book.
      */
     boolean hasEvent(Event event);
 

@@ -28,18 +28,18 @@ public class UniqueEventListTest {
     }
 
     @Test
-    public void contains_personNotInList_returnsFalse() {
+    public void contains_eventNotInList_returnsFalse() {
         assertFalse(uniqueEventList.contains(MEETING));
     }
 
     @Test
-    public void contains_personInList_returnsTrue() {
+    public void contains_eventInList_returnsTrue() {
         uniqueEventList.add(MEETING);
         assertTrue(uniqueEventList.contains(MEETING));
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_eventWithSameIdentityFieldsInList_returnsTrue() {
         uniqueEventList.add(MEETING);
         Event editedMeeting = new EventBuilder(MEETING).withDescription(VALID_DESCRIPTION_TRAINING)
                 .build();
@@ -114,7 +114,7 @@ public class UniqueEventListTest {
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsEventNotFoundException() {
+    public void remove_eventDoesNotExist_throwsEventNotFoundException() {
         assertThrows(EventNotFoundException.class, () -> uniqueEventList.remove(MEETING));
     }
 
@@ -148,8 +148,8 @@ public class UniqueEventListTest {
     @Test
     public void setEvents_list_replacesOwnListWithProvidedList() {
         uniqueEventList.add(MEETING);
-        List<Event> personList = Collections.singletonList(TRAINING);
-        uniqueEventList.setEvents(personList);
+        List<Event> eventList = Collections.singletonList(TRAINING);
+        uniqueEventList.setEvents(eventList);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
         expectedUniqueEventList.add(TRAINING);
         assertEquals(expectedUniqueEventList, uniqueEventList);

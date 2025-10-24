@@ -32,7 +32,7 @@ public class EventTest {
         assertFalse(MEETING.isSameEvent(editedMeeting));
 
         // different duration, all other attributes same -> returns false
-        editedMeeting = new EventBuilder(MEETING).withName(VALID_DURATION_TRAINING).build();
+        editedMeeting = new EventBuilder(MEETING).withDuration(VALID_DURATION_TRAINING).build();
         assertFalse(MEETING.isSameEvent(editedMeeting));
 
         // name differs in case, all other attributes same -> returns false
@@ -67,11 +67,11 @@ public class EventTest {
         Event editedMeeting = new EventBuilder(MEETING).withName(VALID_NAME_TRAINING).build();
         assertFalse(MEETING.equals(editedMeeting));
 
-        // different phone -> returns false
+        // different duration -> returns false
         editedMeeting = new EventBuilder(MEETING).withDuration(VALID_DURATION_TRAINING).build();
         assertFalse(MEETING.equals(editedMeeting));
 
-        // different email -> returns false
+        // different description -> returns false
         editedMeeting = new EventBuilder(MEETING).withDescription(VALID_DESCRIPTION_TRAINING).build();
         assertFalse(MEETING.equals(editedMeeting));
     }
