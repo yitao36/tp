@@ -117,6 +117,12 @@ public interface Model {
      */
     boolean hasEvent(Event event);
 
+    /**
+     * Adds the given event.
+     * {@code event} must not already exist in the address book.
+     */
+    void addEvent(Event event);
+
     /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();
 

@@ -103,6 +103,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void addEvent(Event event) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public boolean hasEvent(Event event) {
         throw new AssertionError("This method should not be called.");
     }

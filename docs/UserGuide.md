@@ -240,6 +240,23 @@ Examples:
 
 <br>
 
+### Adding an event: `addevent`
+
+Add events to your address book, with the given fields given there are no duplicate events.
+
+Format: `addevent n/NAME d/(d/M/yyyy or d/M/yyyy-d/M/yyyy) [info/DESCRIPTION]`
+
+Examples:
+* `addevent n/meeting d/1/10/2025 info/routine meeting`
+
+<box type="definition">
+
+**Note:**
+Events are considered duplicates if they have the same name and duration.
+</box>
+
+<br>
+
 ### Consolidate student info : `consolidate`
 
 Consolidate students' a) names, b) phone number, c) email and d) address and
@@ -321,5 +338,6 @@ Action     | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​ [t/TAG]…​ [pin/(TRUE/FALSE)] [enroll/[YEAR]] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE]`<br> e.g.,`edit 1 n/John p/98765432 e/johndoe@example.com a/New Place r/Senior Student t/experienced pin/TRUE enroll/2022 ecn/Sally ecp/88887777`
 **Find** | `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<\|<=\|>\|>=\|=)NUMBER]] [r/SUBSTRING]…​`<br> e.g., `find n/yu john enroll/>=2022 r/lead r/sec`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Add Event** | `addevent n/NAME d/(d/M/yyyy or d/M/yyyy-d/M/yyyy) [info/DESCRIPTION]` <br> e.g., `addevent n/meeting d/1/10/2025 info/routine meeting`
 **Consolidate** | `consolidate`
 **Clear**  | `clear`
