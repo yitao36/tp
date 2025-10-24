@@ -102,7 +102,7 @@ public class AddEventCommandParserTest {
         assertParseFailure(parser, INVALID_EVENT_NAME_DESC + DURATION_DESC_MEETING + DESC_DESC_MEETING,
                 EventName.MESSAGE_CONSTRAINTS);
 
-        // invalid phone
+        // invalid duration
         assertParseFailure(parser, NAME_DESC_MEETING + INVALID_DURATION_DESC + DESC_DESC_MEETING,
                 Duration.MESSAGE_CONSTRAINTS);
 
