@@ -180,7 +180,7 @@ public class ModelManager implements Model {
         }
     }
 
-    //=========== Selected Person Accessors =============================================================
+    //=========== Selected Event Accessors =============================================================
 
     @Override
     public ObjectProperty<Event> getSelectedEvent() {
