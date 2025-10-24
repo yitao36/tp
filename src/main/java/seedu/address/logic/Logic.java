@@ -9,6 +9,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -36,6 +37,12 @@ public interface Logic {
 
     /** Returns a modifiable view of the selected person from the list of persons */
     ObjectProperty<Person> getSelectedPerson();
+
+    /** Returns an unmodifiable view of the filtered list of events */
+    ObservableList<Event> getFilteredEventList();
+
+    /** Returns a modifiable view of the selected event from the list of events */
+    ObjectProperty<Event> getSelectedEvent();
 
     /**
      * Returns the user prefs' address book file path.

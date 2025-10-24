@@ -61,10 +61,6 @@ public class PersonPanel extends UiPart<VBox> {
     private Label emergencyPhone;
     @FXML
     private ImageView emergencyPhoneIcon;
-    @FXML
-    private Label emergencyEmail;
-    @FXML
-    private ImageView emergencyEmailIcon;
 
     /**
      * Constructs PersonPanel and links the graphics.
@@ -78,7 +74,6 @@ public class PersonPanel extends UiPart<VBox> {
         yearIcon.setImage(yearImage);
         emergencyNameIcon.setImage(contactImage);
         emergencyPhoneIcon.setImage(phoneImage);
-        emergencyEmailIcon.setImage(emailImage);
 
         name.setGraphic(pinIcon);
         phone.setGraphic(phoneIcon);
@@ -87,7 +82,6 @@ public class PersonPanel extends UiPart<VBox> {
         year.setGraphic(yearIcon);
         emergencyName.setGraphic(emergencyNameIcon);
         emergencyPhone.setGraphic(emergencyPhoneIcon);
-        emergencyEmail.setGraphic(emergencyEmailIcon);
     }
 
     /**
@@ -133,19 +127,14 @@ public class PersonPanel extends UiPart<VBox> {
         if (selected.getEmergencyContact().isPresent()) {
             emergencyPhone.setManaged(true);
             emergencyPhone.setVisible(true);
-            emergencyEmail.setManaged(true);
-            emergencyEmail.setVisible(true);
 
             EmergencyContact ec = selected.getEmergencyContact().get();
             emergencyName.setText(ec.name.fullName);
             emergencyPhone.setText(ec.phone.value);
-            emergencyEmail.setText(ec.email.value);
         } else {
             emergencyName.setText(MESSAGE_NO_EMERGENCY_CONTACT);
             emergencyPhone.setManaged(false);
             emergencyPhone.setVisible(false);
-            emergencyEmail.setManaged(false);
-            emergencyEmail.setVisible(false);
         }
     }
 }
