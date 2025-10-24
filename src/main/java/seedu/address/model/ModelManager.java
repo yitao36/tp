@@ -128,6 +128,12 @@ public class ModelManager implements Model {
         return addressBook.hasEvent(event);
     }
 
+    @Override
+    public void addEvent(Event event) {
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+        addressBook.addEvent(event);
+    }
+
     //=========== Filtered Event List Accessors =============================================================
 
     /**
