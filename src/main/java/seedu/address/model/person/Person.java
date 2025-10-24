@@ -21,7 +21,7 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Emergency contact's phone number and email address should not be the same as this person's.";
+            "Emergency contact's phone number should not be the same as this person's.";
 
     // Identity fields
     private final Name name;
@@ -42,7 +42,7 @@ public class Person {
     public Person(Name name, Phone phone, Email email, Address address, Pin pin, Set<Role> roles, Set<Tag> tags,
                   EmergencyContact emergencyContact, EnrollmentYear enrollmentYear) {
         requireAllNonNull(name, phone, email, address, pin, tags);
-        checkArgument(isValidPerson(phone, email, emergencyContact), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidPerson(phone, emergencyContact), MESSAGE_CONSTRAINTS);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -55,11 +55,12 @@ public class Person {
     }
 
     /**
-     * Returns true if the given parameters form a valid Person.
+     * Returns true if the given parameters form a valid Person:
+     * The emergency contact (if provided) must not have the same number as the contact.
      */
-    public static boolean isValidPerson(Phone phone, Email email, EmergencyContact emergencyContact) {
+    public static boolean isValidPerson(Phone phone, EmergencyContact emergencyContact) {
         if (emergencyContact != null) {
-            return !emergencyContact.phone.equals(phone) && !emergencyContact.email.equals(email);
+            return !emergencyContact.phone.equals(phone);
         }
         return true;
     }

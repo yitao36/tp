@@ -54,9 +54,6 @@
                 <Label fx:id="emergencyPhone" wrapText="true" graphicTextGap="10.0">
                     <ImageView fx:id="emergencyPhoneIcon" fitHeight="20.0" fitWidth="20.0"/>
                 </Label>
-                <Label fx:id="emergencyEmail" wrapText="true" graphicTextGap="10.0">
-                    <ImageView fx:id="emergencyEmailIcon" fitHeight="20.0" fitWidth="20.0"/>
-                </Label>
             </VBox>
         </VBox>
         <VBox GridPane.columnIndex="2" GridPane.hgrow="SOMETIMES"/>

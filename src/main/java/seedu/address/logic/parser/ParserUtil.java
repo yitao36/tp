@@ -117,24 +117,22 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code emergencyName, emergencyPhone, emergencyEmail} into an {@code EmergencyContact}.
+     * Parses a {@code emergencyName, emergencyPhone} into an {@code EmergencyContact}.
      */
     public static Optional<EmergencyContact> parseEmergencyContact(Optional<String> emergencyName,
-                                                                   Optional<String> emergencyPhone,
-                                                                   Optional<String> emergencyEmail)
+                                                                   Optional<String> emergencyPhone)
                                                                     throws ParseException {
         int presentFieldsCount = (emergencyName.isPresent() ? 1 : 0)
-                + (emergencyPhone.isPresent() ? 1 : 0)
-                + (emergencyEmail.isPresent() ? 1 : 0);
+                + (emergencyPhone.isPresent() ? 1 : 0);
 
-        if (presentFieldsCount != 0 && presentFieldsCount != 3) {
+        if (presentFieldsCount != 0 && presentFieldsCount != 2) {
             throw new ParseException(EmergencyContact.MESSAGE_CONSTRAINTS);
         }
         if (presentFieldsCount == 0) {
             return Optional.empty();
         }
         try {
-            return Optional.of(new EmergencyContact(emergencyName.get(), emergencyPhone.get(), emergencyEmail.get()));
+            return Optional.of(new EmergencyContact(emergencyName.get(), emergencyPhone.get()));
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());
         }

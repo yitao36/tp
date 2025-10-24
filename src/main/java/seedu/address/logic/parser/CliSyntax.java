@@ -15,7 +15,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_EMERGENCY_NAME = new Prefix("ecn/");
     public static final Prefix PREFIX_EMERGENCY_PHONE = new Prefix("ecp/");
-    public static final Prefix PREFIX_EMERGENCY_EMAIL = new Prefix("ece/");
     public static final Prefix PREFIX_ENROLL_YEAR = new Prefix("enroll/");
 
 }

@@ -296,19 +296,19 @@ public class ParserUtilTest {
     @Test
     public void parseEmergencyContact_incomplete_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseEmergencyContact(Optional.of(VALID_NAME),
-                Optional.of(VALID_PHONE), Optional.empty()));
+                Optional.empty()));
     }
 
     @Test
     public void parseEmergencyContact_invalidValue_returnsEmergencyContact() throws Exception {
         assertThrows(ParseException.class, () -> ParserUtil.parseEmergencyContact(Optional.of(INVALID_NAME),
-                Optional.of(VALID_PHONE), Optional.of(VALID_EMAIL)));
+                Optional.of(VALID_PHONE)));
     }
 
     @Test
     public void parseEmergencyContact_empty_returnsEmpty() throws Exception {
         Optional<EmergencyContact> emergencyContact = ParserUtil.parseEmergencyContact(Optional.empty(),
-                Optional.empty(), Optional.empty());
+                Optional.empty());
         Optional<EmergencyContact> expectedEmergencyContact = Optional.empty();
         assertEquals(expectedEmergencyContact, emergencyContact);
     }
@@ -316,8 +316,8 @@ public class ParserUtilTest {
     @Test
     public void parseEmergencyContact_validValue_returnsEmergencyContact() throws Exception {
         EmergencyContact emergencyContact = ParserUtil.parseEmergencyContact(Optional.of(VALID_NAME),
-                Optional.of(VALID_PHONE), Optional.of(VALID_EMAIL)).get();
-        EmergencyContact expectedEmergencyContact = new EmergencyContact(VALID_NAME, VALID_PHONE, VALID_EMAIL);
+                Optional.of(VALID_PHONE)).get();
+        EmergencyContact expectedEmergencyContact = new EmergencyContact(VALID_NAME, VALID_PHONE);
         assertEquals(expectedEmergencyContact, emergencyContact);
     }
 }
