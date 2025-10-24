@@ -12,7 +12,7 @@ public class Description {
             + " or an empty string to indicate no description.";
 
     /*
-     * The description must contains at least one non-space character.
+     * The description must contain at least one non-space character.
      */
     public static final String VALIDATION_REGEX = ".*[^\\s].*";
 
