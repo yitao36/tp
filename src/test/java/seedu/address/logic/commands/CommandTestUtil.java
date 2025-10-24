@@ -43,6 +43,12 @@ public class CommandTestUtil {
     public static final String VALID_ROLE_PRESIDENT = "president";
     public static final String VALID_ROLE_SECRETARY = "secretary";
     public static final String VALID_ROLE_SECTION_LEADER = "section leader";
+    public static final String VALID_NAME_MEETING = "Meeting";
+    public static final String VALID_NAME_TRAINING = "Training";
+    public static final String VALID_DURATION_MEETING = "1/10/2025";
+    public static final String VALID_DURATION_TRAINING = "2/10/2025-5/10/2025";
+    public static final String VALID_DESCRIPTION_MEETING = "Routine meeting";
+    public static final String VALID_DESCRIPTION_TRAINING = "Daily traning for a week";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

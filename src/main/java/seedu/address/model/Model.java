@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -17,6 +18,7 @@ public interface Model {
      * {@code Predicate} that always evaluate to true
      */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -109,4 +111,27 @@ public interface Model {
      * If not, either set it to the first person in the list, or null if the list is empty.
      */
     void updateSelectedPerson();
+
+    /**
+     * Returns true if a event with the same identity as {@code event} exists in the address book.
+     */
+    boolean hasEvent(Event event);
+
+    /** Returns an unmodifiable view of the filtered event list */
+    ObservableList<Event> getFilteredEventList();
+
+    /**
+     * Updates the filter of the filtered event list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredEventList(Predicate<Event> predicate);
+
+    /** Returns the selected event in the filtered event list. */
+    ObjectProperty<Event> getSelectedEvent();
+
+    /**
+     * Check if the currently selected event is in the filtered list.
+     * If not, either set it to the first event in the list, or null if the list is empty.
+     */
+    void updateSelectedEvent();
 }
