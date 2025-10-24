@@ -17,14 +17,14 @@ public class MessageCenter {
     }
 
     public static void appendFront(String s) {
-        stringBuilder.insert(0, s);
+        stringBuilder.insert(0, "\n").insert(0, s);
     }
 
     /**
      * Append the String s to the end of the currently built message.
      */
     public static void appendEnd(String s) {
-        stringBuilder.append(s);
+        stringBuilder.append(s).append("\n");
     }
 
     /**

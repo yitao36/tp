@@ -3,14 +3,16 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Arrays;
+
 /**
  * Represents a Person's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
 
-    public static final String MESSAGE_CONSTRAINTS = "Names should not be blank, bracket sequences in names should be"
-            + " matched, and names should only contain alphanumeric characters, spaces, and the following characters: "
+    public static final String MESSAGE_CONSTRAINTS = "Names should not be blank, "
+            + "and names should only contain alphanumeric characters, spaces, and the following characters: "
             + ".,-'()";
 
     /*
@@ -47,16 +49,24 @@ public class Name {
      */
     public static String getStyleWarningMessage(String test) {
         final String regexDoubleSpace = ".*[ ]{2}.*";
+        final String regexWordsStartsWithCapital = "[^a-zA-Z]*[A-Z][^A-Z]*";
+
+        String[] words = test.split(" ");
 
         StringBuilder styleWarning = new StringBuilder();
         if (test.matches(regexDoubleSpace)) {
             styleWarning.append(
-                    String.format("Style warning: Name `%s` contains multiple consecutive spaces.\n", test));
+                    String.format("Style warning: Name `%s` contains multiple consecutive spaces.", test));
         }
-        if (checkBalancedBrackets(test)) {
+        if (!checkBalancedBrackets(test)) {
             styleWarning.append(
                     String.format("Style warning: Name `%s` opening bracket "
-                            + "does not have a matching closing bracket.\n", test));
+                            + "does not have a matching closing bracket.", test));
+        }
+        if (!Arrays.stream(words).allMatch(w -> w.matches(regexWordsStartsWithCapital))) {
+            styleWarning.append(
+                    String.format("Style warning: Name `%s` does not have proper capitalization or alphabetical name.",
+                            test));
         }
         return styleWarning.toString();
     }

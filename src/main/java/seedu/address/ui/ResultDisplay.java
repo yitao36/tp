@@ -17,6 +17,9 @@ public class ResultDisplay extends UiPart<Region> {
     @FXML
     private TextArea resultDisplay;
 
+    /**
+     * Constructs a new ResultDisplay Ui, and bind it to MessageCenter to receive messages.
+     */
     public ResultDisplay() {
         super(FXML);
         MessageCenter.init(resultDisplay);
