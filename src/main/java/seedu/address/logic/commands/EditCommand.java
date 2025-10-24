@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENROLL_YEAR;
@@ -55,7 +54,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PIN + "(TRUE/FALSE)] "
             + "[" + PREFIX_EMERGENCY_NAME + "EMERGENCY_NAME] "
             + "[" + PREFIX_EMERGENCY_PHONE + "EMERGENCY_PHONE] "
-            + "[" + PREFIX_EMERGENCY_EMAIL + "EMERGENCY_EMAIL] "
             + "[" + PREFIX_ENROLL_YEAR + "[YEAR]] "
             + "[" + PREFIX_ROLE + "ROLE]... "
             + "[" + PREFIX_TAG + "TAG]...\n"

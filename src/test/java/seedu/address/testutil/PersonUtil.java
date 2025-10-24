@@ -2,7 +2,6 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENROLL_YEAR;
@@ -63,7 +62,6 @@ public class PersonUtil {
             final EmergencyContact emergencyContact = person.getEmergencyContact().get();
             sb.append(PREFIX_EMERGENCY_NAME + emergencyContact.name.fullName + " ");
             sb.append(PREFIX_EMERGENCY_PHONE + emergencyContact.phone.value + " ");
-            sb.append(PREFIX_EMERGENCY_EMAIL + emergencyContact.email.value + " ");
         }
         sb.append(PREFIX_ENROLL_YEAR + person.getEnrollmentYear().toString() + " ");
         return sb.toString();
@@ -101,7 +99,6 @@ public class PersonUtil {
         descriptor.getEmergencyContact().ifPresent(emergencyContact -> {
             sb.append(PREFIX_EMERGENCY_NAME + emergencyContact.name.fullName + " ");
             sb.append(PREFIX_EMERGENCY_PHONE + emergencyContact.phone.value + " ");
-            sb.append(PREFIX_EMERGENCY_EMAIL + emergencyContact.email.value + " ");
         });
         descriptor.getEnrollmentYear().ifPresent(enrollmentYear ->
             sb.append(PREFIX_ENROLL_YEAR)
