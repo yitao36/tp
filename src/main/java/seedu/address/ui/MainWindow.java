@@ -77,7 +77,7 @@ public class MainWindow extends UiPart<Stage> {
      * Displays a message to the user on initialization of AddressBook
      */
     public void initializeMessageToUser() {
-        resultDisplay.setFeedbackToUser("AddressBook successfully initialized.");
+        resultDisplay.setFeedbackToUser("AddressBook successfully initialized.\n");
     }
 
     public Stage getPrimaryStage() {

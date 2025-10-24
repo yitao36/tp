@@ -36,9 +36,29 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
+        final boolean lengthLessThan50 = test.length() < 50;
         final boolean hasValidCharacters = test.matches(VALIDATION_REGEX);
-        final boolean hasBalancedBrackets = checkBalancedBrackets(test);
-        return hasValidCharacters && hasBalancedBrackets;
+        return lengthLessThan50 & hasValidCharacters;
+    }
+
+    /**
+     * Returns a message containing details about not following the recommend style format.
+     * Does not throw an error.
+     */
+    public static String getStyleWarningMessage(String test) {
+        final String regexDoubleSpace = ".*[ ]{2}.*";
+
+        StringBuilder styleWarning = new StringBuilder();
+        if (test.matches(regexDoubleSpace)) {
+            styleWarning.append(
+                    String.format("Style warning: Name `%s` contains multiple consecutive spaces.\n", test));
+        }
+        if (checkBalancedBrackets(test)) {
+            styleWarning.append(
+                    String.format("Style warning: Name `%s` opening bracket "
+                            + "does not have a matching closing bracket.\n", test));
+        }
+        return styleWarning.toString();
     }
 
     @Override
