@@ -48,22 +48,18 @@ public class Name {
      * Does not throw an error.
      */
     public static String getStyleWarningMessage(String test) {
-        final String regexDoubleSpace = ".*[ ]{2}.*";
-        final String regexWordsStartsWithCapital = "[^a-zA-Z]*[A-Z][^A-Z]*";
-
-        String[] words = test.split(" ");
-
         StringBuilder styleWarning = new StringBuilder();
-        if (test.matches(regexDoubleSpace)) {
+
+        if (hasConsecutiveSpaces(test)) {
             styleWarning.append(
                     String.format("Style warning: Name `%s` contains multiple consecutive spaces.", test));
         }
-        if (!checkBalancedBrackets(test)) {
+        if (!hasBalancedBrackets(test)) {
             styleWarning.append(
                     String.format("Style warning: Name `%s` opening bracket "
                             + "does not have a matching closing bracket.", test));
         }
-        if (!Arrays.stream(words).allMatch(w -> w.matches(regexWordsStartsWithCapital))) {
+        if (isCapitalizedWithLetters(test)) {
             styleWarning.append(
                     String.format("Style warning: Name `%s` does not have proper capitalization or alphabetical name.",
                             test));
@@ -99,7 +95,7 @@ public class Name {
     /**
      * Returns true if the given string has a balanced bracket matching.
      */
-    private static boolean checkBalancedBrackets(String s) {
+    private static boolean hasBalancedBrackets(String s) {
         int openBracketCount = 0;
         for (char c : s.toCharArray()) {
             if (c == '(') {
@@ -112,5 +108,22 @@ public class Name {
             }
         }
         return openBracketCount == 0;
+    }
+
+    /**
+     * Tests if all the words start with a capital letter, followed by characters that are not capitalized.
+     */
+    private static boolean isCapitalizedWithLetters(String test) {
+        final String regex = "[^a-zA-Z]*[A-Z][^A-Z]*";
+        String[] words = test.split(" ");
+        return !Arrays.stream(words).allMatch(w -> w.matches(regex));
+    }
+
+    /**
+     * Tests if the string contains two or more consecutive spaces.
+     */
+    private static boolean hasConsecutiveSpaces(String test) {
+        final String regexDoubleSpace = ".*[ ]{2}.*";
+        return test.matches(regexDoubleSpace);
     }
 }
