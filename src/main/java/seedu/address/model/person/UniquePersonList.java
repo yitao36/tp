@@ -83,6 +83,7 @@ public class UniquePersonList implements Iterable<Person> {
         requireNonNull(toRemove);
         if (selectedPerson.get() != null && selectedPerson.get().equals(toRemove)) {
             int index = internalList.indexOf(toRemove);
+            assert index >= 0 : "person to be removed should exist in the internal list.";
             if (internalList.size() == 1) {
                 selectedPerson.set(null);
             } else if (index == internalList.size() - 1) {
