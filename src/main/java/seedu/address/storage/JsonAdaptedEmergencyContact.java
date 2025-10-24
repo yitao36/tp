@@ -57,16 +57,16 @@ class JsonAdaptedEmergencyContact {
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        } else {
-            MessageCenter.appendEnd(Name.getStyleWarningMessage(name));
         }
-
         if (!Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
         if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
+
+        MessageCenter.appendEnd(Name.getStyleWarningMessage(name));
+
         return new EmergencyContact(name, phone, email);
     }
 

@@ -11,7 +11,7 @@ import java.util.Arrays;
  */
 public class Name {
 
-    public static final String MESSAGE_CONSTRAINTS = "Names should not be blank, "
+    public static final String MESSAGE_CONSTRAINTS = "Names must be less than 50 characters long, should not be blank, "
             + "and names should only contain alphanumeric characters, spaces, and the following characters: "
             + ".,-'()";
 
@@ -59,7 +59,7 @@ public class Name {
                     String.format("Style warning: Name `%s` opening bracket "
                             + "does not have a matching closing bracket.", test));
         }
-        if (isCapitalizedWithLetters(test)) {
+        if (!isCapitalizedWithLetters(test)) {
             styleWarning.append(
                     String.format("Style warning: Name `%s` does not have proper capitalization or alphabetical name.",
                             test));
@@ -116,7 +116,7 @@ public class Name {
     private static boolean isCapitalizedWithLetters(String test) {
         final String regex = "[^a-zA-Z]*[A-Z][^A-Z]*";
         String[] words = test.split(" ");
-        return !Arrays.stream(words).allMatch(w -> w.matches(regex));
+        return Arrays.stream(words).allMatch(w -> w.matches(regex));
     }
 
     /**

@@ -16,12 +16,17 @@ public class MessageCenter {
         MessageCenter.resultDisplay = resultDisplay;
     }
 
+    /**
+     * Appends the string to the front of the currently built message.
+     * Used for showing the main success / error message.
+     */
     public static void appendFront(String s) {
         stringBuilder.insert(0, "\n").insert(0, s);
     }
 
     /**
-     * Append the String s to the end of the currently built message.
+     * Appends the string to the end of the currently built message.
+     * Typically used for showing additional info, such as style warnings.
      */
     public static void appendEnd(String s) {
         stringBuilder.append(s).append("\n");
