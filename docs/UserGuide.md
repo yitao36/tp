@@ -272,8 +272,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `delete 2` deletes the 2nd person in the displayed person list.
-
+* `delete 2` deletes the 2nd evebt in the displayed event list.
 
 <br>
 
