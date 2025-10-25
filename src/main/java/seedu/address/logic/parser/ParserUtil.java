@@ -177,7 +177,7 @@ public class ParserUtil {
             roleSet.add(parseRole(roleName));
         }
         if (roleSet.size() > PERSON_MAX_ROLES) {
-            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Role.PERSON_ROLES_SIZE_CONSTRAINT);
         }
         return roleSet;
     }
@@ -226,7 +226,7 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         if (tagSet.size() > PERSON_MAX_TAGS) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Tag.PERSON_TAGS_SIZE_CONSTRAINT);
         }
         return tagSet;
     }

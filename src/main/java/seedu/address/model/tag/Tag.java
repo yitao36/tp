@@ -9,6 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
     public static final int PERSON_MAX_TAGS = 5;
+    public static final String PERSON_TAGS_SIZE_CONSTRAINT = "Each person can have a maximum of 5 tags!";
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric, "
             + "and each person can have a maximum of 5 tags.";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
