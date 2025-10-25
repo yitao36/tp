@@ -20,6 +20,6 @@
 &#10;&#10;List of available commands:
 &#10; 1. General commands: help, exit
 &#10; 2. Student-related commands: add, list, edit, find, delete, consolidate, clear
-&#10; 3. Event-related commands: add:event, delete:event, clear:event" wrapText="true"
+&#10; 3. Event-related commands: add:event, edit:event, delete:event, clear:event" wrapText="true"
            style="-fx-font-size: 20.0;"/>
 </VBox>
