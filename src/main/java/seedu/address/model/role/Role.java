@@ -30,14 +30,14 @@ public class Role {
      * Returns true if a given string is a valid role name.
      */
     public static boolean isValidRoleName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.length() <= 20 && test.matches(VALIDATION_REGEX);
     }
 
     /**
      * Returns true if a given string is a valid role name.
      */
     public static boolean isValidFindString(String test) {
-        return test.isEmpty() || test.matches(VALIDATION_REGEX);
+        return test.isEmpty() || isValidRoleName(test);
     }
 
     @Override
