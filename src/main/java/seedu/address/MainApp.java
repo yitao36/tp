@@ -88,6 +88,7 @@ public class MainApp extends Application {
                 MessageCenter.appendEnd(message);
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData.isValidAddressBook();
         } catch (DataLoadingException e) {
             String error = "Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.";

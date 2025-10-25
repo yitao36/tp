@@ -1,11 +1,13 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.event.Attendance;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Duration;
 import seedu.address.model.event.Event;
@@ -54,11 +56,11 @@ public class SampleDataUtil {
     public static Event[] getSampleEvents() {
         return new Event[]{
             new Event(new EventName("Exco Meeting"), new Duration("1/10/2025"),
-                    new Description("Routine exco meeting")),
+                    new Description("Routine exco meeting"), new Attendance(new HashSet<>())),
             new Event(new EventName("Camping Trip"), new Duration("5/10/2025-10/10/2025"),
-                    new Description("Annual camping trip involving everyone")),
+                    new Description("Annual camping trip involving everyone"), new Attendance(new HashSet<>())),
             new Event(new EventName("Training"), new Duration("12/10/2025"),
-                    new Description("Weekly training"))
+                    new Description("Weekly training"), new Attendance(new HashSet<>()))
         };
     }
 

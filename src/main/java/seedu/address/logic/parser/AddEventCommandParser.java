@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Attendance;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Duration;
 import seedu.address.model.event.Event;
@@ -46,9 +47,10 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         EventName name = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_NAME).get());
         Duration duration = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).orElse(""));
+        Attendance attendance = new Attendance();
 
         try {
-            Event event = new Event(name, duration, description);
+            Event event = new Event(name, duration, description, attendance);
             return new AddEventCommand(event);
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());

@@ -275,4 +275,27 @@ public class ParserUtil {
         }
         return new Description(trimmedDesc);
     }
+
+    /**
+     * Parses a {@code String indexes} into a {@code Set<Index>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if any of the index is invalid.
+     */
+    public static Set<Index> parseIndexes(String indexes) throws ParseException {
+        requireNonNull(indexes);
+        String trimmedIndexes = indexes.trim();
+        Set<Index> indexSet = new HashSet<>();
+        String[] indexList = indexes.split(" ");
+        for (String index : indexList) {
+            Index i = parseIndex(index);
+            if (indexSet.contains(i)) {
+                MessageCenter.appendEnd(
+                        String.format("Warning: Duplicate index %d supplied, this is ignored.", i.getOneBased()));
+            } else {
+                indexSet.add(i);
+            }
+        }
+        return indexSet;
+    }
 }
