@@ -61,6 +61,13 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Returns true if at least one student information is being stored.
+     *
+     * @return The boolean result of whether at least one student information is being stored.
+     */
+    boolean isEmptyAddressBook();
+
+    /**
      * Sorts the AddressBook
      */
     void sortAddressBook(Comparator<Person> personComparator);

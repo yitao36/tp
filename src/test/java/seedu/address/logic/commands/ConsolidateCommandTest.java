@@ -1,6 +1,10 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.executeCommandOnEmptyModel;
+import static seedu.address.logic.commands.ConsolidateCommand.COMMAND_WORD;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 
@@ -9,6 +13,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -54,10 +60,12 @@ public class ConsolidateCommandTest {
     }
 
     @Test
-    public void execute_emptyAddressBook_success() {
-        Model model = new ModelManager();
-        model.setAddressBook(new AddressBook());
-        String commandResult = ConsolidateCommand.ALTERNATE_MESSAGE_SUCCESS;
-        assertCommandSuccess(new ConsolidateCommand(), model, commandResult, model);
+    public void execute_emptyAddressBook_throwsCommandException() {
+        try {
+            executeCommandOnEmptyModel(new ConsolidateCommand());
+            fail(); // test should not reach this line
+        } catch (CommandException e) {
+            assertEquals(Messages.specifyEmptyUserListMessage(COMMAND_WORD), e.getMessage());
+        }
     }
 }
