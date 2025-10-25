@@ -11,10 +11,12 @@
   "events": [ {
     "name": "Meeting",
     "duration": "1/10/2025-2/10/2025",
-    "description": "meeting"
+    "description": "meeting",
+    "attendance": []
   }, {
     "name": "Meeting",
     "duration": "1/10/2025-2/10/2025",
-    "description": "meeting 2"
+    "description": "meeting 2",
+    "attendance": []
   } ]
 }

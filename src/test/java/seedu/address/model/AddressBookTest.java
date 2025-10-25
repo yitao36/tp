@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.util.SortUtil;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
@@ -208,6 +209,11 @@ public class AddressBookTest {
 
         @Override
         public ObservableObjectValue<Event> getSelectedEvent() {
+            throw new RuntimeException("This method should not be called");
+        }
+
+        @Override
+        public void isValidAddressBook() throws DataLoadingException {
             throw new RuntimeException("This method should not be called");
         }
     }
