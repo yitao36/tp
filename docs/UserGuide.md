@@ -265,14 +265,14 @@ Events are considered duplicates if they have the same name and duration.
 
 Deletes the event at the specified index. Cannot be undone.
 
-Format: `delete INDEX`
+Format: `delete:event INDEX`
 
 * Deletes the event at the specified `INDEX`.
 * The index refers to the index number shown in the currently displayed event list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `delete 2` deletes the 2nd evebt in the displayed event list.
+* `delete:event 2` deletes the 2nd evebt in the displayed event list.
 
 <br>
 
@@ -358,6 +358,6 @@ Action     | Format, Examples
 **Find** | `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<\|<=\|>\|>=\|=)NUMBER]] [r/SUBSTRING]…​`<br> e.g., `find n/yu john enroll/>=2022 r/lead r/sec`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Add Event** | `add:event n/NAME d/(d/M/yyyy or d/M/yyyy-d/M/yyyy) [info/DESCRIPTION]` <br> e.g., `add:event n/meeting d/1/10/2025 info/routine meeting`
-**Delete Event** | `delete INDEX`<br> e.g., `delete:event 3`
+**Delete Event** | `delete:event INDEX`<br> e.g., `delete:event 3`
 **Consolidate** | `consolidate`
 **Clear**  | `clear`
