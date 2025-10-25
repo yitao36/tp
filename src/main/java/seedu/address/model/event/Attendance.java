@@ -1,11 +1,13 @@
 package seedu.address.model.event;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.exceptions.DuplicateAttendeeException;
+import seedu.address.model.event.exceptions.PersonReferenceNotFoundException;
 
 /**
  * Represents attendance of a set of {@code PersonReference} in the address book for an event.
@@ -36,10 +38,24 @@ public class Attendance {
         return persons.contains(p);
     }
 
-    public Set<PersonReference> getPersons() {
-        return persons;
+    /**
+     * Removes a person from the current attendance set.
+     * @throws PersonReferenceNotFoundException if the person does not exist in the set.
+     */
+    public void removePerson(PersonReference p) {
+        if (!persons.contains(p)) {
+            throw new PersonReferenceNotFoundException();
+        }
+        this.persons.remove(p);
     }
 
+    public boolean contains(PersonReference p) {
+        return persons.contains(p);
+    }
+
+    public Set<PersonReference> asUnmodifiableList() {
+        return Collections.unmodifiableSet(persons);
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

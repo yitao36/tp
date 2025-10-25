@@ -12,14 +12,14 @@ import seedu.address.model.person.Phone;
 /**
  * Represents a reference to a {@code Person} in the model, where a person is guaranteed to be unique
  * as defined by {@code Person#isSamePerson}.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated.
  *
  * @see Person#isSamePerson
  */
 public class PersonReference {
     // Identity fields
-    private final Name name;
-    private final Phone phone;
+    private Name name;
+    private Phone phone;
 
     /**
      * Every field must be present and not null.
@@ -46,6 +46,15 @@ public class PersonReference {
     public Name getName() {
         return name;
     }
+
+    public void setName(Name name) {
+        this.name = name;
+    }
+
+    public void setPhone(Phone phone) {
+        this.phone = phone;
+    }
+
     /**
      * Returns true if both person references have the same identity fields.
      */

@@ -141,6 +141,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
         persons.setPerson(target, editedPerson);
         sort();
+        events.forEach(e -> {
+            if (e.getAttendance().contains(new PersonReference(target))) {
+                e.getAttendance().removePerson(new PersonReference(target));
+                e.getAttendance().addPerson(new PersonReference(editedPerson));
+            }
+        });
     }
 
     /**
@@ -158,6 +164,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        events.forEach(e -> {
+            if (e.getAttendance().contains(new PersonReference(key))) {
+                e.getAttendance().removePerson(new PersonReference(key));
+            }
+        });
     }
 
     /**
@@ -198,7 +209,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .collect(Collectors.toUnmodifiableSet());
 
         Set<PersonReference> personReferences = events.asUnmodifiableObservableList().stream()
-                .flatMap(e -> e.getAttendance().getPersons().stream())
+                .flatMap(e -> e.getAttendance().asUnmodifiableList().stream())
                 .collect(Collectors.toSet());
 
         // If a reference exists in the person list, it will be removed. This should become empty.

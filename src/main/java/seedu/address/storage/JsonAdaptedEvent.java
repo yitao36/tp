@@ -49,7 +49,7 @@ class JsonAdaptedEvent {
         name = source.getName().value;
         duration = source.getDuration().toString();
         description = source.getDescription().value;
-        attendance.addAll(source.getAttendance().getPersons().stream()
+        attendance.addAll(source.getAttendance().asUnmodifiableList().stream()
                 .map(JsonAdaptedPersonReference::new)
                 .collect(Collectors.toUnmodifiableSet()));
     }
