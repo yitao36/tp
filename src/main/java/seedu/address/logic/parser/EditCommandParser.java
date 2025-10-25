@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_NAME;
@@ -43,9 +44,12 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_ADDRESS, PREFIX_PIN, PREFIX_ROLE, PREFIX_EMERGENCY_NAME, PREFIX_EMERGENCY_PHONE,
                         PREFIX_TAG, PREFIX_ENROLL_YEAR);
 
-        Index index;
+        // Checks if preamble consists of strictly integers.
+        if (argMultimap.getPreamble().isEmpty() || !argMultimap.getPreamble().matches("[0-9]*")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
 
-        index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_PIN,
                 PREFIX_EMERGENCY_NAME, PREFIX_EMERGENCY_PHONE, PREFIX_ADDRESS, PREFIX_ENROLL_YEAR);
