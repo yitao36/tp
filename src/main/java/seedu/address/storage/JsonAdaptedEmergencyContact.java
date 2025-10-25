@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.MessageCenter;
 import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -52,6 +53,9 @@ class JsonAdaptedEmergencyContact {
         if (!Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
+
+        MessageCenter.appendEnd(Name.getStyleWarningMessage(name));
+
         return new EmergencyContact(name, phone);
     }
 
