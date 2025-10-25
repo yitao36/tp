@@ -48,6 +48,8 @@ public class NameTest {
         assertFalse(Name.getStyleWarningMessage("Muscle-Man").isEmpty()); // capitalized in middle
         assertFalse(Name.getStyleWarningMessage("pEter jack").isEmpty()); // non-capitalized name
         assertFalse(Name.getStyleWarningMessage("peter ()").isEmpty()); // word with no alphabets
+        assertFalse(Name.getStyleWarningMessage("Peter (Dean").isEmpty()); // unbalanced brackets
+        assertFalse(Name.getStyleWarningMessage("Too many  spaces").isEmpty()); // consecutive spaces
 
         // stylish names
         assertTrue(Name.getStyleWarningMessage("Peter Jack (Dean)").isEmpty());
