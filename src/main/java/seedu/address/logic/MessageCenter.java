@@ -39,7 +39,7 @@ public class MessageCenter {
      * The error message is added to the built string.
      */
     public static void error(String s) {
-        stringBuilder.insert(0, s + "\n");
+        appendFront(s);
         resultDisplay.setStyleError();
     }
 
