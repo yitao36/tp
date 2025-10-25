@@ -6,6 +6,10 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.event.Description;
+import seedu.address.model.event.Duration;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmergencyContact;
@@ -25,8 +29,8 @@ public class SampleDataUtil {
         return new Person[]{
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"), new Pin(false),
-                    getRoleSet(), getTagSet("friends"), new EmergencyContact("George Yeoh", "99998888",
-                    "georgeyeoh@example.com"), new EnrollmentYear()),
+                    getRoleSet(), getTagSet("friends"), new EmergencyContact("George Yeoh", "99998888"),
+                    new EnrollmentYear()),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Pin(false),
                     getRoleSet("President", "Camping Head"), getTagSet("colleagues", "friends"),
@@ -47,10 +51,24 @@ public class SampleDataUtil {
         };
     }
 
+    public static Event[] getSampleEvents() {
+        return new Event[]{
+            new Event(new EventName("Exco Meeting"), new Duration("1/10/2025"),
+                    new Description("Routine exco meeting")),
+            new Event(new EventName("Camping Trip"), new Duration("5/10/2025-10/10/2025"),
+                    new Description("Annual camping trip involving everyone")),
+            new Event(new EventName("Training"), new Duration("12/10/2025"),
+                    new Description("Weekly training"))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
+        }
+        for (Event sampleEvent : getSampleEvents()) {
+            sampleAb.addEvent(sampleEvent);
         }
         return sampleAb;
     }

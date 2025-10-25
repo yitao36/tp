@@ -8,11 +8,12 @@ import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.index.Index;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,7 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private Person selectedPerson;
+    private final FilteredList<Event> filteredEvents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,7 +38,9 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        selectedPerson = filteredPersons.isEmpty() ? null : filteredPersons.get(0);
+        filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+        filteredEvents = new FilteredList<>(this.addressBook.getEventList());
+        filteredEvents.setPredicate(PREDICATE_SHOW_ALL_EVENTS);
     }
 
     public ModelManager() {
@@ -109,14 +112,44 @@ public class ModelManager implements Model {
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        addressBook.addPerson(person);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    @Override
+    public void addEvent(Event event) {
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+        addressBook.addEvent(event);
+    }
+
+    //=========== Filtered Event List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Event} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Event> getFilteredEventList() {
+        return filteredEvents;
+    }
+
+    @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
+        updateSelectedEvent();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -134,27 +167,39 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+        updateSelectedPerson();
     }
 
     //=========== Selected Person Accessors =============================================================
 
     @Override
-    public void setSelectedPerson(Person p) {
-        selectedPerson = p;
+    public ObjectProperty<Person> getSelectedPerson() {
+        return addressBook.getSelectedPerson();
     }
 
     @Override
-    public void setSelectedPerson(Index i) {
-        if (filteredPersons.size() <= i.getZeroBased()) {
-            selectedPerson = null;
-        } else {
-            selectedPerson = filteredPersons.get(i.getZeroBased());
+    public void updateSelectedPerson() {
+        if (filteredPersons.isEmpty()) {
+            getSelectedPerson().set(null);
+        } else if (getSelectedPerson().get() == null || !filteredPersons.contains(getSelectedPerson().get())) {
+            getSelectedPerson().set(filteredPersons.get(0));
         }
     }
 
+    //=========== Selected Event Accessors =============================================================
+
     @Override
-    public Person getSelectedPerson() {
-        return selectedPerson;
+    public ObjectProperty<Event> getSelectedEvent() {
+        return addressBook.getSelectedEvent();
+    }
+
+    @Override
+    public void updateSelectedEvent() {
+        if (filteredEvents.isEmpty()) {
+            getSelectedEvent().set(null);
+        } else if (getSelectedEvent().get() == null || !filteredEvents.contains(getSelectedEvent().get())) {
+            getSelectedEvent().set(filteredEvents.get(0));
+        }
     }
 
     @Override
@@ -171,7 +216,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredEvents.equals(otherModelManager.filteredEvents);
     }
 
 }

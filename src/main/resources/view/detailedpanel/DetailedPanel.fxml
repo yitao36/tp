@@ -12,4 +12,5 @@
     </stylesheets>
     <VBox fx:id="helpPanelPlaceholder" styleClass="pane-with-border-dark"/>
     <VBox fx:id="personPanelPlaceholder" styleClass="pane-with-border-dark"/>
+    <VBox fx:id="eventPanelPlaceholder" styleClass="pane-with-border-dark"/>
 </StackPane>

@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENROLL_YEAR;
@@ -12,7 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -56,7 +54,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PIN + "(TRUE/FALSE)] "
             + "[" + PREFIX_EMERGENCY_NAME + "EMERGENCY_NAME] "
             + "[" + PREFIX_EMERGENCY_PHONE + "EMERGENCY_PHONE] "
-            + "[" + PREFIX_EMERGENCY_EMAIL + "EMERGENCY_EMAIL] "
             + "[" + PREFIX_ENROLL_YEAR + "[YEAR]] "
             + "[" + PREFIX_ROLE + "ROLE]... "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -128,8 +125,6 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.setSelectedPerson(editedPerson);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 

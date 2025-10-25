@@ -17,9 +17,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.SortUtil;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.AddressBookBuilder;
@@ -153,7 +155,8 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList()
+                + ", events=" + addressBook.getEventList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
@@ -182,6 +185,7 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Event> events = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -190,6 +194,21 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableObjectValue<Person> getSelectedPerson() {
+            throw new RuntimeException("This method should not be called");
+        }
+
+        @Override
+        public ObservableList<Event> getEventList() {
+            return events;
+        }
+
+        @Override
+        public ObservableObjectValue<Event> getSelectedEvent() {
+            throw new RuntimeException("This method should not be called");
         }
     }
 

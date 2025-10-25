@@ -9,7 +9,11 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.MessageCenter;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Description;
+import seedu.address.model.event.Duration;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmergencyContact;
@@ -51,6 +55,9 @@ public class ParserUtil {
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        } else {
+            MessageCenter.appendEnd(
+                    String.format(Name.getStyleWarningMessage(name), name));
         }
         return new Name(trimmedName);
     }
@@ -64,6 +71,7 @@ public class ParserUtil {
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
+        trimmedPhone = trimmedPhone.replaceAll("[\\s-]", "");
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
@@ -116,24 +124,22 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code emergencyName, emergencyPhone, emergencyEmail} into an {@code EmergencyContact}.
+     * Parses a {@code emergencyName, emergencyPhone} into an {@code EmergencyContact}.
      */
     public static Optional<EmergencyContact> parseEmergencyContact(Optional<String> emergencyName,
-                                                                   Optional<String> emergencyPhone,
-                                                                   Optional<String> emergencyEmail)
+                                                                   Optional<String> emergencyPhone)
                                                                     throws ParseException {
         int presentFieldsCount = (emergencyName.isPresent() ? 1 : 0)
-                + (emergencyPhone.isPresent() ? 1 : 0)
-                + (emergencyEmail.isPresent() ? 1 : 0);
+                + (emergencyPhone.isPresent() ? 1 : 0);
 
-        if (presentFieldsCount != 0 && presentFieldsCount != 3) {
+        if (presentFieldsCount != 0 && presentFieldsCount != 2) {
             throw new ParseException(EmergencyContact.MESSAGE_CONSTRAINTS);
         }
         if (presentFieldsCount == 0) {
             return Optional.empty();
         }
         try {
-            return Optional.of(new EmergencyContact(emergencyName.get(), emergencyPhone.get(), emergencyEmail.get()));
+            return Optional.of(new EmergencyContact(emergencyName.get(), emergencyPhone.get()));
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());
         }
@@ -210,5 +216,50 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String name} into an {@code EventName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static EventName parseEventName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!EventName.isValidName(trimmedName)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
+        return new EventName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String duration} into a {@code Duration}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code duration} is invalid.
+     */
+    public static Duration parseDuration(String duration) throws ParseException {
+        requireNonNull(duration);
+        String trimmedDuration = duration.trim();
+        if (!Duration.isValidDuration(trimmedDuration)) {
+            throw new ParseException(Duration.MESSAGE_CONSTRAINTS);
+        }
+        return new Duration(trimmedDuration);
+    }
+
+    /**
+     * Parses a {@code String desc} into a {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code desc} is invalid.
+     */
+    public static Description parseDescription(String desc) throws ParseException {
+        requireNonNull(desc);
+        String trimmedDesc = desc.trim();
+        if (!Description.isValidDescription(trimmedDesc)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(trimmedDesc);
     }
 }

@@ -7,6 +7,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -24,7 +26,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * @see Person#isSamePerson(Person)
  */
 public class UniquePersonList implements Iterable<Person> {
-
+    private final ObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>(null);
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -47,6 +49,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+        selectedPerson.set(toAdd);
     }
 
     /**
@@ -67,14 +70,28 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.set(index, editedPerson);
+        selectedPerson.set(editedPerson);
     }
 
     /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.
+     * If the person removed was selected, set it to the previous or next person in the list,
+     * or null if the list is empty.
      */
     public void remove(Person toRemove) {
         requireNonNull(toRemove);
+        if (selectedPerson.get() != null && selectedPerson.get().equals(toRemove)) {
+            int index = internalList.indexOf(toRemove);
+            assert index >= 0 : "person to be removed should exist in the internal list.";
+            if (internalList.size() == 1) {
+                selectedPerson.set(null);
+            } else if (index == internalList.size() - 1) {
+                selectedPerson.set(internalList.get(index - 1));
+            } else {
+                selectedPerson.set(internalList.get(index + 1));
+            }
+        }
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
@@ -90,6 +107,7 @@ public class UniquePersonList implements Iterable<Person> {
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        selectedPerson.set(null);
     }
 
     /**
@@ -103,8 +121,15 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+        selectedPerson.set(null);
     }
 
+    /**
+     * Returns the selected person as an {@code ObservableValue}.
+     */
+    public ObjectProperty<Person> getObservableSelectedPerson() {
+        return selectedPerson;
+    }
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

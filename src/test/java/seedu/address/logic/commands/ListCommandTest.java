@@ -44,15 +44,15 @@ public class ListCommandTest {
     public void execute_listEmpty_selectedPersonReturnsNull() {
         Model model = new ModelManager();
         new ListCommand().execute(model);
-        assertNull(model.getSelectedPerson());
+        assertNull(model.getSelectedPerson().get());
     }
 
     @Test
-    public void execute_listNotEmpty_firstPersonSelected() {
+    public void execute_listNotEmpty_previouslySelectedPersonStillSelected() {
         Person lastPerson = model.getFilteredPersonList().get(model.getFilteredPersonList().size() - 1);
-        model.setSelectedPerson(lastPerson);
+        model.getSelectedPerson().set(lastPerson);
         new ListCommand().execute(model);
 
-        assertEquals(model.getFilteredPersonList().get(0), model.getSelectedPerson());
+        assertEquals(lastPerson, model.getSelectedPerson().get());
     }
 }

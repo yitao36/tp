@@ -10,8 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Phone {
     public static final String MESSAGE_CONSTRAINTS =
             "Expected 8 digit Singapore phone number that starts with 3/6/8/9." + "\n"
-            + "This phone number should only contain numbers." + "\n"
-            + "Do not add spacing or hyphen between digits.";
+            + "This phone number should only contain numbers." + "\n";
     public final String value;
 
     /**
@@ -30,6 +29,7 @@ public class Phone {
      */
     public static boolean isValidPhone(String test) {
         try {
+            test = test.replaceAll("[\\s-]", "");
             if (test.length() != 8) {
                 return false;
             }

@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENROLL_YEAR;
@@ -18,6 +17,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+
 
 /**
  * Adds a person to the address book.
@@ -35,7 +35,6 @@ public class AddCommand extends Command {
             + "[" + PREFIX_PIN + "] "
             + "[" + PREFIX_EMERGENCY_NAME + "EMERGENCY_NAME] "
             + "[" + PREFIX_EMERGENCY_PHONE + "EMERGENCY_PHONE] "
-            + "[" + PREFIX_EMERGENCY_EMAIL + "EMERGENCY_EMAIL] "
             + "[" + PREFIX_ENROLL_YEAR + "] "
             + "[" + PREFIX_ROLE + "ROLE]... "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -47,7 +46,6 @@ public class AddCommand extends Command {
             + PREFIX_PIN + " "
             + PREFIX_EMERGENCY_NAME + "Jack Doe "
             + PREFIX_EMERGENCY_PHONE + "99998888 "
-            + PREFIX_EMERGENCY_EMAIL + "jackd@example.com "
             + PREFIX_ENROLL_YEAR + "2024 "
             + PREFIX_ROLE + "President "
             + PREFIX_TAG + "friends "
@@ -75,7 +73,6 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        model.setSelectedPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

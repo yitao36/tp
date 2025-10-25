@@ -2,10 +2,13 @@ package seedu.address.ui.detailedpanel;
 
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.value.ObservableObjectValue;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.ui.UiPart;
 
@@ -19,38 +22,68 @@ public class DetailedPanel extends UiPart<StackPane> {
 
     // Internal copy
     private final HelpPanel helpPanel = new HelpPanel();
-    private final PersonPanel personPanel = new PersonPanel();
+    private final PersonPanel personPanel;
+    private final ObservableObjectValue<Person> selectedPerson;
+    private final EventPanel eventPanel;
+    private final ObservableObjectValue<Event> selectedEvent;
 
     @FXML
     private VBox helpPanelPlaceholder;
     @FXML
     private VBox personPanelPlaceholder;
+    @FXML
+    private VBox eventPanelPlaceholder;
 
     private VBox activePanel = helpPanelPlaceholder;
 
     /**
      * Constructs a container panel that initially shows the help panel.
      */
-    public DetailedPanel() {
+    public DetailedPanel(ObjectProperty<Person> selectedPerson,
+            ObjectProperty<Event> selectedEvent) {
         super(FXML);
+        this.selectedPerson = selectedPerson;
+        this.selectedEvent = selectedEvent;
+        personPanel = new PersonPanel();
+        eventPanel = new EventPanel();
+
         helpPanelPlaceholder.getChildren().add(helpPanel.getRoot());
         personPanelPlaceholder.getChildren().add(personPanel.getRoot());
+        eventPanelPlaceholder.getChildren().add(eventPanel.getRoot());
 
-        // Workaround to get personPanel height to fill up the whole container
+        // Workaround to get panel height to fill up the whole container
         personPanel.getRoot().prefHeightProperty().bind(personPanelPlaceholder.heightProperty());
         personPanelPlaceholder.setVisible(false);
-    }
+        eventPanel.getRoot().prefHeightProperty().bind(eventPanelPlaceholder.heightProperty());
+        eventPanelPlaceholder.setVisible(false);
 
-    /**
-     * Populates the person panel with details of the selected person.
-     */
-    public void updateDetails(Person selected) {
-        if (selected == null) {
-            showHelp();
-        } else {
-            personPanel.updateDetails(selected);
-            showPerson();
-        }
+        selectedPerson.addListener((obs, old, newPerson) -> {
+            if (newPerson == null) {
+                if (selectedEvent.get() == null) {
+                    showHelp();
+                } else {
+                    showEvent();
+                }
+            } else {
+                selectedEvent.set(null);
+                personPanel.updateDetails(newPerson);
+                showPerson();
+            }
+        });
+
+        selectedEvent.addListener((obs, old, newEvent) -> {
+            if (newEvent == null) {
+                if (selectedPerson.get() == null) {
+                    showHelp();
+                } else {
+                    showPerson();
+                }
+            } else {
+                selectedPerson.set(null);
+                eventPanel.updateDetails(newEvent);
+                showEvent();
+            }
+        });
     }
 
     /**
@@ -75,5 +108,17 @@ public class DetailedPanel extends UiPart<StackPane> {
         activePanel.setVisible(false);
         personPanelPlaceholder.setVisible(true);
         activePanel = helpPanelPlaceholder;
+    }
+
+    /**
+     * Shows detailed event information upon selection of event.
+     */
+    public void showEvent() {
+        if (activePanel == eventPanelPlaceholder) {
+            return;
+        }
+        activePanel.setVisible(false);
+        eventPanelPlaceholder.setVisible(true);
+        activePanel = eventPanelPlaceholder;
     }
 }

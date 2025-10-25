@@ -1,5 +1,4 @@
 package seedu.address.ui;
-
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -18,6 +17,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.ui.detailedpanel.DetailedPanel;
 
+
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private EventListPanel eventListPanel;
     private DetailedPanel detailedPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -48,6 +49,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane detailedPanelPlaceholder;
+
+    @FXML
+    private StackPane eventListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -119,17 +123,18 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Fills up all the placeholders of this window.
+     * Fills up all the placeholders of this window, and binds certain observable components in the Ui.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getSelectedPerson());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        detailedPanel = new DetailedPanel();
+        eventListPanel = new EventListPanel(logic.getFilteredEventList(), logic.getSelectedEvent());
+        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+
+        detailedPanel = new DetailedPanel(logic.getSelectedPerson(), logic.getSelectedEvent());
         detailedPanelPlaceholder.getChildren().add(detailedPanel.getRoot());
         detailedPanel.showHelp();
-        // Binds the detailedPanel person to the selected person in personList.
-        personListPanel.listenForSelectionEvent(detailedPanel);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -191,12 +196,6 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-            personListPanel.setSelectedPerson(logic.getSelectedPerson());
-
-            if (logic.getFilteredPersonList().isEmpty()) {
-                detailedPanel.showHelp();
-            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

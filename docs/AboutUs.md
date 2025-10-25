@@ -45,7 +45,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`.
 <img src="images/3seastacks.png" width="200px">
 
 [[github](http://github.com/3seastacks)]
-# [[portfolio](team/3seastacks.md)]
+[[portfolio](team/3seastacks.md)]
 
 * Role: Developer
 * Responsibilities: Documentation

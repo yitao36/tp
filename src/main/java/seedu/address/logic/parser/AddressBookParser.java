@@ -9,8 +9,10 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.ConsolidateCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -29,6 +31,16 @@ public class AddressBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+
+    private void checkValidUserInput(String userInput, String keyword) throws ParseException {
+        boolean validInput = (userInput.replaceAll("\\s", "").equals(keyword));
+        if (!validInput) {
+            String message = "When using " + keyword + ", "
+                    + "there should not be any characters (except whitespace, which is allowed) "
+                    + "that comes before and/or follow " + keyword + ".";
+            throw new ParseException(message);
+        }
+    }
 
     /**
      * Parses user input into command for execution.
@@ -56,6 +68,9 @@ public class AddressBookParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
+        case AddEventCommand.COMMAND_WORD:
+            return new AddEventCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
@@ -63,18 +78,26 @@ public class AddressBookParser {
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+            checkValidUserInput(userInput, ClearCommand.COMMAND_WORD);
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case ConsolidateCommand.COMMAND_WORD:
+            checkValidUserInput(userInput, ConsolidateCommand.COMMAND_WORD);
+            return new ConsolidateCommand();
+
         case ListCommand.COMMAND_WORD:
+            checkValidUserInput(userInput, ListCommand.COMMAND_WORD);
             return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
+            checkValidUserInput(userInput, ExitCommand.COMMAND_WORD);
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
+            checkValidUserInput(userInput, HelpCommand.COMMAND_WORD);
             return new HelpCommand();
 
         default:
