@@ -119,12 +119,12 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
      * Returns true if both persons have the same identity and data fields.
-     * Does not take into account {@code Pin} field.
      * This defines a stronger notion of equality between two persons.
      */
     @Override
@@ -145,6 +145,7 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && roles.equals(otherPerson.roles)
                 && tags.equals(otherPerson.tags)
+                && pin.equals(otherPerson.pin)
                 && enrollmentYear.equals(otherPerson.enrollmentYear);
     }
 

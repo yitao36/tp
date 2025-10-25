@@ -103,7 +103,7 @@ CCAmper is optimized for use via a
 | Pin                   | • Input either `TRUE` or `FALSE` (Non case-sensitive)                                                                                                                                                                                                                  |
 
 **Duplicate handling**
-* We require that no two person have the exact same `Name`, `Phone` and `Email` combination.
+* We require that no two person have the exact same `Name` and `Phone` combination.
 
 </box>
 
