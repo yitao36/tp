@@ -1,5 +1,8 @@
 package seedu.address.storage;
 
+import static seedu.address.model.role.Role.PERSON_MAX_ROLES;
+import static seedu.address.model.tag.Tag.PERSON_MAX_TAGS;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -28,6 +31,7 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String SIZE_LIMIT_EXCEEDED_FORMAT = "Person's %s count exceeds the maximum size of %d!";
 
     private final String name;
     private final String phone;
@@ -102,10 +106,18 @@ class JsonAdaptedPerson {
         for (JsonAdaptedRole role : roles) {
             personRoles.add(role.toModelType());
         }
+        if (personRoles.size() > PERSON_MAX_ROLES) {
+            throw new IllegalValueException(
+                    String.format(SIZE_LIMIT_EXCEEDED_FORMAT, Role.class.getSimpleName(), PERSON_MAX_ROLES));
+        }
 
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+        if (personTags.size() > PERSON_MAX_TAGS) {
+            throw new IllegalValueException(
+                    String.format(SIZE_LIMIT_EXCEEDED_FORMAT, Tag.class.getSimpleName(), PERSON_MAX_TAGS));
         }
 
         if (name == null) {

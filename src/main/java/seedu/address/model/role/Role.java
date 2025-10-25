@@ -5,9 +5,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Role for a contact in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidRoleName(String)}
+ * Guarantees: immutable; role name is valid as declared in {@link #isValidRoleName(String)}
  */
 public class Role {
+    public static final int PERSON_MAX_ROLES = 3;
+    public static final String PERSON_ROLES_SIZE_CONSTRAINT = "Each person can have a maximum of 3 roles!";
     public static final String MESSAGE_CONSTRAINTS = "Role names should be alphanumeric with spaces.";
     public static final String FIND_MESSAGE_CONSTRAINTS = "Supplied substrings for roles should be "
             + "alphanumeric with spaces, or empty.";
@@ -30,14 +32,14 @@ public class Role {
      * Returns true if a given string is a valid role name.
      */
     public static boolean isValidRoleName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.length() <= 20 && test.matches(VALIDATION_REGEX);
     }
 
     /**
      * Returns true if a given string is a valid role name.
      */
     public static boolean isValidFindString(String test) {
-        return test.isEmpty() || test.matches(VALIDATION_REGEX);
+        return test.isEmpty() || isValidRoleName(test);
     }
 
     @Override
@@ -60,10 +62,8 @@ public class Role {
         return roleName.hashCode();
     }
 
-    /**
-     * Format state as text for viewing.
-     */
+    @Override
     public String toString() {
-        return "(Role: " + roleName + ')';
+        return roleName;
     }
 }
