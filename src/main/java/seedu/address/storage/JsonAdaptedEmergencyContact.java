@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.MessageCenter;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -18,17 +17,14 @@ class JsonAdaptedEmergencyContact {
 
     private final String name;
     private final String phone;
-    private final String email;
 
     /**
-     * Constructs a {@code JsonAdaptedEmergencyContact} with the given {@code name, phone, email}.
+     * Constructs a {@code JsonAdaptedEmergencyContact} with the given {@code name, phone}.
      */
     @JsonCreator
-    public JsonAdaptedEmergencyContact(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                                       @JsonProperty("email") String email) {
+    public JsonAdaptedEmergencyContact(@JsonProperty("name") String name, @JsonProperty("phone") String phone) {
         this.name = name;
         this.phone = phone;
-        this.email = email;
     }
 
     /**
@@ -37,7 +33,6 @@ class JsonAdaptedEmergencyContact {
     public JsonAdaptedEmergencyContact(EmergencyContact source) {
         name = source.name.fullName;
         phone = source.phone.value;
-        email = source.email.value;
     }
 
     /**
@@ -52,22 +47,16 @@ class JsonAdaptedEmergencyContact {
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         if (!Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
 
         MessageCenter.appendEnd(Name.getStyleWarningMessage(name));
 
-        return new EmergencyContact(name, phone, email);
+        return new EmergencyContact(name, phone);
     }
 
 }

@@ -75,8 +75,8 @@ public class PersonCard extends UiPart<Region> {
 
         if (person.getEmergencyContact().isPresent()) {
             EmergencyContact emergencyContact = person.getEmergencyContact().get();
-            String displayMessage = String.format("Emergency Contact: %s, %s, %s", emergencyContact.name.fullName,
-                    emergencyContact.phone.value, emergencyContact.email.value);
+            String displayMessage = String.format("Emergency Contact: %s, %s", emergencyContact.name.fullName,
+                    emergencyContact.phone.value);
             emergency.setText(displayMessage);
         } else {
             emergency.setText("Missing emergency contact.");

@@ -27,7 +27,6 @@ public class PersonBuilder {
     public static final boolean DEFAULT_PIN = false;
     public static final String DEFAULT_EMERGENCY_NAME = "Alice Bee";
     public static final String DEFAULT_EMERGENCY_PHONE = "88887777";
-    public static final String DEFAULT_EMERGENCY_EMAIL = "alice@gmail.com";
 
     private Name name;
     private Phone phone;
@@ -50,8 +49,7 @@ public class PersonBuilder {
         pin = new Pin(DEFAULT_PIN);
         roles = new HashSet<>();
         tags = new HashSet<>();
-        emergencyContact = new EmergencyContact(DEFAULT_EMERGENCY_NAME, DEFAULT_EMERGENCY_PHONE,
-                DEFAULT_EMERGENCY_EMAIL);
+        emergencyContact = new EmergencyContact(DEFAULT_EMERGENCY_NAME, DEFAULT_EMERGENCY_PHONE);
         enrollmentYear = new EnrollmentYear();
     }
 
@@ -129,8 +127,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code EmergencyContact} of the {@code Person} that we are building.
      */
-    public PersonBuilder withEmergencyContact(String name, String phone, String email) {
-        this.emergencyContact = new EmergencyContact(name, phone, email);
+    public PersonBuilder withEmergencyContact(String name, String phone) {
+        this.emergencyContact = new EmergencyContact(name, phone);
         return this;
     }
 
