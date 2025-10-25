@@ -61,9 +61,9 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if at least one student information is being stored.
+     * Returns true if the address book is empty.
      *
-     * @return The boolean result of whether at least one student information is being stored.
+     * @return The boolean result of whether the address book is empty.
      */
     boolean isEmptyAddressBook();
 

@@ -127,7 +127,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if the list of person is empty.
      *
-     * @return The boolean result of whether at least one person information is being stored.
+     * @return The boolean result of whether the list of person is empty.
      */
     public boolean isPersonListEmpty() {
         return persons.isEmpty();
