@@ -4,12 +4,16 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.util.SortUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.PersonReference;
 import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -146,6 +150,33 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void sort(Comparator<Person> personComparator) {
         sortMethod = personComparator;
         persons.sort(personComparator);
+    }
+
+    //// methods
+
+    /**
+     * AddressBook is valid as defined by whether all {@code PersonReference} in all the {@code Event} attendance list
+     * properly reference an existing {@code Person} in the {@code UniquePersonList}.
+     *
+     * @throws DataLoadingException if any {@code PersonReference} does not reference a person in the person list.
+     */
+    public void isValidAddressBook() throws DataLoadingException {
+        Set<PersonReference> personList = persons.asUnmodifiableObservableList()
+                .stream()
+                .map(PersonReference::new)
+                .collect(Collectors.toUnmodifiableSet());
+
+        Set<PersonReference> personReferences = events.asUnmodifiableObservableList().stream()
+                .flatMap(e -> e.getAttendance().getPersons().stream())
+                .collect(Collectors.toSet());
+
+        // If a reference exists in the person list, it will be removed. This should become empty.
+        personReferences.removeAll(personList);
+
+        if (!personReferences.isEmpty()) {
+            throw new DataLoadingException("Error: Following person references in event attendance is invalid: "
+                    + personReferences.stream().map(PersonReference::getName));
+        }
     }
 
     //// util methods

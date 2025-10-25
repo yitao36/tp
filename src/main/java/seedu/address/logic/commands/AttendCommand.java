@@ -56,7 +56,8 @@ public class AttendCommand extends Command {
                     PersonReference pr = new PersonReference(p);
                     if (attendance.hasPerson(pr)) {
                         MessageCenter.appendEnd(
-                                String.format("Warning: %s is already in the event's attendance list. Person not added.",
+                                String.format("Warning: %s is already in the event's attendance list. "
+                                        + "Person not added.",
                                         pr.getName().fullName));
                         return null;
                     } else {
