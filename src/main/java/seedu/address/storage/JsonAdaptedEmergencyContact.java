@@ -31,8 +31,8 @@ class JsonAdaptedEmergencyContact {
      * Converts a given {@code EmergencyContact} into this class for Jackson use.
      */
     public JsonAdaptedEmergencyContact(EmergencyContact source) {
-        name = source.name.fullName;
-        phone = source.phone.value;
+        name = source.name == null ? null : source.name.fullName;
+        phone = source.phone == null ? null : source.phone.value;
     }
 
     /**
@@ -41,12 +41,21 @@ class JsonAdaptedEmergencyContact {
      * @throws IllegalValueException if there were any data constraints violated in the adapted emergency contact.
      */
     public EmergencyContact toModelType() throws IllegalValueException {
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        if (name == null && phone == null) {
+            return new EmergencyContact();
         }
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+
+        // Emergency contact should not be partially filled.
+        if (name == null || phone == null) {
+            if (name == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                        Name.class.getSimpleName()));
+            } else {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                        Phone.class.getSimpleName()));
+            }
         }
+
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }

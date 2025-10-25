@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -294,29 +293,20 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseEmergencyContact_incomplete_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEmergencyContact(Optional.of(VALID_NAME),
-                Optional.empty()));
-    }
-
-    @Test
     public void parseEmergencyContact_invalidValue_returnsEmergencyContact() throws Exception {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEmergencyContact(Optional.of(INVALID_NAME),
-                Optional.of(VALID_PHONE)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmergencyContact(INVALID_NAME, VALID_PHONE));
     }
 
     @Test
     public void parseEmergencyContact_empty_returnsEmpty() throws Exception {
-        Optional<EmergencyContact> emergencyContact = ParserUtil.parseEmergencyContact(Optional.empty(),
-                Optional.empty());
-        Optional<EmergencyContact> expectedEmergencyContact = Optional.empty();
+        EmergencyContact emergencyContact = ParserUtil.parseEmergencyContact(null, null);
+        EmergencyContact expectedEmergencyContact = new EmergencyContact();
         assertEquals(expectedEmergencyContact, emergencyContact);
     }
 
     @Test
     public void parseEmergencyContact_validValue_returnsEmergencyContact() throws Exception {
-        EmergencyContact emergencyContact = ParserUtil.parseEmergencyContact(Optional.of(VALID_NAME),
-                Optional.of(VALID_PHONE)).get();
+        EmergencyContact emergencyContact = ParserUtil.parseEmergencyContact(VALID_NAME, VALID_PHONE);
         EmergencyContact expectedEmergencyContact = new EmergencyContact(VALID_NAME, VALID_PHONE);
         assertEquals(expectedEmergencyContact, emergencyContact);
     }
