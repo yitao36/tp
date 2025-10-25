@@ -13,5 +13,6 @@ public class SampleDataUtilTest {
     @Test
     public void constructor() {
         assertTrue(addressBook.getPersonList().size() > 0);
+        assertTrue(addressBook.getEventList().size() > 0);
     }
 }
