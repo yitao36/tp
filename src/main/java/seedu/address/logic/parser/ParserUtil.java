@@ -63,8 +63,7 @@ public class ParserUtil {
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         } else {
-            MessageCenter.appendEnd(
-                    String.format(Name.getStyleWarningMessage(name), name));
+            MessageCenter.appendEnd(String.format(Name.getStyleWarningMessage(name), name));
         }
         return new Name(trimmedName);
     }
