@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.role.Role.PERSON_MAX_ROLES;
+import static seedu.address.model.tag.Tag.PERSON_MAX_TAGS;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -169,6 +171,9 @@ public class ParserUtil {
         for (String roleName : roles) {
             roleSet.add(parseRole(roleName));
         }
+        if (roleSet.size() > PERSON_MAX_ROLES) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+        }
         return roleSet;
     }
 
@@ -214,6 +219,9 @@ public class ParserUtil {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
+        }
+        if (tagSet.size() > PERSON_MAX_TAGS) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return tagSet;
     }

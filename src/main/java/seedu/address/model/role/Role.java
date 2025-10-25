@@ -5,10 +5,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Role for a contact in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidRoleName(String)}
+ * Guarantees: immutable; role name is valid as declared in {@link #isValidRoleName(String)}
  */
 public class Role {
-    public static final String MESSAGE_CONSTRAINTS = "Role names should be alphanumeric with spaces.";
+    public static final int PERSON_MAX_ROLES = 3;
+    public static final String MESSAGE_CONSTRAINTS = "Role names should be alphanumeric with spaces, "
+            + "and each person can have a maximum of 3 roles.";
     public static final String FIND_MESSAGE_CONSTRAINTS = "Supplied substrings for roles should be "
             + "alphanumeric with spaces, or empty.";
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9 ]+$";
