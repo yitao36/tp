@@ -1,37 +1,43 @@
 package seedu.address.model.event;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.exceptions.DuplicateAttendeeException;
-import seedu.address.model.person.Person;
 
 /**
- * Represents attendance of a list of {@code Person} in the address book for an event.
+ * Represents attendance of a set of {@code PersonReference} in the address book for an event.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Attendance {
     public static final String MESSAGE_CONSTRAINTS = "The indexes ";
-    private final Set<Person> persons;
+    private final Set<PersonReference> persons = new HashSet<>();
 
-    public Attendance(Set<Person> persons) {
-        this.persons = persons;
+    public Attendance() {}
+
+    public Attendance(Set<PersonReference> persons) {
+        this.persons.addAll(persons);
     }
 
     /**
      * Adds a person to the current attendance set.
      * @throws DuplicateAttendeeException if the person is already in the set.
      */
-    public void addPerson(Person p) {
+    public void addPerson(PersonReference p) {
         if (persons.contains(p)) {
             throw new DuplicateAttendeeException();
         }
         persons.add(p);
     }
 
-    public boolean hasPerson(Person p) {
+    public boolean hasPerson(PersonReference p) {
         return persons.contains(p);
+    }
+
+    public Set<PersonReference> getPersons() {
+        return persons;
     }
 
     @Override

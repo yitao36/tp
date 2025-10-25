@@ -1,11 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
+import static seedu.address.logic.parser.ParserUtil.parseIndex;
+import static seedu.address.logic.parser.ParserUtil.parseIndexes;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -31,38 +31,15 @@ public class AttendCommandParser {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public void parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PHONE, PREFIX_EMAIL);
+    public AttendCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PERSON, PREFIX_EVENT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_PHONE, PREFIX_EMAIL)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_PERSON, PREFIX_EVENT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendCommand.MESSAGE_USAGE));
         }
 
-        Set<Index> personIndexes = parseMultiplePersons(argMultimap.getAllValues(PREFIX_PHONE));
-    }
-
-    /**
-     * Takes in a list of user inputs, and parses them into integers.
-     * Invalid inputs are stored in a separate set.
-     * Duplicate inputs are stored in a separate set.
-     * @return A new AttendCommand to handle valid, invalid, and duplicate inputs.
-     */
-    public Set<Index> parseMultiplePersons(List<String> personList) {
-        Set<Index> personSet = new HashSet<>();
-        Set<Index> duplicateSet = new HashSet<>();
-        Set<String> invalidSet = new HashSet<>();
-        personList.forEach(s -> {
-            try {
-                Index index = Index.fromZeroBased(Integer.parseInt(s));
-                if (personSet.contains(index)) {
-                    duplicateSet.add(index);
-                } else {
-                    personSet.add(index);
-                }
-            } catch (NumberFormatException e) {
-                invalidSet.add(s);
-            }
-        });
-        return personSet;
+        Index eventIndex = parseIndex(argMultimap.getValue(PREFIX_EVENT).get());
+        Set<Index> personIndexes = parseIndexes(argMultimap.getValue(PREFIX_PERSON).get());
+        return new AttendCommand(eventIndex, personIndexes);
     }
 }
