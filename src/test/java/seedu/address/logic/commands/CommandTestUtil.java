@@ -165,5 +165,4 @@ public class CommandTestUtil {
         Model emptyModel = new ModelManager();
         command.execute(emptyModel);
     }
-
 }
