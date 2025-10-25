@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.role.Role.PERSON_MAX_ROLES;
+import static seedu.address.model.tag.Tag.PERSON_MAX_TAGS;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -30,6 +32,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_EXCEEDS_INTEGER_LIMIT = "Index exceeds integer limit of 2147483647.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -39,7 +42,11 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            if (StringUtil.isExceedsIntegerLimit(trimmedIndex)) {
+                throw new ParseException(MESSAGE_EXCEEDS_INTEGER_LIMIT);
+            } else {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -169,6 +176,9 @@ public class ParserUtil {
         for (String roleName : roles) {
             roleSet.add(parseRole(roleName));
         }
+        if (roleSet.size() > PERSON_MAX_ROLES) {
+            throw new ParseException(Role.PERSON_ROLES_SIZE_CONSTRAINT);
+        }
         return roleSet;
     }
 
@@ -214,6 +224,9 @@ public class ParserUtil {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
+        }
+        if (tagSet.size() > PERSON_MAX_TAGS) {
+            throw new ParseException(Tag.PERSON_TAGS_SIZE_CONSTRAINT);
         }
         return tagSet;
     }

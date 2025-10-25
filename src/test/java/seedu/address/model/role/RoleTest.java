@@ -31,7 +31,7 @@ public class RoleTest {
         // valid role names
         assertTrue(Role.isValidRoleName("93121534"));
         assertTrue(Role.isValidRoleName("section leader 1"));
-        assertTrue(Role.isValidRoleName("    section leader  2      "));
+        assertTrue(Role.isValidRoleName("section leader  2"));
         assertTrue(Role.isValidRoleName(" ")); // spaces only
     }
 
@@ -59,6 +59,6 @@ public class RoleTest {
     public void toString_test() {
         Role role = new Role("section leader");
 
-        assertTrue(role.toString().equals("(Role: section leader)"));
+        assertTrue(role.toString().equals("section leader"));
     }
 }

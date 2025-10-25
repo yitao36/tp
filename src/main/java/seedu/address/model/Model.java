@@ -61,6 +61,13 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Returns true if the address book is empty.
+     *
+     * @return The boolean result of whether the address book is empty.
+     */
+    boolean isEmptyAddressBook();
+
+    /**
      * Sorts the AddressBook
      */
     void sortAddressBook(Comparator<Person> personComparator);

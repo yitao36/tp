@@ -18,8 +18,8 @@
            text="We are designed to solve your CCA management needs.
 &#10;First time user? Type in `help` and visit our website!
 &#10;&#10;List of available commands:
-&#10;- Add          - List
-&#10;- Edit          - Find
-&#10;- Delete       - Exit" wrapText="true"
+&#10; 1. General commands: help, exit
+&#10; 2. Student-related commands: add, list, edit, find, delete, consolidate, clear
+&#10; 3. Event-related commands: add:event, delete:event, clear:event" wrapText="true"
            style="-fx-font-size: 20.0;"/>
 </VBox>

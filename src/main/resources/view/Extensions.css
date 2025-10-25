@@ -1,6 +1,11 @@
 
 .error {
     -fx-text-fill: #d06651 !important; /* The error class should always override the default text-fill style */
+    -fx-border-color: #d06651 !important;
+}
+
+.success {
+    -fx-border-color: darkgreen;
 }
 
 .list-cell:empty {
