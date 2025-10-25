@@ -62,10 +62,8 @@ public class Role {
         return roleName.hashCode();
     }
 
-    /**
-     * Format state as text for viewing.
-     */
+    @Override
     public String toString() {
-        return "(Role: " + roleName + ')';
+        return roleName;
     }
 }

@@ -45,16 +45,13 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Roles: ");
-        person.getRoles().forEach(builder::append);
-
-        builder.append("; Tags: ");
-        person.getTags().forEach(builder::append);
-
-        builder.append("; Enrollment Year: ")
-               .append(person.getEnrollmentYear());
-
-        builder.append("; Pinned: ")
+                .append("; Roles: ")
+                .append(person.getRoles())
+                .append("; Tags: ")
+                .append(person.getTags())
+                .append("; Enrollment Year: ")
+                .append(person.getEnrollmentYear())
+                .append("; Pinned: ")
                 .append(person.getPin());
 
         if (person.getEmergencyContact().isPresent()) {

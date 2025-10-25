@@ -53,11 +53,9 @@ public class Tag {
         return tagName.hashCode();
     }
 
-    /**
-     * Format state as text for viewing.
-     */
+    @Override
     public String toString() {
-        return '[' + tagName + ']';
+        return tagName;
     }
 
 }
