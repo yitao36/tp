@@ -272,7 +272,7 @@ Format: `delete:event INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `delete:event 2` deletes the 2nd evebt in the displayed event list.
+* `delete:event 2` deletes the 2nd event in the displayed event list.
 
 <br>
 
