@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.MessageCenter;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -75,13 +76,6 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-    }
-
-    /**
-     * Displays a message to the user on initialization of AddressBook
-     */
-    public void initializeMessageToUser() {
-        resultDisplay.setFeedbackToUser("AddressBook successfully initialized.");
     }
 
     public Stage getPrimaryStage() {
@@ -195,7 +189,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            MessageCenter.appendFront(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -208,8 +202,10 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            MessageCenter.error(e.getMessage());
             throw e;
+        } finally {
+            MessageCenter.showFeedback();
         }
     }
 }
