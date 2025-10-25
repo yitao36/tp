@@ -77,6 +77,11 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Delete all people in the address book.
+     */
+    void clearPerson();
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
@@ -128,6 +133,11 @@ public interface Model {
      * The event must exist in the address book.
      */
     void deleteEvent(Event target);
+
+    /**
+     * Delete all events in the address book.
+     */
+    void clearEvent();
 
     /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();

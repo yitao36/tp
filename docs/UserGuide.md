@@ -288,11 +288,20 @@ Format: `consolidate`
 
 <br>
 
-### Clearing all entries : `clear`
+### Clearing all contacts : `clear`
 
 <box type="warning">
 
-**Warning:** Deletes all entries from the address book. Not undoable.
+**Warning:** Deletes all contacts from the address book. Not undoable.
+</box>
+
+<br>
+
+### Clearing all events : `clear:event`
+
+<box type="warning">
+
+**Warning:** Deletes all events from the address book. Not undoable.
 </box>
 
 <br>
@@ -361,3 +370,4 @@ Action     | Format, Examples
 **Delete Event** | `delete:event INDEX`<br> e.g., `delete:event 3`
 **Consolidate** | `consolidate`
 **Clear**  | `clear`
+**Clear Events**  | `clear:event`

@@ -2,45 +2,47 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalEvents.MEETING;
+import static seedu.address.testutil.TypicalEvents.getTypicalEvents;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.event.Event;
 
-public class ClearCommandTest {
+public class ClearEventCommandTest {
 
     @Test
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearEventCommand(), model, ClearEventCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        model.addEvent(MEETING);
+        for (Event e: getTypicalEvents()) {
+            model.addEvent(e);
+        }
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setAddressBook(new AddressBook());
-        expectedModel.addEvent(MEETING);
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearEventCommand(), model, ClearEventCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_selectedPersonReturnsNull() {
+    public void execute_nonEmptyAddressBook_selectedEventReturnsNull() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Person lastPerson = model.getFilteredPersonList().get(model.getFilteredPersonList().size() - 1);
-        model.getSelectedPerson().set(lastPerson);
-        new ClearCommand().execute(model);
+        for (Event e: getTypicalEvents()) {
+            model.addEvent(e);
+        }
+        Event lastEvent = model.getFilteredEventList().get(model.getFilteredEventList().size() - 1);
+        model.getSelectedEvent().set(lastEvent);
+        new ClearEventCommand().execute(model);
 
-        assertNull(model.getSelectedPerson().get());
+        assertNull(model.getSelectedEvent().get());
     }
 }
