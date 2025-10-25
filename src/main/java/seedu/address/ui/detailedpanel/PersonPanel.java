@@ -127,7 +127,7 @@ public class PersonPanel extends UiPart<VBox> {
             emergencyPhone.setManaged(true);
             emergencyPhone.setVisible(true);
 
-            EmergencyContact ec = selected.getEmergencyContact().get();
+            EmergencyContact ec = selected.getEmergencyContact();
             emergencyName.setText(ec.name.fullName);
             emergencyPhone.setText(ec.phone.value);
         } else {

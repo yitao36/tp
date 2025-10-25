@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PIN;
@@ -25,6 +27,7 @@ import seedu.address.model.event.Attendance;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -70,6 +73,10 @@ public class CommandTestUtil {
     public static final String PIN_DESC_BOB = " " + PREFIX_PIN + VALID_PIN_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String EMERGENCY_NAME_DESC_AMY = " " + PREFIX_EMERGENCY_NAME + VALID_NAME_AMY;
+    public static final String EMERGENCY_NAME_DESC_BOB = " " + PREFIX_EMERGENCY_NAME + VALID_NAME_BOB;
+    public static final String EMERGENCY_PHONE_DESC_AMY = " " + PREFIX_EMERGENCY_PHONE + VALID_PHONE_AMY;
+    public static final String EMERGENCY_PHONE_DESC_BOB = " " + PREFIX_EMERGENCY_PHONE + VALID_PHONE_BOB;
     public static final String NAME_DESC_MEETING = " " + PREFIX_NAME + VALID_NAME_MEETING;
     public static final String NAME_DESC_TRAINING = " " + PREFIX_NAME + VALID_NAME_TRAINING;
     public static final String DURATION_DESC_MEETING = " " + PREFIX_DURATION + VALID_DURATION_MEETING;
@@ -83,6 +90,10 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_ROLE_DESC = " " + PREFIX_TAG + "president*"; // '*' not allowed in roles
+    // '^' not allowed in names
+    public static final String INVALID_EMERGENCY_NAME_DESC = " " + PREFIX_EMERGENCY_NAME + "Tom^";
+    // 'b' not allowed in phones
+    public static final String INVALID_EMERGENCY_PHONE_DESC = " " + PREFIX_EMERGENCY_PHONE + "911b";
     public static final String INVALID_EVENT_NAME_DESC = " " + PREFIX_NAME + ""; // event name not allowed to be empty
     public static final String INVALID_DURATION_DESC =
             " " + PREFIX_DURATION + "1/10/2025*"; // '*' not allowed in duration
@@ -92,6 +103,8 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditEventCommand.EditEventDescriptor DESC_MEETING;
+    public static final EditEventCommand.EditEventDescriptor DESC_TRAINING;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -103,6 +116,10 @@ public class CommandTestUtil {
                 .withEnrollmentYear(VALID_ENROLLMENT_YEAR_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withRoles(VALID_ROLE_SECRETARY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withPin(VALID_PIN_BOB).build();
+        DESC_MEETING = new EditEventDescriptorBuilder().withName(VALID_NAME_MEETING)
+                .withDuration(VALID_DURATION_MEETING).withDescription(VALID_DESCRIPTION_MEETING).build();
+        DESC_TRAINING = new EditEventDescriptorBuilder().withName(VALID_NAME_TRAINING)
+                .withDuration(VALID_DURATION_TRAINING).withDescription(VALID_DESCRIPTION_TRAINING).build();
     }
 
     /**

@@ -64,7 +64,7 @@ public class PersonBuilder {
         roles = new HashSet<>(personToCopy.getRoles());
         tags = new HashSet<>(personToCopy.getTags());
         pin = personToCopy.getPin();
-        emergencyContact = personToCopy.getEmergencyContact().orElse(null);
+        emergencyContact = personToCopy.getEmergencyContact();
         enrollmentYear = personToCopy.getEnrollmentYear();
     }
 

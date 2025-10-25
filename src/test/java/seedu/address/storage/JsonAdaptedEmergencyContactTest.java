@@ -18,14 +18,14 @@ public class JsonAdaptedEmergencyContactTest {
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
 
-    private static final String VALID_EMERGENCY_NAME = BENSON.getEmergencyContact().get().name.toString();
-    private static final String VALID_EMERGENCY_PHONE = BENSON.getEmergencyContact().get().phone.toString();
+    private static final String VALID_EMERGENCY_NAME = BENSON.getEmergencyContact().name.toString();
+    private static final String VALID_EMERGENCY_PHONE = BENSON.getEmergencyContact().phone.toString();
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         JsonAdaptedEmergencyContact emergencyContact = new JsonAdaptedEmergencyContact(VALID_EMERGENCY_NAME,
                 VALID_EMERGENCY_PHONE);
-        assertEquals(BENSON.getEmergencyContact().get(), emergencyContact.toModelType());
+        assertEquals(BENSON.getEmergencyContact(), emergencyContact.toModelType());
     }
 
     @Test

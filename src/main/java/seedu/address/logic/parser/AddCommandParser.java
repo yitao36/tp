@@ -12,7 +12,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -67,17 +66,17 @@ public class AddCommandParser implements Parser<AddCommand> {
         Pin pin = ParserUtil.parsePin(argMultimap.getValue(PREFIX_PIN).isPresent()
                 ? argMultimap.getValue(PREFIX_PIN).get()
                 : "false");
-        Optional<EmergencyContact> emergencyContact =
-                ParserUtil.parseEmergencyContact(argMultimap.getValue(PREFIX_EMERGENCY_NAME),
-                        argMultimap.getValue(PREFIX_EMERGENCY_PHONE));
+        EmergencyContact emergencyContact =
+                ParserUtil.parseEmergencyContact(argMultimap.getValue(PREFIX_EMERGENCY_NAME).orElse(null),
+                        argMultimap.getValue(PREFIX_EMERGENCY_PHONE).orElse(null));
         EnrollmentYear enrollmentYear = ParserUtil.parseEnrollmentYear(
                 argMultimap.getValue(PREFIX_ENROLL_YEAR).orElse(""));
         Set<Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         try {
-            Person person = new Person(name, phone, email, address, pin, roleList, tagList,
-                    emergencyContact.orElse(null), enrollmentYear);
+            Person person = new Person(name, phone, email, address, pin, roleList, tagList, emergencyContact,
+                    enrollmentYear);
             return new AddCommand(person);
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());

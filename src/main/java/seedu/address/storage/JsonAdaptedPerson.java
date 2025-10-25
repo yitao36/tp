@@ -59,7 +59,11 @@ class JsonAdaptedPerson {
         this.email = email;
         this.address = address;
         this.pin = pin;
-        this.emergencyContact = emergencyContact;
+        if (emergencyContact != null) {
+            this.emergencyContact = emergencyContact;
+        } else {
+            this.emergencyContact = new JsonAdaptedEmergencyContact(new EmergencyContact());
+        }
         if (enrollmentYear != null) {
             this.enrollmentYear = enrollmentYear;
         } else {
@@ -83,9 +87,9 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         pin = source.getPin().value;
         if (source.getEmergencyContact().isPresent()) {
-            emergencyContact = new JsonAdaptedEmergencyContact(source.getEmergencyContact().get());
+            emergencyContact = new JsonAdaptedEmergencyContact(source.getEmergencyContact());
         } else {
-            emergencyContact = null;
+            emergencyContact = new JsonAdaptedEmergencyContact(new EmergencyContact());
         }
         enrollmentYear = source.getEnrollmentYear().toString();
         roles.addAll(source.getRoles().stream()
@@ -156,10 +160,7 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
         final Address modelAddress = new Address(address);
         final Pin modelPin = new Pin(pin);
-        EmergencyContact modelEmergencyContact = null;
-        if (emergencyContact != null) {
-            modelEmergencyContact = emergencyContact.toModelType();
-        }
+        final EmergencyContact modelEmergencyContact = new EmergencyContact(emergencyContact.toModelType());
         final EnrollmentYear modelEnrollmentYear = new EnrollmentYear(enrollmentYear);
         final Set<Role> modelRoles = new HashSet<>(personRoles);
         final Set<Tag> modelTags = new HashSet<>(personTags);

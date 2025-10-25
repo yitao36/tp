@@ -136,6 +136,13 @@ public interface Model {
     void addEvent(Event event);
 
     /**
+     * Replaces the given event {@code target} with {@code editedEvent}.
+     * {@code target} must exist in the address book.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
+     */
+    void setEvent(Event target, Event editedEvent);
+
+    /**
      * Deletes the given event.
      * The event must exist in the address book.
      */

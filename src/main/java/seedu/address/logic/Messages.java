@@ -60,7 +60,7 @@ public class Messages {
                 .append(person.getPin());
 
         if (person.getEmergencyContact().isPresent()) {
-            EmergencyContact emergencyContact = person.getEmergencyContact().get();
+            EmergencyContact emergencyContact = person.getEmergencyContact();
             builder.append("; Emergency Contact Name: ")
                     .append(emergencyContact.name)
                     .append("; Emergency Contact Phone: ")

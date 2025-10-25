@@ -6,7 +6,6 @@ import static seedu.address.model.tag.Tag.PERSON_MAX_TAGS;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -130,22 +129,12 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code emergencyName, emergencyPhone} into an {@code EmergencyContact}.
+     * Parses an {@code emergencyName, emergencyPhone} into an {@code EmergencyContact}.
      */
-    public static Optional<EmergencyContact> parseEmergencyContact(Optional<String> emergencyName,
-                                                                   Optional<String> emergencyPhone)
-                                                                    throws ParseException {
-        int presentFieldsCount = (emergencyName.isPresent() ? 1 : 0)
-                + (emergencyPhone.isPresent() ? 1 : 0);
-
-        if (presentFieldsCount != 0 && presentFieldsCount != 2) {
-            throw new ParseException(EmergencyContact.MESSAGE_CONSTRAINTS);
-        }
-        if (presentFieldsCount == 0) {
-            return Optional.empty();
-        }
+    public static EmergencyContact parseEmergencyContact(String emergencyName, String emergencyPhone)
+            throws ParseException {
         try {
-            return Optional.of(new EmergencyContact(emergencyName.get(), emergencyPhone.get()));
+            return new EmergencyContact(emergencyName, emergencyPhone);
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());
         }
