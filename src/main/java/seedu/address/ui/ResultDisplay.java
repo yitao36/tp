@@ -26,7 +26,6 @@ public class ResultDisplay extends UiPart<Region> {
 
     public void setText(String s) {
         resultDisplay.setText(s);
-        setStyleSuccess();
     }
 
     public void setStyleError() {

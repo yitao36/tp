@@ -84,6 +84,7 @@ public class MainApp extends Application {
                 String message = "Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.";
                 logger.info(message);
+
                 MessageCenter.appendEnd(message);
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
@@ -91,7 +92,11 @@ public class MainApp extends Application {
             String error = "Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.";
             logger.warning(error);
-            MessageCenter.error(error + "\n" + e.getCause().getMessage());
+
+            MessageCenter.appendFront(error + "\n"
+                    + Optional.ofNullable(e.getCause()).map(Throwable::getMessage).orElse(e.getMessage()));
+            MessageCenter.error();
+
             initialData = new AddressBook();
         }
 
