@@ -22,7 +22,7 @@ public class JsonAdaptedEventTest {
     private static final String VALID_DURATION = MEETING.getDuration().toString();
     private static final String VALID_DESCRIPTION = MEETING.getDescription().toString();
     private static final List<JsonAdaptedPersonReference> VALID_ATTENDANCE = MEETING.getAttendance()
-            .getPersons().stream().map(JsonAdaptedPersonReference::new).toList();
+            .asUnmodifiableList().stream().map(JsonAdaptedPersonReference::new).toList();
 
     @Test
     public void toModelType_validEventDetails_returnsEvent() throws Exception {
