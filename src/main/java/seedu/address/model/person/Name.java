@@ -111,7 +111,8 @@ public class Name {
     }
 
     /**
-     * Tests if all the words start with a capital letter, followed by characters that are not capitalized.
+     * Tests if for each word , the first letter character that appears is capitalized,
+     * with following letters that are not capitalized.
      */
     private static boolean isCapitalizedWithLetters(String test) {
         final String regex = "[^a-zA-Z]*[A-Z][^A-Z]*";
