@@ -42,7 +42,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            if (StringUtil.isExceedsIntegerLimit(trimmedIndex)) {
+            if (!trimmedIndex.isEmpty() && StringUtil.isExceedsIntegerLimit(trimmedIndex)) {
                 throw new ParseException(MESSAGE_EXCEEDS_INTEGER_LIMIT);
             } else {
                 throw new ParseException(MESSAGE_INVALID_INDEX);
