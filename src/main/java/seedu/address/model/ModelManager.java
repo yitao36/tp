@@ -134,6 +134,11 @@ public class ModelManager implements Model {
         addressBook.addEvent(event);
     }
 
+    @Override
+    public void deleteEvent(Event target) {
+        addressBook.removeEvent(target);
+    }
+
     //=========== Filtered Event List Accessors =============================================================
 
     /**
