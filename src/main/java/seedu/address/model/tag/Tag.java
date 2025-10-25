@@ -5,11 +5,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Tag in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ * Guarantees: immutable; tag name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
-
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final int PERSON_MAX_TAGS = 5;
+    public static final String PERSON_TAGS_SIZE_CONSTRAINT = "Each person can have a maximum of 5 tags!";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric, "
+            + "and each person can have a maximum of 5 tags.";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
@@ -52,11 +54,9 @@ public class Tag {
         return tagName.hashCode();
     }
 
-    /**
-     * Format state as text for viewing.
-     */
+    @Override
     public String toString() {
-        return '[' + tagName + ']';
+        return tagName;
     }
 
 }

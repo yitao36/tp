@@ -20,6 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.event.Attendance;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -173,5 +174,17 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredEventList().size());
     }
+
+    /**
+     * Creates an empty model and executes the command on empty model.
+     *
+     * @param command Command to be executed on the empty model.
+     * @throws CommandException When the command cannot be executed on the empty model.
+     */
+    public static void executeCommandOnEmptyModel(Command command) throws CommandException {
+        Model emptyModel = new ModelManager();
+        command.execute(emptyModel);
+    }
+
 
 }

@@ -10,6 +10,7 @@ import seedu.address.model.role.Role;
  * Jackson-friendly version of {@link Role}.
  */
 class JsonAdaptedRole {
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is null!";
 
     private final String roleName;
 
@@ -39,6 +40,9 @@ class JsonAdaptedRole {
      * @throws IllegalValueException if there were any data constraints violated in the adapted role.
      */
     public Role toModelType() throws IllegalValueException {
+        if (roleName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
+        }
         if (!Role.isValidRoleName(roleName)) {
             throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }

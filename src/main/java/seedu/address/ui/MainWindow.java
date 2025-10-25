@@ -1,4 +1,5 @@
 package seedu.address.ui;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -75,13 +76,6 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-    }
-
-    /**
-     * Displays a message to the user on initialization of AddressBook
-     */
-    public void initializeMessageToUser() {
-        resultDisplay.setFeedbackToUser("AddressBook successfully initialized.");
     }
 
     public Stage getPrimaryStage() {
@@ -195,7 +189,6 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -208,7 +201,6 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
     }

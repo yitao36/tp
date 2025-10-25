@@ -4,8 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.ClearCommand.COMMAND_WORD;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.executeCommandOnEmptyModel;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
@@ -16,6 +19,8 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -78,20 +83,28 @@ public class FindCommandTest {
 
     @Test
     public void execute_noPersonFound_selectedPersonReturnsNull() {
-        Person lastPerson = model.getFilteredPersonList().get(model.getFilteredPersonList().size() - 1);
-        model.getSelectedPerson().set(lastPerson);
-        FindCommand command = new FindCommand(p -> false);
-        command.execute(model);
-        assertNull(model.getSelectedPerson().get());
+        try {
+            Person lastPerson = model.getFilteredPersonList().get(model.getFilteredPersonList().size() - 1);
+            model.getSelectedPerson().set(lastPerson);
+            FindCommand command = new FindCommand(p -> false);
+            command.execute(model);
+            assertNull(model.getSelectedPerson().get());
+        } catch (CommandException e) {
+            fail();
+        }
     }
 
     @Test
     public void execute_personsFound_firstPersonSelected() {
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        command.execute(model);
-        assertEquals(expectedModel.getFilteredPersonList().get(0), model.getSelectedPerson().get());
+        try {
+            NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+            FindCommand command = new FindCommand(predicate);
+            expectedModel.updateFilteredPersonList(predicate);
+            command.execute(model);
+            assertEquals(expectedModel.getFilteredPersonList().get(0), model.getSelectedPerson().get());
+        } catch (CommandException e) {
+            fail();
+        }
     }
 
     @Test
@@ -100,6 +113,16 @@ public class FindCommandTest {
         FindCommand findCommand = new FindCommand(predicate);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
+    }
+
+    @Test
+    public void execute_emptyAddressBook_throwsCommandException() {
+        try {
+            executeCommandOnEmptyModel(new ClearCommand());
+            fail(); // test should not reach this line
+        } catch (CommandException e) {
+            assertEquals(Messages.specifyEmptyUserListMessage(COMMAND_WORD), e.getMessage());
+        }
     }
 
     /**

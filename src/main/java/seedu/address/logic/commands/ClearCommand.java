@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
@@ -14,9 +16,12 @@ public class ClearCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.clearPerson();;
+        if (model.isEmptyAddressBook()) {
+            throw new CommandException(Messages.specifyEmptyUserListMessage(COMMAND_WORD));
+        }
+        model.clearPerson();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
