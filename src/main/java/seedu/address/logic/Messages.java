@@ -22,6 +22,9 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_EMPTY_USER_CONTACT = "Nothing to %s so far, "
+            + "since no student's data has been entered and stored in CCAmper.";
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -82,5 +85,9 @@ public class Messages {
                 .append(event.getDescription());
 
         return builder.toString();
+    }
+
+    public static String specifyEmptyUserListMessage(String commandWord) {
+        return String.format(MESSAGE_EMPTY_USER_CONTACT, commandWord);
     }
 }

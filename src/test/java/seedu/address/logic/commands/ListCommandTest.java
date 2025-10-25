@@ -1,15 +1,19 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.executeCommandOnEmptyModel;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.ListCommand.COMMAND_WORD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -41,18 +45,24 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_listEmpty_selectedPersonReturnsNull() {
-        Model model = new ModelManager();
-        new ListCommand().execute(model);
-        assertNull(model.getSelectedPerson().get());
+    public void execute_emptyAddressBook_throwsCommandException() {
+        try {
+            executeCommandOnEmptyModel(new ListCommand());
+            fail();
+        } catch (CommandException e) {
+            assertEquals(Messages.specifyEmptyUserListMessage(COMMAND_WORD), e.getMessage());
+        }
     }
 
     @Test
     public void execute_listNotEmpty_previouslySelectedPersonStillSelected() {
-        Person lastPerson = model.getFilteredPersonList().get(model.getFilteredPersonList().size() - 1);
-        model.getSelectedPerson().set(lastPerson);
-        new ListCommand().execute(model);
-
-        assertEquals(lastPerson, model.getSelectedPerson().get());
+        try {
+            Person lastPerson = model.getFilteredPersonList().get(model.getFilteredPersonList().size() - 1);
+            model.getSelectedPerson().set(lastPerson);
+            new ListCommand().execute(model);
+            assertEquals(lastPerson, model.getSelectedPerson().get());
+        } catch (CommandException e) {
+            fail();
+        }
     }
 }
