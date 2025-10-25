@@ -25,6 +25,7 @@ import seedu.address.model.event.Attendance;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -92,6 +93,8 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditEventCommand.EditEventDescriptor DESC_MEETING;
+    public static final EditEventCommand.EditEventDescriptor DESC_TRAINING;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -103,6 +106,10 @@ public class CommandTestUtil {
                 .withEnrollmentYear(VALID_ENROLLMENT_YEAR_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withRoles(VALID_ROLE_SECRETARY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withPin(VALID_PIN_BOB).build();
+        DESC_MEETING = new EditEventDescriptorBuilder().withName(VALID_NAME_MEETING)
+                .withDuration(VALID_DURATION_MEETING).withDescription(VALID_DESCRIPTION_MEETING).build();
+        DESC_TRAINING = new EditEventDescriptorBuilder().withName(VALID_NAME_TRAINING)
+                .withDuration(VALID_DURATION_TRAINING).withDescription(VALID_DESCRIPTION_TRAINING).build();
     }
 
     /**

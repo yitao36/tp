@@ -261,6 +261,23 @@ Events are considered duplicates if they have the same name and duration.
 
 <br>
 
+### Editing an event : `edit:event`
+
+Edits an existing event in the address book.
+
+Format: `edit:event INDEX [n/NAME] [d/(d/M/yyyy or d/M/yyyy-d/M/yyyy)] [info/DESCRIPTION]`
+
+* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* You can remove the event's description by typing `info/` without specifying any description after it.
+
+Examples:
+* `edit:event 1 n/new meeting d/2/10/2025 info/special meeting` Edits the 1st event
+* `edit:event 2 info/` Clears the description of the 2nd event
+
+<br>
+
 ### Deleting an event : `delete:event`
 
 Deletes the event at the specified index. Cannot be undone.
@@ -367,6 +384,7 @@ Action     | Format, Examples
 **Find** | `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<\|<=\|>\|>=\|=)NUMBER]] [r/SUBSTRING]…​`<br> e.g., `find n/yu john enroll/>=2022 r/lead r/sec`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Add Event** | `add:event n/NAME d/(d/M/yyyy or d/M/yyyy-d/M/yyyy) [info/DESCRIPTION]` <br> e.g., `add:event n/meeting d/1/10/2025 info/routine meeting`
+**Edit Event** | `edit:event [n/NAME] [d/(d/M/yyyy or d/M/yyyy-d/M/yyyy)] [info/DESCRIPTION]` <br> e.g., `edit:event 1 n/new meeting d/2/10/2025 info/special meeting`
 **Delete Event** | `delete:event INDEX`<br> e.g., `delete:event 3`
 **Consolidate** | `consolidate`
 **Clear**  | `clear`
