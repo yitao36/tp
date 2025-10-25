@@ -40,6 +40,15 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Checks if the list of person is empty.
+     *
+     * @return The boolean condition of whether the list of person is empty.
+     */
+    public boolean isEmpty() {
+        return internalList.isEmpty();
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -95,6 +104,14 @@ public class UniquePersonList implements Iterable<Person> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+    }
+
+    /**
+     * Clears the internal list.
+     */
+    public void clear() {
+        selectedPerson.set(null);
+        internalList.clear();
     }
 
     /**

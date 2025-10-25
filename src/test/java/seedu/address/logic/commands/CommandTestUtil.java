@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -21,6 +22,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.event.Attendance;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -38,8 +42,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final boolean VALID_PIN_AMY = true;
-    public static final boolean VALID_PIN_BOB = false;
+    public static final boolean VALID_PIN_AMY = false;
+    public static final boolean VALID_PIN_BOB = true;
     public static final String VALID_ENROLLMENT_YEAR_AMY = "";
     public static final String VALID_ENROLLMENT_YEAR_BOB = "2024";
     public static final String VALID_TAG_HUSBAND = "husband";
@@ -53,6 +57,8 @@ public class CommandTestUtil {
     public static final String VALID_DURATION_TRAINING = "2/10/2025-5/10/2025";
     public static final String VALID_DESCRIPTION_MEETING = "Routine meeting";
     public static final String VALID_DESCRIPTION_TRAINING = "Daily traning for a week";
+    public static final Attendance VALID_ATTENDANCE_MEETING = new Attendance();
+    public static final Attendance VALID_ATTENDANCE_TRAINING = new Attendance();
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -62,6 +68,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String PIN_DESC_AMY = " " + PREFIX_PIN + VALID_PIN_AMY;
+    public static final String PIN_DESC_BOB = " " + PREFIX_PIN + VALID_PIN_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String EMERGENCY_NAME_DESC_AMY = " " + PREFIX_EMERGENCY_NAME + VALID_NAME_AMY;
@@ -163,5 +171,30 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the event at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showEventAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredEventList().size());
+
+        Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
+        model.updateFilteredEventList(val -> val.equals(event));
+
+        assertEquals(1, model.getFilteredEventList().size());
+    }
+
+    /**
+     * Creates an empty model and executes the command on empty model.
+     *
+     * @param command Command to be executed on the empty model.
+     * @throws CommandException When the command cannot be executed on the empty model.
+     */
+    public static void executeCommandOnEmptyModel(Command command) throws CommandException {
+        Model emptyModel = new ModelManager();
+        command.execute(emptyModel);
+    }
+
 
 }

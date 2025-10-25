@@ -18,6 +18,7 @@ public class Event {
 
     // Data fields
     private final Description description;
+    private final Attendance attendance;
 
     /**
      * Creates an {@code Event} object.
@@ -25,11 +26,12 @@ public class Event {
      * @param duration duration period of event.
      * @param description description of event.
      */
-    public Event(EventName name, Duration duration, Description description) {
-        requireAllNonNull(name, duration, description);
+    public Event(EventName name, Duration duration, Description description, Attendance attendance) {
+        requireAllNonNull(name, duration, description, attendance);
         this.name = name;
         this.duration = duration;
         this.description = description;
+        this.attendance = attendance;
     }
 
     public EventName getName() {
@@ -42,6 +44,10 @@ public class Event {
 
     public Description getDescription() {
         return description;
+    }
+
+    public Attendance getAttendance() {
+        return attendance;
     }
 
     /**
@@ -72,13 +78,14 @@ public class Event {
         Event otherEvent = (Event) other;
         return name.equals(otherEvent.name)
                 && duration.equals(otherEvent.duration)
-                && description.equals(otherEvent.description);
+                && description.equals(otherEvent.description)
+                && attendance.equals(otherEvent.attendance);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, duration, description);
+        return Objects.hash(name, duration, description, attendance);
     }
 
     @Override
@@ -87,6 +94,7 @@ public class Event {
                 .add("name", name)
                 .add("duration", duration)
                 .add("description", description)
+                .add("attendance", attendance)
                 .toString();
     }
 }

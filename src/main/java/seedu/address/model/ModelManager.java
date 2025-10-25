@@ -117,9 +117,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isEmptyAddressBook() {
+        return addressBook.isPersonListEmpty();
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void clearPerson() {
+        addressBook.clearPerson();
     }
 
     @Override
@@ -132,6 +142,16 @@ public class ModelManager implements Model {
     public void addEvent(Event event) {
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         addressBook.addEvent(event);
+    }
+
+    @Override
+    public void deleteEvent(Event target) {
+        addressBook.removeEvent(target);
+    }
+
+    @Override
+    public void clearEvent() {
+        addressBook.clearEvent();
     }
 
     //=========== Filtered Event List Accessors =============================================================

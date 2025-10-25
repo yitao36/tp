@@ -90,20 +90,20 @@ CCAmper is optimized for use via a
 
 **Constraints on Person contacts**
 
-| Field                 | Requirements                                                                                                                                                                                                                                                           |
-|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Name                  | • Letters, numbers, and spaces and the following `.,-'()` only.<br>• Cannot be blank                                                                                                                                                                                   |
-| Phone                 | • Exactly 8 digits that starts with one of `3/6/8/9`.                                                                                                                                                                                                                  |
-| Email                 | • Local-part contains only alphanumeric characters and the following `+_.-` <br/>• Domain label must consist of only alphanumeric characters and hyphens, <br/>and the end part (after the period) must be at least 2 characters long. <br/>(example.email@do-main.ca) |
-| Address               | • Any characters, but cannot be blank.                                                                                                                                                                                                                                 |
-| Year                  | • Positive integer, or blank to not add one.                                                                                                                                                                                                                           |
-| Roles                 | • Contains only alphanumeric characters or spaces.                                                                                                                                                                                                                     |
-| Tags                  | • Contains only alphanumeric characters (No spaces).                                                                                                                                                                                                                   |
-| Emergency<br/>Contact | • Name and Phone of emergency contact has the same constraints as specified above.                                                                                                                                                                                     |
-| Pin                   | • Input either `TRUE` or `FALSE` (Non case-sensitive)                                                                                                                                                                                                                  |
+| Field                 | Requirements                                                                                                                                                                                                                                                                                         |
+|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Name                  | • Max 50 characters long.<br/>• Letters, numbers, and spaces and the following `.,-'()` only.<br>• Cannot be blank                                                                                                                                                                                   |
+| Phone                 | • Exactly 8 digits that starts with one of `3/6/8/9`.                                                                                                                                                                                                                                                |
+| Email                 | • Max 50 characters long.<br/>• Local-part contains only alphanumeric characters and the following `+_.-` <br/>• Domain label must consist of only alphanumeric characters and hyphens, <br/>and the end part (after the period) must be at least 2 characters long. <br/>(example.email@do-main.ca) |
+| Address               | • Max 70 characters long.<br/>• Any characters, but cannot be blank.                                                                                                                                                                                                                                 |
+| Year                  | • Positive integer, or blank to not add one.                                                                                                                                                                                                                                                         |
+| Roles                 | • Maximum 20 characters for each role, maximum of 3 roles.<br/>• Contains only alphanumeric characters or spaces.                                                                                                                                                                                    |
+| Tags                  | • Maximum 15 characters for each tag, maximum of 5 tags.<br/>• Contains only alphanumeric characters (No spaces).                                                                                                                                                                                    |
+| Emergency<br/>Contact | • Name and Phone of emergency contact has the same constraints as specified above.                                                                                                                                                                                                                   |
+| Pin                   | • Input either `TRUE` or `FALSE` (Non case-sensitive)                                                                                                                                                                                                                                                |
 
 **Duplicate handling**
-* We require that no two person have the exact same `Name`, `Phone` and `Email` combination.
+* We require that no two person have the exact same `Name` and `Phone` combination.
 
 </box>
 
@@ -148,7 +148,7 @@ A popup appears which redirects the user to this current page. :D
 
 Add students to your address book, with the given fields.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE]…​ [t/TAG]…​ [pin/] [enroll/YEAR] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE]…​ [t/TAG]…​ [pin/TRUE] [enroll/YEAR] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE]`
 
 Additional information on fields:
 * While one may key in phone numbers with hyphen(s) and/or space(s) to improve human-readability, the hyphen(s) and space(s) are automatically removed when phone number is stored in app.
@@ -209,12 +209,12 @@ Format: `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(
 * If different prefixes are provided, a list of persons matching ALL the given constraints are shown<br>
 (except for groups of prefixes that are the same, which will be `OR` search).
 
-| Search type                                     | Notes                                                                                                                                                                                                                                                                                                                                         |
-|-------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Name (n/NAME...)                                | • Case-insensitive<br/>• Matches the full word, e.g. `Han` does not match `Hans`<br/>• If more than 1 keyword is specified, people with names matching at least one keyword is returned (`OR` search).<br/>e.g. `Hans Bo` returns `Bo Yang` and `Hans Gruber`                                                                                 |
-| Tag (t/TAG...)                                  | • Case-insensitive<br/>• Matches substrings of the word. e.g. `friend` will match `friends`.<br/>• If more than 1 keyword is specified, people with tags matching any is returned. (`OR` search)                                                                                                                                              |
-| Role (r/\[ROLE]) \[r/ROLE]...                   | • Case-insensitive<br/>• Matches substrings of the word.<br/>• Spaces are included in the search. <br/>e.g. `r/section leader` matches `Section Leader` but not `Section Head` and not `Leader Section`.<br/>• Leave empty to search for people having any role.<br/>• Multiple roles can be specified using multiple prefixes. (`OR` search) |
-| Enrollment Year<br/>(enroll/\[OPERATOR + YEAR]) | • Must be either empty (Search for people with empty year field) <br/>or contain one of the following operators `<, <=, >, >=, =` and a positive integer.<br/>e.g. `<2025` returns people enrolled in `2024` or earlier.                                                                                                                      |
+| Search type                                     | Notes                                                                                                                                                                                                                                                                                                                                                  |
+|-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Name (n/NAME...)                                | • Case-insensitive<br/>• Matches the full word, e.g. `Han` does not match `Hans`<br/>• If more than 1 keyword is specified, people with names matching at least one keyword is returned (`OR` search).<br/>e.g. `Hans Bo` returns `Bo Yang` and `Hans Gruber`                                                                                          |
+| Tag (t/TAG...)                                  | • Case-insensitive<br/>• Matches substrings of the word. e.g. `friend` will match `friends`.<br/>• If more than 1 keyword is specified, people with tags matching any is returned. (`OR` search)                                                                                                                                                       |
+| Role (r/\[ROLE]) \[r/ROLE]...                   | • Case-insensitive<br/>• Matches substrings of the word.<br/>• Spaces are included in the search. <br/>e.g. `r/section leader` matches `Section Leader` but not `Section Head` and not `Leader Section`.<br/>• Leave empty to search for people with at least any 1 role.<br/>• Multiple roles can be specified using multiple prefixes. (`OR` search) |
+| Enrollment Year<br/>(enroll/\[OPERATOR + YEAR]) | • Must be either empty (Search for people with empty year field) <br/>or contain one of the following operators `<, <=, >, >=, =` and a positive integer.<br/>e.g. `<2025` returns people enrolled in `2024` or earlier.                                                                                                                               |
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
@@ -244,20 +244,35 @@ Examples:
 
 <br>
 
-### Adding an event: `addevent`
+### Adding an event: `add:event`
 
 Add events to your address book, with the given fields given there are no duplicate events.
 
-Format: `addevent n/NAME d/(d/M/yyyy or d/M/yyyy-d/M/yyyy) [info/DESCRIPTION]`
+Format: `add:event n/NAME d/(d/M/yyyy or d/M/yyyy-d/M/yyyy) [info/DESCRIPTION]`
 
 Examples:
-* `addevent n/meeting d/1/10/2025 info/routine meeting`
+* `add:event n/meeting d/1/10/2025 info/routine meeting`
 
 <box type="definition">
 
 **Note:**
 Events are considered duplicates if they have the same name and duration.
 </box>
+
+<br>
+
+### Deleting an event : `delete:event`
+
+Deletes the event at the specified index. Cannot be undone.
+
+Format: `delete:event INDEX`
+
+* Deletes the event at the specified `INDEX`.
+* The index refers to the index number shown in the currently displayed event list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `delete:event 2` deletes the 2nd event in the displayed event list.
 
 <br>
 
@@ -273,11 +288,20 @@ Format: `consolidate`
 
 <br>
 
-### Clearing all entries : `clear`
+### Clearing all contacts : `clear`
 
 <box type="warning">
 
-**Warning:** Deletes all entries from the address book. Not undoable.
+**Warning:** Deletes all contacts from the address book. Not undoable.
+</box>
+
+<br>
+
+### Clearing all events : `clear:event`
+
+<box type="warning">
+
+**Warning:** Deletes all events from the address book. Not undoable.
 </box>
 
 <br>
@@ -337,11 +361,13 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Help** | `help`
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE]…​ [t/TAG]…​ [pin/] [enroll/YEAR] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE]` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/president r/camp leader ecn/Jack Doe ecp/99998888 enroll/2022 t/friend`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE]…​ [t/TAG]…​ [pin/TRUE] [enroll/YEAR] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE]` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/president r/camp leader ecn/Jack Doe ecp/99998888 enroll/2022 t/friend`
 **List** | `list`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​ [t/TAG]…​ [pin/(TRUE/FALSE)] [enroll/[YEAR]] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE]`<br> e.g.,`edit 1 n/John p/98765432 e/johndoe@example.com a/New Place r/Senior Student t/experienced pin/TRUE enroll/2022 ecn/Sally ecp/88887777`
 **Find** | `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<\|<=\|>\|>=\|=)NUMBER]] [r/SUBSTRING]…​`<br> e.g., `find n/yu john enroll/>=2022 r/lead r/sec`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Add Event** | `addevent n/NAME d/(d/M/yyyy or d/M/yyyy-d/M/yyyy) [info/DESCRIPTION]` <br> e.g., `addevent n/meeting d/1/10/2025 info/routine meeting`
+**Add Event** | `add:event n/NAME d/(d/M/yyyy or d/M/yyyy-d/M/yyyy) [info/DESCRIPTION]` <br> e.g., `add:event n/meeting d/1/10/2025 info/routine meeting`
+**Delete Event** | `delete:event INDEX`<br> e.g., `delete:event 3`
 **Consolidate** | `consolidate`
 **Clear**  | `clear`
+**Clear Events**  | `clear:event`

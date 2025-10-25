@@ -119,4 +119,13 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} is a non-zero unsigned integer AND exceeds integer limits
+     */
+    public static boolean isExceedsIntegerLimit(String s) {
+        requireNonNull(s);
+        final String regex = "[0-9]*";
+        return s.matches(regex);
+    }
 }

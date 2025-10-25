@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -21,9 +23,6 @@ public class ConsolidateCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Consolidate all distinct students' data: \n";
 
-    public static final String ALTERNATE_MESSAGE_SUCCESS = "Nothing to consolidate so far, "
-            + "since no student's data has been entered and stored in CCAmper.";
-
     /**
      * Lists the categories whose data will be consolidated under ConsolidateCommand.
      */
@@ -32,17 +31,15 @@ public class ConsolidateCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         ObservableList<Person> persons = model.getAddressBook().getPersonList();
         List<String> categoryCompilation = new ArrayList<>();
 
-        int size = persons.size();
-        assert size >= 0 : "number of contacts cannot be a negative value";
-        if (size == 0) {
-            return new CommandResult(ALTERNATE_MESSAGE_SUCCESS);
+        if (model.isEmptyAddressBook()) {
+            throw new CommandException(Messages.specifyEmptyUserListMessage(COMMAND_WORD));
         }
 
         ConsolidateCategory[] categories = ConsolidateCategory.values();

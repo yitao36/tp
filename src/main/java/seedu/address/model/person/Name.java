@@ -38,7 +38,7 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        final boolean lengthLessThan50 = test.length() < 50;
+        final boolean lengthLessThan50 = test.length() <= 50;
         final boolean hasValidCharacters = test.matches(VALIDATION_REGEX);
         return lengthLessThan50 & hasValidCharacters;
     }
@@ -111,7 +111,7 @@ public class Name {
     }
 
     /**
-     * Tests if for each word , the first letter character that appears is capitalized,
+     * Tests if for each word, the first letter character that appears is capitalized,
      * with following letters that are not capitalized.
      */
     private static boolean isCapitalizedWithLetters(String test) {
@@ -124,7 +124,7 @@ public class Name {
      * Tests if the string contains two or more consecutive spaces.
      */
     private static boolean hasConsecutiveSpaces(String test) {
-        final String regexDoubleSpace = ".*[ ]{2}.*";
+        final String regexDoubleSpace = ".* {2}.*";
         return test.matches(regexDoubleSpace);
     }
 }

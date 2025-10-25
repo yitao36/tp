@@ -63,7 +63,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Pin pin = ParserUtil.parsePin(argMultimap.getValue(PREFIX_PIN).isPresent() ? "TRUE" : "FALSE");
+        Pin pin = ParserUtil.parsePin(argMultimap.getValue(PREFIX_PIN).isPresent()
+                ? argMultimap.getValue(PREFIX_PIN).get()
+                : "false");
         EmergencyContact emergencyContact =
                 ParserUtil.parseEmergencyContact(argMultimap.getValue(PREFIX_EMERGENCY_NAME).orElse(null),
                         argMultimap.getValue(PREFIX_EMERGENCY_PHONE).orElse(null));

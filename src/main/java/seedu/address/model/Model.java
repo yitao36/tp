@@ -61,6 +61,13 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Returns true if the address book is empty.
+     *
+     * @return The boolean result of whether the address book is empty.
+     */
+    boolean isEmptyAddressBook();
+
+    /**
      * Sorts the AddressBook
      */
     void sortAddressBook(Comparator<Person> personComparator);
@@ -75,6 +82,11 @@ public interface Model {
      * The person must exist in the address book.
      */
     void deletePerson(Person target);
+
+    /**
+     * Delete all people in the address book.
+     */
+    void clearPerson();
 
     /**
      * Adds the given person.
@@ -122,6 +134,17 @@ public interface Model {
      * {@code event} must not already exist in the address book.
      */
     void addEvent(Event event);
+
+    /**
+     * Deletes the given event.
+     * The event must exist in the address book.
+     */
+    void deleteEvent(Event target);
+
+    /**
+     * Delete all events in the address book.
+     */
+    void clearEvent();
 
     /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();

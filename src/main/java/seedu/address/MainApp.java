@@ -15,6 +15,7 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
+import seedu.address.logic.MessageCenter;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -80,13 +81,23 @@ public class MainApp extends Application {
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+                String message = "Creating a new data file " + storage.getAddressBookFilePath()
+                        + " populated with a sample AddressBook.";
+                logger.info(message);
+
+                MessageCenter.appendEnd(message);
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData.isValidAddressBook();
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
+            String error = "Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+                    + " Will be starting with an empty AddressBook.";
+            logger.warning(error);
+
+            MessageCenter.appendFront(error + "\n"
+                    + Optional.ofNullable(e.getCause()).map(Throwable::getMessage).orElse(e.getMessage()));
+            MessageCenter.error();
+
             initialData = new AddressBook();
         }
 

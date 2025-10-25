@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+
+import seedu.address.model.event.Attendance;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Duration;
 import seedu.address.model.event.Event;
@@ -17,6 +20,7 @@ public class EventBuilder {
     private EventName name;
     private Duration duration;
     private Description description;
+    private Attendance attendance;
 
     /**
      * Creates an {@code EventBuilder} with the default details.
@@ -25,6 +29,7 @@ public class EventBuilder {
         name = new EventName(DEFAULT_NAME);
         duration = new Duration(DEFAULT_DURATION);
         description = new Description(DEFAULT_DESCRIPTION);
+        attendance = new Attendance(new HashSet<>());
     }
 
     /**
@@ -34,6 +39,7 @@ public class EventBuilder {
         name = eventToCopy.getName();
         duration = eventToCopy.getDuration();
         description = eventToCopy.getDescription();
+        attendance = eventToCopy.getAttendance();
     }
 
     /**
@@ -60,8 +66,16 @@ public class EventBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Attendance} of the {@code Event} that we are building.
+     */
+    public EventBuilder withAttendance(Attendance attendance) {
+        this.attendance = attendance;
+        return this;
+    }
+
     public Event build() {
-        return new Event(name, duration, description);
+        return new Event(name, duration, description, attendance);
     }
 
 }

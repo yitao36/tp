@@ -1,19 +1,24 @@
 package seedu.address.logic;
 
-import javafx.scene.control.TextArea;
+import seedu.address.ui.ResultDisplay;
 
 /**
  * A static class that handles displaying detailed feedback to the user.
  */
 public class MessageCenter {
-    private static TextArea resultDisplay;
+    private static ResultDisplay resultDisplay;
     private static StringBuilder stringBuilder = new StringBuilder();
+
+    /** An internal state is used since resultDisplay is not initialized while initializing model. */
+    private static boolean isError = false;
+
     /**
      * Initializes MessageCenter with the ResultDisplay Ui.
      */
-    public static void init(TextArea resultDisplay) {
+    public static void init(ResultDisplay resultDisplay) {
         assert MessageCenter.resultDisplay == null : "Already initialized";
         MessageCenter.resultDisplay = resultDisplay;
+        appendFront("CCAmper initialized.");
     }
 
     /**
@@ -33,10 +38,31 @@ public class MessageCenter {
     }
 
     /**
+     * This method is called when something has gone wrong during launch of program or execution of command.
+     * Sets the style of the result display to error.
+     */
+    public static void error() {
+        isError = true;
+    }
+
+    /**
+     * Sets the style of the result display ui to success.
+     */
+    public static void success() {
+        isError = false;
+    }
+
+    /**
      * Shows the currently built message into the text area Ui.
      */
     public static void showFeedback() {
+        if (isError) {
+            resultDisplay.setStyleError();
+        } else {
+            resultDisplay.setStyleSuccess();
+        }
         resultDisplay.setText(stringBuilder.toString());
         stringBuilder.setLength(0);
+        isError = false;
     }
 }

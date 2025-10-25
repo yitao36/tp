@@ -18,5 +18,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_ENROLL_YEAR = new Prefix("enroll/");
     public static final Prefix PREFIX_DURATION = new Prefix("d/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("info/");
-
+    public static final Prefix PREFIX_EVENT = new Prefix("e/");
+    public static final Prefix PREFIX_PERSON = new Prefix("p/");
 }
