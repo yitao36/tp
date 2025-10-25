@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.EnrollmentYear;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -41,6 +42,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
         descriptor.setPin(person.getPin());
+        descriptor.setEmergencyContact(person.getEmergencyContact());
         descriptor.setEnrollmentYear(person.getEnrollmentYear());
     }
 
@@ -81,6 +83,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withPin(boolean isPinned) {
         descriptor.setPin(new Pin(isPinned));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EmergencyContact} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withEmergencyContact(String emergencyName, String emergencyPhone) {
+        descriptor.setEmergencyContact(new EmergencyContact(emergencyName, emergencyPhone));
         return this;
     }
 

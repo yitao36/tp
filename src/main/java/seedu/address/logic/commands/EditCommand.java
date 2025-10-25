@@ -96,11 +96,13 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getEnrollmentYear());
         Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        EmergencyContact emergencyContact =
-                editPersonDescriptor.getEmergencyContact().orElse(personToEdit.getEmergencyContact().orElse(null));
+
+        EmergencyContact editEmergencyContact =
+                editPersonDescriptor.getEmergencyContact().orElse(new EmergencyContact());
+        EmergencyContact updatedEmergencyContact = personToEdit.getEmergencyContact().merge(editEmergencyContact);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPin,
-                updatedRoles, updatedTags, emergencyContact, updatedEnrollYear);
+                updatedRoles, updatedTags, updatedEmergencyContact, updatedEnrollYear);
     }
 
     @Override

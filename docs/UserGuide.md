@@ -190,7 +190,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​ [t/T
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * Editing roles follows the same rules as editing tags.
 * The pin field takes in either "TRUE" or "FALSE"
-* The emergency contact fields (`ecn` and `ecp`) must be either both provided or not at all.
+* If the student has no emergency contact, then both emergency contact fields (`ecn` and `ecp`) must be either both provided or not at all.
 * The enrollment year should be a positive integer or empty string (to delete)
 
 Examples:

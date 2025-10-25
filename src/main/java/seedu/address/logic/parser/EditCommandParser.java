@@ -23,6 +23,8 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
 import seedu.address.model.role.Role;
 import seedu.address.model.tag.Tag;
 
@@ -73,10 +75,20 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setPin(ParserUtil.parsePin(argMultimap.getValue(PREFIX_PIN).get()));
         }
 
-        EmergencyContact newEmergencyContact =
-                ParserUtil.parseEmergencyContact(argMultimap.getValue(PREFIX_EMERGENCY_NAME),
-                        argMultimap.getValue(PREFIX_EMERGENCY_PHONE)).orElse(null);
-        editPersonDescriptor.setEmergencyContact(newEmergencyContact);
+        final boolean hasEmergencyName = argMultimap.getValue(PREFIX_EMERGENCY_NAME).isPresent();
+        final boolean hasEmergencyPhone = argMultimap.getValue(PREFIX_EMERGENCY_PHONE).isPresent();
+        if (hasEmergencyName || hasEmergencyPhone) {
+            Name newEmergencyName = null;
+            if (hasEmergencyName) {
+                newEmergencyName = ParserUtil.parseName(argMultimap.getValue(PREFIX_EMERGENCY_NAME).get());
+            }
+            Phone newEmergencyPhone = null;
+            if (hasEmergencyPhone) {
+                newEmergencyPhone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_EMERGENCY_PHONE).get());
+            }
+            EmergencyContact newEmergencyContact = new EmergencyContact(newEmergencyName, newEmergencyPhone);
+            editPersonDescriptor.setEmergencyContact(newEmergencyContact);
+        }
 
         if (argMultimap.getValue(PREFIX_ENROLL_YEAR).isPresent()) {
             editPersonDescriptor.setEnrollmentYear(ParserUtil.parseEnrollmentYear(
