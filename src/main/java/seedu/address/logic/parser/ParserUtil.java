@@ -41,7 +41,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            if (StringUtil.isExceedsIntegerLimit(trimmedIndex)) {
+            if (!trimmedIndex.isEmpty() && StringUtil.isExceedsIntegerLimit(trimmedIndex)) {
                 throw new ParseException(MESSAGE_EXCEEDS_INTEGER_LIMIT);
             } else {
                 throw new ParseException(MESSAGE_INVALID_INDEX);
@@ -62,8 +62,7 @@ public class ParserUtil {
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         } else {
-            MessageCenter.appendEnd(
-                    String.format(Name.getStyleWarningMessage(name), name));
+            MessageCenter.appendEnd(String.format(Name.getStyleWarningMessage(name), name));
         }
         return new Name(trimmedName);
     }

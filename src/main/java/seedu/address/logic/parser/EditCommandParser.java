@@ -46,13 +46,12 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_ADDRESS, PREFIX_PIN, PREFIX_ROLE, PREFIX_EMERGENCY_NAME, PREFIX_EMERGENCY_PHONE,
                         PREFIX_TAG, PREFIX_ENROLL_YEAR);
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        // Checks if preamble consists of strictly integers.
+        if (argMultimap.getPreamble().isEmpty() || !argMultimap.getPreamble().matches("[0-9]*")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
+
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_PIN,
                 PREFIX_EMERGENCY_NAME, PREFIX_EMERGENCY_PHONE, PREFIX_ADDRESS, PREFIX_ENROLL_YEAR);

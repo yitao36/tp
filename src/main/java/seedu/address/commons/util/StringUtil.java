@@ -126,6 +126,6 @@ public class StringUtil {
     public static boolean isExceedsIntegerLimit(String s) {
         requireNonNull(s);
         final String regex = "[0-9]*";
-        return s.matches(regex);
+        return !s.equals("0") && s.matches(regex);
     }
 }

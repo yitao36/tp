@@ -16,7 +16,7 @@
         <VBox GridPane.columnIndex="0" GridPane.hgrow="SOMETIMES"/>
         <VBox GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES" alignment="TOP_CENTER">
             <Label fx:id="name" style="-fx-font-size: 40;" wrapText="true" maxHeight="125">
-                <!-- maxHeight to ensure max 2 line wrap -->
+                <!-- maxHeight to ensure max 2 line text wrap for Label -->
                 <ImageView fx:id="pinIcon" fitHeight="30.0" fitWidth="30.0"/>
             </Label>
 
