@@ -7,7 +7,11 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Represents a Person's emergency contact in the address book.
  * Guarantees: immutable; fields name, phone are valid as declared in {@link Name#isValidName},
- * {@link Phone#isValidPhone} respectively. Note that all fields may be null.
+ * {@link Phone#isValidPhone} respectively.
+ * Note that any fields may be null. This is because EmergencyContact class is used in places like EditPersonDescriptor,
+ * where it is perfectly valid to have null fields.
+ * It is only important for EmergencyContact to have all null fields / all non-null fields when it is used in the
+ * Person class, hence we maintain that invariant in Person class instead.
  */
 public class EmergencyContact {
 
@@ -17,8 +21,8 @@ public class EmergencyContact {
     /**
      * Constructs an {@code EmergencyContact}.
      *
-     * @param name  A valid name.
-     * @param phone A valid phone number.
+     * @param name  A (possibly null) valid name.
+     * @param phone A (possibly null) valid phone number.
      */
     public EmergencyContact(String name, String phone) {
         this.name = name == null ? null : new Name(name);
@@ -53,7 +57,8 @@ public class EmergencyContact {
     }
 
     /**
-     * Returns a new emergency contact, where the edits are applied to the current emergency contact.
+     * Returns a new emergency contact, which is the result of applying the edits to this emergency contact.
+     * Null fields in {@code edits} are treated as no change to the field.
      */
     public EmergencyContact merge(EmergencyContact edits) {
         String editedName = null;
