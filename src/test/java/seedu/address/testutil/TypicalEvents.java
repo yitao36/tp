@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.event.Attendance;
 import seedu.address.model.event.Event;
 
 /**
@@ -26,11 +27,11 @@ public class TypicalEvents {
             .withAttendance(VALID_ATTENDANCE_MEETING).build();
     public static final Event TRAINING = new EventBuilder().withName(VALID_NAME_TRAINING)
             .withDuration(VALID_DURATION_TRAINING).withDescription(VALID_DESCRIPTION_TRAINING)
-            .withAttendance(VALID_ATTENDANCE_MEETING).build();
+            .withAttendance(VALID_ATTENDANCE_TRAINING).build();
 
     public static final Event TRAINING_2 = new EventBuilder().withName(VALID_NAME_TRAINING)
             .withDuration("1/9/2025").withDescription(VALID_DESCRIPTION_TRAINING)
-            .withAttendance(VALID_ATTENDANCE_TRAINING).build();
+            .withAttendance(new Attendance(VALID_ATTENDANCE_TRAINING)).build();
 
     private TypicalEvents() {} // prevents instantiation
 
@@ -44,7 +45,7 @@ public class TypicalEvents {
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         for (Event event : getTypicalEvents()) {
-            ab.addEvent(event);
+            ab.addEvent(new Event(event));
         }
         return ab;
     }
