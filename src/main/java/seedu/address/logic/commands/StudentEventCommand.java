@@ -23,10 +23,11 @@ public class StudentEventCommand extends Command {
     public static final String COMMAND_WORD = "student:event";
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Lists all events attended by the student at the given index.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX_OF_STUDENT_LIST (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_LIST_EVENT_SUCCESS = "Listed %1$s events attended";
+    public static final String MESSAGE_NO_EVENTS_WARNING = "%1$s has not attended any events";
 
 
     private final Index targetIndex;
@@ -52,7 +53,13 @@ public class StudentEventCommand extends Command {
         model.updateFilteredPersonAndEventList(makeTargetPersonPredicate(targetPerson),
                 makeAttendedByPredicate(targetPerson));
 
-        return new CommandResult(String.format(MESSAGE_LIST_EVENT_SUCCESS, model.getFilteredEventList().size()));
+        String message;
+        if (model.getFilteredEventList().isEmpty()) {
+            message = String.format(MESSAGE_NO_EVENTS_WARNING, targetPerson.getName().toString());
+        } else {
+            message = String.format(MESSAGE_LIST_EVENT_SUCCESS, model.getFilteredEventList().size());
+        }
+        return new CommandResult(message);
     }
 
     @Override

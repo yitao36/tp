@@ -178,6 +178,11 @@ public class ModelManager implements Model {
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
+        // Any time we modify the filtered events list ony, we want to reset our filtered persons list to all persons,
+        // as we might currently only be showing a subset of persons.
+        // (e.g. if we were looking at one student's events, then we add an event).
+        filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+        isZoomInSelected.set(false);
         updateSelectedEvent();
     }
 

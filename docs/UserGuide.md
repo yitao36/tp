@@ -293,11 +293,11 @@ Examples:
 
 <br>
 
-### Listing a student's events : `student:event`
+### Listing events attended by a student : `student:event`
 
 Displays the events attended by a person at the specified index.
 
-Format: `student:event INDEX`
+Format: `student:event INDEX_OF_STUDENT_LIST`
 
 * The index refers to the index number shown in the currently displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -400,7 +400,7 @@ Action     | Format, Examples
 **Add Event** | `add:event n/NAME d/(d/M/yyyy or d/M/yyyy-d/M/yyyy) [info/DESCRIPTION]` <br> e.g., `add:event n/meeting d/1/10/2025 info/routine meeting`
 **Edit Event** | `edit:event [n/NAME] [d/(d/M/yyyy or d/M/yyyy-d/M/yyyy)] [info/DESCRIPTION]` <br> e.g., `edit:event 1 n/new meeting d/2/10/2025 info/special meeting`
 **Delete Event** | `delete:event INDEX`<br> e.g., `delete:event 3`
-**List Student's Event** | `student:event INDEX`<br> e.g., `student:event 1`
+**List Events Attended By Student** | `student:event INDEX_OF_STUDENT_LIST`<br> e.g., `student:event 1`
 **Consolidate** | `consolidate`
 **Clear**  | `clear`
 **Clear Events**  | `clear:event`
