@@ -14,7 +14,8 @@ public class Role {
             + "and each role is at max 20 characters long, "
             + "and each person can have a maximum of 3 roles.";
     public static final String FIND_MESSAGE_CONSTRAINTS = "Supplied substrings for roles should be "
-            + "alphanumeric with spaces, or empty.";
+            + "alphanumeric with spaces and at max 20 characters long, or empty to search for all "
+            + "people with at least one role.";
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9 ]+$";
 
     public final String roleName;
