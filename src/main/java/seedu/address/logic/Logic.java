@@ -44,6 +44,9 @@ public interface Logic {
     /** Returns a modifiable view of the selected event from the list of events */
     ObjectProperty<Event> getSelectedEvent();
 
+    /** Returns an unmodifiable view of whether to zoom in on the selected event/person. */
+    ObjectProperty<Boolean> getIsZoomInSelected();
+
     /**
      * Returns the user prefs' address book file path.
      */

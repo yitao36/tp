@@ -156,4 +156,14 @@ public class ModelStub implements Model {
     public void updateSelectedEvent() {
         throw new AssertionError("This method should not be called.");
     }
+
+    @Override
+    public void updateFilteredPersonAndEventList(Predicate<Person> personPredicate, Predicate<Event> eventPredicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObjectProperty<Boolean> getIsZoomInSelected() {
+        throw new AssertionError("This method should not be called.");
+    }
 }

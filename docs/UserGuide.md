@@ -293,6 +293,20 @@ Examples:
 
 <br>
 
+### Listing a student's events : `student:event`
+
+Displays the events attended by a person at the specified index.
+
+Format: `student:event INDEX`
+
+* The index refers to the index number shown in the currently displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `student:event 2` displays the events attended by the 2nd person in the displayed person list.
+
+<br>
+
 ### Consolidate student info : `consolidate`
 
 Consolidate students' a) names, b) phone number, c) email and d) address and
@@ -386,6 +400,7 @@ Action     | Format, Examples
 **Add Event** | `add:event n/NAME d/(d/M/yyyy or d/M/yyyy-d/M/yyyy) [info/DESCRIPTION]` <br> e.g., `add:event n/meeting d/1/10/2025 info/routine meeting`
 **Edit Event** | `edit:event [n/NAME] [d/(d/M/yyyy or d/M/yyyy-d/M/yyyy)] [info/DESCRIPTION]` <br> e.g., `edit:event 1 n/new meeting d/2/10/2025 info/special meeting`
 **Delete Event** | `delete:event INDEX`<br> e.g., `delete:event 3`
+**List Student's Event** | `student:event INDEX`<br> e.g., `student:event 1`
 **Consolidate** | `consolidate`
 **Clear**  | `clear`
 **Clear Events**  | `clear:event`

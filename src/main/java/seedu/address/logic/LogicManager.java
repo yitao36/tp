@@ -89,6 +89,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObjectProperty<Boolean> getIsZoomInSelected() {
+        return model.getIsZoomInSelected();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
     }

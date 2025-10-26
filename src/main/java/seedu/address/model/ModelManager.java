@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -26,6 +27,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Event> filteredEvents;
+    /** Whether to zoom in on the selected event/person (e.g. only show events of selected person).  */
+    private ObjectProperty<Boolean> isZoomInSelected = new SimpleObjectProperty<>(false);
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -193,7 +196,27 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+        // Any time we modify the filtered persons list ony, we want to reset our filtered events list to all events,
+        // as we might currently only be showing a subset of events (e.g. if we were looking at one student's events).
+        filteredEvents.setPredicate(PREDICATE_SHOW_ALL_EVENTS);
+        isZoomInSelected.set(false);
         updateSelectedPerson();
+    }
+
+    //=========== Filtered Person and Event List Accessors ==============================================
+
+    @Override
+    public void updateFilteredPersonAndEventList(Predicate<Person> personPredicate, Predicate<Event> eventPredicate) {
+        requireAllNonNull(personPredicate, eventPredicate);
+        filteredPersons.setPredicate(personPredicate);
+        filteredEvents.setPredicate(eventPredicate);
+        isZoomInSelected.set(true);
+        updateSelectedPerson();
+    }
+
+    /** Returns an unmodifiable view of whether to zoom in on the selected event/person. */
+    public ObjectProperty<Boolean> getIsZoomInSelected() {
+        return isZoomInSelected;
     }
 
     //=========== Selected Person Accessors =============================================================
