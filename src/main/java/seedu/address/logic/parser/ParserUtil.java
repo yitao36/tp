@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.role.Role.PERSON_MAX_ROLES;
 import static seedu.address.model.tag.Tag.PERSON_MAX_TAGS;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
@@ -79,8 +80,12 @@ public class ParserUtil {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
         trimmedPhone = trimmedPhone.replaceAll("[\\s-]", "");
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        String processNumber = Phone.convertRawFormat(trimmedPhone);
+        if (!Phone.isValidPhone(processNumber)) {
+            throw new ParseException(Phone.createErrorMessage(processNumber));
+        }
+        if (Phone.hasWarning(processNumber)) {
+            MessageCenter.appendEnd(Phone.createWarningMessage(processNumber));
         }
         return new Phone(trimmedPhone);
     }
@@ -110,7 +115,8 @@ public class ParserUtil {
         requireNonNull(email);
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            ArrayList<Email.SourceOfEmailIssue> sourcesOfErrors = Email.identifyEmailSegmentWithError(trimmedEmail);
+            throw new ParseException(Email.createErrorMessage(sourcesOfErrors));
         }
         return new Email(trimmedEmail);
     }

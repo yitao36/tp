@@ -70,6 +70,7 @@ public class AddressBookParserTest {
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(createCommandWithSpace(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
+        assertTrue(createCommandWithSpace(ClearCommand.COMMAND_WORD.toUpperCase()) instanceof ClearCommand);
     }
 
     @Test

@@ -23,7 +23,6 @@ public class TypicalEvents {
             .withDuration(VALID_DURATION_MEETING).withDescription(VALID_DESCRIPTION_MEETING).build();
     public static final Event TRAINING = new EventBuilder().withName(VALID_NAME_TRAINING)
             .withDuration(VALID_DURATION_TRAINING).withDescription(VALID_DESCRIPTION_TRAINING).build();
-
     public static final Event TRAINING_2 = new EventBuilder().withName(VALID_NAME_TRAINING)
             .withDuration("1/9/2025").withDescription(VALID_DESCRIPTION_TRAINING).build();
 
