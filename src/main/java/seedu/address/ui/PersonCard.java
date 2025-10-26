@@ -85,6 +85,10 @@ public class PersonCard extends UiPart<Region> {
         String enrollmentYearStr = person.getEnrollmentYear().toString();
         enrollmentYear.setText(enrollmentYearStr.isEmpty()
                 ? "No enrollment year" : "Enrollment Year: " + enrollmentYearStr);
+
+        setupFlowPaneWrapping(roles, cardPane);
+        setupFlowPaneWrapping(tags, cardPane);
+
         person.getRoles().stream()
                 .sorted(Comparator.comparing(role -> role.roleName))
                 .forEach(role -> roles.getChildren().add(new Label(role.roleName)));
@@ -92,5 +96,24 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    /**
+     * Sets up proper wrapping for a FlowPane based on parent width.
+     */
+    private void setupFlowPaneWrapping(FlowPane flowPane, HBox parent) {
+        flowPane.setMaxWidth(Region.USE_PREF_SIZE);
+
+        parent.widthProperty().addListener((obs, oldVal, newVal) -> {
+            double availableWidth = newVal.doubleValue() - 60;
+            flowPane.setPrefWrapLength(availableWidth);
+            flowPane.setMaxWidth(availableWidth);
+        });
+
+        if (parent.getWidth() > 0) {
+            double availableWidth = parent.getWidth() - 60;
+            flowPane.setPrefWrapLength(availableWidth);
+            flowPane.setMaxWidth(availableWidth);
+        }
     }
 }
