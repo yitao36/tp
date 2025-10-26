@@ -23,6 +23,11 @@ public class Attendance {
         this.persons.addAll(persons);
     }
 
+    /** Copy constructor. */
+    public Attendance(Attendance attendance) {
+        this.persons.addAll(attendance.persons);
+    }
+
     /**
      * Adds a person to the current attendance set.
      * @throws DuplicateAttendeeException if the person is already in the set.

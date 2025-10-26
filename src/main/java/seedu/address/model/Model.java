@@ -161,7 +161,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
-
     /** Returns the selected event in the filtered event list. */
     ObjectProperty<Event> getSelectedEvent();
 
@@ -170,4 +169,13 @@ public interface Model {
      * If not, either set it to the first event in the list, or null if the list is empty.
      */
     void updateSelectedEvent();
+
+    /**
+     * Update the filter of both filtered person list and filtered event list to filter by the given {@code predicates}.
+     * @throws NullPointerException if either {@code predicate}s are null.
+     */
+    void updateFilteredPersonAndEventList(Predicate<Person> personPredicate, Predicate<Event> eventPredicate);
+
+    /** Returns an unmodifiable view of whether to zoom in on the selected event/person. */
+    ObjectProperty<Boolean> getIsZoomInSelected();
 }

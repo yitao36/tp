@@ -123,7 +123,8 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getSelectedPerson());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        eventListPanel = new EventListPanel(logic.getFilteredEventList(), logic.getSelectedEvent());
+        eventListPanel = new EventListPanel(logic.getFilteredEventList(), logic.getSelectedEvent(),
+                logic.getSelectedPerson(), logic.getIsZoomInSelected());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         detailedPanel = new DetailedPanel(logic.getSelectedPerson(), logic.getSelectedEvent());

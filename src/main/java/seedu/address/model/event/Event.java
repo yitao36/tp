@@ -31,7 +31,15 @@ public class Event {
         this.name = name;
         this.duration = duration;
         this.description = description;
-        this.attendance = attendance;
+        this.attendance = new Attendance(attendance);
+    }
+
+    /** Copy constructor */
+    public Event(Event event) {
+        this.name = event.getName();
+        this.duration = event.getDuration();
+        this.description = event.getDescription();
+        this.attendance = new Attendance(event.getAttendance());
     }
 
     public EventName getName() {
