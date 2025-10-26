@@ -12,7 +12,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -120,18 +119,20 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Pin pin = ParserUtil.parsePin(argMultimap.getValue(PREFIX_PIN).isPresent() ? "TRUE" : "FALSE");
-        Optional<EmergencyContact> emergencyContact =
-                ParserUtil.parseEmergencyContact(argMultimap.getValue(PREFIX_EMERGENCY_NAME),
-                        argMultimap.getValue(PREFIX_EMERGENCY_PHONE));
+        Pin pin = ParserUtil.parsePin(argMultimap.getValue(PREFIX_PIN).isPresent()
+                ? argMultimap.getValue(PREFIX_PIN).get()
+                : "false");
+        EmergencyContact emergencyContact =
+                ParserUtil.parseEmergencyContact(argMultimap.getValue(PREFIX_EMERGENCY_NAME).orElse(null),
+                        argMultimap.getValue(PREFIX_EMERGENCY_PHONE).orElse(null));
         EnrollmentYear enrollmentYear = ParserUtil.parseEnrollmentYear(
                 argMultimap.getValue(PREFIX_ENROLL_YEAR).orElse(""));
         Set<Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         try {
-            Person person = new Person(name, phone, email, address, pin, roleList, tagList,
-                    emergencyContact.orElse(null), enrollmentYear);
+            Person person = new Person(name, phone, email, address, pin, roleList, tagList, emergencyContact,
+                    enrollmentYear);
             return new AddCommand(person);
         } catch (IllegalArgumentException e) {
             throw new ParseException(compilationOfErrorMessage + e.getMessage());

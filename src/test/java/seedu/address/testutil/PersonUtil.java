@@ -59,7 +59,7 @@ public class PersonUtil {
         );
         sb.append(PREFIX_PIN + person.getPin().toString() + " ");
         if (person.getEmergencyContact().isPresent()) {
-            final EmergencyContact emergencyContact = person.getEmergencyContact().get();
+            final EmergencyContact emergencyContact = person.getEmergencyContact();
             sb.append(PREFIX_EMERGENCY_NAME + emergencyContact.name.fullName + " ");
             sb.append(PREFIX_EMERGENCY_PHONE + emergencyContact.phone.value + " ");
         }
@@ -97,8 +97,12 @@ public class PersonUtil {
                         .append(pin.value ? "True" : "False")
                         .append(" "));
         descriptor.getEmergencyContact().ifPresent(emergencyContact -> {
-            sb.append(PREFIX_EMERGENCY_NAME + emergencyContact.name.fullName + " ");
-            sb.append(PREFIX_EMERGENCY_PHONE + emergencyContact.phone.value + " ");
+            if (emergencyContact.name != null) {
+                sb.append(PREFIX_EMERGENCY_NAME).append(emergencyContact.name.fullName).append(" ");
+            }
+            if (emergencyContact.phone != null) {
+                sb.append(PREFIX_EMERGENCY_PHONE).append(emergencyContact.phone.value).append(" ");
+            }
         });
         descriptor.getEnrollmentYear().ifPresent(enrollmentYear ->
             sb.append(PREFIX_ENROLL_YEAR)

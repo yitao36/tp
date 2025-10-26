@@ -103,7 +103,7 @@ CCAmper is optimized for use via a
 | Pin                   | • Input either `TRUE` or `FALSE` (Non case-sensitive)                                                                                                                                                                                                                                                |
 
 **Duplicate handling**
-* We require that no two person have the exact same `Name`, `Phone` and `Email` combination.
+* We require that no two person have the exact same `Name` and `Phone` combination.
 
 </box>
 
@@ -148,7 +148,7 @@ A popup appears which redirects the user to this current page. :D
 
 Add students to your address book, with the given fields.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE]…​ [t/TAG]…​ [pin/] [enroll/YEAR] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE]…​ [t/TAG]…​ [pin/TRUE] [enroll/YEAR] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE]`
 
 Additional information on fields:
 * While one may key in phone numbers with hyphen(s) and/or space(s) to improve human-readability, the hyphen(s) and space(s) are automatically removed when phone number is stored in app.
@@ -190,7 +190,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​ [t/T
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * Editing roles follows the same rules as editing tags.
 * The pin field takes in either "TRUE" or "FALSE"
-* The emergency contact fields (`ecn` and `ecp`) must be either both provided or not at all.
+* If the student has no emergency contact, then both emergency contact fields (`ecn` and `ecp`) must be either both provided or not at all.
 * The enrollment year should be a positive integer or empty string (to delete)
 
 Examples:
@@ -258,6 +258,23 @@ Examples:
 **Note:**
 Events are considered duplicates if they have the same name and duration.
 </box>
+
+<br>
+
+### Editing an event : `edit:event`
+
+Edits an existing event in the address book.
+
+Format: `edit:event INDEX [n/NAME] [d/(d/M/yyyy or d/M/yyyy-d/M/yyyy)] [info/DESCRIPTION]`
+
+* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* You can remove the event's description by typing `info/` without specifying any description after it.
+
+Examples:
+* `edit:event 1 n/new meeting d/2/10/2025 info/special meeting` Edits the 1st event
+* `edit:event 2 info/` Clears the description of the 2nd event
 
 <br>
 
@@ -361,12 +378,13 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Help** | `help`
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE]…​ [t/TAG]…​ [pin/] [enroll/YEAR] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE]` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/president r/camp leader ecn/Jack Doe ecp/99998888 enroll/2022 t/friend`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE]…​ [t/TAG]…​ [pin/TRUE] [enroll/YEAR] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE]` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/president r/camp leader ecn/Jack Doe ecp/99998888 enroll/2022 t/friend`
 **List** | `list`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​ [t/TAG]…​ [pin/(TRUE/FALSE)] [enroll/[YEAR]] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE]`<br> e.g.,`edit 1 n/John p/98765432 e/johndoe@example.com a/New Place r/Senior Student t/experienced pin/TRUE enroll/2022 ecn/Sally ecp/88887777`
 **Find** | `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<\|<=\|>\|>=\|=)NUMBER]] [r/SUBSTRING]…​`<br> e.g., `find n/yu john enroll/>=2022 r/lead r/sec`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Add Event** | `add:event n/NAME d/(d/M/yyyy or d/M/yyyy-d/M/yyyy) [info/DESCRIPTION]` <br> e.g., `add:event n/meeting d/1/10/2025 info/routine meeting`
+**Edit Event** | `edit:event [n/NAME] [d/(d/M/yyyy or d/M/yyyy-d/M/yyyy)] [info/DESCRIPTION]` <br> e.g., `edit:event 1 n/new meeting d/2/10/2025 info/special meeting`
 **Delete Event** | `delete:event INDEX`<br> e.g., `delete:event 3`
 **Consolidate** | `consolidate`
 **Clear**  | `clear`

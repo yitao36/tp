@@ -6,7 +6,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -15,12 +14,13 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null (except optional fields below), field values are validated, immutable.
- * Optional fields: [emergencyContact, enrollmentYear].
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
 
-    public static final String MESSAGE_CONSTRAINTS =
+    public static final String EMERGENCY_MESSAGE_CONSTRAINTS =
+            "Emergency contact must be either not provided, or contain both name and phone.";
+    public static final String EMERGENCY_NUMBER_MESSAGE_CONSTRAINTS =
             "Emergency contact's phone number should not be the same as this person's.";
 
     // Identity fields
@@ -41,8 +41,8 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Pin pin, Set<Role> roles, Set<Tag> tags,
                   EmergencyContact emergencyContact, EnrollmentYear enrollmentYear) {
-        requireAllNonNull(name, phone, email, address, pin, tags);
-        checkArgument(isValidPerson(phone, emergencyContact), MESSAGE_CONSTRAINTS);
+        requireAllNonNull(name, phone, email, address, pin, tags, emergencyContact);
+        checkValidPerson(phone, emergencyContact);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -55,14 +55,17 @@ public class Person {
     }
 
     /**
-     * Returns true if the given parameters form a valid Person:
-     * The emergency contact (if provided) must not have the same number as the contact.
+     * Checks if the given parameters form a valid Person.
+     *
+     * @param phone            Student's phone number.
+     * @param emergencyContact Student's emergency contact.
+     * @throws IllegalArgumentException through checkArgument if person is invalid.
      */
-    public static boolean isValidPerson(Phone phone, EmergencyContact emergencyContact) {
-        if (emergencyContact != null) {
-            return !emergencyContact.phone.equals(phone);
+    public static void checkValidPerson(Phone phone, EmergencyContact emergencyContact) {
+        checkArgument(emergencyContact.isPresent() || emergencyContact.isEmpty(), EMERGENCY_MESSAGE_CONSTRAINTS);
+        if (emergencyContact.isPresent()) {
+            checkArgument(!emergencyContact.phone.equals(phone), EMERGENCY_NUMBER_MESSAGE_CONSTRAINTS);
         }
-        return true;
     }
 
     public Name getName() {
@@ -101,8 +104,10 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public Optional<EmergencyContact> getEmergencyContact() {
-        return Optional.ofNullable(emergencyContact);
+    public EmergencyContact getEmergencyContact() {
+        assert emergencyContact.isPresent() || emergencyContact.isEmpty()
+                : "emergency contact cannot be partially filled";
+        return emergencyContact;
     }
 
     public EnrollmentYear getEnrollmentYear() {
@@ -119,12 +124,12 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
      * Returns true if both persons have the same identity and data fields.
-     * Does not take into account {@code Pin} field.
      * This defines a stronger notion of equality between two persons.
      */
     @Override
@@ -145,6 +150,7 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && roles.equals(otherPerson.roles)
                 && tags.equals(otherPerson.tags)
+                && pin.equals(otherPerson.pin)
                 && enrollmentYear.equals(otherPerson.enrollmentYear);
     }
 

@@ -7,7 +7,6 @@ import static seedu.address.model.tag.Tag.PERSON_MAX_TAGS;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -43,7 +42,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            if (StringUtil.isExceedsIntegerLimit(trimmedIndex)) {
+            if (!trimmedIndex.isEmpty() && StringUtil.isExceedsIntegerLimit(trimmedIndex)) {
                 throw new ParseException(MESSAGE_EXCEEDS_INTEGER_LIMIT);
             } else {
                 throw new ParseException(MESSAGE_INVALID_INDEX);
@@ -64,8 +63,7 @@ public class ParserUtil {
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         } else {
-            MessageCenter.appendEnd(
-                    String.format(Name.getStyleWarningMessage(name), name));
+            MessageCenter.appendEnd(String.format(Name.getStyleWarningMessage(name), name));
         }
         return new Name(trimmedName);
     }
@@ -137,22 +135,12 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code emergencyName, emergencyPhone} into an {@code EmergencyContact}.
+     * Parses an {@code emergencyName, emergencyPhone} into an {@code EmergencyContact}.
      */
-    public static Optional<EmergencyContact> parseEmergencyContact(Optional<String> emergencyName,
-                                                                   Optional<String> emergencyPhone)
-                                                                    throws ParseException {
-        int presentFieldsCount = (emergencyName.isPresent() ? 1 : 0)
-                + (emergencyPhone.isPresent() ? 1 : 0);
-
-        if (presentFieldsCount != 0 && presentFieldsCount != 2) {
-            throw new ParseException(EmergencyContact.MESSAGE_CONSTRAINTS);
-        }
-        if (presentFieldsCount == 0) {
-            return Optional.empty();
-        }
+    public static EmergencyContact parseEmergencyContact(String emergencyName, String emergencyPhone)
+            throws ParseException {
         try {
-            return Optional.of(new EmergencyContact(emergencyName.get(), emergencyPhone.get()));
+            return new EmergencyContact(emergencyName, emergencyPhone);
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());
         }
@@ -280,5 +268,28 @@ public class ParserUtil {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
         return new Description(trimmedDesc);
+    }
+
+    /**
+     * Parses a {@code String indexes} into a {@code Set<Index>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if any of the index is invalid.
+     */
+    public static Set<Index> parseIndexes(String indexes) throws ParseException {
+        requireNonNull(indexes);
+        String trimmedIndexes = indexes.trim();
+        Set<Index> indexSet = new HashSet<>();
+        String[] indexList = indexes.split(" ");
+        for (String index : indexList) {
+            Index i = parseIndex(index);
+            if (indexSet.contains(i)) {
+                MessageCenter.appendEnd(
+                        String.format("Warning: Duplicate index %d supplied, this is ignored.", i.getOneBased()));
+            } else {
+                indexSet.add(i);
+            }
+        }
+        return indexSet;
     }
 }

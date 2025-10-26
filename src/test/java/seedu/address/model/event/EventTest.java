@@ -79,7 +79,8 @@ public class EventTest {
     @Test
     public void toStringMethod() {
         String expected = Event.class.getCanonicalName() + "{name=" + MEETING.getName()
-                + ", duration=" + MEETING.getDuration() + ", description=" + MEETING.getDescription() + "}";
+                + ", duration=" + MEETING.getDuration() + ", description=" + MEETING.getDescription()
+                + ", attendance=" + MEETING.getAttendance() + "}";
         assertEquals(expected, MEETING.toString());
     }
 }

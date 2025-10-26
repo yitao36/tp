@@ -1,13 +1,21 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.event.Attendance;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Duration;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
+import seedu.address.model.event.PersonReference;
 
 /**
  * Jackson-friendly version of {@link Event}.
@@ -19,16 +27,19 @@ class JsonAdaptedEvent {
     private final String name;
     private final String duration;
     private final String description;
+    private final List<JsonAdaptedPersonReference> attendance = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given event details.
      */
     @JsonCreator
     public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("duration") String duration,
-                             @JsonProperty("description") String description) {
+                             @JsonProperty("description") String description,
+                             @JsonProperty("attendance") List<JsonAdaptedPersonReference> attendance) {
         this.name = name;
         this.duration = duration;
         this.description = description;
+        this.attendance.addAll(attendance);
     }
 
     /**
@@ -38,6 +49,9 @@ class JsonAdaptedEvent {
         name = source.getName().value;
         duration = source.getDuration().toString();
         description = source.getDescription().value;
+        attendance.addAll(source.getAttendance().asUnmodifiableList().stream()
+                .map(JsonAdaptedPersonReference::new)
+                .collect(Collectors.toUnmodifiableSet()));
     }
 
     /**
@@ -72,7 +86,14 @@ class JsonAdaptedEvent {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
         final Description modelDescription = new Description(description);
-        return new Event(modelName, modelDuration, modelDescription);
+
+        Set<PersonReference> modelList = new HashSet<>();
+        for (JsonAdaptedPersonReference pr : attendance) {
+            modelList.add(pr.toModelType());
+        }
+        Attendance modelAttendance = new Attendance(modelList);
+
+        return new Event(modelName, modelDuration, modelDescription, modelAttendance);
     }
 
 }

@@ -16,19 +16,9 @@ public class EmergencyContactTest {
     static final String OTHER_VALID_NAME = "Bob";
 
     @Test
-    public void constructor_nullName_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new EmergencyContact(null, VALID_PHONE));
-    }
-
-    @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
         String invalidName = "";
         assertThrows(IllegalArgumentException.class, () -> new EmergencyContact(invalidName, VALID_PHONE));
-    }
-
-    @Test
-    public void constructor_nullPhone_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new EmergencyContact(VALID_NAME, null));
     }
 
     @Test

@@ -7,19 +7,17 @@
 <VBox   xmlns="http://javafx.com/javafx/17"
         xmlns:fx="http://javafx.com/fxml/1"
         style="-fx-padding: 15 15 15 15;">
-    <Label fx:id="title" underline="true" maxWidth="Infinity" text="Welcome to CCAmper!" alignment="TOP_CENTER"
+    <Label fx:id="title" underline="true" prefWidth="Infinity" text="Welcome to CCAmper!" alignment="CENTER"
         wrapText="true" textAlignment="CENTER" contentDisplay="RIGHT" VBox.vgrow="SOMETIMES"
-           style=" -fx-font-size: 30.0;
-                -fx-padding: 0 0 15 0;">
+           style="-fx-padding: 0 0 15 0;-fx-font-size: 30">
         <ImageView fx:id="tentIcon" fitWidth="40.0" fitHeight="40.0"/>
     </Label>
 
-    <Label fx:id="description" maxWidth="Infinity" alignment="TOP_CENTER" VBox.vgrow="ALWAYS"
+    <Label fx:id="description" prefWidth="Infinity" alignment="CENTER" VBox.vgrow="ALWAYS" maxHeight="Infinity"
            text="We are designed to solve your CCA management needs.
 &#10;First time user? Type in `help` and visit our website!
 &#10;&#10;List of available commands:
 &#10; 1. General commands: help, exit
 &#10; 2. Student-related commands: add, list, edit, find, delete, consolidate, clear
-&#10; 3. Event-related commands: add:event, delete:event, clear:event" wrapText="true"
-           style="-fx-font-size: 20.0;"/>
+&#10; 3. Event-related commands: add:event, edit:event, delete:event, clear:event" wrapText="true"/>
 </VBox>

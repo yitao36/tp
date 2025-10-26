@@ -23,6 +23,8 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
 import seedu.address.model.role.Role;
 import seedu.address.model.tag.Tag;
 
@@ -44,13 +46,12 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_ADDRESS, PREFIX_PIN, PREFIX_ROLE, PREFIX_EMERGENCY_NAME, PREFIX_EMERGENCY_PHONE,
                         PREFIX_TAG, PREFIX_ENROLL_YEAR);
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        // Checks if preamble consists of strictly integers.
+        if (argMultimap.getPreamble().isEmpty() || !argMultimap.getPreamble().matches("[0-9]*")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
+
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_PIN,
                 PREFIX_EMERGENCY_NAME, PREFIX_EMERGENCY_PHONE, PREFIX_ADDRESS, PREFIX_ENROLL_YEAR);
@@ -73,10 +74,20 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setPin(ParserUtil.parsePin(argMultimap.getValue(PREFIX_PIN).get()));
         }
 
-        EmergencyContact newEmergencyContact =
-                ParserUtil.parseEmergencyContact(argMultimap.getValue(PREFIX_EMERGENCY_NAME),
-                        argMultimap.getValue(PREFIX_EMERGENCY_PHONE)).orElse(null);
-        editPersonDescriptor.setEmergencyContact(newEmergencyContact);
+        final boolean hasEmergencyName = argMultimap.getValue(PREFIX_EMERGENCY_NAME).isPresent();
+        final boolean hasEmergencyPhone = argMultimap.getValue(PREFIX_EMERGENCY_PHONE).isPresent();
+        if (hasEmergencyName || hasEmergencyPhone) {
+            Name newEmergencyName = null;
+            if (hasEmergencyName) {
+                newEmergencyName = ParserUtil.parseName(argMultimap.getValue(PREFIX_EMERGENCY_NAME).get());
+            }
+            Phone newEmergencyPhone = null;
+            if (hasEmergencyPhone) {
+                newEmergencyPhone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_EMERGENCY_PHONE).get());
+            }
+            EmergencyContact newEmergencyContact = new EmergencyContact(newEmergencyName, newEmergencyPhone);
+            editPersonDescriptor.setEmergencyContact(newEmergencyContact);
+        }
 
         if (argMultimap.getValue(PREFIX_ENROLL_YEAR).isPresent()) {
             editPersonDescriptor.setEnrollmentYear(ParserUtil.parseEnrollmentYear(

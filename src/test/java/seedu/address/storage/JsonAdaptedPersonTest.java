@@ -37,7 +37,7 @@ public class JsonAdaptedPersonTest {
             .collect(Collectors.toList());
     private static final Boolean VALID_PIN = BENSON.getPin().value;
     private static final JsonAdaptedEmergencyContact VALID_EMERGENCY_CONTACT =
-            new JsonAdaptedEmergencyContact(BENSON.getEmergencyContact().get());
+            new JsonAdaptedEmergencyContact(BENSON.getEmergencyContact());
     private static final String VALID_ENROLLMENT_YEAR = BENSON.getEnrollmentYear().toString();
 
     @Test

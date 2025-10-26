@@ -26,6 +26,9 @@ public class MessageCenter {
      * Used for showing the main success / error message.
      */
     public static void appendFront(String s) {
+        if (s.isEmpty()) {
+            return;
+        }
         stringBuilder.insert(0, "\n").insert(0, s);
     }
 
@@ -34,6 +37,9 @@ public class MessageCenter {
      * Typically used for showing additional info, such as style warnings.
      */
     public static void appendEnd(String s) {
+        if (s.isEmpty()) {
+            return;
+        }
         stringBuilder.append(s).append("\n");
     }
 

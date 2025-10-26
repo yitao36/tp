@@ -1,6 +1,7 @@
 package seedu.address.ui.detailedpanel;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -93,11 +94,9 @@ public class PersonPanel extends UiPart<VBox> {
         name.setText(selected.getName().fullName);
 
         if (selected.getPin().value) {
-            pinIcon.setManaged(true);
-            pinIcon.setVisible(true);
+            name.setContentDisplay(ContentDisplay.LEFT);
         } else {
-            pinIcon.setManaged(false);
-            pinIcon.setVisible(false);
+            name.setContentDisplay(ContentDisplay.TEXT_ONLY);
         }
 
         roles.getChildren().clear();
@@ -128,7 +127,7 @@ public class PersonPanel extends UiPart<VBox> {
             emergencyPhone.setManaged(true);
             emergencyPhone.setVisible(true);
 
-            EmergencyContact ec = selected.getEmergencyContact().get();
+            EmergencyContact ec = selected.getEmergencyContact();
             emergencyName.setText(ec.name.fullName);
             emergencyPhone.setText(ec.phone.value);
         } else {
