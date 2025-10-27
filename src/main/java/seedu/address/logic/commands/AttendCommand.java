@@ -4,10 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.MessageCenter;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Attendance;
@@ -73,18 +75,25 @@ public class AttendCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        if (event.getZeroBased() >= model.getFilteredEventList().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        }
+
         Event eventToEdit = model.getFilteredEventList().get(event.getZeroBased());
-        List<PersonReference> personsToAdd = attendees
-                .stream()
-                .map(i -> {
-                    Person p = model.getFilteredPersonList().get(i.getZeroBased());
-                    PersonReference pr = new PersonReference(p);
-                    return pr;
-                })
-                .toList();
+        List<PersonReference> personsToAdd = new ArrayList<>();
+
+        for (Index i : attendees) {
+            if (i.getZeroBased() < model.getFilteredPersonList().size()) {
+                Person p = model.getFilteredPersonList().get(i.getZeroBased());
+                personsToAdd.add(new PersonReference(p));
+            } else {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+        }
 
         // Convert to names to display text result of names added.
         List<Name> names = personsToAdd.stream()
+                .filter(p -> !eventToEdit.getAttendance().contains(p))
                 .map(PersonReference::getName)
                 .toList();
 

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Attendance;
@@ -57,11 +58,22 @@ public class UnattendCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        if (eventIndex.getZeroBased() >= model.getFilteredEventList().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        }
+
         Event event = model.getFilteredEventList().get(eventIndex.getZeroBased());
         Attendance attendance = event.getAttendance();
         List<PersonReference> personList = attendance.asUnmodifiableList();
         List<PersonReference> personsToRemove = new ArrayList<>();
-        attendees.forEach(i -> personsToRemove.add(personList.get(i.getZeroBased())));
+
+        for (Index i : attendees) {
+            if (i.getZeroBased() < personList.size()) {
+                personsToRemove.add(personList.get(i.getZeroBased()));
+            } else {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+        }
 
         Event edittedEvent = createEditedEvent(event, personsToRemove);
         model.setEvent(event, edittedEvent);
