@@ -11,6 +11,7 @@ public class Tag {
     public static final int PERSON_MAX_TAGS = 5;
     public static final String PERSON_TAGS_SIZE_CONSTRAINT = "Each person can have a maximum of 5 tags!";
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric, "
+            + "each tag is at max 15 characters long, "
             + "and each person can have a maximum of 5 tags.";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
@@ -31,7 +32,7 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.length() <= 15 && test.matches(VALIDATION_REGEX);
     }
 
     @Override
