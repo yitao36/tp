@@ -10,6 +10,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.ZoomIn;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
@@ -158,12 +159,13 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void updateFilteredPersonAndEventList(Predicate<Person> personPredicate, Predicate<Event> eventPredicate) {
+    public void updateFilteredPersonAndEventList(Predicate<Person> personPredicate, Predicate<Event> eventPredicate,
+                                                 ZoomIn zoomIn) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public ObjectProperty<Boolean> getIsZoomInSelected() {
+    public ObjectProperty<ZoomIn> getZoomInSelected() {
         throw new AssertionError("This method should not be called.");
     }
 }
