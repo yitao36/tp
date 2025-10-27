@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 import seedu.address.model.event.Attendance;
 import seedu.address.model.event.Description;
@@ -29,7 +29,7 @@ public class EventBuilder {
         name = new EventName(DEFAULT_NAME);
         duration = new Duration(DEFAULT_DURATION);
         description = new Description(DEFAULT_DESCRIPTION);
-        attendance = new Attendance(new HashSet<>());
+        attendance = new Attendance(new ArrayList<>());
     }
 
     /**

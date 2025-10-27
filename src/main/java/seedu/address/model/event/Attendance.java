@@ -1,9 +1,10 @@
 package seedu.address.model.event;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.exceptions.DuplicateAttendeeException;
@@ -15,11 +16,11 @@ import seedu.address.model.event.exceptions.PersonReferenceNotFoundException;
  */
 public class Attendance {
     public static final String MESSAGE_CONSTRAINTS = "The indexes ";
-    private final Set<PersonReference> persons = new HashSet<>();
+    private final List<PersonReference> persons = new ArrayList<>();
 
     public Attendance() {}
 
-    public Attendance(Set<PersonReference> persons) {
+    public Attendance(List<PersonReference> persons) {
         this.persons.addAll(persons);
     }
 
@@ -32,11 +33,15 @@ public class Attendance {
      * Adds a person to the current attendance set.
      * @throws DuplicateAttendeeException if the person is already in the set.
      */
-    public void addPerson(PersonReference p) {
+    public void add(PersonReference p) {
         if (persons.contains(p)) {
             throw new DuplicateAttendeeException();
         }
         persons.add(p);
+    }
+
+    public void addAll(Collection<PersonReference> p) {
+        persons.addAll(p);
     }
 
     public boolean hasPerson(PersonReference p) {
@@ -47,19 +52,30 @@ public class Attendance {
      * Removes a person from the current attendance set.
      * @throws PersonReferenceNotFoundException if the person does not exist in the set.
      */
-    public void removePerson(PersonReference p) {
+    public void remove(PersonReference p) {
         if (!persons.contains(p)) {
             throw new PersonReferenceNotFoundException();
         }
         this.persons.remove(p);
     }
 
+    /**
+     * Removes a person from the current attendance set at the given index.
+     */
+    public void remove(int index) {
+        persons.remove(index);
+    }
+
+    public void removeAll(Collection<PersonReference> personsToRemove) {
+        persons.removeAll(personsToRemove);
+    }
+
     public boolean contains(PersonReference p) {
         return persons.contains(p);
     }
 
-    public Set<PersonReference> asUnmodifiableList() {
-        return Collections.unmodifiableSet(persons);
+    public List<PersonReference> asUnmodifiableList() {
+        return Collections.unmodifiableList(persons);
     }
     @Override
     public boolean equals(Object other) {

@@ -31,7 +31,7 @@ public class TypicalAddressBook {
         // First person attends all events.
         Person firstPerson = ab.getPersonList().get(0);
         for (Event event : ab.getEventList()) {
-            event.getAttendance().addPerson(new PersonReference(firstPerson));
+            event.getAttendance().add(new PersonReference(firstPerson));
         }
 
         return ab;
