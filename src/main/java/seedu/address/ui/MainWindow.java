@@ -120,11 +120,12 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window, and binds certain observable components in the Ui.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getSelectedPerson());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getSelectedPerson(),
+                logic.getZoomInSelected());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         eventListPanel = new EventListPanel(logic.getFilteredEventList(), logic.getSelectedEvent(),
-                logic.getSelectedPerson(), logic.getIsZoomInSelected());
+                logic.getZoomInSelected());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         detailedPanel = new DetailedPanel(logic.getSelectedPerson(), logic.getSelectedEvent());

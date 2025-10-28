@@ -174,8 +174,9 @@ public interface Model {
      * Update the filter of both filtered person list and filtered event list to filter by the given {@code predicates}.
      * @throws NullPointerException if either {@code predicate}s are null.
      */
-    void updateFilteredPersonAndEventList(Predicate<Person> personPredicate, Predicate<Event> eventPredicate);
+    void updateFilteredPersonAndEventList(Predicate<Person> personPredicate, Predicate<Event> eventPredicate,
+                                          ZoomIn zoomIn);
 
-    /** Returns an unmodifiable view of whether to zoom in on the selected event/person. */
-    ObjectProperty<Boolean> getIsZoomInSelected();
+    /** Returns an unmodifiable view of whether to zoom in on the selected person. */
+    ObjectProperty<ZoomIn> getZoomInSelected();
 }

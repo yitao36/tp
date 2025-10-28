@@ -17,23 +17,23 @@ import seedu.address.model.event.PersonReference;
 import seedu.address.model.person.Person;
 
 /**
- * Lists all events the given student is attending.
+ * Lists all students attending the given event.
  */
-public class StudentEventCommand extends Command {
+public class EventStudentCommand extends Command {
 
-    public static final String COMMAND_WORD = "student:event";
+    public static final String COMMAND_WORD = "event:student";
     public static final String MESSAGE_USAGE =
-            COMMAND_WORD + ": Lists all events attended by the student at the given index.\n"
-            + "Parameters: INDEX_OF_STUDENT_LIST (must be a positive integer)\n"
+            COMMAND_WORD + ": Lists all students attending the event at the given index.\n"
+            + "Parameters: INDEX_OF_EVENT_LIST (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_LIST_EVENT_SUCCESS = "Listed %1$s events attended";
-    public static final String MESSAGE_NO_EVENTS_WARNING = "%1$s has not attended any events";
+    public static final String MESSAGE_LIST_STUDENTS_SUCCESS = "Listed %1$s students attending.";
+    public static final String MESSAGE_NO_STUDENTS_WARNING = "%1$s has no students attending.";
 
 
     private final Index targetIndex;
 
-    public StudentEventCommand(Index targetIndex) {
+    public EventStudentCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -42,24 +42,24 @@ public class StudentEventCommand extends Command {
         requireNonNull(model);
 
         if (model.isEmptyAddressBook()) {
-            throw new CommandException(Messages.specifyEmptyUserListMessage(COMMAND_WORD));
+            throw new CommandException(Messages.specifyEmptyEventListMessage(COMMAND_WORD));
         }
 
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Event> lastShownList = model.getFilteredEventList();
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
-        Person targetPerson = lastShownList.get(targetIndex.getZeroBased());
-        model.updateFilteredPersonAndEventList(makeTargetPersonPredicate(targetPerson),
-                makeAttendedByPredicate(targetPerson),
-                new ZoomIn(ZoomInType.PERSON, targetPerson, null));
+        Event targetEvent = lastShownList.get(targetIndex.getZeroBased());
+        model.updateFilteredPersonAndEventList(makeAttendingPredicate(targetEvent),
+                makeTargetEventPredicate(targetEvent),
+                new ZoomIn(ZoomInType.EVENT, null, targetEvent));
 
         String message;
         if (model.getFilteredEventList().isEmpty()) {
-            message = String.format(MESSAGE_NO_EVENTS_WARNING, targetPerson.getName().toString());
+            message = String.format(MESSAGE_NO_STUDENTS_WARNING, targetEvent.getName().toString());
         } else {
-            message = String.format(MESSAGE_LIST_EVENT_SUCCESS, model.getFilteredEventList().size());
+            message = String.format(MESSAGE_LIST_STUDENTS_SUCCESS, model.getFilteredPersonList().size());
         }
         return new CommandResult(message);
     }
@@ -71,11 +71,11 @@ public class StudentEventCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof StudentEventCommand)) {
+        if (!(other instanceof EventStudentCommand)) {
             return false;
         }
 
-        StudentEventCommand otherCommand = (StudentEventCommand) other;
+        EventStudentCommand otherCommand = (EventStudentCommand) other;
         return targetIndex.equals(otherCommand.targetIndex);
     }
 
@@ -89,11 +89,11 @@ public class StudentEventCommand extends Command {
     /**
      * Creates a predicate that returns true if and only if the person is the same as our given target person.
      */
-    private Predicate<Person> makeTargetPersonPredicate(Person targetPerson) {
-        return new Predicate<Person>() {
+    private Predicate<Event> makeTargetEventPredicate(Event targetEvent) {
+        return new Predicate<Event>() {
             @Override
-            public boolean test(Person person) {
-                return targetPerson.isSamePerson(person);
+            public boolean test(Event event) {
+                return targetEvent.isSameEvent(event);
             }
         };
     }
@@ -101,11 +101,11 @@ public class StudentEventCommand extends Command {
     /**
      * Creates a predicate that returns true if and only if the event is attended by the given attendee.
      */
-    private Predicate<Event> makeAttendedByPredicate(Person attendee) {
-        return new Predicate<Event>() {
+    private Predicate<Person> makeAttendingPredicate(Event event) {
+        return new Predicate<Person>() {
             @Override
-            public boolean test(Event event) {
-                return event.getAttendance().contains(new PersonReference(attendee));
+            public boolean test(Person person) {
+                return event.getAttendance().contains(new PersonReference(person));
             }
         };
     }

@@ -25,6 +25,9 @@ public class Messages {
     public static final String MESSAGE_EMPTY_USER_CONTACT = "Nothing to %s so far, "
             + "since no student's data has been entered and stored in CCAmper.";
 
+    public static final String MESSAGE_EMPTY_EVENT_LIST = "Nothing to %s so far, "
+            + "since no event's data has been entered and stored in CCAmper.";
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -86,5 +89,9 @@ public class Messages {
 
     public static String specifyEmptyUserListMessage(String commandWord) {
         return String.format(MESSAGE_EMPTY_USER_CONTACT, commandWord);
+    }
+
+    public static String specifyEmptyEventListMessage(String commandWord) {
+        return String.format(MESSAGE_EMPTY_EVENT_LIST, commandWord);
     }
 }

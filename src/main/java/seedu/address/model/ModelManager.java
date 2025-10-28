@@ -27,8 +27,10 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Event> filteredEvents;
-    /** Whether to zoom in on the selected event/person (e.g. only show events of selected person).  */
-    private ObjectProperty<Boolean> isZoomInSelected = new SimpleObjectProperty<>(false);
+    /**
+     * Whether to zoom in on the selected event/person (e.g. only show events of selected person).
+     */
+    private ObjectProperty<ZoomIn> zoomInSelected = new SimpleObjectProperty<>(new ZoomIn());
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -178,11 +180,11 @@ public class ModelManager implements Model {
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
-        // Any time we modify the filtered events list ony, we want to reset our filtered persons list to all persons,
+        // Any time we modify the filtered events list only, we want to reset our filtered persons list to all persons,
         // as we might currently only be showing a subset of persons.
         // (e.g. if we were looking at one student's events, then we add an event).
         filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
-        isZoomInSelected.set(false);
+        zoomInSelected.set(new ZoomIn());
         updateSelectedEvent();
     }
 
@@ -204,24 +206,41 @@ public class ModelManager implements Model {
         // Any time we modify the filtered persons list ony, we want to reset our filtered events list to all events,
         // as we might currently only be showing a subset of events (e.g. if we were looking at one student's events).
         filteredEvents.setPredicate(PREDICATE_SHOW_ALL_EVENTS);
-        isZoomInSelected.set(false);
+        zoomInSelected.set(new ZoomIn());
         updateSelectedPerson();
     }
 
     //=========== Filtered Person and Event List Accessors ==============================================
 
     @Override
-    public void updateFilteredPersonAndEventList(Predicate<Person> personPredicate, Predicate<Event> eventPredicate) {
+    public void updateFilteredPersonAndEventList(Predicate<Person> personPredicate, Predicate<Event> eventPredicate,
+                                                 ZoomIn zoomIn) {
         requireAllNonNull(personPredicate, eventPredicate);
+
+        // We should only be calling this when we want to zoom in
+        assert (zoomIn.getType() != ZoomInType.NONE);
         filteredPersons.setPredicate(personPredicate);
         filteredEvents.setPredicate(eventPredicate);
-        isZoomInSelected.set(true);
-        updateSelectedPerson();
+
+        zoomInSelected.set(zoomIn);
+        switch (zoomIn.getType()) {
+        case PERSON:
+            updateSelectedPerson();
+            break;
+
+        case EVENT:
+            updateSelectedEvent();
+            break;
+
+        default:
+        }
     }
 
-    /** Returns an unmodifiable view of whether to zoom in on the selected event/person. */
-    public ObjectProperty<Boolean> getIsZoomInSelected() {
-        return isZoomInSelected;
+    /**
+     * Returns an unmodifiable view of whether to zoom in on the selected event/person.
+     */
+    public ObjectProperty<ZoomIn> getZoomInSelected() {
+        return zoomInSelected;
     }
 
     //=========== Selected Person Accessors =============================================================

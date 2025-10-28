@@ -34,6 +34,14 @@ public class TypicalAddressBook {
             event.getAttendance().addPerson(new PersonReference(firstPerson));
         }
 
+        // First event is attended by all people.
+        Event firstEvent = ab.getEventList().get(0);
+        for (Person person : ab.getPersonList()) {
+            if (!person.equals(firstPerson)) {
+                firstEvent.getAttendance().addPerson(new PersonReference(person));
+            }
+        }
+
         return ab;
     }
 }

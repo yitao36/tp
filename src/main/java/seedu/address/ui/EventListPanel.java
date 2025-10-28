@@ -9,6 +9,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.ZoomIn;
+import seedu.address.model.ZoomInType;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
@@ -29,7 +31,7 @@ public class EventListPanel extends UiPart<Region> {
      * Creates a {@code EventListPanel} with the given {@code ObservableList}.
      */
     public EventListPanel(ObservableList<Event> eventList, ObjectProperty<Event> selectedEvent,
-                          ObjectProperty<Person> selectedPerson, ObjectProperty<Boolean> isZoomIn) {
+                          ObjectProperty<ZoomIn> zoomIn) {
         super(FXML);
         eventListView.setItems(eventList);
         eventListView.setCellFactory(listView -> new EventListViewCell());
@@ -44,12 +46,9 @@ public class EventListPanel extends UiPart<Region> {
                     selectedEvent.setValue(newEvent);
                 });
 
-        updateZoomInSelectedPerson(selectedPerson, isZoomIn);
-        selectedPerson.addListener((obs, old, newPerson) -> {
-            updateZoomInSelectedPerson(selectedPerson, isZoomIn);
-        });
-        isZoomIn.addListener((obs, old, newZoom) -> {
-            updateZoomInSelectedPerson(selectedPerson, isZoomIn);
+        updateZoomInSelectedPerson(zoomIn);
+        zoomIn.addListener((obs, old, newZoom) -> {
+            updateZoomInSelectedPerson(zoomIn);
         });
     }
 
@@ -70,11 +69,14 @@ public class EventListPanel extends UiPart<Region> {
         }
     }
 
-    /** Updates UI to hide/show the student header which indicates that the events belong to a particular student. */
-    private void updateZoomInSelectedPerson(ObjectProperty<Person> selectedPerson, ObjectProperty<Boolean> isZoom) {
-        if (isZoom.get() && selectedPerson.get() != null) {
+    /**
+     * Updates UI to hide/show the student header which indicates that the events belong to a particular student.
+     */
+    private void updateZoomInSelectedPerson(ObjectProperty<ZoomIn> zoomIn) {
+        if (zoomIn.get().getType() == ZoomInType.PERSON) {
             studentHeader.setManaged(true);
-            studentName.setText("Showing Events Of: " + selectedPerson.get().getName().toString());
+            Person targetPerson = zoomIn.get().getTargetPerson();
+            studentName.setText("Showing Events Of: " + targetPerson.getName().toString());
         } else {
             studentHeader.setManaged(false);
         }
