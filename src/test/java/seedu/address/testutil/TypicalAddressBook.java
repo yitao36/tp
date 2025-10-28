@@ -38,7 +38,7 @@ public class TypicalAddressBook {
         Event firstEvent = ab.getEventList().get(0);
         for (Person person : ab.getPersonList()) {
             if (!person.equals(firstPerson)) {
-                firstEvent.getAttendance().addPerson(new PersonReference(person));
+                firstEvent.getAttendance().add(new PersonReference(person));
             }
         }
 
