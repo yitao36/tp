@@ -8,8 +8,13 @@
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
       styleClass="pane-with-border">
-  <HBox fx:id="studentHeader">
-      <Label fx:id="studentName" text="\$name" styleClass="event-selected-student-header" />
-  </HBox>
+    <HBox fx:id="studentHeader" maxWidth="Infinity" prefWidth="Infinity" VBox.vgrow="NEVER">
+        <Label fx:id="studentName"
+               text="\$name"
+               styleClass="student-selected-event-header"
+               wrapText="true"
+               maxWidth="Infinity"
+        />
+    </HBox>
   <ListView fx:id="eventListView" VBox.vgrow="ALWAYS" />
 </VBox>

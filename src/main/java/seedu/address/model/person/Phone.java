@@ -8,9 +8,19 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Phone {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Expected 8 digit Singapore phone number that starts with 3/6/8/9." + "\n"
-            + "This phone number should only contain numbers." + "\n";
+
+    // Note: Error message has greater severity than warning message.
+    public static final String ERROR_MESSAGE_FIST_CHARACTER = "Expected Singapore phone number "
+            + "that starts with 3/6/8/9. \n";
+    public static final String ERROR_MESSAGE_LOWER_LIMIT = "Expected 8 digit Singapore phone number \n";
+    public static final String WARNING_MESSAGE_UPPER_LIMIT = "Phone number keyed in is more than 8 digit long \n";
+    public static final String WARNING_MESSAGE_NON_NUMERIC = "This phone number contains non-numeric characters."
+            + "\n";
+    public static final String MESSAGE_CONSTRAINTS = "1. "
+            + ERROR_MESSAGE_LOWER_LIMIT
+            + "2. "
+            + ERROR_MESSAGE_FIST_CHARACTER;
+
     public final String value;
 
     /**
@@ -25,25 +35,122 @@ public class Phone {
     }
 
     /**
+     * Removes spaces and hyphens to give raw format of number.
+     *
+     * @param test Phone number that potentially have spaces and hyphens.
+     * @return Phone number with spaces and hyphens removed.
+     */
+    public static String convertRawFormat(String test) {
+        return test.replaceAll("[\\s-]", "");
+    }
+
+    /**
+     * Checks if the phone number given starts with 8 numerical digits.
+     * Takes into account edge cases such as '98769876 (HP)',
+     * where there may be non-numerical digits that follows.
+     *
+     * @param test Phone number to be tested.
+     * @return The conditional check of whether the phone number given starts with 8 numerical digits.
+     */
+    public static boolean hasEightNumber(String test) {
+        test = convertRawFormat(test);
+        if (test.length() < 8 || test == null) {
+            return false;
+        }
+        return test.substring(0, 8).chars().allMatch(Character::isDigit);
+    }
+
+    private static boolean containOnlyNumbers(String test) {
+        return test.chars().allMatch(Character::isDigit);
+    }
+
+    private static boolean lengthGreaterThanEight(String test) {
+        test = convertRawFormat(test);
+        return test.length() > 8;
+    }
+
+    private static boolean validFirstDigit(String test) {
+        test = convertRawFormat(test);
+        if (test.length() == 0) {
+            return false;
+        }
+        int firstDigit = test.charAt(0);
+        return firstDigit == '3' || firstDigit == '6' || firstDigit == '8' || firstDigit == '9';
+    }
+
+    /**
+     * Creates error message depending on the issue(s) of phone number provided.
+     *
+     * @param test Phone number provided.
+     * @return A description of the issue(s) of the phone number provided.
+     */
+    public static String createErrorMessage(String test) {
+        test = convertRawFormat(test);
+        String errorMessage = "";
+        int counter = 1;
+        if (!hasEightNumber(test)) {
+            errorMessage += counter + ". " + ERROR_MESSAGE_LOWER_LIMIT;
+            counter += 1;
+        }
+        if (!validFirstDigit(test)) {
+            errorMessage += counter + ". " + ERROR_MESSAGE_FIST_CHARACTER;
+        }
+        return errorMessage;
+    }
+
+    /**
+     * Returns true if phone number needs to have warning.
+     *
+     * @param test Phone number provided.
+     * @return The conditional check of whether the phone number has warnings.
+     */
+    public static boolean hasWarning(String test) {
+        test = convertRawFormat(test);
+        if (!containOnlyNumbers(test) || lengthGreaterThanEight(test)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Creates warning message depending on the issue(s) of phone number provided.
+     *
+     * @param test Phone number provided.
+     * @return A compilation of the warnings pertaining to the phone number provided.
+     */
+    public static String createWarningMessage(String test) {
+        test = convertRawFormat(test);
+        String warningMessage = "Note: \n";
+
+        int counter = 1;
+        if (lengthGreaterThanEight(test)) {
+            warningMessage += counter + ". " + WARNING_MESSAGE_UPPER_LIMIT;
+            counter += 1;
+        }
+        if (!containOnlyNumbers(test)) {
+            warningMessage += counter + ". " + WARNING_MESSAGE_NON_NUMERIC;
+        }
+        return warningMessage;
+    }
+
+    /**
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        try {
-            test = test.replaceAll("[\\s-]", "");
-            if (test.length() != 8) {
-                return false;
-            }
-            int firstDigit = Integer.parseInt(String.valueOf(test.charAt(0)));
-            if (firstDigit == 3 || firstDigit == 6 || firstDigit == 8 || firstDigit == 9) {
-                Integer.parseInt(test);
-                return true;
-            } else {
-                return false;
-            }
-        } catch (NumberFormatException e) {
+        test = convertRawFormat(test);
+        if (test.length() == 0) {
             return false;
         }
+        if (!hasEightNumber(test)) {
+            return false;
+        }
+        if (!validFirstDigit(test)) {
+            return false;
+        }
+        return true;
     }
+
+
 
     @Override
     public String toString() {

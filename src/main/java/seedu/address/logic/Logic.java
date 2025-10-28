@@ -9,6 +9,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ZoomIn;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
@@ -18,10 +19,11 @@ import seedu.address.model.person.Person;
 public interface Logic {
     /**
      * Executes the command and returns the result.
+     *
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
-     * @throws ParseException If an error occurs during parsing.
+     * @throws ParseException   If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
@@ -32,20 +34,30 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /**
+     * Returns an unmodifiable view of the filtered list of persons
+     */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns a modifiable view of the selected person from the list of persons */
+    /**
+     * Returns a modifiable view of the selected person from the list of persons
+     */
     ObjectProperty<Person> getSelectedPerson();
 
-    /** Returns an unmodifiable view of the filtered list of events */
+    /**
+     * Returns an unmodifiable view of the filtered list of events
+     */
     ObservableList<Event> getFilteredEventList();
 
-    /** Returns a modifiable view of the selected event from the list of events */
+    /**
+     * Returns a modifiable view of the selected event from the list of events
+     */
     ObjectProperty<Event> getSelectedEvent();
 
-    /** Returns an unmodifiable view of whether to zoom in on the selected event/person. */
-    ObjectProperty<Boolean> getIsZoomInSelected();
+    /**
+     * Returns an unmodifiable view of whether to zoom in on the selected event/person.
+     */
+    ObjectProperty<ZoomIn> getZoomInSelected();
 
     /**
      * Returns the user prefs' address book file path.

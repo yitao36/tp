@@ -3,25 +3,42 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.ArrayList;
+
 /**
  * Represents a Person's email in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {
 
-    private static final String SPECIAL_CHARACTERS = "+_.-";
-    public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
-            + "and adhere to the following constraints:\n"
-            + "1. The local-part should only contain alphanumeric characters and these special characters, excluding "
-            + "the parentheses, (" + SPECIAL_CHARACTERS + "). The local-part may not start or end with any special "
-            + "characters.\n"
-            + "2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels "
-            + "separated by periods.\n"
-            + "The domain name must:\n"
+
+
+    public static final String SPECIAL_CHARACTERS = "+_.-";
+    public static final Integer EMAIL_LENGTH_LIMIT = 50;
+    // specialised warning message
+    public static final String ERROR_MESSAGE_INTRO = "Emails should be of the format local-part@domain. "
+            + "Check that:  \n";
+    public static final String ERROR_MESSAGE_LENGTH = "Email address length should be "
+            + EMAIL_LENGTH_LIMIT
+            + " characters or less. \n";
+    public static final String ERROR_MESSAGE_SPECIAL_CHARACTER = "Email address should have 1 @ character. \n";
+    public static final String ERROR_MESSAGE_LOCAL = "The local-part should only contain alphanumeric characters, "
+            + "and these special characters, excluding the parentheses, ("
+            + SPECIAL_CHARACTERS
+            + "). The local-part may not start or end with any special characters.\n";
+    public static final String ERROR_MESSAGE_DOMAIN = "The domain name is "
+            + "made up of domain labels separated by periods. The domain name must:\n"
             + "    - end with a domain label at least 2 characters long\n"
             + "    - have each domain label start and end with alphanumeric characters\n"
-            + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.\n"
-            + "3. Email is at maximum 50 characters long.";
+            + "    - have each domain label consist of alphanumeric characters and hyphens, "
+            + "separated only by periods.\n";
+
+    public static final String MESSAGE_CONSTRAINTS = ERROR_MESSAGE_INTRO
+            + "1. " + ERROR_MESSAGE_LENGTH
+            + "2. " + ERROR_MESSAGE_SPECIAL_CHARACTER
+            + "3. " + ERROR_MESSAGE_LOCAL
+            + "4. " + ERROR_MESSAGE_DOMAIN;
+
     // alphanumeric and special characters
     private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
     private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC_NO_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]"
@@ -49,7 +66,92 @@ public class Email {
      * Returns if a given string is a valid email.
      */
     public static boolean isValidEmail(String test) {
-        return test.length() <= 50 && test.matches(VALIDATION_REGEX);
+        if (!containAtSymbol(test)) {
+            return false;
+        }
+        return test.length() <= EMAIL_LENGTH_LIMIT
+                && countNumberOfAtSymbol(test) == 1
+                && test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Lists the various source of invalid email address.
+     */
+    public enum SourceOfEmailIssue {
+        LOCAL, DOMAIN, LENGTH, SPECIAL_CHARACTER
+    }
+
+    private static long countNumberOfAtSymbol(String emailAddress) {
+        return emailAddress.chars().filter(c -> c == '@').count();
+    }
+
+    private static boolean containAtSymbol(String emailAddress) {
+        return emailAddress.contains(String.valueOf('@'));
+    }
+
+    /**
+     * Identifies what is the source that cause emailAddress to be invalid.
+     *
+     * @param emailAddress The email address that has the issue.
+     * @return An ArrayList containing all the source(s) of error.
+     */
+    public static ArrayList<SourceOfEmailIssue> identifyEmailSegmentWithError(String emailAddress) {
+        ArrayList<SourceOfEmailIssue> result = new ArrayList<>();
+        long numberOfAtSymbol = countNumberOfAtSymbol(emailAddress);
+        if (numberOfAtSymbol != 1) {
+            result.add(SourceOfEmailIssue.SPECIAL_CHARACTER);
+        }
+
+        if (emailAddress.length() > EMAIL_LENGTH_LIMIT) {
+            result.add(SourceOfEmailIssue.LENGTH);
+        }
+
+        if (numberOfAtSymbol == 1) {
+            String[] emailSegments = emailAddress.split("@", 2);
+            String local = emailSegments[0];
+            String domain = emailSegments[1];
+
+            if (!local.matches(LOCAL_PART_REGEX)) {
+                result.add(SourceOfEmailIssue.LOCAL);
+            }
+
+            if (!domain.matches(DOMAIN_REGEX)) {
+                result.add(SourceOfEmailIssue.DOMAIN);
+            }
+        }
+
+        // Only when the email address have issue, do we call the identifyEmailSegmentWithError function.
+        assert result.size() > 0 : "There should be at least one source of error.";
+        return result;
+    }
+
+    private static String createSubWarning(SourceOfEmailIssue source, SourceOfEmailIssue comparison, String message) {
+        if (source == comparison) {
+            return message;
+        } else {
+            return "";
+        }
+    }
+
+    /**
+     * Returns a consolidates error message depending on the source of error.
+     *
+     * @param sourcesOfError Sources of error pertaining to the email.
+     * @return A description of the sources of error.
+     */
+    public static String createErrorMessage(ArrayList<SourceOfEmailIssue> sourcesOfError) {
+        int counter = 1;
+        String message = ERROR_MESSAGE_INTRO;
+        for (SourceOfEmailIssue source : sourcesOfError) {
+            message += counter + ". ";
+            message += Email.createSubWarning(source, SourceOfEmailIssue.LENGTH, ERROR_MESSAGE_LENGTH);
+            message += Email.createSubWarning(source,
+                    SourceOfEmailIssue.SPECIAL_CHARACTER, ERROR_MESSAGE_SPECIAL_CHARACTER);
+            message += Email.createSubWarning(source, SourceOfEmailIssue.LOCAL, ERROR_MESSAGE_LOCAL);
+            message += Email.createSubWarning(source, SourceOfEmailIssue.DOMAIN, ERROR_MESSAGE_DOMAIN);
+            counter = counter + 1;
+        }
+        return message;
     }
 
     @Override

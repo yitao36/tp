@@ -33,6 +33,8 @@ import seedu.address.model.tag.Tag;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
+    public static final String ERROR_MESSAGE_MISSING_COMPULSORY_PREFIX = "Missing compulsory prefixes: %s";
+    public static final String ERROR_MESSAGE_MISSING_FIRST_PREFIX = "There is an input without prefix after 'add'. \n";
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
@@ -41,6 +43,63 @@ public class AddCommandParser implements Parser<AddCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    private static String checkMissingPrefix(ArgumentMultimap argMultimap) {
+        String missingPrefix = "";
+        Prefix[] compulsoryPrefix = {PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL};
+        for (Prefix prefix: compulsoryPrefix) {
+            if (!arePrefixesPresent(argMultimap, prefix)) {
+                missingPrefix += prefix.toString() + ", ";
+            }
+        }
+        if (missingPrefix != "") {
+            return String.format(ERROR_MESSAGE_MISSING_COMPULSORY_PREFIX, missingPrefix) + "\n";
+        }
+        return "";
+    }
+
+    private static String checkUntokenInput(ArgumentMultimap argMultimap) {
+        if (haveUntokenInput(argMultimap)) {
+            return ERROR_MESSAGE_MISSING_FIRST_PREFIX;
+        }
+        return "";
+    }
+
+    private static boolean isMissingCompulsoryPrefixes(ArgumentMultimap argMultimap) {
+        return !arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL);
+    }
+
+    private static boolean haveUntokenInput(ArgumentMultimap argMultimap) {
+        return !argMultimap.getPreamble().isEmpty();
+    }
+
+    /**
+     * Returns error message when either first input after command word does not have prefix,
+     * of if we are missing compulsory prefixes.
+     *
+     * @param argMultimap Contains mapping of prefixes to input.
+     * @return Error message providing detailed description on what is missing.
+     */
+    private static String createErrorMessageForMissingPrefix(ArgumentMultimap argMultimap) {
+        String compilationOfErrorMessage = "Note: \n";
+        compilationOfErrorMessage += AddCommandParser.checkMissingPrefix(argMultimap);
+        compilationOfErrorMessage += AddCommandParser.checkUntokenInput(argMultimap);
+        compilationOfErrorMessage += "\n" + String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddCommand.MESSAGE_USAGE) + "\n";
+        return compilationOfErrorMessage;
+    }
+
+    private static ArgumentMultimap createArgumentMultimap(String args) {
+        return ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_PIN, PREFIX_ROLE, PREFIX_EMERGENCY_NAME, PREFIX_EMERGENCY_PHONE,
+                PREFIX_TAG, PREFIX_ENROLL_YEAR);
+    }
+
+    private static void verifyDuplicate(ArgumentMultimap argMultimap) throws ParseException {
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_PIN,
+                PREFIX_EMERGENCY_NAME, PREFIX_EMERGENCY_PHONE, PREFIX_ENROLL_YEAR);
+    }
+
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -48,17 +107,14 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_PIN, PREFIX_ROLE, PREFIX_EMERGENCY_NAME, PREFIX_EMERGENCY_PHONE,
-                PREFIX_TAG, PREFIX_ENROLL_YEAR);
+        ArgumentMultimap argMultimap = createArgumentMultimap(args);
+        String compilationOfErrorMessage = createErrorMessageForMissingPrefix(argMultimap);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        verifyDuplicate(argMultimap);
+        if (isMissingCompulsoryPrefixes(argMultimap) || haveUntokenInput(argMultimap)) {
+            throw new ParseException(compilationOfErrorMessage);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_PIN,
-                PREFIX_EMERGENCY_NAME, PREFIX_EMERGENCY_PHONE, PREFIX_ENROLL_YEAR);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
@@ -79,7 +135,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                     enrollmentYear);
             return new AddCommand(person);
         } catch (IllegalArgumentException e) {
-            throw new ParseException(e.getMessage());
+            throw new ParseException(compilationOfErrorMessage + e.getMessage());
         }
     }
 

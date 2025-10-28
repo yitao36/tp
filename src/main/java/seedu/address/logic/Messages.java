@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Please modify input to follow command format: \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided is invalid";
     public static final String MESSAGE_EMPTY_EVENT = "Event list is empty";
@@ -24,6 +24,9 @@ public class Messages {
             "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_EMPTY_USER_CONTACT = "Nothing to %s so far, "
             + "since no student's data has been entered and stored in CCAmper.";
+
+    public static final String MESSAGE_EMPTY_EVENT_LIST = "Nothing to %s so far, "
+            + "since no event's data has been entered and stored in CCAmper.";
 
 
     /**
@@ -86,5 +89,9 @@ public class Messages {
 
     public static String specifyEmptyUserListMessage(String commandWord) {
         return String.format(MESSAGE_EMPTY_USER_CONTACT, commandWord);
+    }
+
+    public static String specifyEmptyEventListMessage(String commandWord) {
+        return String.format(MESSAGE_EMPTY_EVENT_LIST, commandWord);
     }
 }

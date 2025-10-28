@@ -19,6 +19,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditEventCommand;
+import seedu.address.logic.commands.EventStudentCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -39,7 +40,8 @@ public class AddressBookParser {
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     private void checkValidUserInput(String userInput, String keyword) throws ParseException {
-        boolean validInput = (userInput.replaceAll("\\s", "").equals(keyword));
+        String formattedInput = userInput.replaceAll("\\s", "").toLowerCase();
+        boolean validInput = formattedInput.equals(keyword);
         if (!validInput) {
             String message = "When using " + keyword + ", "
                     + "there should not be any characters (except whitespace, which is allowed) "
@@ -61,7 +63,7 @@ public class AddressBookParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
+        final String commandWord = matcher.group("commandWord").toLowerCase();
         final String arguments = matcher.group("arguments");
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
@@ -116,6 +118,9 @@ public class AddressBookParser {
 
         case StudentEventCommand.COMMAND_WORD:
             return new StudentEventCommandParser().parse(arguments);
+
+        case EventStudentCommand.COMMAND_WORD:
+            return new EventStudentCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             checkValidUserInput(userInput, ExitCommand.COMMAND_WORD);

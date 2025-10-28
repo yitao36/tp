@@ -79,8 +79,12 @@ public class ParserUtil {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
         trimmedPhone = trimmedPhone.replaceAll("[\\s-]", "");
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        String processNumber = Phone.convertRawFormat(trimmedPhone);
+        if (!Phone.isValidPhone(processNumber)) {
+            throw new ParseException(Phone.createErrorMessage(processNumber));
+        }
+        if (Phone.hasWarning(processNumber)) {
+            MessageCenter.appendEnd(Phone.createWarningMessage(processNumber));
         }
         return new Phone(trimmedPhone);
     }
@@ -110,7 +114,8 @@ public class ParserUtil {
         requireNonNull(email);
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            ArrayList<Email.SourceOfEmailIssue> sourcesOfErrors = Email.identifyEmailSegmentWithError(trimmedEmail);
+            throw new ParseException(Email.createErrorMessage(sourcesOfErrors));
         }
         return new Email(trimmedEmail);
     }
