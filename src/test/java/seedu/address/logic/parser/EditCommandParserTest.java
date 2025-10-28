@@ -46,7 +46,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -89,17 +88,21 @@ public class EditCommandParserTest {
     }
 
     @Test
+    public void parse_validPhoneValue_failure() {
+        assertParseFailure(parser, "1 " + PREFIX_PHONE + " 9", "1. "
+                + Phone.ERROR_MESSAGE_LOWER_LIMIT); // phone too short
+        assertParseFailure(parser, "1 " + PREFIX_PHONE + " 00000000", "1. "
+                + Phone.ERROR_MESSAGE_FIST_CHARACTER); // wrong 1st digit
+    }
+
+    @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
         assertParseFailure(parser, "1" + INVALID_EMERGENCY_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_EMERGENCY_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
-
-        // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_EMERGENCY_PHONE_DESC,
+                "1. " + Phone.ERROR_MESSAGE_LOWER_LIMIT); // phone too short
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error

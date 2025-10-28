@@ -13,13 +13,13 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS = "Names must be less than 50 characters long, should not be blank, "
             + "and names should only contain alphanumeric characters, spaces, and the following characters: "
-            + ".,-'()";
+            + ".,-'()/";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}.,\\-'()][\\p{Alnum}.,\\-'() ]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}.,\\-'()][\\p{Alnum}.,\\-'()/ ]*";
 
     public final String fullName;
 

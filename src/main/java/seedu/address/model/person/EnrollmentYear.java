@@ -85,7 +85,6 @@ public class EnrollmentYear {
         }
     }
 
-
     @Override
     public String toString() {
         if (isPresent) {

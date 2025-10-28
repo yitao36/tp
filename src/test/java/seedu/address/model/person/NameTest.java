@@ -37,6 +37,7 @@ public class NameTest {
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
         assertTrue(Name.isValidName("Dr. Bob Tan-Ray, the 2nd (Bobby')")); // uses all types of valid characters
+        assertTrue(Name.isValidName("John s/o James")); // use of slash
     }
 
     @Test
