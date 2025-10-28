@@ -59,6 +59,8 @@ public class PersonListPanel extends UiPart<Region> {
                 // Updates the pseudo-class "pin" if pin status changes.
                 this.pseudoClassStateChanged(PseudoClass.getPseudoClass("pin"), person.getPin().value);
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+
+                personListView.setFixedCellSize(-1);
             }
         }
     }
