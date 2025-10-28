@@ -27,6 +27,7 @@ public class EventPanel extends UiPart<VBox> {
     private ImageView yearIcon;
     @FXML
     private ImageView infoIcon;
+
     /**
      * Constructs EventPanel and links the graphics.
      */
@@ -50,12 +51,5 @@ public class EventPanel extends UiPart<VBox> {
         name.setText(selected.getName().value);
         duration.setText(selected.getDuration().toString());
         description.setText(selected.getDescription().value);
-
-        // Unused
-//        attendees.getChildren().clear();
-//        List<PersonReference> attendanceList = selected.getAttendance().asUnmodifiableList();
-//        for (int i = 0; i < attendanceList.size(); i++) {
-//            attendees.getChildren().add(new PersonReferenceCard(attendanceList.get(i), i + 1).getRoot());
-//        }
     }
 }
