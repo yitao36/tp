@@ -25,13 +25,13 @@ import seedu.address.model.person.Person;
  * Adds the list of persons to the attendance list of an event.
  */
 public class AttendCommand extends Command {
-    public static final String COMMAND_WORD = "attend";
+    public static final String COMMAND_WORD = "attend:event";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds the list of person at the given indexes to the attendance list of an event.\n"
             + "Parameters: "
             + PREFIX_EVENT + "EVENT_INDEX "
             + PREFIX_PERSON + "PERSON_INDEX [MORE_INDEXES]...\n"
-            + "Example: attend e/2 p/1 4 5 6";
+            + "Example: attend:event e/2 p/1 4 5 6";
 
     public static final String MESSAGE_SUCCESS = "Attendance of Persons added: %1$s";
 

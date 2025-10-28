@@ -278,25 +278,25 @@ Examples:
 
 <br>
 
-### Adding event attendance : `attend`
+### Adding event attendance : `attend:event`
 
 Adds the attendance of people at the specified indexes to an existing event in the address book.
 
-Format: `attend e/EVENT_INDEX p/PERSON_INDEX [PERSON_INDEXES]...`
+Format: `attend:event e/EVENT_INDEX p/PERSON_INDEX [PERSON_INDEXES]...`
 
 * Adds the attendance of the persons at the given person indexes to the event at the given event index.
 * Note that `PERSON_INDEX` refers to the index of the person in the person list.
 
 Examples:
-* `attend e/1 p/3 5` Adds Bernice Yu and David Li to the 1st event.
+* `attend:event e/1 p/3 5` Adds Bernice Yu and David Li to the 1st event.
 
 <br>
 
-### Adding event attendance : `unattend`
+### Adding event attendance : `unattend:event`
 
 Removes the attendance of the people from an existing event in the address book.
 
-Format: `unattend e/EVENT_INDEX p/PERSON_INDEX [PERSON_INDEXES]...`
+Format: `unattend:event e/EVENT_INDEX p/PERSON_INDEX [PERSON_INDEXES]...`
 
 * Removes the attendance of the persons at the given indexes in the attendance list
   from the event at the given event index.
@@ -304,7 +304,7 @@ Format: `unattend e/EVENT_INDEX p/PERSON_INDEX [PERSON_INDEXES]...`
   and not the person list.
 
 Examples:
-* `attend e/1 p/3 5` followed by `unattend e/1 p/1` Removes Bernice Yu from the 1st event.
+* `attend:event e/1 p/3 5` followed by `unattend:event e/1 p/1` Removes Bernice Yu from the 1st event.
 
 <br>
 
@@ -443,8 +443,8 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Add Event** | `add:event n/NAME d/(d/M/yyyy or d/M/yyyy-d/M/yyyy) [info/DESCRIPTION]` <br> e.g., `add:event n/meeting d/1/10/2025 info/routine meeting`
 **Edit Event** | `edit:event [n/NAME] [d/(d/M/yyyy or d/M/yyyy-d/M/yyyy)] [info/DESCRIPTION]` <br> e.g., `edit:event 1 n/new meeting d/2/10/2025 info/special meeting`
-**Attend Event** | `attend e/EVENT_INDEX p/PERSON_INDEX [PERSON_INDEXES]...`<br> e.g. `attend e/1 p/3 5`
-**Unattend Event** | `unattend e/EVENT_INDEX p/PERSON_INDEX [PERSON_INDEXES]...`<br> e.g. `attend e/1 p/3 5` followed by `unattend e/1 p/1`
+**Attend Event** | `attend:event e/EVENT_INDEX p/PERSON_INDEX [PERSON_INDEXES]...`<br> e.g. `attend:event e/1 p/3 5`
+**Unattend Event** | `unattend:event e/EVENT_INDEX p/PERSON_INDEX [PERSON_INDEXES]...`<br> e.g. `attend:event e/1 p/3 5` followed by `unattend:event e/1 p/1`
 **Delete Event** | `delete:event INDEX`<br> e.g., `delete:event 3`
 **List Events Attended By Student** | `student:event INDEX_OF_STUDENT_LIST`<br> e.g., `student:event 1`
 **List Students Attending An Event** | `event:student INDEX_OF_EVENT_LIST`<br> e.g., `event:student 1`

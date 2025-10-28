@@ -21,13 +21,13 @@ import seedu.address.model.event.PersonReference;
  * Removes the list of persons to the attendance list of an event.
  */
 public class UnattendCommand extends Command {
-    public static final String COMMAND_WORD = "unattend";
+    public static final String COMMAND_WORD = "unattend:event";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes attendance from an event index of people at the given indexes.\n"
             + "Parameters: "
             + PREFIX_EVENT + "EVENT_INDEX "
             + PREFIX_PERSON + "PERSON_INDEX [MORE_INDEXES]...\n"
-            + "Example: unattend e/2 p/1 4 5 6";
+            + "Example: unattend:event e/2 p/1 4 5 6";
 
     public static final String MESSAGE_SUCCESS = "Attendance of Persons removed: %1$s";
     private final Index eventIndex;
