@@ -75,8 +75,8 @@ public class UnattendCommand extends Command {
             }
         }
 
-        Event edittedEvent = createEditedEvent(event, personsToRemove);
-        model.setEvent(event, edittedEvent);
+        Event editedEvent = createEditedEvent(event, personsToRemove);
+        model.setEvent(event, editedEvent);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, personsToRemove));
     }
