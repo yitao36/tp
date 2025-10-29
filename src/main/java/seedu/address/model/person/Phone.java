@@ -60,7 +60,7 @@ public class Phone {
         if (test.length() < 8 || test == null) {
             return false;
         }
-        return test.substring(0, 8).chars().allMatch(Character::isDigit);
+        return containOnlyNumbers(test.substring(0,8));
     }
 
     private static boolean containOnlyNumbers(String test) {

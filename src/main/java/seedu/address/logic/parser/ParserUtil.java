@@ -78,7 +78,6 @@ public class ParserUtil {
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
-        trimmedPhone = trimmedPhone.replaceAll("[\\s-]", "");
         String processNumber = Phone.convertRawFormat(trimmedPhone);
         if (!Phone.isValidPhone(processNumber)) {
             throw new ParseException(Phone.createErrorMessage(processNumber));

@@ -83,8 +83,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         String compilationOfErrorMessage = "Note: \n";
         compilationOfErrorMessage += AddCommandParser.checkMissingPrefix(argMultimap);
         compilationOfErrorMessage += AddCommandParser.checkUntokenInput(argMultimap);
-        compilationOfErrorMessage += "\n" + String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddCommand.MESSAGE_USAGE) + "\n";
+        compilationOfErrorMessage += String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE) + "\n";
         return compilationOfErrorMessage;
     }
 

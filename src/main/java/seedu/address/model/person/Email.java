@@ -11,8 +11,6 @@ import java.util.ArrayList;
  */
 public class Email {
 
-
-
     public static final String SPECIAL_CHARACTERS = "+_.-";
     public static final Integer EMAIL_LENGTH_LIMIT = 50;
     // specialised warning message
@@ -97,6 +95,7 @@ public class Email {
      */
     public static ArrayList<SourceOfEmailIssue> identifyEmailSegmentWithError(String emailAddress) {
         ArrayList<SourceOfEmailIssue> result = new ArrayList<>();
+
         long numberOfAtSymbol = countNumberOfAtSymbol(emailAddress);
         if (numberOfAtSymbol != 1) {
             result.add(SourceOfEmailIssue.SPECIAL_CHARACTER);
