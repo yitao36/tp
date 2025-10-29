@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.MessageCenter;
 import seedu.address.model.role.Role;
 import seedu.address.model.tag.Tag;
 
@@ -22,6 +23,8 @@ public class Person {
             "Emergency contact must be either not provided, or contain both name and phone.";
     public static final String EMERGENCY_NUMBER_MESSAGE_CONSTRAINTS =
             "Emergency contact's phone number should not be the same as this person's.";
+    public static final String EMERGENCY_NAME_WARNING =
+            "Note: Emergency contact of %1$s has the same name as them, please check that this is not a mistake.";
 
     // Identity fields
     private final Name name;
@@ -42,7 +45,7 @@ public class Person {
     public Person(Name name, Phone phone, Email email, Address address, Pin pin, Set<Role> roles, Set<Tag> tags,
                   EmergencyContact emergencyContact, EnrollmentYear enrollmentYear) {
         requireAllNonNull(name, phone, email, address, pin, tags, emergencyContact);
-        checkValidPerson(phone, emergencyContact);
+        checkValidPerson(name, phone, emergencyContact);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -61,10 +64,13 @@ public class Person {
      * @param emergencyContact Student's emergency contact.
      * @throws IllegalArgumentException through checkArgument if person is invalid.
      */
-    public static void checkValidPerson(Phone phone, EmergencyContact emergencyContact) {
+    public static void checkValidPerson(Name name, Phone phone, EmergencyContact emergencyContact) {
         checkArgument(emergencyContact.isPresent() || emergencyContact.isEmpty(), EMERGENCY_MESSAGE_CONSTRAINTS);
         if (emergencyContact.isPresent()) {
             checkArgument(!emergencyContact.phone.equals(phone), EMERGENCY_NUMBER_MESSAGE_CONSTRAINTS);
+            if (emergencyContact.name.equals(name)) {
+                MessageCenter.appendEnd(String.format(EMERGENCY_NAME_WARNING, name));
+            }
         }
     }
 
