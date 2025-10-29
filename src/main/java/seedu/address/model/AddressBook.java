@@ -187,6 +187,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void clearPerson() {
         persons.clear();
+        events.forEach(e -> e.getAttendance().clear());
     }
 
     //// sort methods

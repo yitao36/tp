@@ -70,6 +70,13 @@ public class Attendance {
         persons.removeAll(personsToRemove);
     }
 
+    /**
+     * Removes everyone from the current attendance set.
+     */
+    public void clear() {
+        persons.clear();
+    }
+
     public boolean contains(PersonReference p) {
         return persons.contains(p);
     }
