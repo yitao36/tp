@@ -31,7 +31,7 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
+    public static final String MESSAGE_EMPTY_INDEX = "Expecting an index, but no index specified.";
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_EXCEEDS_INTEGER_LIMIT = "Index exceeds integer limit of 2147483647.";
 
@@ -42,6 +42,9 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+        if (oneBasedIndex.isEmpty()) {
+            throw new ParseException(MESSAGE_EMPTY_INDEX);
+        }
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             if (!trimmedIndex.isEmpty() && StringUtil.isExceedsIntegerLimit(trimmedIndex)) {
                 throw new ParseException(MESSAGE_EXCEEDS_INTEGER_LIMIT);
