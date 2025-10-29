@@ -33,11 +33,13 @@ public class EventPanel extends UiPart<VBox> {
      */
     public EventPanel() {
         super(FXML);
+
         yearIcon.setImage(yearImage);
         infoIcon.setImage(infoImage);
 
         duration.setGraphic(yearIcon);
         description.setGraphic(infoIcon);
+
     }
 
     /**

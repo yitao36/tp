@@ -52,6 +52,8 @@ public class DetailedPanel extends UiPart<StackPane> {
         eventPanelPlaceholder.getChildren().add(eventPanel.getRoot());
 
         // Workaround to get panel height to fill up the whole container
+        helpPanel.getRoot().prefHeightProperty().bind(personPanelPlaceholder.heightProperty());
+        helpPanelPlaceholder.setVisible(true);
         personPanel.getRoot().prefHeightProperty().bind(personPanelPlaceholder.heightProperty());
         personPanelPlaceholder.setVisible(false);
         eventPanel.getRoot().prefHeightProperty().bind(eventPanelPlaceholder.heightProperty());

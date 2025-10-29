@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AttendCommand;
+import seedu.address.logic.commands.UnattendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new AttendCommand object.
+ * Parses input arguments and creates a new UnattendCommand object.
  */
-public class AttendCommandParser {
+public class UnattendCommandParser {
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
@@ -31,15 +31,15 @@ public class AttendCommandParser {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AttendCommand parse(String args) throws ParseException {
+    public UnattendCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PERSON, PREFIX_EVENT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_PERSON, PREFIX_EVENT)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnattendCommand.MESSAGE_USAGE));
         }
 
         Index eventIndex = parseIndex(argMultimap.getValue(PREFIX_EVENT).get());
         List<Index> personIndexes = parseIndexes(argMultimap.getValue(PREFIX_PERSON).get());
-        return new AttendCommand(eventIndex, personIndexes);
+        return new UnattendCommand(eventIndex, personIndexes);
     }
 }
