@@ -54,6 +54,13 @@ public class Attendance {
         this.persons.remove(p);
     }
 
+    /**
+     * Removes everyone from the current attendance set.
+     */
+    public void clear() {
+        this.persons.clear();
+    }
+
     public boolean contains(PersonReference p) {
         return persons.contains(p);
     }
