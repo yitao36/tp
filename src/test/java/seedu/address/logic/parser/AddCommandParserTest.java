@@ -137,23 +137,22 @@ public class AddCommandParserTest {
     @Test
     public void parse_compulsoryFieldMissing_failure() {
 
-        String expectedMessage = "Note: " + "\n" + AddCommandParser.ERROR_MESSAGE_MISSING_COMPULSORY_PREFIX
-                + "\n\n"
-                + String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE)
-                + "\n";
+        String expectedMessage = "Note: " + AddCommandParser.ERROR_MESSAGE_MISSING_COMPULSORY_PREFIX
+                + "\n"
+                + String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing phone prefix
-        String missingPhonePrefixMessage = String.format(expectedMessage, PREFIX_PHONE + ", ");
+        String missingPhonePrefixMessage = String.format(expectedMessage, PREFIX_PHONE);
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
                 missingPhonePrefixMessage);
 
         // missing email prefix
-        String missingEmailPrefixMessage = String.format(expectedMessage, PREFIX_EMAIL + ", ");
+        String missingEmailPrefixMessage = String.format(expectedMessage, PREFIX_EMAIL);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
                 missingEmailPrefixMessage);
 
         // missing address prefix
-        String missingAddressPrefixMessage = String.format(expectedMessage, PREFIX_ADDRESS + ", ");
+        String missingAddressPrefixMessage = String.format(expectedMessage, PREFIX_ADDRESS);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
                 missingAddressPrefixMessage);
     }
