@@ -47,6 +47,10 @@ public class DeleteEventCommand extends Command {
         Event eventToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteEvent(eventToDelete);
 
+        if (model.getZoomInSelected().get().getTargetEvent() == eventToDelete) {
+            model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
+        }
+
         return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, Messages.format(eventToDelete)));
     }
 
