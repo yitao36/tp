@@ -292,7 +292,7 @@ Examples:
 
 <br>
 
-### Adding event attendance : `unattend:event`
+### Removing event attendance : `unattend:event`
 
 Removes the attendance of the people from an existing event in the address book.
 
