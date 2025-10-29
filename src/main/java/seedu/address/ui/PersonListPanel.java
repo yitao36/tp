@@ -85,11 +85,13 @@ public class PersonListPanel extends UiPart<Region> {
     private void updateZoomInSelectedEvent(ObjectProperty<ZoomIn> zoomIn) {
         if (zoomIn.get().getType() == ZoomInType.EVENT) {
             eventHeader.setManaged(true);
+            eventHeader.setVisible(true);
             Event targetEvent = zoomIn.get().getTargetEvent();
             eventName.setText("Showing Students Of: " + targetEvent.getName().toString()
                     + " (" + targetEvent.getDuration().toString() + ")");
         } else {
             eventHeader.setManaged(false);
+            eventHeader.setVisible(false);
         }
     }
 }
