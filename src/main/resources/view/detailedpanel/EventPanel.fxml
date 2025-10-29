@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.control.ListView?>
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
       style="-fx-padding: 15 15 15 15;">
@@ -14,11 +15,9 @@
             <RowConstraints vgrow="ALWAYS"/>
         </rowConstraints>
         <VBox GridPane.columnIndex="0" GridPane.hgrow="SOMETIMES"/>
-        <VBox GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES" alignment="TOP_CENTER">
-            <Label fx:id="name" style="-fx-font-size: 40;" wrapText="true" maxHeight="125">
-            </Label>
+        <VBox GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES" spacing="15" alignment="TOP_CENTER">
 
-            <VBox VBox.vgrow="ALWAYS" />
+            <Label fx:id="name" style="-fx-font-size: 40;" wrapText="true" maxHeight="125" />
 
             <Label fx:id="duration" graphicTextGap="10.0">
                 <ImageView fx:id="yearIcon" fitHeight="25.0" fitWidth="25.0"/>
@@ -27,7 +26,6 @@
             <Label fx:id="description" graphicTextGap="10.0" wrapText="true">
                 <ImageView fx:id="infoIcon" fitHeight="25.0" fitWidth="25.0"/>
             </Label>
-            <VBox VBox.vgrow="ALWAYS" />
         </VBox>
         <VBox GridPane.columnIndex="2" GridPane.hgrow="SOMETIMES"/>
     </GridPane>

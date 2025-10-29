@@ -83,6 +83,7 @@ public class PersonPanel extends UiPart<VBox> {
         year.setGraphic(yearIcon);
         emergencyName.setGraphic(emergencyNameIcon);
         emergencyPhone.setGraphic(emergencyPhoneIcon);
+
     }
 
     /**

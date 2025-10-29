@@ -154,8 +154,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         sort();
         events.forEach(e -> {
             if (e.getAttendance().contains(new PersonReference(target))) {
-                e.getAttendance().removePerson(new PersonReference(target));
-                e.getAttendance().addPerson(new PersonReference(editedPerson));
+                e.getAttendance().remove(new PersonReference(target));
+                e.getAttendance().add(new PersonReference(editedPerson));
             }
         });
     }
@@ -177,7 +177,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
         events.forEach(e -> {
             if (e.getAttendance().contains(new PersonReference(key))) {
-                e.getAttendance().removePerson(new PersonReference(key));
+                e.getAttendance().remove(new PersonReference(key));
             }
         });
     }

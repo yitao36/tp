@@ -7,6 +7,7 @@ import static seedu.address.model.tag.Tag.PERSON_MAX_TAGS;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -276,10 +277,10 @@ public class ParserUtil {
      *
      * @throws ParseException if any of the index is invalid.
      */
-    public static Set<Index> parseIndexes(String indexes) throws ParseException {
+    public static List<Index> parseIndexes(String indexes) throws ParseException {
         requireNonNull(indexes);
         String trimmedIndexes = indexes.trim();
-        Set<Index> indexSet = new HashSet<>();
+        List<Index> indexSet = new ArrayList<>();
         String[] indexList = indexes.split(" ");
         for (String index : indexList) {
             Index i = parseIndex(index);
