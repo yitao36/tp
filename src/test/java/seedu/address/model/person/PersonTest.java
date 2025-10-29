@@ -118,19 +118,21 @@ public class PersonTest {
 
     @Test
     public void checkValidPerson() {
+        Name nameA = new Name("Alice");
+        Name nameB = new Name("Bob");
         Phone phoneA = new Phone("98765432");
         Phone phoneB = new Phone("91234567");
         EmergencyContact emergencyContactA = new EmergencyContact("Father", phoneA.value);
 
         // invalid person (same phone as emergency contact)
         assertThrows(IllegalArgumentException.class, Person.EMERGENCY_NUMBER_MESSAGE_CONSTRAINTS, () ->
-                Person.checkValidPerson(phoneA, emergencyContactA));
+                Person.checkValidPerson(nameA, phoneA, emergencyContactA));
         // invalid person (emergency contact is partially filled, missing name)
         assertThrows(IllegalArgumentException.class, Person.EMERGENCY_MESSAGE_CONSTRAINTS, () ->
-                Person.checkValidPerson(phoneA, new EmergencyContact(null, phoneB.value)));
+                Person.checkValidPerson(nameA, phoneA, new EmergencyContact(null, phoneB.value)));
 
         // valid person
-        Person.checkValidPerson(phoneA, new EmergencyContact()); // emergency contact is optional
-        Person.checkValidPerson(phoneB, emergencyContactA); // valid emergency contact
+        Person.checkValidPerson(nameA, phoneA, new EmergencyContact()); // emergency contact is optional
+        Person.checkValidPerson(nameB, phoneB, emergencyContactA); // valid emergency contact
     }
 }

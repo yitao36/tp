@@ -99,7 +99,7 @@ CCAmper is optimized for use via a
 | Year                  | • Positive integer, or blank to not add one.                                                                                                                                                                                                                                                         |
 | Roles                 | • Maximum 20 characters for each role, maximum of 3 roles.<br/>• Contains only alphanumeric characters or spaces.                                                                                                                                                                                    |
 | Tags                  | • Maximum 15 characters for each tag, maximum of 5 tags.<br/>• Contains only alphanumeric characters (No spaces).                                                                                                                                                                                    |
-| Emergency<br/>Contact | • Name and Phone of emergency contact has the same constraints as specified above.                                                                                                                                                                                                                   |
+| Emergency<br/>Contact | • Name and Phone of emergency contact has the same constraints as specified above.<br/>• Phone of emergency contact must not be the same as student's.                                                                                                                                               |
 | Pin                   | • Input either `TRUE` or `FALSE` (Non case-sensitive)                                                                                                                                                                                                                                                |
 
 **Duplicate handling**
@@ -115,12 +115,12 @@ CCAmper is optimized for use via a
   These do not throw an error, but will display a warning message after the command finishes execution,<br>
   and during launch of the program.
 
-| Field                 | Style Guide                                                                                               |
-|-----------------------|:----------------------------------------------------------------------------------------------------------|
-| Name                  | • Proper capitalization<br/>• No consecutive spaces<br/>• Brackets close, e.g. `John (Doe` is not stylish |
-| Address               | • Proper capitalization                                                                                   |
-| Roles                 | • Proper capitalization<br/>• No consecutive spaces                                                       |
-| Emergency<br/>Contact | • Name field has the same recommendations as specified above.                                             |
+| Field                 | Style Guide                                                                                                              |
+|-----------------------|:-------------------------------------------------------------------------------------------------------------------------|
+| Name                  | • Proper capitalization<br/>• No consecutive spaces<br/>• Brackets close, e.g. `John (Doe` is not stylish                |
+| Address               | • Proper capitalization                                                                                                  |
+| Roles                 | • Proper capitalization<br/>• No consecutive spaces                                                                      |
+| Emergency<br/>Contact | • Name field has the same recommendations as specified above.<br/>• Name field should be different from student's name.  |
 
 </box>
 
