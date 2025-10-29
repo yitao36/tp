@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.Messages;
@@ -23,6 +25,8 @@ public class ConsolidateCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Consolidate all distinct students' data: \n";
 
+    private static final Logger logger = Logger.getLogger(ConsolidateCommand.class.getName());
+
     /**
      * Lists the categories whose data will be consolidated under ConsolidateCommand.
      */
@@ -32,6 +36,7 @@ public class ConsolidateCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.log(Level.INFO, "start executing consolidate command");
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
@@ -44,6 +49,7 @@ public class ConsolidateCommand extends Command {
 
         ConsolidateCategory[] categories = ConsolidateCategory.values();
         for (ConsolidateCategory category : categories) {
+            logger.log(Level.INFO, "consolidating " + category);
             categoryCompilation.add(this.consolidateData(category, persons));
         }
         String fullCompilation = String.join("\n\n", categoryCompilation);
@@ -59,6 +65,8 @@ public class ConsolidateCommand extends Command {
      * @return Value of data under specified category of specified person.
      */
     public static String getData(ConsolidateCategory category, Person person) {
+        requireNonNull(person);
+        requireNonNull(category);
         if (category == ConsolidateCategory.NAME) {
             return person.getName().toString();
         } else if (category == ConsolidateCategory.PHONE) {
