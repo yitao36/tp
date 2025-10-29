@@ -40,18 +40,19 @@ public class ConsolidateCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        ObservableList<Person> persons = model.getAddressBook().getPersonList();
-        List<String> categoryCompilation = new ArrayList<>();
-
         if (model.isEmptyAddressBook()) {
             throw new CommandException(Messages.specifyEmptyUserListMessage(COMMAND_WORD));
         }
 
+        ObservableList<Person> persons = model.getAddressBook().getPersonList();
+        List<String> categoryCompilation = new ArrayList<>();
         ConsolidateCategory[] categories = ConsolidateCategory.values();
+
         for (ConsolidateCategory category : categories) {
             logger.log(Level.INFO, "consolidating " + category);
             categoryCompilation.add(this.consolidateData(category, persons));
         }
+
         String fullCompilation = String.join("\n\n", categoryCompilation);
 
         return new CommandResult(MESSAGE_SUCCESS + fullCompilation);
@@ -107,19 +108,23 @@ public class ConsolidateCommand extends Command {
         assert !persons.isEmpty() : "Only when there are persons data stored, "
                 + "do we call consolidateData function";
 
+        //get everyone's data pertaining to a particular category, and add to the container
         HashSet<String> container = new HashSet<>();
         for (Person person : persons) {
             container.add(this.getData(category, person));
         }
 
+        //sort everyone's data
         ArrayList<String> list = new ArrayList<>(container);
         Collections.sort(list);
-        String compilation = "";
 
+        //compile everyone's data into string spanning multiple line
+        String compilation = "";
         for (String s : list) {
             compilation += "\n" + s;
         }
 
+        //add a header specifying the category to the compiled data
         return formatCategoryHeader(category) + compilation;
     }
 }

@@ -56,10 +56,14 @@ public class Phone {
      * @return The conditional check of whether the phone number given starts with 8 numerical digits.
      */
     public static boolean hasEightNumber(String test) {
+        // remove space and hyphens from test string first
         test = convertRawFormat(test);
+
         if (test.length() < 8 || test == null) {
             return false;
         }
+
+        // check if the first 8 character contains only number
         return containOnlyNumbers(test.substring(0,8));
     }
 
@@ -129,6 +133,7 @@ public class Phone {
             // vacuously true
             return true;
         }
+
         Stack<Character> stack = new Stack<>();
         for (char character : input.toCharArray()) {
             if (isOpeningBracket(character)) {
@@ -137,6 +142,8 @@ public class Phone {
             if (!isClosingBracket(character)) {
                 continue;
             }
+
+            // when the character is a closing bracket
             if (stack.isEmpty()) {
                 return false;
             }
@@ -179,8 +186,8 @@ public class Phone {
     public static String createWarningMessage(String test) {
         test = convertRawFormat(test);
         String warningMessage = "Note: \n";
-
         int counter = 1;
+
         if (lengthGreaterThanEight(test)) {
             warningMessage += counter + ". " + WARNING_MESSAGE_UPPER_LIMIT;
             counter += 1;

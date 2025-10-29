@@ -40,9 +40,12 @@ public class AddressBookParser {
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     private void checkValidUserInput(String userInput, String keyword) throws ParseException {
+        //formats input by deleting white space and converting to lower case
         String formattedInput = userInput.replaceAll("\\s", "").toLowerCase();
-        boolean validInput = formattedInput.equals(keyword);
-        if (!validInput) {
+
+        //checks if is valid input, and if invalid, would throw a ParseException
+        boolean isValidInput = formattedInput.equals(keyword);
+        if (!isValidInput) {
             String message = "When using " + keyword + ", "
                     + "there should not be any characters (except whitespace, which is allowed) "
                     + "that comes before and/or follow " + keyword + ".";
