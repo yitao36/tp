@@ -106,6 +106,8 @@ public class Email {
         }
 
         if (numberOfAtSymbol == 1) {
+            // split the email address into 2 because there is only two segments to the email,
+            // the local part and the domain part
             String[] emailSegments = emailAddress.split("@", 2);
             String local = emailSegments[0];
             String domain = emailSegments[1];

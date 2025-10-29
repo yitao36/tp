@@ -111,7 +111,8 @@ public class ConsolidateCommand extends Command {
         //get everyone's data pertaining to a particular category, and add to the container
         HashSet<String> container = new HashSet<>();
         for (Person person : persons) {
-            container.add(this.getData(category, person));
+            String dataOfPerson = this.getData(category, person);
+            container.add(dataOfPerson);
         }
 
         //sort everyone's data
