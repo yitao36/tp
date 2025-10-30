@@ -11,7 +11,8 @@ import java.util.Stack;
  */
 public class Phone {
 
-    // Note: Error message has greater severity than warning message.
+    // error message has greater severity than warning message.
+
     public static final String ERROR_MESSAGE_FIST_CHARACTER = "Expected Singapore phone number "
             + "that starts with 3/6/8/9. \n";
     public static final String ERROR_MESSAGE_LOWER_LIMIT = "Expected 8 digit Singapore phone number \n";
@@ -56,10 +57,10 @@ public class Phone {
      * @return The conditional check of whether the phone number given starts with 8 numerical digits.
      */
     public static boolean hasEightNumber(String test) {
-        //removes space and hyphens from test string first
+        // removes space and hyphens from test string first
         test = convertRawFormat(test);
 
-        //checks for conditions that guarantee to return false
+        // checks for conditions that guarantee to return false
         if (test == null) {
             return false;
         }
@@ -67,7 +68,7 @@ public class Phone {
             return false;
         }
 
-        //checks if the first 8 character contains only number
+        // checks if the first 8 character contains only number
         return containOnlyNumbers(test.substring(0,8));
     }
 
@@ -210,6 +211,9 @@ public class Phone {
 
     /**
      * Returns true if a given string is a valid phone number.
+     *
+     * @param test Phone number provided.
+     * @return The conditional check of whether the phone number is valid.
      */
     public static boolean isValidPhone(String test) {
         test = convertRawFormat(test);

@@ -135,7 +135,7 @@ public class Email {
     }
 
     /**
-     * Returns a consolidates error message depending on the source of error.
+     * Returns a consolidation of error message(s) depending on the source of error.
      *
      * @param sourcesOfError Sources of error pertaining to the email.
      * @return A description of the sources of error.

@@ -17,7 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Consolidate all the student's phone number.
+ * Consolidates all the student's phone number.
  */
 public class ConsolidateCommand extends Command {
 
@@ -59,7 +59,7 @@ public class ConsolidateCommand extends Command {
     }
 
     /**
-     * Extract the data of the specified category of the specified person.
+     * Extracts the data of the specified category of the specified person.
      *
      * @param category Category of the data to be extracted.
      * @param person Person whose data to be extracted.
@@ -108,18 +108,18 @@ public class ConsolidateCommand extends Command {
         assert !persons.isEmpty() : "Only when there are persons data stored, "
                 + "do we call consolidateData function";
 
-        //get everyone's data pertaining to a particular category, and add to the container
+        //gets everyone's data pertaining to a particular category, and add to the container
         HashSet<String> container = new HashSet<>();
         for (Person person : persons) {
             String dataOfPerson = this.getData(category, person);
             container.add(dataOfPerson);
         }
 
-        //sort everyone's data
+        //sorts everyone's data
         ArrayList<String> list = new ArrayList<>(container);
         Collections.sort(list);
 
-        //compile everyone's data into string spanning multiple line
+        //compiles everyone's data into string spanning multiple line
         String compilation = "";
         for (String s : list) {
             compilation += "\n" + s;
