@@ -173,7 +173,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Find feature
 
-#### Proposed Implementation
+#### Implementation
 
 The finding or filtering feature is implemented via a `FindCommand` object which allows multiple filters to be applied on the list of persons at the same time. This is supported via a `MultiPredicate` class which is a composition of multiple `Predicate<Person>` which could consist of multiple different type of predicates extending the base predicate class.
 
@@ -187,7 +187,7 @@ Step 2. This input is parsed by the `FindCommandParser` which for each option cr
 
 Step 3. These predicates are passed to a construction of a `MultiPredicate` within a `FindCommand` object.
 
-Step 4. The command then executes and updates the filtered person list via `Model#updateFilteredPersonList` to be the new `MultiPredicate`. This causes the list to be updated with `Person`s that satisfies all the predicates.
+Step 4. The command then executes and updates the filtered person list via `Model#updateFilteredPersonList` to satisfy the new `MultiPredicate`. This causes the list to be updated with `Person`s that satisfies all the predicates.
 
 Step 5. The display `PersonListPanel` is then updated to show the filtered list.
 
@@ -196,6 +196,7 @@ Step 5. The display `PersonListPanel` is then updated to show the filtered list.
 **Note:** If a command fails its execution, it will not call `Model#updateFilteredPersonList()`, so the list will not be updated.
 
 </box>
+
 #### Design considerations:
 
 * **Alternative 1 (current choice):** Having a single find command for all constraints.
