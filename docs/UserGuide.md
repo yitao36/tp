@@ -15,12 +15,6 @@ CCAmper is the perfect app for **secondary school teachers** as an all-in-one de
 - Managing all your various CCA student details plus emergency contact details
 - Keeping track of their attendance with respect to various events
 
-CCAmper is optimized for use via a
-<tooltip content="Command Line Interface">**CLI**</tooltip> to help secondary school teachers to
-**plan, manage, and simplify** your CCA's weekly tasks faster than traditional
-<tooltip content="Graphical User Interface">GUI</tooltip> apps.
-
-
 ## Quick start
 
 1. Download and install Java `17` or above from this
@@ -42,17 +36,6 @@ CCAmper is optimized for use via a
 <br><br>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-
-   * `list` : Lists all contacts.
-
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
 
 2. Refer to the [Features](#features) below for details of each command.
 
@@ -246,6 +229,28 @@ Examples:
 
 <br>
 
+### Consolidate student info : `consolidate`
+
+Consolidate students' a) names, b) phone number, c) email and d) address and
+display data under corresponding categories.
+
+Format: `consolidate`
+
+* If there are repeated values for a particular category (e.g. two students share the same phone number),
+  then that particular value (e.g. phone number) is displayed once.
+* Within each category, the data is being sorted lexicographically in ascending order. This is to help teachers scan through the consolidated data more easily. 
+
+<br>
+
+### Clearing all contacts : `clear`
+
+<box type="warning">
+
+**Warning:** Deletes all contacts from the address book. Not undoable.
+</box>
+
+<br>
+
 ### Adding an event: `add:event`
 
 Add events to your address book, with the given fields given there are no duplicate events.
@@ -353,28 +358,6 @@ Examples:
 
 <br>
 
-### Consolidate student info : `consolidate`
-
-Consolidate students' a) names, b) phone number, c) email and d) address and
-display data under corresponding categories.
-
-Format: `consolidate`
-
-* If there are repeated values for a particular category (e.g. two students share the same phone number),
-  then that particular value (e.g. phone number) is displayed once.
-* Within each category, the data is being sorted lexicographically in ascending order. This is to help teachers scan through the consolidated data more easily. 
-
-<br>
-
-### Clearing all contacts : `clear`
-
-<box type="warning">
-
-**Warning:** Deletes all contacts from the address book. Not undoable.
-</box>
-
-<br>
-
 ### Clearing all events : `clear:event`
 
 <box type="warning">
@@ -444,6 +427,8 @@ Action     | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​ [t/TAG]…​ [pin/(TRUE/FALSE)] [enroll/[YEAR]] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE]`<br> e.g.,`edit 1 n/John p/98765432 e/johndoe@example.com a/New Place r/Senior Student t/experienced pin/TRUE enroll/2022 ecn/Sally ecp/88887777`
 **Find** | `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<\|<=\|>\|>=\|=)NUMBER]] [r/SUBSTRING]…​`<br> e.g., `find n/yu john enroll/>=2022 r/lead r/sec`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Consolidate** | `consolidate`
+**Clear**  | `clear`
 **Add Event** | `add:event n/NAME d/(d/M/yyyy or d/M/yyyy-d/M/yyyy) [info/DESCRIPTION]` <br> e.g., `add:event n/meeting d/1/10/2025 info/routine meeting`
 **Edit Event** | `edit:event [n/NAME] [d/(d/M/yyyy or d/M/yyyy-d/M/yyyy)] [info/DESCRIPTION]` <br> e.g., `edit:event 1 n/new meeting d/2/10/2025 info/special meeting`
 **Attend Event** | `attend:event e/EVENT_INDEX p/PERSON_INDEX [PERSON_INDEXES]...`<br> e.g. `attend:event e/1 p/3 5`
@@ -451,6 +436,4 @@ Action     | Format, Examples
 **Delete Event** | `delete:event INDEX`<br> e.g., `delete:event 3`
 **List Events Attended By Student** | `student:event INDEX_OF_STUDENT_LIST`<br> e.g., `student:event 1`
 **List Students Attending An Event** | `event:student INDEX_OF_EVENT_LIST`<br> e.g., `event:student 1`
-**Consolidate** | `consolidate`
-**Clear**  | `clear`
 **Clear Events**  | `clear:event`
