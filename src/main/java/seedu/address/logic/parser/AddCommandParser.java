@@ -35,6 +35,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
     public static final String ERROR_MESSAGE_MISSING_COMPULSORY_PREFIX = "Missing compulsory prefixes: %s";
     public static final String ERROR_MESSAGE_MISSING_FIRST_PREFIX = "There is an input without prefix after 'add'. \n";
+
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
@@ -46,11 +47,13 @@ public class AddCommandParser implements Parser<AddCommand> {
     private static String checkMissingPrefix(ArgumentMultimap argMultimap) {
         String missingPrefix = "";
         Prefix[] compulsoryPrefix = {PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL};
+
         for (Prefix prefix: compulsoryPrefix) {
             if (!arePrefixesPresent(argMultimap, prefix)) {
                 missingPrefix += prefix.toString() + ", ";
             }
         }
+
         if (missingPrefix != "") {
             return String.format(ERROR_MESSAGE_MISSING_COMPULSORY_PREFIX, missingPrefix) + "\n";
         }

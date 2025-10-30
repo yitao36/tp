@@ -16,10 +16,12 @@ public class Phone {
     public static final String ERROR_MESSAGE_FIST_CHARACTER = "Expected Singapore phone number "
             + "that starts with 3/6/8/9. \n";
     public static final String ERROR_MESSAGE_LOWER_LIMIT = "Expected 8 digit Singapore phone number \n";
+
     public static final String WARNING_MESSAGE_UPPER_LIMIT = "Phone number keyed in is more than 8 characters long \n";
     public static final String WARNING_MESSAGE_NON_NUMERIC = "This phone number contains non-numeric characters."
             + "\n";
     public static final String WARNING_MESSAGE_IMPROPER_BRACKETS = "There is an improper use of brackets. \n";
+
     public static final String MESSAGE_CONSTRAINTS = "1. "
             + ERROR_MESSAGE_LOWER_LIMIT
             + "2. "
@@ -102,6 +104,7 @@ public class Phone {
         test = convertRawFormat(test);
         String errorMessage = "";
         int counter = 1;
+
         if (!hasEightNumber(test)) {
             errorMessage += counter + ". " + ERROR_MESSAGE_LOWER_LIMIT;
             counter += 1;
@@ -109,6 +112,7 @@ public class Phone {
         if (!validFirstDigit(test)) {
             errorMessage += counter + ". " + ERROR_MESSAGE_FIST_CHARACTER;
         }
+
         return errorMessage;
     }
 
@@ -141,26 +145,27 @@ public class Phone {
             return true;
         }
 
-        Stack<Character> stack = new Stack<>();
+        Stack<Character> characters = new Stack<>();
         for (char character : input.toCharArray()) {
             if (isOpeningBracket(character)) {
-                stack.push(character);
+                characters.push(character);
             }
+
             if (!isClosingBracket(character)) {
                 continue;
             }
 
             // when the character is a closing bracket
-            if (stack.isEmpty()) {
+            if (characters.isEmpty()) {
                 return false;
             }
-            char previousBracket = stack.pop();
+            char previousBracket = characters.pop();
             if (!isValidBracketMatching(previousBracket, character)) {
                 return false;
             }
         }
 
-        return stack.isEmpty();
+        return characters.isEmpty();
     }
 
     private static boolean isOpeningBracket(char character) {
@@ -206,6 +211,7 @@ public class Phone {
         if (!isValidUseOfBracket(test)) {
             warningMessage += counter + ". " + WARNING_MESSAGE_IMPROPER_BRACKETS;
         }
+
         return warningMessage;
     }
 

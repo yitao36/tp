@@ -68,6 +68,7 @@ public class ConsolidateCommand extends Command {
     public static String getData(ConsolidateCategory category, Person person) {
         requireNonNull(person);
         requireNonNull(category);
+
         if (category == ConsolidateCategory.NAME) {
             return person.getName().toString();
         } else if (category == ConsolidateCategory.PHONE) {
@@ -108,24 +109,24 @@ public class ConsolidateCommand extends Command {
         assert !persons.isEmpty() : "Only when there are persons data stored, "
                 + "do we call consolidateData function";
 
-        //gets everyone's data pertaining to a particular category, and add to the container
+        // Get everyone's data pertaining to a particular category, and add to the container
         HashSet<String> container = new HashSet<>();
         for (Person person : persons) {
             String dataOfPerson = this.getData(category, person);
             container.add(dataOfPerson);
         }
 
-        //sorts everyone's data
+        // Sort everyone's data
         ArrayList<String> list = new ArrayList<>(container);
         Collections.sort(list);
 
-        //compiles everyone's data into string spanning multiple line
+        // Compile everyone's data into string spanning multiple line
         String compilation = "";
         for (String s : list) {
             compilation += "\n" + s;
         }
 
-        //add a header specifying the category to the compiled data
+        // Add a header specifying the category to the compiled data
         return formatCategoryHeader(category) + compilation;
     }
 }
