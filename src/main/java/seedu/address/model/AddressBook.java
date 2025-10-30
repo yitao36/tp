@@ -193,7 +193,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Clears the event list.
+     * Clears the person list and attendance list of events.
      */
     public void clearPerson() {
         persons.clear();
