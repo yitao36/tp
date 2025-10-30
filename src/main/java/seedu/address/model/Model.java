@@ -61,11 +61,18 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if the address book is empty.
+     * Returns true if the list of persons in the address book is empty.
      *
-     * @return The boolean result of whether the address book is empty.
+     * @return The boolean result of whether the person list in address book is empty.
      */
-    boolean isEmptyAddressBook();
+    boolean isPersonEmptyAddressBook();
+
+    /**
+     * Returns true if the list of events in the address book is empty.
+     *
+     * @return The boolean result of whether the event list in address book is empty.
+     */
+    boolean isEventEmptyAddressBook();
 
     /**
      * Sorts the AddressBook

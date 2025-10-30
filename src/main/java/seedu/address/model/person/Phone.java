@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Stack;
+
 /**
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
@@ -13,9 +15,10 @@ public class Phone {
     public static final String ERROR_MESSAGE_FIST_CHARACTER = "Expected Singapore phone number "
             + "that starts with 3/6/8/9. \n";
     public static final String ERROR_MESSAGE_LOWER_LIMIT = "Expected 8 digit Singapore phone number \n";
-    public static final String WARNING_MESSAGE_UPPER_LIMIT = "Phone number keyed in is more than 8 digit long \n";
+    public static final String WARNING_MESSAGE_UPPER_LIMIT = "Phone number keyed in is more than 8 characters long \n";
     public static final String WARNING_MESSAGE_NON_NUMERIC = "This phone number contains non-numeric characters."
             + "\n";
+    public static final String WARNING_MESSAGE_IMPROPER_BRACKETS = "There is an improper use of brackets. \n";
     public static final String MESSAGE_CONSTRAINTS = "1. "
             + ERROR_MESSAGE_LOWER_LIMIT
             + "2. "
@@ -86,7 +89,7 @@ public class Phone {
      */
     public static String createErrorMessage(String test) {
         test = convertRawFormat(test);
-        String errorMessage = "";
+        String errorMessage = String.format("Phone number %s is invalid\n", test);
         int counter = 1;
         if (!hasEightNumber(test)) {
             errorMessage += counter + ". " + ERROR_MESSAGE_LOWER_LIMIT;
@@ -112,6 +115,61 @@ public class Phone {
         return false;
     }
 
+    private static boolean hasBracket(String input) {
+        return input.contains("(")
+                || input.contains(")")
+                || input.contains("[")
+                || input.contains("]")
+                || input.contains("{")
+                || input.contains("}");
+    }
+
+    private static boolean isValidUseOfBracket(String input) {
+        if (!hasBracket(input)) {
+            // vacuously true
+            return true;
+        }
+        Stack<Character> stack = new Stack<>();
+        for (char character : input.toCharArray()) {
+            if (isOpeningBracket(character)) {
+                stack.push(character);
+            }
+            if (!isClosingBracket(character)) {
+                continue;
+            }
+            if (stack.isEmpty()) {
+                return false;
+            }
+            char previousBracket = stack.pop();
+            if (!isValidBracketMatching(previousBracket, character)) {
+                return false;
+            }
+        }
+
+        return stack.isEmpty();
+    }
+
+    private static boolean isOpeningBracket(char character) {
+        return character == '(' || character == '{' || character == '[';
+    }
+
+    private static boolean isClosingBracket(char character) {
+        return character == ')' || character == '}' || character == ']';
+    }
+
+    private static boolean isValidBracketMatching(char previousBracket, char nextBracket) {
+        if (nextBracket == ')' && previousBracket == '(') {
+            return true;
+        }
+        if (nextBracket == ']' && previousBracket == '[') {
+            return true;
+        }
+        if (nextBracket == '}' && previousBracket == '{') {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Creates warning message depending on the issue(s) of phone number provided.
      *
@@ -120,7 +178,7 @@ public class Phone {
      */
     public static String createWarningMessage(String test) {
         test = convertRawFormat(test);
-        String warningMessage = "Note: \n";
+        String warningMessage = String.format("Note (Phone number %s may have issues):\n", test);
 
         int counter = 1;
         if (lengthGreaterThanEight(test)) {
@@ -129,6 +187,10 @@ public class Phone {
         }
         if (!containOnlyNumbers(test)) {
             warningMessage += counter + ". " + WARNING_MESSAGE_NON_NUMERIC;
+            counter += 1;
+        }
+        if (!isValidUseOfBracket(test)) {
+            warningMessage += counter + ". " + WARNING_MESSAGE_IMPROPER_BRACKETS;
         }
         return warningMessage;
     }

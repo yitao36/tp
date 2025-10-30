@@ -79,6 +79,14 @@ public class EditEventCommand extends Command {
         requireNonNull(model);
         List<Event> lastShownList = model.getFilteredEventList();
 
+        if (model.isEventEmptyAddressBook()) {
+            throw new CommandException(Messages.specifyEmptyEventListMessage(COMMAND_WORD));
+        }
+
+        if (lastShownList.size() == 0) {
+            throw new CommandException(Messages.MESSAGE_EMPTY_EVENT);
+        }
+
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }

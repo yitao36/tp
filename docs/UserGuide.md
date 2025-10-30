@@ -13,11 +13,10 @@
 ## Welcome to CCAmper!
 CCAmper is the perfect app for **secondary school teachers** as an all-in-one desktop app for
 - Managing all your various CCA student details plus emergency contact details
-- Keeping track of critical information such as their dietary restrictions
-- Keeping track of their attendance and performance.
+- Keeping track of their attendance with respect to various events
 
 CCAmper is optimized for use via a
-<tooltip content="Command Line Interface">**CLI**</tooltip> to help secondary school teachers who are fast-typers to
+<tooltip content="Command Line Interface">**CLI**</tooltip> to help secondary school teachers to
 **plan, manage, and simplify** your CCA's weekly tasks faster than traditional
 <tooltip content="Graphical User Interface">GUI</tooltip> apps.
 
@@ -93,13 +92,13 @@ CCAmper is optimized for use via a
 | Field                 | Requirements                                                                                                                                                                                                                                                                                         |
 |-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Name                  | • Max 50 characters long.<br/>• Letters, numbers, and spaces and the following `.,-'()` only.<br>• Cannot be blank                                                                                                                                                                                   |
-| Phone                 | • Exactly 8 digits that starts with one of `3/6/8/9`.                                                                                                                                                                                                                                                |
+| Phone                 | • Standard Format: Exactly 8 digits that starts with one of `3/6/8/9`.                                                                                                                                                                                                                                                |
 | Email                 | • Max 50 characters long.<br/>• Local-part contains only alphanumeric characters and the following `+_.-` <br/>• Domain label must consist of only alphanumeric characters and hyphens, <br/>and the end part (after the period) must be at least 2 characters long. <br/>(example.email@do-main.ca) |
 | Address               | • Max 70 characters long.<br/>• Any characters, but cannot be blank.                                                                                                                                                                                                                                 |
 | Year                  | • Positive integer, or blank to not add one.                                                                                                                                                                                                                                                         |
 | Roles                 | • Maximum 20 characters for each role, maximum of 3 roles.<br/>• Contains only alphanumeric characters or spaces.                                                                                                                                                                                    |
 | Tags                  | • Maximum 15 characters for each tag, maximum of 5 tags.<br/>• Contains only alphanumeric characters (No spaces).                                                                                                                                                                                    |
-| Emergency<br/>Contact | • Name and Phone of emergency contact has the same constraints as specified above.                                                                                                                                                                                                                   |
+| Emergency<br/>Contact | • Name and Phone of emergency contact has the same constraints as specified above.<br/>• Phone of emergency contact must not be the same as student's.                                                                                                                                               |
 | Pin                   | • Input either `TRUE` or `FALSE` (Non case-sensitive)                                                                                                                                                                                                                                                |
 
 **Duplicate handling**
@@ -115,12 +114,12 @@ CCAmper is optimized for use via a
   These do not throw an error, but will display a warning message after the command finishes execution,<br>
   and during launch of the program.
 
-| Field                 | Style Guide                                                                                               |
-|-----------------------|:----------------------------------------------------------------------------------------------------------|
-| Name                  | • Proper capitalization<br/>• No consecutive spaces<br/>• Brackets close, e.g. `John (Doe` is not stylish |
-| Address               | • Proper capitalization                                                                                   |
-| Roles                 | • Proper capitalization<br/>• No consecutive spaces                                                       |
-| Emergency<br/>Contact | • Name field has the same recommendations as specified above.                                             |
+| Field                 | Style Guide                                                                                                              |
+|-----------------------|:-------------------------------------------------------------------------------------------------------------------------|
+| Name                  | • Proper capitalization<br/>• No consecutive spaces<br/>• Brackets close, e.g. `John (Doe` is not stylish                |
+| Address               | • Proper capitalization                                                                                                  |
+| Roles                 | • Proper capitalization<br/>• No consecutive spaces                                                                      |
+| Emergency<br/>Contact | • Name field has the same recommendations as specified above.<br/>• Name field should be different from student's name.  |
 
 </box>
 
@@ -158,6 +157,9 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/President r/Camp leader ecn/Jack Doe ecp/99998888 ece/jackd@example.com enroll/2022 t/friend`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/98765432 t/criminal enroll/2024`
 
+Note: 
+* If there are multiple errors when keying in the add command (e.g. duplicate fields, missing compulsory fields, some fields do not follow the correct format), CCAmper may show error messages in batches, rather than all at once, and only show the next batch of error messages once the current batch of error messages is resolved. This is to help users avoid information overload.
+ 
 <box type="tip">
 
 **Tip:** A person can have any number of tags (including 0)
@@ -360,6 +362,7 @@ Format: `consolidate`
 
 * If there are repeated values for a particular category (e.g. two students share the same phone number),
   then that particular value (e.g. phone number) is displayed once.
+* Within each category, the data is being sorted lexicographically in ascending order. This is to help teachers scan through the consolidated data more easily. 
 
 <br>
 

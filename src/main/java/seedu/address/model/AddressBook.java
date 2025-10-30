@@ -118,6 +118,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if the list of event is empty.
+     *
+     * @return The boolean result of whether the list of event is empty.
+     */
+    public boolean isEventListEmpty() {
+        return events.isEmpty();
+    }
+
+
+    /**
      * Clears the event list.
      */
     public void clearEvent() {
@@ -187,6 +197,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void clearPerson() {
         persons.clear();
+        events.forEach(e -> e.getAttendance().clear());
     }
 
     //// sort methods

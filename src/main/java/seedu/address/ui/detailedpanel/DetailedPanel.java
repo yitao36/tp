@@ -116,7 +116,7 @@ public class DetailedPanel extends UiPart<StackPane> {
         }
         activePanel.setVisible(false);
         personPanelPlaceholder.setVisible(true);
-        activePanel = helpPanelPlaceholder;
+        activePanel = personPanelPlaceholder;
     }
 
     /**

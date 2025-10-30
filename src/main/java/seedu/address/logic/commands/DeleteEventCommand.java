@@ -36,6 +36,10 @@ public class DeleteEventCommand extends Command {
         requireNonNull(model);
         List<Event> lastShownList = model.getFilteredEventList();
 
+        if (model.isEventEmptyAddressBook()) {
+            throw new CommandException(Messages.specifyEmptyEventListMessage(COMMAND_WORD));
+        }
+
         if (lastShownList.size() == 0) {
             throw new CommandException(Messages.MESSAGE_EMPTY_EVENT);
         }
@@ -46,6 +50,10 @@ public class DeleteEventCommand extends Command {
 
         Event eventToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteEvent(eventToDelete);
+
+        if (model.getZoomInSelected().get().getTargetEvent() == eventToDelete) {
+            model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
+        }
 
         return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, Messages.format(eventToDelete)));
     }

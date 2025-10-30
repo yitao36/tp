@@ -49,7 +49,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public boolean isEmptyAddressBook() {
+    public boolean isPersonEmptyAddressBook() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean isEventEmptyAddressBook() {
         throw new AssertionError("This method should not be called.");
     }
 

@@ -40,6 +40,13 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
+     * Returns true if the list is empty.
+     */
+    public boolean isEmpty() {
+        return internalList.isEmpty();
+    }
+
+    /**
      * Adds an event to the list.
      * The event must not already exist in the list.
      */
