@@ -11,7 +11,7 @@ import java.util.Arrays;
  */
 public class Name {
 
-    public static final String MESSAGE_CONSTRAINTS = "Names must be less than 50 characters long, should not be blank, "
+    public static final String MESSAGE_CONSTRAINTS = "Names must be at most 50 characters long, should not be blank, "
             + "and names should only contain alphanumeric characters, spaces, and the following characters: "
             + ".,-'()/";
 

@@ -84,9 +84,6 @@ public class ParserUtil {
         String trimmedPhone = phone.trim();
         String processNumber = Phone.convertRawFormat(trimmedPhone);
 
-        if (!Phone.isValidPhone(processNumber)) {
-            throw new ParseException(Phone.createErrorMessage(processNumber));
-        }
         if (Phone.hasWarning(processNumber)) {
             MessageCenter.appendEnd(Phone.createWarningMessage(processNumber));
         }
