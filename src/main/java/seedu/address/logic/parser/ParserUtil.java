@@ -144,7 +144,9 @@ public class ParserUtil {
     public static EmergencyContact parseEmergencyContact(String emergencyName, String emergencyPhone)
             throws ParseException {
         try {
-            return new EmergencyContact(emergencyName, emergencyPhone);
+            Name name = emergencyName == null ? null : ParserUtil.parseName(emergencyName);
+            Phone phone = emergencyPhone == null ? null : ParserUtil.parsePhone(emergencyPhone);
+            return new EmergencyContact(name, phone);
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());
         }

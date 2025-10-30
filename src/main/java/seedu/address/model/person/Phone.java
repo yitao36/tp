@@ -89,7 +89,7 @@ public class Phone {
      */
     public static String createErrorMessage(String test) {
         test = convertRawFormat(test);
-        String errorMessage = "";
+        String errorMessage = String.format("Phone number %s is invalid\n", test);
         int counter = 1;
         if (!hasEightNumber(test)) {
             errorMessage += counter + ". " + ERROR_MESSAGE_LOWER_LIMIT;
@@ -178,7 +178,7 @@ public class Phone {
      */
     public static String createWarningMessage(String test) {
         test = convertRawFormat(test);
-        String warningMessage = "Note: \n";
+        String warningMessage = String.format("Note (Phone number %s may have issues):\n", test);
 
         int counter = 1;
         if (lengthGreaterThanEight(test)) {

@@ -89,10 +89,10 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_validPhoneValue_failure() {
-        assertParseFailure(parser, "1 " + PREFIX_PHONE + " 9", "1. "
-                + Phone.ERROR_MESSAGE_LOWER_LIMIT); // phone too short
-        assertParseFailure(parser, "1 " + PREFIX_PHONE + " 00000000", "1. "
-                + Phone.ERROR_MESSAGE_FIST_CHARACTER); // wrong 1st digit
+        assertParseFailure(parser, "1 " + PREFIX_PHONE + " 9", "Phone number 9 is invalid\n"
+                + "1. " + Phone.ERROR_MESSAGE_LOWER_LIMIT); // phone too short
+        assertParseFailure(parser, "1 " + PREFIX_PHONE + " 00000000", "Phone number 00000000 is invalid\n"
+                + "1. " + Phone.ERROR_MESSAGE_FIST_CHARACTER); // wrong 1st digit
     }
 
     @Test
@@ -101,8 +101,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
         assertParseFailure(parser, "1" + INVALID_EMERGENCY_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_EMERGENCY_PHONE_DESC,
-                "1. " + Phone.ERROR_MESSAGE_LOWER_LIMIT); // phone too short
+        assertParseFailure(parser, "1" + INVALID_EMERGENCY_PHONE_DESC, "Phone number 911b is invalid\n"
+                + "1. " + Phone.ERROR_MESSAGE_LOWER_LIMIT); // phone too short
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
