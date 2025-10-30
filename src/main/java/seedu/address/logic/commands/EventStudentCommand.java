@@ -41,7 +41,7 @@ public class EventStudentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.isEmptyAddressBook()) {
+        if (model.isEventEmptyAddressBook()) {
             throw new CommandException(Messages.specifyEmptyEventListMessage(COMMAND_WORD));
         }
 

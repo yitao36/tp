@@ -118,6 +118,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if the list of event is empty.
+     *
+     * @return The boolean result of whether the list of event is empty.
+     */
+    public boolean isEventListEmpty() {
+        return events.isEmpty();
+    }
+
+
+    /**
      * Clears the event list.
      */
     public void clearEvent() {

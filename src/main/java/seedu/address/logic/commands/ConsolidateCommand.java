@@ -43,7 +43,7 @@ public class ConsolidateCommand extends Command {
         ObservableList<Person> persons = model.getAddressBook().getPersonList();
         List<String> categoryCompilation = new ArrayList<>();
 
-        if (model.isEmptyAddressBook()) {
+        if (model.isPersonEmptyAddressBook()) {
             throw new CommandException(Messages.specifyEmptyUserListMessage(COMMAND_WORD));
         }
 

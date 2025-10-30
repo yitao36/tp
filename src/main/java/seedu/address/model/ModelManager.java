@@ -122,8 +122,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean isEmptyAddressBook() {
+    public boolean isPersonEmptyAddressBook() {
         return addressBook.isPersonListEmpty();
+    }
+
+    @Override
+    public boolean isEventEmptyAddressBook() {
+        return addressBook.isEventListEmpty();
     }
 
     @Override
