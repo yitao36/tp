@@ -15,6 +15,12 @@ CCAmper is the perfect app for **Singaporean secondary school teachers** as an a
 - Managing all your various CCA student details plus emergency contact details
 - Keeping track of their attendance with respect to various events
 
+CCAmper is optimized for use via a
+<tooltip content="Command Line Interface">**CLI**</tooltip> to help secondary school teachers to
+**plan, manage, and simplify** your CCA's weekly tasks faster than traditional
+<tooltip content="Graphical User Interface">GUI</tooltip> apps.
+
+
 ## Quick start
 
 1. Download and install Java `17` or above from this
@@ -75,7 +81,7 @@ CCAmper is the perfect app for **Singaporean secondary school teachers** as an a
 |-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Name                  | • Max 50 characters long.<br/>• Letters, numbers, and spaces and the following `.,-'()/` only.<br>• Cannot be blank                                                                                                                                                                                   |
 | Phone                 | • Encouraged input format: 8-digit Singaporean phone number that starts with one of `3/6/8/9`. <br/> • While it is possible to key in any other inputs such as 90909090 (HP) or +60-12-345 6789, application would issue warnings. This helps to signal a deviation from the encouraged input format (e.g. 90909090 or 9090 9090), allowing users to manually check if the phone number they keyed in is correct. <br/> • While users can key in phone numbers with hyphens and space, these hyphens and space would be removed when phone number is stored in CCAmper.                                                                                                                                                                                                              |
-| Email                 | • Max 50 characters long.<br/>• Local-part contains only alphanumeric characters and the following `+_.-`. The local parts may not start or end with any special characters. <br/>• Domain label must consist of only alphanumeric characters and hyphens, <br/>and the end part (after the period) must be at least 2 characters long. <br/>(example.email@do-main.ca) |
+| Email                 | • Max 50 characters long.<br/>• Local-part contains only alphanumeric characters and the following `+_.-`. The local parts may not start or end with any special characters. <br/> • Domain labels are separated by period, consist of only alphanumeric characters and hyphens, <br/>and the end part (after the period) must be at least 2 characters long. <br/>(example.email@do-main.ca) |
 | Address               | • Max 70 characters long.<br/>• Any characters, but cannot be blank.                                                                                                                                                                                                                                 |
 | Year                  | • Positive integer, or blank to not add one.                                                                                                                                                                                                                                                         |
 | Roles                 | • Maximum 20 characters for each role, maximum of 3 roles.<br/>• Contains only alphanumeric characters or spaces.                                                                                                                                                                                    |
