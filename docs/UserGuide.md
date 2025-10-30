@@ -26,24 +26,26 @@ CCAmper is optimized for use via a
 1. Download and install Java `17` or above from this
    <a href="https://www.oracle.com/java/technologies/downloads/#java17">Java downloads page</a>.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed
-   [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).<br> {{ verifyJava17 }}
+   [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).<br> {{ verifyJava17Box }}
 
 2. Download our latest CCAmper `.jar` file from our [GitHub page](https://github.com/AY2526S1-CS2103T-T10-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
    <br>We recommend placing the `.jar` file into a folder named `CCAmper` on your desktop for easy access.
 
-3. Open a command terminal, {{ navigate }} into the folder containing the `.jar` file,
-   and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
-
-<br>
-   <img src="images/Ui.png" width="600" height="450"/>
+4. Open a command terminal, navigate into the folder containing the `.jar` file,
+   and use the `java -jar addressbook.jar` command to run the application.
+<br>{{ navigateGuideBox }}
+5. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+The layout of the application is also shown below. Clicking on a person or event will show more detailed information
+about the corresponding item in `DetailedPanel`.
 <br><br>
+    <img src="images/Ui.png" width="560" height="400"/>
+<br>
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
-2. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -157,11 +159,11 @@ Note:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Resets any `find`, `event:student` or `student:event` filters used, and displays all persons and events in the address book.
 
 Format: `list`
 
-It should look like this:
+This command brings you back to the default view:
 
 <img src="images/list.png" width="650" height="400"/>
 
