@@ -40,7 +40,7 @@ public class ConsolidateCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        if (model.isEmptyAddressBook()) {
+        if (model.isPersonEmptyAddressBook()) {
             throw new CommandException(Messages.specifyEmptyUserListMessage(COMMAND_WORD));
         }
 

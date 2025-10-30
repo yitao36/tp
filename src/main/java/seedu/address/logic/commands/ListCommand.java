@@ -20,7 +20,7 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.isEmptyAddressBook()) {
+        if (model.isPersonEmptyAddressBook()) {
             throw new CommandException(Messages.specifyEmptyUserListMessage(COMMAND_WORD));
         }
 

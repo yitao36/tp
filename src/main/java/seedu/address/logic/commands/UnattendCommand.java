@@ -58,6 +58,14 @@ public class UnattendCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        if (model.isPersonEmptyAddressBook()) {
+            throw new CommandException(Messages.specifyEmptyUserListMessage(COMMAND_WORD));
+        }
+
+        if (model.isEventEmptyAddressBook()) {
+            throw new CommandException(Messages.specifyEmptyEventListMessage(COMMAND_WORD));
+        }
+
         if (eventIndex.getZeroBased() >= model.getFilteredEventList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }

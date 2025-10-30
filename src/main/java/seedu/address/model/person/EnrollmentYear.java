@@ -12,7 +12,7 @@ import java.util.Objects;
 public class EnrollmentYear {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Enrollment year should be a positive integer or an empty string.";
+            "Enrollment year should be a positive integer less than 10000 or an empty string.";
 
     /*
      * The string must be a positive integer.
@@ -78,7 +78,8 @@ public class EnrollmentYear {
             return test != null
                     && !test.isEmpty()
                     && test.matches(VALIDATION_REGEX)
-                    && Integer.parseInt(test) > 0;
+                    && Integer.parseInt(test) > 0
+                    && Integer.parseInt(test) < 10000;
         } catch (NumberFormatException e) {
             // This happens if the number is too large to fit in an int
             return false;

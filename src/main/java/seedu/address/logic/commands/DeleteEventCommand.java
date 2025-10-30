@@ -36,6 +36,10 @@ public class DeleteEventCommand extends Command {
         requireNonNull(model);
         List<Event> lastShownList = model.getFilteredEventList();
 
+        if (model.isEventEmptyAddressBook()) {
+            throw new CommandException(Messages.specifyEmptyEventListMessage(COMMAND_WORD));
+        }
+
         if (lastShownList.size() == 0) {
             throw new CommandException(Messages.MESSAGE_EMPTY_EVENT);
         }
