@@ -82,10 +82,10 @@ public class ParserUtil {
         requireNonNull(phone);
 
         String trimmedPhone = phone.trim();
-        String processNumber = Phone.convertRawFormat(trimmedPhone);
+        String rawNumber = Phone.convertRawFormat(trimmedPhone);
 
-        if (Phone.hasWarning(processNumber)) {
-            MessageCenter.appendEnd(Phone.createWarningMessage(processNumber));
+        if (Phone.hasWarning(rawNumber)) {
+            MessageCenter.appendEnd(Phone.createWarningMessage(rawNumber));
         }
 
         return new Phone(trimmedPhone);

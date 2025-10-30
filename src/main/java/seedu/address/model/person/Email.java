@@ -65,7 +65,7 @@ public class Email {
      * Returns if a given string is a valid email.
      */
     public static boolean isValidEmail(String test) {
-        if (!containAtSymbol(test)) {
+        if (!hasAtSymbol(test)) {
             return false;
         }
         return test.length() <= EMAIL_LENGTH_LIMIT
@@ -84,7 +84,7 @@ public class Email {
         return emailAddress.chars().filter(c -> c == '@').count();
     }
 
-    private static boolean containAtSymbol(String emailAddress) {
+    private static boolean hasAtSymbol(String emailAddress) {
         return emailAddress.contains(String.valueOf('@'));
     }
 
