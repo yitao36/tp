@@ -106,6 +106,7 @@ public class ParserUtil {
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
+        MessageCenter.appendEnd(Address.getStyleWarningMessage(address));
         return new Address(trimmedAddress);
     }
 
@@ -169,6 +170,7 @@ public class ParserUtil {
         if (!Role.isValidRoleName(trimmedRole)) {
             throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
+        MessageCenter.appendEnd(Role.getStyleWarningMessage(trimmedRole));
         return new Role(trimmedRole);
     }
 
