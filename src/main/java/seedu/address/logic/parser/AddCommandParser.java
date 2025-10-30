@@ -37,6 +37,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
     public static final String ERROR_MESSAGE_MISSING_COMPULSORY_PREFIX = "Missing compulsory prefixes: %s";
     public static final String ERROR_MESSAGE_MISSING_FIRST_PREFIX = "There is an input without prefix after 'add'.";
+
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
@@ -83,7 +84,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         String compilationOfErrorMessage = "Note: ";
         compilationOfErrorMessage += AddCommandParser.checkMissingPrefix(argMultimap);
         compilationOfErrorMessage += AddCommandParser.checkUntokenInput(argMultimap);
-        compilationOfErrorMessage += "\n" + String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        compilationOfErrorMessage += String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         return compilationOfErrorMessage;
     }
 
@@ -103,7 +104,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = createArgumentMultimap(args);
@@ -134,7 +135,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                     enrollmentYear);
             return new AddCommand(person);
         } catch (IllegalArgumentException e) {
-            throw new ParseException(e.getMessage());
+            throw new ParseException(compilationOfErrorMessage + e.getMessage());
         }
     }
 

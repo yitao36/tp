@@ -11,14 +11,17 @@ import java.util.Stack;
  */
 public class Phone {
 
-    // Note: Error message has greater severity than warning message.
+    // Error message has greater severity than warning message.
+
     public static final String ERROR_MESSAGE_FIST_CHARACTER = "Expected Singapore phone number "
             + "that starts with 3/6/8/9. \n";
     public static final String ERROR_MESSAGE_LOWER_LIMIT = "Expected 8 digit Singapore phone number \n";
+
     public static final String WARNING_MESSAGE_UPPER_LIMIT = "Phone number keyed in is more than 8 characters long \n";
     public static final String WARNING_MESSAGE_NON_NUMERIC = "This phone number contains non-numeric characters."
             + "\n";
     public static final String WARNING_MESSAGE_IMPROPER_BRACKETS = "There is an improper use of brackets. \n";
+
     public static final String MESSAGE_CONSTRAINTS = "1. "
             + ERROR_MESSAGE_LOWER_LIMIT
             + "2. "
@@ -56,11 +59,19 @@ public class Phone {
      * @return The conditional check of whether the phone number given starts with 8 numerical digits.
      */
     public static boolean hasEightNumber(String test) {
+        // Remove space and hyphens from test string first
         test = convertRawFormat(test);
-        if (test.length() < 8 || test == null) {
+
+        // Check for conditions that guarantee to return false
+        if (test == null) {
             return false;
         }
-        return test.substring(0, 8).chars().allMatch(Character::isDigit);
+        if (test.length() < 8) {
+            return false;
+        }
+
+        // Check if the first 8 character contains only number
+        return containOnlyNumbers(test.substring(0, 8));
     }
 
     private static boolean containOnlyNumbers(String test) {
@@ -78,6 +89,8 @@ public class Phone {
             return false;
         }
         int firstDigit = test.charAt(0);
+
+        // 3, 6, 8 and 9 are valid first digit for Singaporean phone number
         return firstDigit == '3' || firstDigit == '6' || firstDigit == '8' || firstDigit == '9';
     }
 
@@ -91,6 +104,7 @@ public class Phone {
         test = convertRawFormat(test);
         String errorMessage = String.format("Phone number %s is invalid\n", test);
         int counter = 1;
+
         if (!hasEightNumber(test)) {
             errorMessage += counter + ". " + ERROR_MESSAGE_LOWER_LIMIT;
             counter += 1;
@@ -98,6 +112,7 @@ public class Phone {
         if (!validFirstDigit(test)) {
             errorMessage += counter + ". " + ERROR_MESSAGE_FIST_CHARACTER;
         }
+
         return errorMessage;
     }
 
@@ -126,27 +141,31 @@ public class Phone {
 
     private static boolean isValidUseOfBracket(String input) {
         if (!hasBracket(input)) {
-            // vacuously true
+            // Vacuously true
             return true;
         }
-        Stack<Character> stack = new Stack<>();
+
+        Stack<Character> characters = new Stack<>();
         for (char character : input.toCharArray()) {
             if (isOpeningBracket(character)) {
-                stack.push(character);
+                characters.push(character);
             }
+
             if (!isClosingBracket(character)) {
                 continue;
             }
-            if (stack.isEmpty()) {
+
+            // When the character is a closing bracket
+            if (characters.isEmpty()) {
                 return false;
             }
-            char previousBracket = stack.pop();
+            char previousBracket = characters.pop();
             if (!isValidBracketMatching(previousBracket, character)) {
                 return false;
             }
         }
 
-        return stack.isEmpty();
+        return characters.isEmpty();
     }
 
     private static boolean isOpeningBracket(char character) {
@@ -181,6 +200,7 @@ public class Phone {
         String warningMessage = String.format("Note (Phone number %s may have issues):\n", test);
 
         int counter = 1;
+
         if (lengthGreaterThanEight(test)) {
             warningMessage += counter + ". " + WARNING_MESSAGE_UPPER_LIMIT;
             counter += 1;
@@ -192,11 +212,15 @@ public class Phone {
         if (!isValidUseOfBracket(test)) {
             warningMessage += counter + ". " + WARNING_MESSAGE_IMPROPER_BRACKETS;
         }
+
         return warningMessage;
     }
 
     /**
      * Returns true if a given string is a valid phone number.
+     *
+     * @param test Phone number provided.
+     * @return The conditional check of whether the phone number is valid.
      */
     public static boolean isValidPhone(String test) {
         test = convertRawFormat(test);

@@ -17,7 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Consolidate all the student's phone number.
+ * Consolidates all the student's phone number.
  */
 public class ConsolidateCommand extends Command {
 
@@ -40,25 +40,26 @@ public class ConsolidateCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        ObservableList<Person> persons = model.getAddressBook().getPersonList();
-        List<String> categoryCompilation = new ArrayList<>();
-
         if (model.isPersonEmptyAddressBook()) {
             throw new CommandException(Messages.specifyEmptyUserListMessage(COMMAND_WORD));
         }
 
+        ObservableList<Person> persons = model.getAddressBook().getPersonList();
+        List<String> categoryCompilation = new ArrayList<>();
         ConsolidateCategory[] categories = ConsolidateCategory.values();
+
         for (ConsolidateCategory category : categories) {
             logger.log(Level.INFO, "consolidating " + category);
             categoryCompilation.add(this.consolidateData(category, persons));
         }
+
         String fullCompilation = String.join("\n\n", categoryCompilation);
 
         return new CommandResult(MESSAGE_SUCCESS + fullCompilation);
     }
 
     /**
-     * Extract the data of the specified category of the specified person.
+     * Extracts the data of the specified category of the specified person.
      *
      * @param category Category of the data to be extracted.
      * @param person Person whose data to be extracted.
@@ -67,6 +68,7 @@ public class ConsolidateCommand extends Command {
     public static String getData(ConsolidateCategory category, Person person) {
         requireNonNull(person);
         requireNonNull(category);
+
         if (category == ConsolidateCategory.NAME) {
             return person.getName().toString();
         } else if (category == ConsolidateCategory.PHONE) {
@@ -107,19 +109,24 @@ public class ConsolidateCommand extends Command {
         assert !persons.isEmpty() : "Only when there are persons data stored, "
                 + "do we call consolidateData function";
 
+        // Get everyone's data pertaining to a particular category, and add to the container
         HashSet<String> container = new HashSet<>();
         for (Person person : persons) {
-            container.add(this.getData(category, person));
+            String dataOfPerson = this.getData(category, person);
+            container.add(dataOfPerson);
         }
 
+        // Sort everyone's data
         ArrayList<String> list = new ArrayList<>(container);
         Collections.sort(list);
-        String compilation = "";
 
+        // Compile everyone's data into string spanning multiple line
+        String compilation = "";
         for (String s : list) {
             compilation += "\n" + s;
         }
 
+        // Add a header specifying the category to the compiled data
         return formatCategoryHeader(category) + compilation;
     }
 }

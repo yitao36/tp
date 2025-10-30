@@ -11,11 +11,10 @@ import java.util.ArrayList;
  */
 public class Email {
 
-
-
     public static final String SPECIAL_CHARACTERS = "+_.-";
     public static final Integer EMAIL_LENGTH_LIMIT = 50;
-    // specialised warning message
+
+    // Specialise warning message
     public static final String ERROR_MESSAGE_INTRO = "Emails should be of the format local-part@domain. "
             + "Check that:  \n";
     public static final String ERROR_MESSAGE_LENGTH = "Email address length should be "
@@ -107,6 +106,7 @@ public class Email {
         }
 
         if (numberOfAtSymbol == 1) {
+            // Split the email address into 2, as email has 2 segment, local and domain segment
             String[] emailSegments = emailAddress.split("@", 2);
             String local = emailSegments[0];
             String domain = emailSegments[1];
@@ -134,7 +134,7 @@ public class Email {
     }
 
     /**
-     * Returns a consolidates error message depending on the source of error.
+     * Returns a consolidation of error message(s) depending on the source of error.
      *
      * @param sourcesOfError Sources of error pertaining to the email.
      * @return A description of the sources of error.
@@ -142,6 +142,7 @@ public class Email {
     public static String createErrorMessage(ArrayList<SourceOfEmailIssue> sourcesOfError) {
         int counter = 1;
         String message = ERROR_MESSAGE_INTRO;
+
         for (SourceOfEmailIssue source : sourcesOfError) {
             message += counter + ". ";
             message += Email.createSubWarning(source, SourceOfEmailIssue.LENGTH, ERROR_MESSAGE_LENGTH);
@@ -151,6 +152,7 @@ public class Email {
             message += Email.createSubWarning(source, SourceOfEmailIssue.DOMAIN, ERROR_MESSAGE_DOMAIN);
             counter = counter + 1;
         }
+
         return message;
     }
 
