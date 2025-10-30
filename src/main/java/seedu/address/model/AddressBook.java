@@ -197,7 +197,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void clearPerson() {
         persons.clear();
-        events.forEach(e -> e.getAttendance().clear());
+        events.setEvents(events.asUnmodifiableObservableList()
+                .stream().peek(e -> e.getAttendance().clear()).toList());
     }
 
     //// sort methods
