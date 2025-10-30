@@ -71,7 +71,7 @@ public class Phone {
         }
 
         // checks if the first 8 character contains only number
-        return containOnlyNumbers(test.substring(0,8));
+        return containOnlyNumbers(test.substring(0, 8));
     }
 
     private static boolean containOnlyNumbers(String test) {
