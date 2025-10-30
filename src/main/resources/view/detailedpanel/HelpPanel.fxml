@@ -11,7 +11,7 @@
                 VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
         <VBox minHeight="-Infinity">
             <Label fx:id="title" underline="true" text="Welcome to CCAmper!" alignment="CENTER"
-                   wrapText="true" textAlignment="CENTER" contentDisplay="RIGHT"
+                   wrapText="true" maxWidth="Infinity" textAlignment="CENTER" contentDisplay="RIGHT"
                    style="-fx-padding: 0 0 15 0;-fx-font-size: 30">
                 <ImageView fx:id="tentIcon" fitWidth="40.0" fitHeight="40.0"/>
             </Label>
