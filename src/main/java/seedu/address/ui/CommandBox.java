@@ -55,8 +55,8 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandFailure();
 
             MessageCenter.error();
-            MessageCenter.appendFront(
-                    Optional.ofNullable(e.getCause()).map(Throwable::getMessage).orElse(e.getMessage()));
+            MessageCenter.appendFront(Optional.ofNullable(e.getCause()).map(e1 -> e1.getMessage() + "\n")
+                    .orElse("") + e.getMessage());
             MessageCenter.showFeedback();
         }
     }

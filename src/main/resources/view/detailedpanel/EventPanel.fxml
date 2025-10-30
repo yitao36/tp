@@ -26,6 +26,9 @@
             <Label fx:id="description" graphicTextGap="10.0" wrapText="true">
                 <ImageView fx:id="infoIcon" fitHeight="25.0" fitWidth="25.0"/>
             </Label>
+
+            <Label text="Attendance List:" style="-fx-font-size: 30;"/>
+            <VBox fx:id="attendees" alignment="CENTER" />
         </VBox>
         <VBox GridPane.columnIndex="2" GridPane.hgrow="SOMETIMES"/>
     </GridPane>

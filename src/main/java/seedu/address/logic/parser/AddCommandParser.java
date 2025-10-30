@@ -12,7 +12,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
@@ -34,7 +36,7 @@ import seedu.address.model.tag.Tag;
 public class AddCommandParser implements Parser<AddCommand> {
 
     public static final String ERROR_MESSAGE_MISSING_COMPULSORY_PREFIX = "Missing compulsory prefixes: %s";
-    public static final String ERROR_MESSAGE_MISSING_FIRST_PREFIX = "There is an input without prefix after 'add'. \n";
+    public static final String ERROR_MESSAGE_MISSING_FIRST_PREFIX = "There is an input without prefix after 'add'.";
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
@@ -44,15 +46,13 @@ public class AddCommandParser implements Parser<AddCommand> {
     }
 
     private static String checkMissingPrefix(ArgumentMultimap argMultimap) {
-        String missingPrefix = "";
         Prefix[] compulsoryPrefix = {PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL};
-        for (Prefix prefix: compulsoryPrefix) {
-            if (!arePrefixesPresent(argMultimap, prefix)) {
-                missingPrefix += prefix.toString() + ", ";
-            }
-        }
-        if (missingPrefix != "") {
-            return String.format(ERROR_MESSAGE_MISSING_COMPULSORY_PREFIX, missingPrefix) + "\n";
+        String missingPrefix = Arrays.stream(compulsoryPrefix)
+                .filter(p -> !arePrefixesPresent(argMultimap, p))
+                .map(Prefix::toString)
+                .collect(Collectors.joining(", "));
+        if (!missingPrefix.isEmpty()) {
+            return String.format(ERROR_MESSAGE_MISSING_COMPULSORY_PREFIX, missingPrefix);
         }
         return "";
     }
@@ -80,11 +80,10 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @return Error message providing detailed description on what is missing.
      */
     private static String createErrorMessageForMissingPrefix(ArgumentMultimap argMultimap) {
-        String compilationOfErrorMessage = "Note: \n";
+        String compilationOfErrorMessage = "Note: ";
         compilationOfErrorMessage += AddCommandParser.checkMissingPrefix(argMultimap);
         compilationOfErrorMessage += AddCommandParser.checkUntokenInput(argMultimap);
-        compilationOfErrorMessage += "\n" + String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddCommand.MESSAGE_USAGE) + "\n";
+        compilationOfErrorMessage += "\n" + String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         return compilationOfErrorMessage;
     }
 
