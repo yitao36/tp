@@ -134,8 +134,8 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object) as well as all `Event` objects (in `UniqueEventList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* This is also the same for the currently selected `Event` object, which is exposed as an unmodifiable `ObservableList<Event>`
+* stores the currently 'filtered' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* This is also the same for the currently filtered `Event`s, which is exposed as an unmodifiable `ObservableList<Event>`
 * Note that it is an invariant that either the selected `Person` or `Event` is null, as only at most one can be selected at a time.
 * It also stores a `ObjectProperty<ZoomIn>` to show if a particular `Person` or `Event` is zoomed in for the `student:event` or `event:student` command.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
@@ -197,8 +197,6 @@ Step 5. The display `PersonListPanel` is then updated to show the filtered list.
 
 </box>
 #### Design considerations:
-
-**Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Having a single find command for all constraints.
   * Pros: Allow for more complex queries and filtering, less code repetition.
