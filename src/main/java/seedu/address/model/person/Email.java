@@ -14,7 +14,7 @@ public class Email {
     public static final String SPECIAL_CHARACTERS = "+_.-";
     public static final Integer EMAIL_LENGTH_LIMIT = 50;
 
-    // specialised warning message
+    // Specialised warning message
     public static final String ERROR_MESSAGE_INTRO = "Emails should be of the format local-part@domain. "
             + "Check that:  \n";
     public static final String ERROR_MESSAGE_LENGTH = "Email address length should be "
@@ -106,7 +106,7 @@ public class Email {
         }
 
         if (numberOfAtSymbol == 1) {
-            // split the email address into 2, as email has 2 segment, local and domain segment
+            // Split the email address into 2, as email has 2 segment, local and domain segment
             String[] emailSegments = emailAddress.split("@", 2);
             String local = emailSegments[0];
             String domain = emailSegments[1];

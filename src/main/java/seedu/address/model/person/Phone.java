@@ -11,7 +11,7 @@ import java.util.Stack;
  */
 public class Phone {
 
-    // error message has greater severity than warning message.
+    // Error message has greater severity than warning message.
 
     public static final String ERROR_MESSAGE_FIST_CHARACTER = "Expected Singapore phone number "
             + "that starts with 3/6/8/9. \n";
@@ -59,10 +59,10 @@ public class Phone {
      * @return The conditional check of whether the phone number given starts with 8 numerical digits.
      */
     public static boolean hasEightNumber(String test) {
-        // removes space and hyphens from test string first
+        // Remove space and hyphens from test string first
         test = convertRawFormat(test);
 
-        // checks for conditions that guarantee to return false
+        // Check for conditions that guarantee to return false
         if (test == null) {
             return false;
         }
@@ -70,7 +70,7 @@ public class Phone {
             return false;
         }
 
-        // checks if the first 8 character contains only number
+        // Check if the first 8 character contains only number
         return containOnlyNumbers(test.substring(0, 8));
     }
 
@@ -141,7 +141,7 @@ public class Phone {
 
     private static boolean isValidUseOfBracket(String input) {
         if (!hasBracket(input)) {
-            // vacuously true
+            // Vacuously true
             return true;
         }
 
@@ -155,7 +155,7 @@ public class Phone {
                 continue;
             }
 
-            // when the character is a closing bracket
+            // When the character is a closing bracket
             if (characters.isEmpty()) {
                 return false;
             }

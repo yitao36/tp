@@ -40,10 +40,10 @@ public class AddressBookParser {
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     private void checkValidUserInput(String userInput, String keyword) throws ParseException {
-        //formats input by deleting white space and converting to lower case
+        // Format input by deleting white space and converting to lower case
         String formattedInput = userInput.replaceAll("\\s", "").toLowerCase();
 
-        //checks if is valid input, and if invalid, would throw a ParseException
+        // Check if is valid input, and if invalid, would throw a ParseException
         boolean isValidInput = formattedInput.equals(keyword);
         if (!isValidInput) {
             String message = "When using " + keyword + ", "

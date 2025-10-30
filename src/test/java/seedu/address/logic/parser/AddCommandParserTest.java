@@ -138,7 +138,6 @@ public class AddCommandParserTest {
     public void parse_compulsoryFieldMissing_failure() {
 
         String expectedMessage = "Note: " + AddCommandParser.ERROR_MESSAGE_MISSING_COMPULSORY_PREFIX
-                + "\n"
                 + String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing phone prefix
