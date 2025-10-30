@@ -15,7 +15,7 @@ public class EnrollmentYearTest {
     static final String ZERO_YEAR = "0";
     static final String INVALID_YEAR = "20-20";
     static final String LARGE_YEAR = "98765432123456789";
-    static final String LARGE_YEAR2 = "1234556";
+    static final String LARGE_YEAR2 = "10000";
     static final String EMPTY_YEAR = "";
 
     @Test
