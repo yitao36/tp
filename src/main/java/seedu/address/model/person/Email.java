@@ -14,7 +14,7 @@ public class Email {
     public static final String SPECIAL_CHARACTERS = "+_.-";
     public static final Integer EMAIL_LENGTH_LIMIT = 50;
 
-    // Specialised warning message
+    // Specialise warning message
     public static final String ERROR_MESSAGE_INTRO = "Emails should be of the format local-part@domain. "
             + "Check that:  \n";
     public static final String ERROR_MESSAGE_LENGTH = "Email address length should be "
