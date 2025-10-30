@@ -160,14 +160,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-        persons.setPerson(target, editedPerson);
-        sort();
         events.forEach(e -> {
             if (e.getAttendance().contains(new PersonReference(target))) {
                 e.getAttendance().remove(new PersonReference(target));
                 e.getAttendance().add(new PersonReference(editedPerson));
             }
         });
+        persons.setPerson(target, editedPerson);
+        sort();
     }
 
     /**
