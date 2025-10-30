@@ -82,13 +82,10 @@ public class ParserUtil {
         requireNonNull(phone);
 
         String trimmedPhone = phone.trim();
-        String processNumber = Phone.convertRawFormat(trimmedPhone);
+        String rawNumber = Phone.convertRawFormat(trimmedPhone);
 
-        if (!Phone.isValidPhone(processNumber)) {
-            throw new ParseException(Phone.createErrorMessage(processNumber));
-        }
-        if (Phone.hasWarning(processNumber)) {
-            MessageCenter.appendEnd(Phone.createWarningMessage(processNumber));
+        if (Phone.hasWarning(rawNumber)) {
+            MessageCenter.appendEnd(Phone.createWarningMessage(rawNumber));
         }
 
         return new Phone(trimmedPhone);
@@ -106,6 +103,7 @@ public class ParserUtil {
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
+        MessageCenter.appendEnd(Address.getStyleWarningMessage(address));
         return new Address(trimmedAddress);
     }
 
@@ -169,6 +167,7 @@ public class ParserUtil {
         if (!Role.isValidRoleName(trimmedRole)) {
             throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
+        MessageCenter.appendEnd(Role.getStyleWarningMessage(trimmedRole));
         return new Role(trimmedRole);
     }
 

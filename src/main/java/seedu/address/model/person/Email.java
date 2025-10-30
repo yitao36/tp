@@ -29,8 +29,7 @@ public class Email {
             + "made up of domain labels separated by periods. The domain name must:\n"
             + "    - end with a domain label at least 2 characters long\n"
             + "    - have each domain label start and end with alphanumeric characters\n"
-            + "    - have each domain label consist of alphanumeric characters and hyphens, "
-            + "separated only by periods.\n";
+            + "    - have each domain label consist of alphanumeric characters and hyphens. \n";
 
     public static final String MESSAGE_CONSTRAINTS = ERROR_MESSAGE_INTRO
             + "1. " + ERROR_MESSAGE_LENGTH
@@ -65,7 +64,7 @@ public class Email {
      * Returns if a given string is a valid email.
      */
     public static boolean isValidEmail(String test) {
-        if (!containAtSymbol(test)) {
+        if (!hasAtSymbol(test)) {
             return false;
         }
         return test.length() <= EMAIL_LENGTH_LIMIT
@@ -84,7 +83,7 @@ public class Email {
         return emailAddress.chars().filter(c -> c == '@').count();
     }
 
-    private static boolean containAtSymbol(String emailAddress) {
+    private static boolean hasAtSymbol(String emailAddress) {
         return emailAddress.contains(String.valueOf('@'));
     }
 

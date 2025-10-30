@@ -11,7 +11,7 @@
 
 --------------------------------------------------------------------------------------------------------------------
 ## Welcome to CCAmper!
-CCAmper is the perfect app for **secondary school teachers** as an all-in-one desktop app for
+CCAmper is the perfect app for **Singaporean secondary school teachers** as an all-in-one desktop app for
 - Managing all your various CCA student details plus emergency contact details
 - Keeping track of their attendance with respect to various events
 
@@ -44,19 +44,6 @@ about the corresponding item in `DetailedPanel`.
 <br>
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `find n/John`: All contacts that includes `John` in their names will be shown.
-
-   * `list` : Lists all contacts.
-
-   * `clear` : Deletes all contacts. **Warning**: Irreversible.
-
-   * `exit` : Exits the app.
 
 7. Refer to the [Features](#features) below for details of each command.
 
@@ -83,8 +70,7 @@ about the corresponding item in `DetailedPanel`.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* For commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`), there should not be any characters (except whitespace) that comes before and/or follow the command keyword. This is to avoid scenarios such as `help list exit`, where command keyed in may be unclear.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -95,9 +81,9 @@ about the corresponding item in `DetailedPanel`.
 
 | Field                 | Requirements                                                                                                                                                                                                                                                                                         |
 |-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Name                  | • Max 50 characters long.<br/>• Letters, numbers, and spaces and the following `.,-'()` only.<br>• Cannot be blank                                                                                                                                                                                   |
-| Phone                 | • Standard Format: Exactly 8 digits that starts with one of `3/6/8/9`.                                                                                                                                                                                                                                                |
-| Email                 | • Max 50 characters long.<br/>• Local-part contains only alphanumeric characters and the following `+_.-` <br/>• Domain label must consist of only alphanumeric characters and hyphens, <br/>and the end part (after the period) must be at least 2 characters long. <br/>(example.email@do-main.ca) |
+| Name                  | • Max 50 characters long.<br/>• Letters, numbers, and spaces and the following `.,-'()/` only.<br>• Cannot be blank                                                                                                                                                                                   |
+| Phone                 | • Encouraged input format: 8-digit Singaporean phone number that starts with one of `3/6/8/9`. <br/> • While it is possible to key in any other inputs such as 90909090 (HP) or +60-12-345 6789, application would issue warnings. This helps to signal a deviation from the encouraged input format (e.g. 90909090 or 9090 9090), allowing users to manually check if the phone number they keyed in is correct. <br/> • While users can key in phone numbers with hyphens and space, these hyphens and space would be removed when phone number is stored in CCAmper.                                                                                                                                                                                                              |
+| Email                 | • Max 50 characters long.<br/>• Local-part contains only alphanumeric characters and the following `+_.-`. The local parts may not start or end with any special characters. <br/> • Domain labels are separated by period, consist of only alphanumeric characters and hyphens, <br/>and the end part (after the period) must be at least 2 characters long. <br/>(example.email@do-main.ca) |
 | Address               | • Max 70 characters long.<br/>• Any characters, but cannot be blank.                                                                                                                                                                                                                                 |
 | Year                  | • Positive integer, or blank to not add one.                                                                                                                                                                                                                                                         |
 | Roles                 | • Maximum 20 characters for each role, maximum of 3 roles.<br/>• Contains only alphanumeric characters or spaces.                                                                                                                                                                                    |
@@ -250,6 +236,28 @@ Examples:
 
 <br>
 
+### Consolidate student info : `consolidate`
+
+Consolidate students' a) names, b) phone number, c) email and d) address and
+display data under corresponding categories.
+
+Format: `consolidate`
+
+* If there are repeated values for a particular category (e.g. two students share the same phone number),
+  then that particular value (e.g. phone number) is displayed once.
+* Within each category, the data is being sorted lexicographically in ascending order. This is to help teachers scan through the consolidated data more easily. 
+
+<br>
+
+### Clearing all contacts : `clear`
+
+<box type="warning">
+
+**Warning:** Deletes all contacts from the address book. Not undoable.
+</box>
+
+<br>
+
 ### Adding an event: `add:event`
 
 Add events to your address book, with the given fields given there are no duplicate events.
@@ -357,28 +365,6 @@ Examples:
 
 <br>
 
-### Consolidate student info : `consolidate`
-
-Consolidate students' a) names, b) phone number, c) email and d) address and
-display data under corresponding categories.
-
-Format: `consolidate`
-
-* If there are repeated values for a particular category (e.g. two students share the same phone number),
-  then that particular value (e.g. phone number) is displayed once.
-* Within each category, the data is being sorted lexicographically in ascending order. This is to help teachers scan through the consolidated data more easily. 
-
-<br>
-
-### Clearing all contacts : `clear`
-
-<box type="warning">
-
-**Warning:** Deletes all contacts from the address book. Not undoable.
-</box>
-
-<br>
-
 ### Clearing all events : `clear:event`
 
 <box type="warning">
@@ -448,6 +434,8 @@ Action     | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​ [t/TAG]…​ [pin/(TRUE/FALSE)] [enroll/[YEAR]] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE]`<br> e.g.,`edit 1 n/John p/98765432 e/johndoe@example.com a/New Place r/Senior Student t/experienced pin/TRUE enroll/2022 ecn/Sally ecp/88887777`
 **Find** | `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<\|<=\|>\|>=\|=)NUMBER]] [r/SUBSTRING]…​`<br> e.g., `find n/yu john enroll/>=2022 r/lead r/sec`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Consolidate** | `consolidate`
+**Clear**  | `clear`
 **Add Event** | `add:event n/NAME d/(d/M/yyyy or d/M/yyyy-d/M/yyyy) [info/DESCRIPTION]` <br> e.g., `add:event n/meeting d/1/10/2025 info/routine meeting`
 **Edit Event** | `edit:event [n/NAME] [d/(d/M/yyyy or d/M/yyyy-d/M/yyyy)] [info/DESCRIPTION]` <br> e.g., `edit:event 1 n/new meeting d/2/10/2025 info/special meeting`
 **Attend Event** | `attend:event e/EVENT_INDEX p/PERSON_INDEX [PERSON_INDEXES]...`<br> e.g. `attend:event e/1 p/3 5`
@@ -455,6 +443,4 @@ Action     | Format, Examples
 **Delete Event** | `delete:event INDEX`<br> e.g., `delete:event 3`
 **List Events Attended By Student** | `student:event INDEX_OF_STUDENT_LIST`<br> e.g., `student:event 1`
 **List Students Attending An Event** | `event:student INDEX_OF_EVENT_LIST`<br> e.g., `event:student 1`
-**Consolidate** | `consolidate`
-**Clear**  | `clear`
 **Clear Events**  | `clear:event`
