@@ -73,7 +73,7 @@ about the corresponding item in `DetailedPanel`.
   * e.g `n/NAME [enroll/[YEAR]]` can be used as `n/John enroll/` or as `n/John enroll/2024` or as `n/John`.<br><br>
 
 * Items with `…` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…` can be empty, `t/friend`, `t/friend family` etc.
+  e.g. `[t/TAG]…` can be empty, `t/friend`, `t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
