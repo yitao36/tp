@@ -15,11 +15,14 @@ CCAmper is the perfect app for **Singaporean secondary school teachers** as an a
 - Managing all your various CCA student details plus emergency contact details
 - Keeping track of their attendance with respect to various events
 
-CCAmper is optimized for use via a
-<tooltip content="Command Line Interface">**CLI**</tooltip> to help secondary school teachers to
-**plan, manage, and simplify** your CCA's weekly tasks faster than traditional
-<tooltip content="Graphical User Interface">GUI</tooltip> apps.
+CCAmper is optimized for use via a **Command Line Interface (CLI)** to help secondary school teachers to
+**plan, manage, and simplify** your CCA's weekly tasks faster than traditional **Graphical User Interface (GUI)** apps.
 
+<box type="info" seamless>
+
+**Advanced keyboard technique:** Use `tab` to switch between the input box, person list, and event list!<br>
+While focused on the person list or event list, use `up` and `down` to navigate quickly.
+</box>
 
 ## Quick start
 
