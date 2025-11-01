@@ -104,12 +104,12 @@ about the corresponding item in `DetailedPanel`.
   These do not throw an error, but will display a warning message after the command finishes execution,<br>
   and during launch of the program.
 
-| Field                 | Style Guide                                                                                                              |
-|-----------------------|:-------------------------------------------------------------------------------------------------------------------------|
-| Name                  | • Proper capitalization<br/>• No consecutive spaces<br/>• Brackets close, e.g. `John (Doe` is not stylish                |
-| Address               | • Proper capitalization                                                                                                  |
-| Roles                 | • Proper capitalization<br/>• No consecutive spaces                                                                      |
-| Emergency<br/>Contact | • Name field has the same recommendations as specified above.<br/>• Name field should be different from student's name.  |
+| Field                 | Style Guide                                                                                                                                                                                                                     |
+|-----------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Name                  | • Proper capitalization (First letter of each word is capitalized)<br/> e.g. `Al-Amaan`, `John's Dad` is proper, but `john`, `Bob(f)` is not.<br/>• No consecutive spaces<br/>• Brackets close, e.g. `John (Doe` is not stylish |
+| Address               | • Proper capitalization                                                                                                                                                                                                         |
+| Roles                 | • Proper capitalization<br/>• No consecutive spaces                                                                                                                                                                             |
+| Emergency<br/>Contact | • Name field has the same recommendations as specified above.<br/>• Name field should be different from student's name.                                                                                                         |
 
 </box>
 
