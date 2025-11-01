@@ -60,12 +60,17 @@ about the corresponding item in `DetailedPanel`.
 
 **Notes about the syntax and command format:**<br>
 
+* Prefixes start with letters followed by a slash, e.g. `n/`.<br>
+  Certain prefixes are reserved for each command, meaning that it is not possible to
+  supply a string starting with the reserved prefix to another prefix. Workaround is to use other characters.
+  * e.g. `a/FRONT n/MIDDLE BACK` is parsed as two separate prefixes.<br><br>
+    
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in **square brackets** are optional.<br>
   * e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-  * e.g `n/NAME [enroll/[YEAR]]` can be used as `n/John enroll/` or as `n/John enroll/2024` or as `n/John`.
+  * e.g `n/NAME [enroll/[YEAR]]` can be used as `n/John enroll/` or as `n/John enroll/2024` or as `n/John`.<br><br>
 
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…` can be empty, `t/friend`, `t/friend family` etc.
