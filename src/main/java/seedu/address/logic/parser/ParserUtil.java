@@ -267,12 +267,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static EventName parseEventName(String name) throws ParseException {
+    public static EventName parseEventNameWithWarning(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!EventName.isValidName(trimmedName)) {
             throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
         }
+        MessageCenter.appendEnd(EventName.getStyleWarningMessage(trimmedName));
         return new EventName(trimmedName);
     }
 
